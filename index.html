@@ -22,6 +22,38 @@ footer{background:#3b2921;color:#f6e9df;padding:50px 0 25px}.footer-grid{display
 @media(max-width:920px){.navlinks{display:none}.hero-grid,.dash-grid,.editor-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.search{display:none}.author-main{grid-template-columns:120px 1fr}.author-action{grid-column:1/-1;padding-top:0}.avatar{width:120px;height:120px}.story-item{grid-template-columns:60px 1fr}.item-actions{grid-column:1/-1;justify-content:flex-start}.reader-head{grid-template-columns:110px 1fr}.reader-cover{width:110px;height:165px}}
 @media(max-width:560px){.cards{grid-template-columns:repeat(2,1fr);gap:11px}.card-body{padding:11px}.card-title{font-size:15px}.hero{padding-top:42px}.hero-art{min-height:335px}.blob{width:295px;height:295px}.book{width:215px;height:300px}.dash{padding:15px}.dash-top{align-items:flex-start;flex-direction:column}.author-banner{height:175px}.author-main{display:block;padding:0 18px 22px}.avatar{margin-top:-55px}.profile-grid{grid-template-columns:1fr}.reader{padding:20px}.reader-head{display:block}.reader-cover{width:120px;height:180px;margin-bottom:14px}.reader h1{font-size:34px}.reader-content{font-size:17px}.copyright{display:block}.nav{gap:7px}.nav-actions .btn{padding:10px 12px}.bell{min-width:38px}}
 .author-menu-wrap{position:relative}.author-avatar-btn{width:42px;height:42px;padding:0;border:2px solid var(--line);border-radius:50%;background:var(--lightpink);overflow:hidden;display:flex;align-items:center;justify-content:center}.author-avatar-btn img{width:100%;height:100%;object-fit:cover}.author-avatar-fallback{font:700 17px Georgia,serif;color:var(--brown)}.author-menu{position:absolute;right:0;top:52px;width:230px;background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px;z-index:120}.author-menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:var(--brown);font-size:11px;font-weight:800;letter-spacing:.04em}.author-menu button:hover{background:var(--lightpink)}.author-menu .menu-email{padding:10px 12px 8px;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.author-menu .menu-divider{height:1px;background:var(--line);margin:5px 0}.author-menu .menu-owner{color:var(--toffee)}
+
+/* STEP 7 — SIGNATURE AUTOMATIC CHAPTER PROMOTION */
+.chapter-feature{padding:34px 0 8px}
+.chapter-feature-card{position:relative;min-height:390px;overflow:hidden;border:1px solid rgba(92,62,48,.13);border-radius:32px;background:#f8efe8;box-shadow:0 22px 55px rgba(76,52,40,.13)}
+.chapter-feature-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(255,255,255,.95),transparent 28%),linear-gradient(110deg,rgba(255,255,255,.82),rgba(248,239,232,.18) 58%,rgba(113,77,59,.12));pointer-events:none}
+.chapter-feature-art{position:absolute;right:0;top:0;width:45%;height:100%;overflow:hidden}
+.chapter-feature-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f8efe8 0%,rgba(248,239,232,.78) 15%,rgba(248,239,232,.08) 70%)}
+.chapter-feature-art img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(.96);transform:scale(1.04)}
+.chapter-feature-content{position:relative;z-index:2;width:64%;padding:42px 45px 38px}
+.chapter-feature-kicker{display:flex;align-items:center;gap:10px;color:#8d624c;font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.chapter-feature-kicker::before{content:"";width:38px;height:1px;background:#a97d63}
+.chapter-feature-content h2{margin:13px 0 7px;max-width:650px;font:400 clamp(34px,4.7vw,62px)/.98 Georgia,serif;letter-spacing:-.045em;color:#4c3429}
+.chapter-feature-chapter{display:inline-block;margin-top:7px;padding:7px 11px;border:1px solid rgba(141,98,76,.25);border-radius:999px;color:#77513f;font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;background:rgba(255,255,255,.55)}
+.chapter-feature-quote{position:relative;margin:23px 0 0;padding-left:20px;max-width:590px;color:#675147;font:italic 18px/1.62 Georgia,serif}
+.chapter-feature-quote::before{content:"“";position:absolute;left:-2px;top:-12px;font:52px/1 Georgia,serif;color:#b98f78}
+.chapter-feature-meta{margin-top:17px;color:#92776a;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.chapter-feature-read{margin-top:22px;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:13px 19px;background:#4f372c;color:#fff;font-size:11px;font-weight:900;letter-spacing:.1em;cursor:pointer;box-shadow:0 10px 22px rgba(79,55,44,.2)}
+.chapter-feature-read:hover{transform:translateY(-1px)}
+.chapter-feature-number{position:absolute;z-index:3;right:25px;top:22px;color:rgba(79,55,44,.2);font:700 58px/1 Georgia,serif}
+.chapter-feature-empty{display:none}
+@media(max-width:820px){
+ .chapter-feature-card{min-height:0}
+ .chapter-feature-art{position:relative;width:100%;height:235px;right:auto;top:auto}
+ .chapter-feature-art::after{background:linear-gradient(180deg,rgba(248,239,232,.02),#f8efe8)}
+ .chapter-feature-content{width:auto;padding:27px 25px 30px;margin-top:-35px}
+ .chapter-feature-number{top:15px;right:18px}
+}
+@media(max-width:520px){
+ .chapter-feature-art{height:205px}
+ .chapter-feature-content h2{font-size:39px}
+}
+
 </style>
 </head>
 <body>
@@ -56,6 +88,12 @@ footer{background:#3b2921;color:#f6e9df;padding:50px 0 25px}.footer-grid{display
   <div><div class="kicker">Welcome to Avanitaxx Stories</div><h1>Your next<br>obsession<br>starts here.</h1><p>Lose yourself in stories filled with love, secrets, danger, obsession, and unforgettable characters—written for readers who love to feel every chapter.</p><div class="actions"><a class="btn" href="#recent">EXPLORE STORIES</a><button class="btn alt" id="hero-write" type="button">START WRITING</button></div></div>
   <div class="hero-art"><div class="blob"></div><div class="book"><div class="small">AVANITAXX STORIES</div><h2>YOUR<br>STORY<br>AWAITS</h2><div class="by">READ • FEEL • REMEMBER</div></div></div>
 </div></section>
+
+<section class="chapter-feature" id="chapter-promotion">
+  <div class="container">
+    <div id="latest-promo" class="chapter-feature-card chapter-feature-empty" aria-live="polite"></div>
+  </div>
+</section>
 
 <section class="section altbg" id="recent"><div class="container"><div class="section-head"><div><div class="kicker">Fresh from the library</div><h2>Recent Books</h2><p>Published books appear here automatically, led by their actual uploaded cover.</p></div></div><div id="recent-books" class="cards"><div class="empty">Loading published books…</div></div></div></section>
 <section class="section" id="recommended"><div class="container"><div class="section-head"><div><div class="kicker">Picked for readers</div><h2>Recommended</h2><p>Recommendations use recent updates, reads, likes, comments and freshness.</p></div></div><div id="recommend-books" class="cards"><div class="empty">Loading recommendations…</div></div></div></section>
@@ -121,8 +159,64 @@ async function logout(){await sb.auth.signOut();session=null;updateAuthUI();clos
 async function getPublished(){const r=await sb.from('stories').select('*').eq('published',true).order('updated_at',{ascending:false});if(r.error)throw r.error;return (r.data||[]).filter(s=>!isTestStory(s))}
 async function getCounts(storyId){const [l,c]=await Promise.all([sb.from('story_likes').select('*',{count:'exact',head:true}).eq('story_id',storyId),sb.from('comments').select('*',{count:'exact',head:true}).eq('story_id',storyId)]);return{likes:l.count||0,comments:c.count||0}}
 function coverOnlyCard(s,extra=''){return `<article class="story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+((s.tags||[]).join(' '))).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><h3 class="card-title">${esc(s.title)}</h3><div class="meta">${extra||'Updated '+esc(formatDate(s.updated_at||s.created_at))}</div>${Array.isArray(s.tags)&&s.tags.length?`<div class="tag-row">${s.tags.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`}
+
+async function loadLatestChapterPromotion(){
+  const box=document.getElementById('latest-promo');
+  if(!box)return;
+  try{
+    const stories=await getPublished();
+    if(!stories.length){box.classList.add('chapter-feature-empty');box.innerHTML='';return;}
+
+    let newestStory=null,newestChapter=null,newestTime=0;
+    for(const story of stories){
+      const r=await sb.from('chapters')
+        .select('id,chapter_number,title,content,created_at,updated_at')
+        .eq('story_id',story.id)
+        .order('chapter_number',{ascending:false})
+        .limit(1)
+        .maybeSingle();
+      if(r.error||!r.data)continue;
+      const t=Date.parse(r.data.updated_at||r.data.created_at||story.updated_at||story.created_at||0);
+      if(t>newestTime){newestTime=t;newestStory=story;newestChapter=r.data;}
+    }
+    if(!newestStory||!newestChapter){
+      box.classList.add('chapter-feature-empty');box.innerHTML='';return;
+    }
+
+    const raw=String(newestChapter.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    let quote=raw.replace(/^["“”'‘’\s]+|["“”'‘’\s]+$/g,'');
+    if(quote.length>190)quote=quote.slice(0,187).replace(/\s+\S*$/,'')+'…';
+    if(!quote)quote='A brand-new chapter is waiting for you.';
+
+    const chapterNo=newestChapter.chapter_number!=null
+      ? `Chapter ${esc(newestChapter.chapter_number)}`
+      : esc(newestChapter.title||'New Chapter');
+
+    const cover=newestStory.cover_url
+      ? `<img src="${esc(newestStory.cover_url)}" alt="${esc(newestStory.title)} cover" loading="eager">`
+      : `<div style="height:100%;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;font:400 26px Georgia,serif;color:#5c4032">${esc(newestStory.title)}</div>`;
+
+    box.classList.remove('chapter-feature-empty');
+    box.innerHTML=`
+      <div class="chapter-feature-art">${cover}</div>
+      <div class="chapter-feature-number">✦</div>
+      <div class="chapter-feature-content">
+        <div class="chapter-feature-kicker">Just Published</div>
+        <h2>${esc(newestStory.title)}</h2>
+        <span class="chapter-feature-chapter">${chapterNo} · IS NOW LIVE</span>
+        <p class="chapter-feature-quote">${esc(quote)}</p>
+        <div class="chapter-feature-meta">A new chapter from Avanitaxx Stories</div>
+        <button class="chapter-feature-read" id="promo-read-now" type="button">READ CHAPTER <span>→</span></button>
+      </div>`;
+    document.getElementById('promo-read-now').onclick=()=>openPublicStory(newestStory.share_slug||newestStory.id);
+  }catch(e){
+    console.error('Automatic promotion error:',e);
+    box.classList.add('chapter-feature-empty');box.innerHTML='';
+  }
+}
+
 async function loadHome(){
- try{const stories=await getPublished();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
+ try{const stories=await getPublished();await loadLatestChapterPromotion();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
  const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${s.__counts.likes} likes • ${s.__counts.comments} comments • ${Number(s.views)||0} reads`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadPublicAuthorProfile(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
 
@@ -173,7 +267,8 @@ async function openOwnerTimelineEditor(id){if(!(await isOwnerAccount()))return;l
 
 function bindStatic(){document.getElementById('author-btn').onclick=openAuthorHome;document.getElementById('hero-write').onclick=openAuthorHome;document.getElementById('footer-write').onclick=openAuthorHome;document.getElementById('reader-btn').onclick=async()=>{await refreshSession();session?showAccount():openAuth('reader')};document.getElementById('notify-btn').onclick=openNotifications;const avatar=document.getElementById('author-avatar-btn'),menu=document.getElementById('author-menu');if(avatar)avatar.onclick=e=>{e.stopPropagation();menu?.classList.toggle('hidden');avatar.setAttribute('aria-expanded',String(!menu?.classList.contains('hidden')))};document.addEventListener('click',e=>{if(!e.target.closest('#author-menu-wrap')){menu?.classList.add('hidden');avatar?.setAttribute('aria-expanded','false')}});document.getElementById('menu-profile').onclick=()=>{menu.classList.add('hidden');openProfileEditor()};document.getElementById('menu-stories').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-author-home').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-new-story').onclick=()=>{menu.classList.add('hidden');openEditor(null)};document.getElementById('menu-notifications').onclick=()=>{menu.classList.add('hidden');openNotifications()};document.getElementById('menu-owner-timeline').onclick=()=>{menu.classList.add('hidden');openOwnerTimeline()};document.getElementById('menu-logout').onclick=()=>{menu.classList.add('hidden');logout()};document.getElementById('site-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.story-card').forEach(c=>c.style.display=(c.dataset.search||'').includes(q)?'':'none')}}
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
-(async()=>{bindStatic();await refreshSession();await loadHome();if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
+(async()=>{bindStatic();await refreshSession();await loadHome();
+  setInterval(loadLatestChapterPromotion,60000);if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
 })();
 </script>
 </body>
