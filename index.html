@@ -76,6 +76,75 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media(max-width:920px){.hero{padding-top:58px}.hero-grid{gap:30px}.hero-art{min-height:430px}.hero-caption{bottom:4px;transform:translateX(-50%)}.orbit-one{width:390px;height:390px}.orbit-two{width:320px;height:320px}.section{padding:60px 0}.author-main{grid-template-columns:130px 1fr}.avatar{width:128px;height:128px}.chapter-feature-content{padding:32px 28px 34px}}
 @media(max-width:560px){.nav{min-height:68px}.logo{font-size:21px}.nav-actions .btn{font-size:9px;padding:10px}.hero{padding:48px 0 48px}.hero h1{font-size:53px}.hero p{font-size:16px}.hero-notes{display:none}.hero-art{min-height:375px}.premium-book{width:225px;height:320px;padding:26px}.premium-book h2{font-size:35px;margin-top:52px}.orbit-one{width:315px;height:315px}.orbit-two{width:255px;height:255px}.hero-monogram{font-size:225px}.hero-caption{font-size:10px;bottom:0}.chapter-feature-brand{right:14px;top:14px}.section-head h2{font-size:35px}.cards{gap:13px}.story-card{padding:6px;border-radius:13px}.card-title{font-size:16px}.author-banner{height:195px}.author-main{padding:0 18px 24px}.avatar{width:112px;height:112px;margin-top:-52px}.reader-content{font-size:17px}}
 
+
+/* ===== PREMIUM AUTHOR PROFILE / PUBLIC TIMELINE V3 ===== */
+.author-profile-v3{overflow:hidden}
+.author-cover-v3{position:relative;min-height:330px;background:linear-gradient(135deg,#3b2921,#a8795b 55%,#d9a6a6);background-size:cover;background-position:center;display:flex;align-items:flex-end}
+.author-cover-v3::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,23,18,.05) 25%,rgba(35,23,18,.72) 100%)}
+.author-cover-inner{position:relative;z-index:2;width:100%;padding:38px 42px;color:#fff}
+.author-cover-kicker{font-size:9px;letter-spacing:.22em;font-weight:900;text-transform:uppercase;opacity:.86}
+.author-cover-title{font:400 clamp(38px,6vw,72px)/.95 Georgia,serif;margin:10px 0 8px;letter-spacing:-.04em}
+.author-cover-sub{font:italic 16px/1.6 Georgia,serif;max-width:680px;opacity:.92}
+.author-body-v3{padding:0 42px 42px}
+.author-identity-v3{display:grid;grid-template-columns:160px 1fr auto;gap:24px;align-items:start}
+.author-avatar-v3{width:160px;height:160px;border-radius:50%;object-fit:cover;background:var(--lightpink);border:8px solid var(--white);margin-top:-70px;position:relative;z-index:3;box-shadow:0 14px 40px rgba(55,35,27,.18)}
+.author-avatar-fallback-v3{display:flex;align-items:center;justify-content:center;font:500 58px Georgia,serif;color:var(--brown)}
+.author-name-v3{font:400 42px/1 Georgia,serif;color:#34231c;margin:20px 0 6px}
+.author-handle-v3{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--toffee);font-weight:800}
+.author-bio-v3{font:16px/1.8 Georgia,serif;color:var(--muted);max-width:720px;margin:15px 0}
+.author-actions-v3{padding-top:20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.author-stats-v3{display:flex;gap:25px;flex-wrap:wrap;margin-top:18px}
+.author-stat-v3 b{display:block;font:400 25px Georgia,serif;color:#392820}
+.author-stat-v3 span{font-size:9px;letter-spacing:.12em;color:var(--muted);font-weight:900}
+.author-social-v3{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.author-social-v3 a{font-size:9px;letter-spacing:.08em;font-weight:900;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--brown)}
+.author-social-v3 a:hover{background:var(--lightpink)}
+.author-content-v3{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:24px;margin-top:30px}
+.author-section-v3{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:18px;padding:22px}
+.author-section-v3 h3{font:400 27px Georgia,serif;margin:0 0 5px;color:#392820}
+.author-section-v3 .section-note{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.timeline-v3{position:relative;display:grid;gap:15px}
+.timeline-v3::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.timeline-item-v3{position:relative;padding-left:42px}
+.timeline-dot-v3{position:absolute;left:8px;top:9px;width:13px;height:13px;border-radius:50%;background:var(--pink);border:3px solid var(--white);box-shadow:0 0 0 1px var(--line)}
+.timeline-card-v3{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.timeline-image-v3{width:100%;max-height:310px;object-fit:cover;display:block}
+.timeline-copy-v3{padding:16px}
+.timeline-type-v3{font-size:8px;letter-spacing:.16em;color:var(--toffee);font-weight:900;text-transform:uppercase}
+.timeline-title-v3{font:400 22px/1.15 Georgia,serif;margin:7px 0;color:#392820}
+.timeline-caption-v3{font:14px/1.7 Georgia,serif;color:var(--muted);white-space:pre-wrap}
+.timeline-quote-v3{margin:13px 0 0;padding:13px 15px;border-left:2px solid var(--pink);background:#fbf4f1;color:#654d41;font:italic 15px/1.65 Georgia,serif}
+.timeline-meta-v3{margin-top:11px;font-size:9px;color:#9a8479;letter-spacing:.04em}
+.library-v3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.library-card-v3{border:1px solid var(--line);border-radius:13px;background:#fff;overflow:hidden;cursor:pointer}
+.library-card-v3 img,.library-cover-fallback-v3{width:100%;aspect-ratio:2/3;object-fit:cover;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(145deg,#6f4b3b,#ba8c78);color:#fff;font:22px Georgia,serif;padding:12px}
+.library-card-copy-v3{padding:10px}
+.library-card-title-v3{font:400 16px/1.2 Georgia,serif}
+.library-card-meta-v3{font-size:9px;color:var(--muted);margin-top:4px}
+.author-empty-v3{padding:25px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:920px){
+  .author-identity-v3{grid-template-columns:130px 1fr}
+  .author-avatar-v3{width:130px;height:130px}
+  .author-actions-v3{grid-column:1/-1;justify-content:flex-start;padding-top:0}
+  .author-content-v3{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .author-cover-v3{min-height:250px}
+  .author-cover-inner{padding:24px 20px}
+  .author-body-v3{padding:0 18px 24px}
+  .author-identity-v3{display:block}
+  .author-avatar-v3{width:112px;height:112px;margin-top:-55px}
+  .author-name-v3{font-size:34px;margin-top:15px}
+  .author-actions-v3{margin-top:12px}
+  .author-stats-v3{gap:17px}
+  .author-content-v3{margin-top:22px}
+  .author-section-v3{padding:16px}
+  .library-v3{gap:9px}
+  .timeline-item-v3{padding-left:34px}
+  .timeline-v3::before{left:11px}
+  .timeline-dot-v3{left:5px}
+}
+
 </style>
 </head>
 <body>
@@ -119,7 +188,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 <section class="section altbg" id="recent"><div class="container"><div class="section-head"><div><div class="kicker">Fresh from the library</div><h2>New on the Shelf</h2><p>Latest published stories and chapter updates from Avanitaxx Stories.</p></div></div><div id="recent-books" class="cards"><div class="empty">Loading published books…</div></div></div></section>
 <section class="section" id="recommended"><div class="container"><div class="section-head"><div><div class="kicker">Reader favorites</div><h2>Recommended Reads</h2><p>Stories rising through reads, likes, comments, and recent updates.</p></div></div><div id="recommend-books" class="cards"><div class="empty">Loading recommendations…</div></div></div></section>
-<section class="section altbg" id="author"><div class="container"><div class="section-head"><div><div class="kicker">Meet the writer</div><h2>Author Profile</h2></div></div><div id="public-author-profile" class="author-profile"><div class="empty">Loading author profile…</div></div></div></section>
+<section class="section altbg" id="author"><div class="container"><div class="section-head"><div><div class="kicker">Meet the writer</div><h2>AVANITAXX — Author Timeline</h2><p>Profile, latest updates, followers, and published library.</p></div></div><div id="public-author-profile" class="author-profile"><div class="empty">Loading author profile…</div></div></div></section>
 </main>
 
 <footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><a href="#author">Author Profile</a></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div></footer>
@@ -243,9 +312,122 @@ async function loadHome(){
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
 
 async function loadPublicAuthorProfile(stories=[]){
- const box=document.getElementById('public-author-profile');let authorId=stories.find(s=>s.owner_id)?.owner_id||null;if(!authorId){box.innerHTML='<div class="empty">Author profile will appear after the first published book.</div>';return}currentAuthorId=authorId;const p=await sb.from('profiles').select('*').eq('id',authorId).maybeSingle();const profile=p.data||{id:authorId,pen_name:'AVANITAXX'};const fc=await sb.from('follows').select('*',{count:'exact',head:true}).eq('author_id',authorId);const works=stories.filter(s=>s.owner_id===authorId);let following=false;if(session&&session.user.id!==authorId){const f=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();following=!!f.data}
- box.innerHTML=`<div class="author-banner" style="${profile.cover_url?`background-image:url('${esc(profile.cover_url)}')`:''}"></div><div class="author-main">${profile.avatar_url?`<img class="avatar" src="${esc(profile.avatar_url)}" alt="Author profile">`:`<div class="avatar avatar-fallback">A</div>`}<div class="author-copy"><h2>${esc(profile.pen_name||profile.display_name||'AVANITAXX')}</h2><p>${esc(profile.bio||'Author of stories about love, secrets, danger, and unforgettable characters.')}</p>${profile.social_url?`<a class="btn ghost" href="${esc(profile.social_url)}" target="_blank" rel="noopener">SOCIAL MEDIA ↗</a>`:''}<div class="author-stats"><span><b>${works.length}</b>WORKS</span><span><b>${fc.count||0}</b>FOLLOWERS</span></div><div class="work-strip" style="margin-top:16px">${works.slice(0,8).filter(s=>s.cover_url).map(s=>`<button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}"><img src="${esc(s.cover_url)}" alt="${esc(s.title)}"></button>`).join('')}</div></div><div class="author-action">${session?.user?.id===authorId?`<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`:`<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}</div></div>`;
- bindStoryCards();const fp=document.getElementById('follow-author');if(fp)fp.onclick=()=>toggleFollow(authorId,fp);const ep=document.getElementById('edit-profile-public');if(ep)ep.onclick=openProfileEditor;
+  const box=document.getElementById('public-author-profile');
+  let authorId=stories.find(s=>s.owner_id)?.owner_id||null;
+  if(!authorId){
+    box.innerHTML='<div class="author-empty-v3">Author profile will appear after the first published book.</div>';
+    return;
+  }
+  currentAuthorId=authorId;
+
+  const [pr,fr,tr] = await Promise.all([
+    sb.from('profiles').select('*').eq('id',authorId).maybeSingle(),
+    sb.from('follows').select('*',{count:'exact',head:true}).eq('author_id',authorId),
+    sb.from('owner_timeline').select('*').eq('owner_id',authorId).eq('published',true).order('created_at',{ascending:false}).limit(12)
+  ]);
+
+  const profile=pr.data||{id:authorId,pen_name:'AVANITAXX'};
+  const works=stories.filter(s=>s.owner_id===authorId);
+  let following=false;
+  if(session&&session.user.id!==authorId){
+    const f=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();
+    following=!!f.data;
+  }
+
+  const displayName=profile.pen_name||profile.display_name||'AVANITAXX';
+  const bio=profile.bio||'Author of stories about love, secrets, danger, and unforgettable characters.';
+  const timeline=tr.error?[]:(tr.data||[]);
+  const social=profile.social_url
+    ? `<div class="author-social-v3"><a href="${esc(profile.social_url)}" target="_blank" rel="noopener noreferrer">SOCIAL MEDIA ↗</a></div>`
+    : '';
+
+  const timelineHtml=timeline.length
+    ? `<div class="timeline-v3">${timeline.map(x=>{
+        const story=works.find(s=>s.id===x.story_id);
+        const image=x.poster_url||story?.cover_url||'';
+        return `<article class="timeline-item-v3">
+          <span class="timeline-dot-v3"></span>
+          <div class="timeline-card-v3">
+            ${image?`<img class="timeline-image-v3" src="${esc(image)}" alt="${esc(x.title||displayName+' update')}" loading="lazy">`:''}
+            <div class="timeline-copy-v3">
+              <div class="timeline-type-v3">${story?`STORY UPDATE · ${esc(story.title)}`:'AUTHOR UPDATE'}</div>
+              <h4 class="timeline-title-v3">${esc(x.title||'Author Update')}</h4>
+              ${x.caption?`<div class="timeline-caption-v3">${esc(x.caption)}</div>`:''}
+              ${x.dialogue?`<div class="timeline-quote-v3">“${esc(x.dialogue)}”</div>`:''}
+              <div class="timeline-meta-v3">${esc(formatDate(x.created_at||x.updated_at))}</div>
+            </div>
+          </div>
+        </article>`;
+      }).join('')}</div>`
+    : '<div class="author-empty-v3">No public timeline updates yet.</div>';
+
+  const libraryHtml=works.length
+    ? works.slice(0,12).map(s=>`<button class="library-card-v3 read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">
+        ${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}
+        <div class="library-card-copy-v3">
+          <div class="library-card-title-v3">${esc(s.title)}</div>
+          <div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div>
+        </div>
+      </button>`).join('')
+    : '<div class="author-empty-v3">No published books yet.</div>';
+
+  box.innerHTML=`
+    <div class="author-profile author-profile-v3">
+      <div class="author-cover-v3" ${profile.cover_url?`style="background-image:url('${esc(profile.cover_url)}')"`:''}>
+        <div class="author-cover-inner">
+          <div class="author-cover-kicker">Official Author Profile</div>
+          <div class="author-cover-title">${esc(displayName)}</div>
+          <div class="author-cover-sub">Writer • Storyteller • Creator</div>
+        </div>
+      </div>
+
+      <div class="author-body-v3">
+        <div class="author-identity-v3">
+          ${profile.avatar_url
+            ? `<img class="author-avatar-v3" src="${esc(profile.avatar_url)}" alt="${esc(displayName)} profile photo">`
+            : `<div class="author-avatar-v3 author-avatar-fallback-v3">A</div>`}
+
+          <div>
+            <div class="author-name-v3">${esc(displayName)}</div>
+            ${profile.display_name&&profile.display_name!==displayName?`<div class="author-handle-v3">${esc(profile.display_name)}</div>`:''}
+            <p class="author-bio-v3">${esc(bio)}</p>
+
+            <div class="author-stats-v3">
+              <div class="author-stat-v3"><b>${works.length}</b><span>PUBLISHED WORKS</span></div>
+              <div class="author-stat-v3"><b>${fr.count||0}</b><span>FOLLOWERS</span></div>
+              <div class="author-stat-v3"><b>${timeline.length}</b><span>UPDATES</span></div>
+            </div>
+            ${social}
+          </div>
+
+          <div class="author-actions-v3">
+            ${session?.user?.id===authorId
+              ? `<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`
+              : `<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}
+          </div>
+        </div>
+
+        <div class="author-content-v3">
+          <section class="author-section-v3">
+            <h3>Author Timeline</h3>
+            <div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>
+            ${timelineHtml}
+          </section>
+
+          <aside class="author-section-v3">
+            <h3>Library</h3>
+            <div class="section-note">Published stories by ${esc(displayName)}.</div>
+            <div class="library-v3">${libraryHtml}</div>
+          </aside>
+        </div>
+      </div>
+    </div>`;
+
+  bindStoryCards();
+  const fp=document.getElementById('follow-author');
+  if(fp)fp.onclick=()=>toggleFollow(authorId,fp);
+  const ep=document.getElementById('edit-profile-public');
+  if(ep)ep.onclick=openProfileEditor;
 }
 async function toggleFollow(authorId,button){if(!session){openAuth('reader');return}if(session.user.id===authorId)return;const q=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();if(q.data){const d=await sb.from('follows').delete().eq('id',q.data.id);if(!d.error)button.textContent='FOLLOW'}else{const i=await sb.from('follows').insert({author_id:authorId,follower_id:session.user.id});if(!i.error)button.textContent='FOLLOWING'}const stories=await getPublished();loadPublicAuthorProfile(stories)}
 
@@ -280,7 +462,7 @@ async function uploadImage(bucket,file,prefix=''){if(!file)return null;if(!file.
 async function uniqueSlug(title,id=null){const base=slugify(title);let s=base,n=2;while(n<30){let q=sb.from('stories').select('id').eq('share_slug',s).limit(1);if(id)q=q.neq('id',id);const r=await q;if(r.error)throw r.error;if(!r.data?.length)return s;s=base+'-'+n++}return base+'-'+Date.now()}
 async function saveStory(publishState,mode='save'){syncCurrentChapter();const st=document.getElementById('editor-status'),title=document.getElementById('ed-title').value.trim();if(!title){notice(st,'Please enter a story title.');return}if(!session){notice(st,'Your session expired. Sign in again.');return}try{notice(st,'Saving…',true);let coverUrl=editorStory.cover_url||null;if(editorCoverFile)coverUrl=await uploadImage('story-covers',editorCoverFile,'cover-');if(publishState&&!coverUrl){notice(st,'Upload a book cover before publishing. The homepage uses the actual book cover image.');return}const tags=document.getElementById('ed-tags').value.split(',').map(x=>x.trim()).filter(Boolean);const payload={title,description:document.getElementById('ed-desc').value.trim()||null,cover_url:coverUrl,tags,published:publishState,updated_at:new Date().toISOString()};let r;if(editorStory.id){payload.share_slug=editorStory.share_slug||await uniqueSlug(title,editorStory.id);r=await sb.from('stories').update(payload).eq('id',editorStory.id).eq('owner_id',session.user.id).select('*').single()}else{payload.share_slug=await uniqueSlug(title);r=await sb.from('stories').insert({...payload,owner_id:session.user.id}).select('*').single()}if(r.error)throw r.error;editorStory={...r.data};const storyId=r.data.id;const d=await sb.from('chapters').delete().eq('story_id',storyId);if(d.error)throw d.error;const rows=editorChapters.map((c,i)=>({story_id:storyId,chapter_number:i+1,title:c.title||('Chapter '+(i+1)),content:c.content||''}));if(rows.length){const cr=await sb.from('chapters').insert(rows);if(cr.error)throw cr.error}editorCoverFile=null;notice(st,mode==='unpublish'?'Story saved and unpublished.':publishState?'Story saved and published. Your cover now appears on the homepage.':'Changes saved as draft.',true);await loadHome();setTimeout(openAuthorHome,500)}catch(e){console.error(e);notice(st,'Save failed: '+(e.message||e))}}
 
-async function openProfileEditor(){await refreshSession();if(!session){openAuth('author');return}const r=await sb.from('profiles').select('*').eq('id',session.user.id).maybeSingle();const p=r.data||{};open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHOR PROFILE</div><h2>Edit your profile</h2><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'AVANITAXX')}"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE IMAGE</label><input id="pf-avatar" class="field" type="file" accept="image/*">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" style="margin-top:9px">`:''}<label>AUTHOR COVER / BANNER</label><input id="pf-cover" class="field" type="file" accept="image/*">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" style="margin-top:9px">`:''}</div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE AUTHOR PROFILE</button></div>`);document.getElementById('profile-close').onclick=openAuthorHome;document.getElementById('save-profile').onclick=async()=>{try{notice('profile-status','Saving…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;const af=document.getElementById('pf-avatar').files?.[0],cf=document.getElementById('pf-cover').files?.[0];if(af)avatar=await uploadImage('author-media',af,'avatar-');if(cf)cover=await uploadImage('author-media',cf,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||'AVANITAXX',display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});if(u.error)throw u.error;notice('profile-status','Author profile saved.',true);await loadHome();setTimeout(openAuthorHome,450)}catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}}}
+async function openProfileEditor(){await refreshSession();if(!session){openAuth('author');return}const r=await sb.from('profiles').select('*').eq('id',session.user.id).maybeSingle();const p=r.data||{};open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHOR PROFILE</div><h2>Edit your profile</h2><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'AVANITAXX')}"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://facebook.com/..." value="${esc(p.social_url||'')}"><div class="help">You can place your main Facebook, Wattpad, Instagram, TikTok, or other author-page link here.</div></div><div><label>PROFILE IMAGE</label><input id="pf-avatar" class="field" type="file" accept="image/*">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" style="margin-top:9px">`:''}<label>AUTHOR COVER / BANNER</label><input id="pf-cover" class="field" type="file" accept="image/*">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" style="margin-top:9px">`:''}</div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE AUTHOR PROFILE</button></div>`);document.getElementById('profile-close').onclick=openAuthorHome;document.getElementById('save-profile').onclick=async()=>{try{notice('profile-status','Saving…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;const af=document.getElementById('pf-avatar').files?.[0],cf=document.getElementById('pf-cover').files?.[0];if(af)avatar=await uploadImage('author-media',af,'avatar-');if(cf)cover=await uploadImage('author-media',cf,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||'AVANITAXX',display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});if(u.error)throw u.error;notice('profile-status','Author profile saved.',true);await loadHome();setTimeout(openAuthorHome,450)}catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}}}
 
 async function loadUnreadCount(){if(!session)return;const r=await sb.from('notifications').select('*',{count:'exact',head:true}).eq('user_id',session.user.id).eq('read',false);const badge=document.getElementById('notify-badge');if(!badge)return;if(!r.error&&(r.count||0)>0){badge.textContent=r.count;badge.classList.remove('hidden')}else badge.classList.add('hidden')}
 async function openNotifications(){if(!session){openAuth('reader');return}const r=await sb.from('notifications').select('*').eq('user_id',session.user.id).order('created_at',{ascending:false}).limit(100);open(`<div class="modal" style="width:min(600px,100%)"><button class="close" id="n-close">×</button><div class="kicker">READER UPDATES</div><h2>Notifications</h2><div class="actions" style="margin:0 0 12px"><button class="btn alt" id="mark-read">MARK ALL READ</button></div><div id="notify-list" class="notify-list">${r.error?'<div class="meta">Notifications need the Supabase setup.</div>':(r.data||[]).length?(r.data||[]).map(n=>`<button class="notify-item ${n.read?'':'unread'} n-open" data-story="${n.story_id||''}" style="text-align:left;color:inherit"><b>${esc(n.message||'New update')}</b><div class="notify-time">${esc(formatDate(n.created_at))}</div></button>`).join(''):'<div class="meta">No notifications yet.</div>'}</div></div>`);document.getElementById('n-close').onclick=close;document.getElementById('mark-read').onclick=async()=>{await sb.from('notifications').update({read:true}).eq('user_id',session.user.id).eq('read',false);loadUnreadCount();openNotifications()};document.querySelectorAll('.n-open').forEach(b=>b.onclick=async()=>{const id=b.dataset.story;if(id){const s=await sb.from('stories').select('share_slug,id').eq('id',id).maybeSingle();if(s.data)openPublicStory(s.data.share_slug||s.data.id)}})}
