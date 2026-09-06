@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories</title>
-<meta name="avx-build" content="2026-09-07-mobile-reader-flow-2">
+<meta name="avx-build" content="2026-09-07-book-reader-lounge-feature-1">
 <meta name="description" content="Avanitaxx Stories — read, follow, like, comment, and discover new chapters from AVANITAXX.">
 <style>
 :root{--cream:#f8f1e8;--white:#fffdf8;--brown:#4a3025;--toffee:#a8795b;--pink:#d9a6a6;--lightpink:#f3ddda;--gold:#b89562;--muted:#7d685d;--line:#eaded2;--danger:#9b3d38;--ok:#315c38;--shadow:0 18px 55px rgba(74,48,37,.11)}
@@ -322,22 +322,6 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .home-pop{width:min(760px,calc(100vw - 28px));display:grid;grid-template-columns:minmax(245px,.78fr) minmax(0,1.22fr);align-items:stretch}
 .home-pop-art{height:auto;min-height:430px;background-size:contain;background-repeat:no-repeat;background-color:#f4e8df}
 .home-pop-copy{padding:34px 32px;display:flex;flex-direction:column;justify-content:center}.home-pop h2{font-size:38px}.home-pop-close{z-index:3}
-/* ===== MOBILE READING FLOW — APP-LIKE, NOT SQUEEZED ===== */
-.reader-mobile-flow{width:100%;max-width:none!important;max-height:100vh!important;overflow:auto!important;background:var(--reader-paper,#fffdf8)!important;padding:0!important;border-radius:0!important;box-shadow:none!important}
-.reader-mobile-shell{min-height:100vh;background:var(--reader-paper,#fffdf8);color:var(--reader-ink,#2f2723)}
-.reader-mobile-header{position:sticky;top:0;z-index:20;min-height:58px;padding:9px 12px;display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:8px;border-bottom:1px solid var(--reader-line,#eaded2);background:color-mix(in srgb,var(--reader-paper,#fffdf8) 94%,transparent);backdrop-filter:blur(12px)}
-.reader-mobile-close{border:0;background:none;color:var(--reader-ink,#2f2723);font-size:25px;line-height:1;padding:6px}.reader-mobile-title-wrap{min-width:0}.reader-mobile-title-wrap .reader-book-kicker{font-size:7px}.reader-mobile-story-title{font:700 13px/1.2 Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--reader-ink,#2f2723)}
-.reader-mobile-actions{display:flex;gap:4px}.reader-mobile-actions .reader-tool{padding:7px 8px;font-size:12px}
-.reader-mobile-story-meta{padding:26px 18px 16px;text-align:center}.reader-mobile-story-meta h1{font:400 clamp(27px,7vw,36px)/1.15 Georgia,serif;color:var(--reader-ink,#2f2723);margin:0 0 13px}.reader-mobile-stats{display:flex;justify-content:center;gap:17px;flex-wrap:wrap;color:var(--reader-muted,#85746c);font:11px Arial,sans-serif}.reader-mobile-stats b{color:var(--reader-ink,#2f2723)}
-.reader-mobile-author{margin-top:17px;min-height:50px;display:flex;justify-content:center;align-items:center}.reader-mobile-author .mini-author{margin:0;justify-content:center;text-align:center}.reader-mobile-author .mini-author>div:last-child{text-align:left}.reader-mobile-author img,.reader-mobile-author .avatar-fallback{width:44px;height:44px;border-radius:50%;border:0;margin:0}.reader-author-placeholder{font:italic 13px Georgia,serif;color:var(--reader-muted,#85746c)}
-.reader-mobile-tools{display:flex;justify-content:center;align-items:center;gap:7px;padding:5px 18px 17px;border-bottom:1px solid var(--reader-line,#eaded2)}.reader-mobile-tools>span{font:9px Arial,sans-serif;color:var(--reader-muted,#85746c);min-width:38px;text-align:center}.reader-mobile-tools .reader-tool{padding:7px 10px}
-.reader-mobile-content{padding:28px 20px 34px;width:100%;max-width:760px;margin:0 auto;font:var(--reader-font-size,20px)/1.88 Georgia,serif;letter-spacing:.003em;color:var(--reader-ink,#302722);word-break:normal;overflow-wrap:anywhere}.reader-mobile-content p{margin:0 0 1.22em}.reader-mobile-content h1,.reader-mobile-content h2,.reader-mobile-content h3{font-family:Georgia,serif;color:var(--reader-ink,#302722);line-height:1.25;margin-top:1.5em}.reader-mobile-content blockquote{color:var(--reader-ink,#302722);border-left:2px solid var(--toffee);padding-left:14px}.reader-mobile-content img{display:block;max-width:100%;height:auto;margin:18px auto}
-.reader-mobile-end{padding:20px 18px 35px;border-top:1px solid var(--reader-line,#eaded2);background:var(--reader-paper,#fffdf8)}.reader-mobile-progress{height:3px;background:var(--reader-line,#eaded2);border-radius:99px;overflow:hidden;margin-bottom:15px}.reader-mobile-progress span{display:block;height:100%;background:var(--toffee)}.reader-mobile-chapter-nav{display:flex;align-items:center;justify-content:space-between;gap:7px}.reader-mobile-chapter-nav>span{font:8px Arial,sans-serif;letter-spacing:.1em;color:var(--reader-muted,#85746c);text-align:center}.reader-mobile-chapter-nav .btn{font-size:8px;padding:10px 9px}.reader-mobile-engagement{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:22px 0 14px}.reader-mobile-end label{display:block;font:900 9px Arial,sans-serif;letter-spacing:.14em;color:var(--reader-muted,#85746c);margin:9px 0}.reader-mobile-end .field{font-size:15px;line-height:1.5}.reader-mobile-end .comment-body{font-size:14px}
-.reader.dark-mode .reader-mobile-shell,.reader.dark-mode .reader-mobile-end{background:#211b18}.reader.dark-mode .reader-mobile-content,.reader.dark-mode .reader-mobile-content h1,.reader.dark-mode .reader-mobile-content h2,.reader.dark-mode .reader-mobile-content h3,.reader.dark-mode .reader-mobile-content blockquote,.reader.dark-mode .reader-mobile-story-title,.reader.dark-mode .reader-mobile-story-meta h1,.reader.dark-mode .reader-mobile-stats b,.reader.dark-mode .reader-mobile-close{color:#fff!important}.reader.dark-mode .reader-mobile-story-meta,.reader.dark-mode .reader-mobile-tools,.reader.dark-mode .reader-mobile-header{border-color:#40332d}.reader.dark-mode .reader-mobile-content a{color:#f4c9c0!important}
-@media(min-width:701px){.reader-mobile-flow{display:none}}
-@media(max-width:700px){.reader-mobile-content{font-size:20px;padding-left:18px;padding-right:18px}.reader-mobile-story-meta{padding-top:25px}.reader-mobile-header{min-height:60px}}
-@media(max-width:380px){.reader-mobile-content{font-size:19px;padding-left:16px;padding-right:16px}.reader-mobile-story-meta{padding-left:14px;padding-right:14px}.reader-mobile-chapter-nav .btn{font-size:7px;padding-left:7px;padding-right:7px}}
-
 /* ===== SOCIAL-STYLE AUTHOR PROFILE ===== */
 .author-profile-social{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(74,48,37,.12);box-shadow:0 30px 90px rgba(35,23,18,.20)}
 .author-social-cover{height:285px;background:#d9c2bb center/cover no-repeat;position:relative}.author-social-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,23,18,.03),rgba(35,23,18,.38))}
@@ -856,16 +840,12 @@ async function toggleFollow(authorId,button){if(!session){openAuth('reader');ret
 async function openPublicStory(slugValue){
  let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];history.replaceState(null,'','#story='+encodeURIComponent(currentStory.share_slug||currentStory.id));recordView(currentStory.id);renderReader()}
 async function recordView(storyId){const key='avx_view_'+storyId;if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1');try{await sb.rpc('increment_story_view',{p_story_id:storyId})}catch(e){console.warn('View counter unavailable',e)}}
-function readerPageBlocks(content,mode='desktop'){
+function readerPageBlocks(content){
   const clean=renderContent(content||'');
-  // On phones/tablets, let the chapter flow naturally like a real reading app.
-  // Desktop keeps the book/page experience, but mobile should never squeeze six
-  // short paragraphs into a tiny artificial page.
-  if(mode==='mobile'||mode==='tablet') return [clean||'<p></p>'];
   const parts=clean.match(/<p[\s\S]*?<\/p>|<h[1-6][\s\S]*?<\/h[1-6]>|<img[\s\S]*?>|<blockquote[\s\S]*?<\/blockquote>/gi)||[];
   if(!parts.length)return [clean||'<p></p>'];
   const pages=[];let buf='',count=0;
-  parts.forEach(part=>{buf+=part;count++;if(count>=8){pages.push(buf);buf='';count=0}});
+  parts.forEach(part=>{buf+=part;count++;if(count>=6){pages.push(buf);buf='';count=0}});
   if(buf)pages.push(buf);return pages.length?pages:['<p></p>'];
 }
 function readerSettings(){return {theme:localStorage.getItem('avx_reader_theme')||'light',size:Number(localStorage.getItem('avx_reader_size')||18)}}
@@ -873,71 +853,37 @@ function saveReaderSettings(s){localStorage.setItem('avx_reader_theme',s.theme);
 function renderReader(){
   const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};
   const settings=readerSettings();
-  const vw=window.innerWidth||1024;
-  const mode=vw<=700?'mobile':(vw<=1100?'tablet':'desktop');
-  const mobileLike=mode!=='desktop';
-  const pages=readerPageBlocks(c.content||'',mode);
+  const pages=readerPageBlocks(c.content||'');
   if(!currentStory.__readerPage)currentStory.__readerPage={};
   currentStory.__readerPage[currentChapter]=Math.min(currentStory.__readerPage[currentChapter]||0,pages.length-1);
   const pageIndex=currentStory.__readerPage[currentChapter]||0;
   const isLast=pageIndex>=pages.length-1;
-  const root=document.createElement('div');
-  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} ${mobileLike?'reader-mobile-flow':''}`;
+  const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''}`;
   root.style.setProperty('--reader-font-size',settings.size+'px');
-  if(mobileLike){
-    root.innerHTML=`<div class="reader-mobile-shell">
-      <div class="reader-mobile-header">
-        <button class="reader-mobile-close" id="close-reader" aria-label="Close reader">←</button>
-        <div class="reader-mobile-title-wrap"><div class="reader-book-kicker">AVANITAXX STORIES</div><div class="reader-mobile-story-title">${esc(currentStory.title)}</div></div>
-        <div class="reader-mobile-actions"><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾</button></div>
-      </div>
-      <div class="reader-mobile-story-meta">
-        <h1>${esc(c.title||('Chapter '+(currentChapter+1)))}</h1>
-        <div class="reader-mobile-stats"><span>◉ <b>${Number(currentStory.views)||0}</b> reads</span><span>★ <b id="mobile-like-count">—</b></span><span>● <b id="mobile-comment-count">—</b></span></div>
-        <div id="reader-author-mini" class="reader-mobile-author"><div class="reader-author-placeholder">by <strong>Avanitaxx Stories</strong></div></div>
-      </div>
-      <div class="reader-mobile-tools"><button class="reader-tool" id="reader-size-down">A−</button><span id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button></div>
-      <article class="reader-mobile-content" id="reader-page-content">${pages[0]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</article>
-      <div class="reader-mobile-end">
-        <div class="reader-mobile-progress"><span style="width:100%"></span></div>
-        <div class="reader-mobile-chapter-nav">
-          <button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS</button>
-          <span>CHAPTER ${currentChapter+1} / ${currentStory.chapters.length}</span>
-          <button class="btn" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT →</button>
-        </div>
-        <div class="reader-mobile-engagement"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><span id="engage-counts" class="meta">Loading…</span></div>
-        <label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div>
-      </div>
-    </div>`;
-  }else{
-    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top">
-      <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · BOOK MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
-      <div class="reader-tools"><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
-      <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
-    </div><div class="reader-page-stage"><article class="reader-page"><div class="reader-page-content" id="reader-page-content">${pages[pageIndex]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div><div class="reader-page-number">PAGE ${pageIndex+1} OF ${pages.length}</div></article></div>
-    <div class="reader-book-footer"><div class="reader-progress-line"><span style="width:${((pageIndex+1)/pages.length)*100}%"></span></div><div class="reader-page-actions"><button class="btn alt" id="reader-prev-page" ${pageIndex<=0?'disabled':''}>← TURN BACK</button><span class="reader-page-count">${pageIndex+1} / ${pages.length}</span><button class="btn" id="reader-next-page">${isLast?'FINISH CHAPTER':'TURN PAGE →'}</button></div></div>
-    ${isLast?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
-    </div>`;
-  }
+  root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top">
+    <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · BOOK MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
+    <div class="reader-tools"><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
+    <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
+  </div><div class="reader-page-stage"><article class="reader-page"><div class="reader-page-content" id="reader-page-content">${pages[pageIndex]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div><div class="reader-page-number">PAGE ${pageIndex+1} OF ${pages.length}</div></article></div>
+  <div class="reader-book-footer"><div class="reader-progress-line"><span style="width:${((pageIndex+1)/pages.length)*100}%"></span></div><div class="reader-page-actions"><button class="btn alt" id="reader-prev-page" ${pageIndex<=0?'disabled':''}>← TURN BACK</button><span class="reader-page-count">${pageIndex+1} / ${pages.length}</span><button class="btn" id="reader-next-page">${isLast?'FINISH CHAPTER':'TURN PAGE →'}</button></div></div>
+  ${isLast?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
+  </div>`;
   const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open';overlay.setAttribute('aria-hidden','false');
   const rerender=()=>renderReader();
   document.getElementById('close-reader').onclick=close;
   document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);rerender()};
   document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(15,settings.size-1);saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);rerender()};
-  if(!mobileLike){
-    document.getElementById('reader-prev-page').onclick=()=>{if(pageIndex>0){currentStory.__readerPage[currentChapter]=pageIndex-1;rerender()}};
-    document.getElementById('reader-next-page').onclick=()=>{if(!isLast){currentStory.__readerPage[currentChapter]=pageIndex+1;rerender()}else if(currentChapter<currentStory.chapters.length-1){currentChapter++;rerender()}};
-  }
+  document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(14,settings.size-1);saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(26,settings.size+1);saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-prev-page').onclick=()=>{if(pageIndex>0){currentStory.__readerPage[currentChapter]=pageIndex-1;rerender()}};
+  document.getElementById('reader-next-page').onclick=()=>{if(!isLast){currentStory.__readerPage[currentChapter]=pageIndex+1;rerender()}else if(currentChapter<currentStory.chapters.length-1){currentChapter++;rerender()}};
   document.getElementById('prev-ch').onclick=()=>{if(currentChapter>0){currentChapter--;renderReader()}};
   document.getElementById('next-ch').onclick=()=>{if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}};
   const pc=document.getElementById('reader-page-content');if(pc)pc.style.fontSize=settings.size+'px';
-  document.querySelectorAll('.reader-mobile-author').forEach(x=>x.onclick=()=>loadReaderAuthor());
-  document.getElementById('share-story').onclick=shareCurrentStory;document.getElementById('like-story').onclick=toggleLike;document.getElementById('comment-post').onclick=postComment;loadReaderAuthor();loadInteractions();
+  if(isLast){document.getElementById('share-story').onclick=shareCurrentStory;document.getElementById('like-story').onclick=toggleLike;document.getElementById('comment-post').onclick=postComment;loadReaderAuthor();loadInteractions()}
 }
 async function loadReaderAuthor(){const box=document.getElementById('reader-author-mini');if(!box)return;const r=await sb.from('profiles').select('*').eq('id',currentStory.owner_id).maybeSingle();const p=r.data||{};box.innerHTML=`<div class="mini-author">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="Author">`:`<div class="avatar-fallback">A</div>`}<div><div class="meta">Written by</div><strong>${esc(p.pen_name||p.display_name||'AVANITAXX')}</strong></div></div>`}
-async function loadInteractions(){const count=await getCounts(currentStory.id);const cc=document.getElementById('engage-counts');if(cc)cc.textContent=`${count.likes} likes • ${count.comments} comments • ${Number(currentStory.views)||0} reads`;const ml=document.getElementById('mobile-like-count');if(ml)ml.textContent=Number(count.likes)||0;const mc=document.getElementById('mobile-comment-count');if(mc)mc.textContent=Number(count.comments)||0;const like=document.getElementById('like-story');if(like&&session){const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)like.textContent='♥ LIKED'}await loadComments()}
+async function loadInteractions(){const count=await getCounts(currentStory.id);const cc=document.getElementById('engage-counts');if(cc)cc.textContent=`${count.likes} likes • ${count.comments} comments • ${Number(currentStory.views)||0} reads`;const like=document.getElementById('like-story');if(like&&session){const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)like.textContent='♥ LIKED'}await loadComments()}
 async function toggleLike(){if(!session){openAuth('reader');return}const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)await sb.from('story_likes').delete().eq('id',r.data.id);else await sb.from('story_likes').insert({story_id:currentStory.id,user_id:session.user.id});await loadInteractions()}
 async function postComment(){if(!session){openAuth('reader');return}const input=document.getElementById('comment-text'),content=input.value.trim();if(!content)return;const r=await sb.from('comments').insert({story_id:currentStory.id,user_id:session.user.id,content,parent_id:null});if(r.error){notice('comment-status',r.error.message);return}input.value='';notice('comment-status','Comment posted.',true);await loadInteractions()}
 async function postReply(parentId,inputId){if(!session){openAuth('reader');return}const input=document.getElementById(inputId),content=input?.value.trim();if(!content)return;const r=await sb.from('comments').insert({story_id:currentStory.id,user_id:session.user.id,content,parent_id:parentId});if(r.error){alert(r.error.message);return}input.value='';await loadInteractions()}
