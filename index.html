@@ -3,9 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Avanitaxx Stories</title>
-<meta name="avx-build" content="2026-09-07-mobile-reader-flow-2">
-<meta name="description" content="Avanitaxx Stories — read, follow, like, comment, and discover new chapters from AVANITAXX.">
+<title>Avanitaxx Stories — Read Stories Online</title>
+<meta name="avx-build" content="2026-09-07-seo-discovery-1">
+<meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
+<meta name="author" content="AVANITAXX">
+<meta name="theme-color" content="#f8f1e8">
+<meta name="googlebot" content="index,follow">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://avanitaxx-stories.github.io/avanitaxx-stories/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Avanitaxx Stories">
+<meta property="og:title" content="Avanitaxx Stories — Read Stories Online">
+<meta property="og:description" content="Read original stories online, discover authors, follow updates, save books, and explore new chapters from AVANITAXX.">
+<meta property="og:url" content="https://avanitaxx-stories.github.io/avanitaxx-stories/">
+<meta property="og:image" content="https://avanitaxx-stories.github.io/avanitaxx-stories/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Avanitaxx Stories — Read Stories Online">
+<meta name="twitter:description" content="Read original stories online and discover authors on Avanitaxx Stories.">
+<meta name="twitter:image" content="https://avanitaxx-stories.github.io/avanitaxx-stories/og-image.jpg">
+<script type="application/ld+json" id="site-schema">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Avanitaxx Stories",
+  "url":"https://avanitaxx-stories.github.io/avanitaxx-stories/",
+  "description":"A reading and writing platform for discovering original stories, authors, chapters, updates, and community content.",
+  "publisher":{"@type":"Person","name":"AVANITAXX"}
+}
+</script>
 <style>
 :root{--cream:#f8f1e8;--white:#fffdf8;--brown:#4a3025;--toffee:#a8795b;--pink:#d9a6a6;--lightpink:#f3ddda;--gold:#b89562;--muted:#7d685d;--line:#eaded2;--danger:#9b3d38;--ok:#315c38;--shadow:0 18px 55px rgba(74,48,37,.11)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--brown);font-family:Arial,Helvetica,sans-serif}a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}button{cursor:pointer}.container{width:min(1180px,92%);margin:auto}.hidden{display:none!important}
@@ -445,6 +470,19 @@ const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSe
 const overlay=document.getElementById('overlay');
 let session=null,currentStory=null,currentChapter=0,currentAuthorId=null;
 let editorStory=null,editorChapters=[],editorChapterIndex=0,editorCoverFile=null;
+const SITE_URL='https://avanitaxx-stories.github.io/avanitaxx-stories/';
+const DEFAULT_SEO={title:'Avanitaxx Stories — Read Stories Online',description:'Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.',image:SITE_URL+'og-image.jpg',url:SITE_URL};
+function setMeta(selector,content){const el=document.querySelector(selector);if(el&&content)el.setAttribute('content',content)}
+function setSEO({title=DEFAULT_SEO.title,description=DEFAULT_SEO.description,image=DEFAULT_SEO.image,url=SITE_URL,type='website',schema=null}={}){
+  document.title=title;
+  setMeta('meta[name="description"]',description);setMeta('meta[property="og:title"]',title);setMeta('meta[property="og:description"]',description);setMeta('meta[property="og:image"]',image);setMeta('meta[property="og:url"]',url);setMeta('meta[name="twitter:title"]',title);setMeta('meta[name="twitter:description"]',description);setMeta('meta[name="twitter:image"]',image);
+  const canonical=document.querySelector('link[rel="canonical"]');if(canonical)canonical.href=url;
+  const ogType=document.querySelector('meta[property="og:type"]');if(ogType)ogType.content=type;
+  const schemaEl=document.getElementById('site-schema');if(schemaEl&&schema){schemaEl.textContent=JSON.stringify(schema);}
+}
+function resetSEO(){setSEO(DEFAULT_SEO)}
+function publicUrl(params={}){const u=new URL(SITE_URL);Object.entries(params).forEach(([k,v])=>{if(v!=null&&v!=='')u.searchParams.set(k,v)});return u.toString()}
+function updatePublicRoute(params={}){const u=new URL(location.href);u.hash='';Object.keys(u.searchParams).forEach(k=>u.searchParams.delete(k));Object.entries(params).forEach(([k,v])=>{if(v!=null&&v!=='')u.searchParams.set(k,v)});history.replaceState(null,'',u.pathname+(u.search?u.search:'')+(u.hash||''));}
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const slugify=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,70)||('story-'+Date.now());
 const safeHtml=s=>window.DOMPurify?DOMPurify.sanitize(String(s||''),{USE_PROFILES:{html:true}}):esc(s);
@@ -452,7 +490,7 @@ const looksHtml=s=>/<\/?[a-z][\s\S]*>/i.test(String(s||''));
 const renderContent=s=>looksHtml(s)?safeHtml(s):String(s||'').split(/\n\s*\n/).map(p=>'<p>'+esc(p).replace(/\n/g,'<br>')+'</p>').join('');
 const formatDate=s=>{try{return new Date(s).toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}catch{return ''}};
 function open(html,cls=''){overlay.innerHTML=html;overlay.className='open '+cls;overlay.setAttribute('aria-hidden','false')}
-function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');if(location.hash.startsWith('#story='))history.replaceState(null,'',location.pathname+location.search+'#recent')}
+function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');if(location.search.includes('story=')||location.search.includes('author=')){history.replaceState(null,'',location.pathname);resetSEO()}}
 function notice(id,text,ok=false){const e=typeof id==='string'?document.getElementById(id):id;if(!e)return;e.textContent=text;e.className='status show '+(ok?'ok':'err')}
 function isTestStory(s){return /^(test|test book|sample book|demo book|untitled story)(\s*\d+)?$/i.test(String(s?.title||'').trim())}
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
@@ -613,7 +651,7 @@ async function openAuthorHub(authorId=null){
   const authors=window.__authorDirectory||[];
   if(authorId){
     const target=authors.find(a=>a.id===authorId);
-    if(target){await openAuthorProfileInHub(target);return}
+    if(target){updatePublicRoute({author:target.id});await openAuthorProfileInHub(target);return}
   }
   open(`<div class="author-hub-panel">
     <div class="author-hub-head">
@@ -669,6 +707,8 @@ async function openAuthorProfileInHub(author){
   const displayName=profile.pen_name||profile.display_name||'Avanitaxx Member';
   const role=author.__role||((stories.length)?'AUTHOR':'READER');
   const bio=profile.bio||(role==='AUTHOR'?'Author of stories about love, secrets, danger, and unforgettable characters.':'Reader and member of the Avanitaxx Stories community.');
+  const authorSeoUrl=publicUrl({author:author.id});
+  setSEO({title:displayName+' — '+role+' | Avanitaxx Stories',description:String(bio).slice(0,300),image:profile.avatar_url||profile.cover_url||DEFAULT_SEO.image,url:authorSeoUrl,type:'profile',schema:{'@context':'https://schema.org','@type':'ProfilePage','name':displayName,'description':String(bio).slice(0,300),'url':authorSeoUrl,'mainEntity':{'@type':'Person','name':displayName,'image':profile.avatar_url||undefined}}});
   const timeline=tr.error?[]:(tr.data||[]);
   const social=profile.social_url?`<div class="author-social-v3"><a href="${esc(profile.social_url)}" target="_blank" rel="noopener noreferrer">SOCIAL MEDIA ↗</a></div>`:'';
   const timelineHtml=timeline.length?`<div class="timeline-v3">${timeline.map(x=>{
@@ -872,7 +912,7 @@ async function libraryButtonHtml(storyId){
 }
 
 async function openPublicStory(slugValue){
- let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];history.replaceState(null,'','#story='+encodeURIComponent(currentStory.share_slug||currentStory.id));recordView(currentStory.id);renderReader()}
+ let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];const publicSlug=currentStory.share_slug||currentStory.id;updatePublicRoute({story:publicSlug});const seoDescription=String(currentStory.description||currentStory.blurb||('Read '+currentStory.title+' online on Avanitaxx Stories. Discover chapters, follow the author, and join the reading community.')).replace(/<[^>]*>/g,'').slice(0,300);setSEO({title:currentStory.title+' — Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:publicUrl({story:publicSlug}),type:'book',schema:{'@context':'https://schema.org','@type':'Book','name':currentStory.title,'description':seoDescription,'image':currentStory.cover_url||DEFAULT_SEO.image,'url':publicUrl({story:publicSlug}),'author':{'@type':'Person','name':currentStory.author_name||currentStory.pen_name||'AVANITAXX'},'publisher':{'@type':'Organization','name':'Avanitaxx Stories'}}});recordView(currentStory.id);renderReader()}
 async function recordView(storyId){const key='avx_view_'+storyId;if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1');try{await sb.rpc('increment_story_view',{p_story_id:storyId})}catch(e){console.warn('View counter unavailable',e)}}
 function readerPageBlocks(content,mode='desktop'){
   const clean=renderContent(content||'');
@@ -1198,7 +1238,7 @@ async function ensureGoogleProfile(s){
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
 (async()=>{bindStatic();await refreshSession();await loadSoundroom();await loadHome();
 setTimeout(()=>maybeShowHomepageFeature(),1200);
-  setInterval(loadLatestChapterPromotion,60000);if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
+  setInterval(loadLatestChapterPromotion,60000);const params=new URLSearchParams(location.search);if(params.get('story'))openPublicStory(params.get('story'));else if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}})();
 })();
 </script>
 </body>
