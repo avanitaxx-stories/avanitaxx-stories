@@ -307,6 +307,38 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:rotate(180deg);display:block}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
 @media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn{height:40px;padding:0 10px}.public-author-label{font-size:7px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
 .header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
+
+/* ===== AVANITAXX READER / RESPONSIVE READING FIX ===== */
+.reader.book-reader{width:min(1180px,calc(100vw - 28px));max-height:calc(100vh - 22px);overflow:auto}
+.reader-page-stage{padding:34px 26px 40px}
+.reader-page{width:min(900px,100%);min-height:clamp(650px,74vh,900px);padding:68px clamp(46px,7vw,92px)}
+.reader-page-content{width:100%;max-width:760px;font-size:clamp(19px,1.45vw,22px);line-height:2.02;letter-spacing:.005em}
+.reader-page-content p{margin-bottom:1.18em}
+.reader-page-content h1{font-size:1.9em}.reader-page-content h2{font-size:1.55em}.reader-page-content h3{font-size:1.25em}
+.reader-page-content img{max-width:100%;height:auto}
+.reader-book-top{padding:22px 30px 17px}.reader-book-footer{padding:18px 30px 25px}.reader-engagement-book{max-width:900px}
+.reader.dark-mode .reader-page-content,.reader.dark-mode .reader-page-content h1,.reader.dark-mode .reader-page-content h2,.reader.dark-mode .reader-page-content h3,.reader.dark-mode .reader-page-content blockquote{color:#fff!important}
+.reader.dark-mode .reader-page-content a{color:#f3c8bf!important}
+.home-pop{width:min(760px,calc(100vw - 28px));display:grid;grid-template-columns:minmax(245px,.78fr) minmax(0,1.22fr);align-items:stretch}
+.home-pop-art{height:auto;min-height:430px;background-size:contain;background-repeat:no-repeat;background-color:#f4e8df}
+.home-pop-copy{padding:34px 32px;display:flex;flex-direction:column;justify-content:center}.home-pop h2{font-size:38px}.home-pop-close{z-index:3}
+/* ===== SOCIAL-STYLE AUTHOR PROFILE ===== */
+.author-profile-social{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(74,48,37,.12);box-shadow:0 30px 90px rgba(35,23,18,.20)}
+.author-social-cover{height:285px;background:#d9c2bb center/cover no-repeat;position:relative}.author-social-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,23,18,.03),rgba(35,23,18,.38))}
+.author-social-body{padding:0 28px 30px}.author-social-identity{display:grid;grid-template-columns:145px minmax(0,1fr) auto;gap:20px;align-items:start}
+.author-social-avatar{width:145px;height:145px;margin-top:-62px;position:relative;z-index:2;border-radius:50%;object-fit:cover;background:#f3dfdc;border:7px solid #fff;box-shadow:0 10px 30px rgba(55,35,27,.18)}
+.author-social-avatar-fallback{display:flex;align-items:center;justify-content:center;font:500 52px Georgia,serif;color:#563b31}
+.author-social-main{padding-top:17px}.author-social-name{font:700 29px/1.12 Arial,sans-serif;color:#201914}.author-social-handle{font-size:10px;color:#a8795b;letter-spacing:.1em;font-weight:900;margin-top:5px;text-transform:uppercase}
+.author-social-bio{font:15px/1.6 Arial,sans-serif;color:#4d433e;margin:13px 0 0;max-width:700px}.author-social-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:14px}.author-social-stat b{font:700 17px Arial,sans-serif;color:#241b17}.author-social-stat span{font-size:9px;color:#776c66;margin-left:4px}
+.author-social-action{padding-top:17px;display:flex;gap:8px;justify-content:flex-end}.author-social-action .btn{white-space:nowrap}
+.author-social-info{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;color:#554a44;font:11px/1.5 Arial,sans-serif}.author-social-info span{display:inline-flex;align-items:center;gap:5px}
+.author-social-tabs{display:flex;gap:0;border-top:1px solid #eee4df;border-bottom:1px solid #eee4df;margin-top:24px;overflow:auto}.author-social-tab{flex:1;min-width:105px;border:0;background:#fff;padding:16px 12px;color:#766b65;font:700 10px Arial,sans-serif;letter-spacing:.08em;cursor:pointer;position:relative}.author-social-tab.active{color:#9a665f}.author-social-tab.active::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:3px;background:#b77d73;border-radius:3px}
+.author-social-panel{display:none;padding-top:22px}.author-social-panel.active{display:block}.author-social-panel .author-section-v3{background:#fff;border-radius:0;border:0;padding:0}.author-social-panel .author-section-v3 h3{font:700 20px Arial,sans-serif;color:#28201b}.author-social-panel .section-note{font-family:Arial,sans-serif}.author-social-panel .library-v3{grid-template-columns:repeat(3,minmax(0,1fr))}.author-social-panel .library-card-v3{box-shadow:0 5px 18px rgba(55,35,27,.07)}
+.author-social-back{padding:14px 20px;border-bottom:1px solid #eee4df;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px}.author-social-back button{border:0;background:none;color:#9b6d64;font:700 10px Arial,sans-serif;letter-spacing:.08em}.author-social-back span{font-size:8px;color:#968983;letter-spacing:.14em;font-weight:900}
+.crop-modal{width:min(780px,calc(100vw - 28px));background:#fffdf9;border-radius:22px;padding:22px;box-shadow:0 35px 110px rgba(25,15,11,.4)}.crop-canvas-wrap{background:#2c231f;border-radius:16px;padding:12px;display:grid;place-items:center;overflow:hidden}.crop-canvas{max-width:100%;max-height:52vh;display:block;touch-action:none;cursor:grab;background:#1d1714}.crop-canvas:active{cursor:grabbing}.crop-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:13px}.crop-controls input[type=range]{flex:1;min-width:180px}.crop-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}.crop-note{font-size:10px;color:#8c7b73;line-height:1.5;margin-top:8px}
+@media (min-width:701px) and (max-width:1100px){.reader-page{width:min(860px,100%);min-height:680px;padding:60px}.reader-page-content{font-size:20px;max-width:700px}}
+@media (max-width:700px){.reader.book-reader{width:100%;max-height:100vh}.reader-book-shell{border-radius:0;min-height:100vh}.reader-book-top{padding:13px 14px 12px}.reader-book-title{font-size:20px}.reader-tools{width:100%;gap:5px}.reader-tool{padding:7px 9px;font-size:8px}.reader-book-nav{margin-top:10px}.reader-book-nav .btn{font-size:8px;padding:9px 8px}.reader-chapter-name{font-size:14px}.reader-page-stage{padding:8px}.reader-page{width:100%;min-height:calc(100vh - 235px);padding:48px 23px 62px;border-radius:2px}.reader-page::before{inset:10px}.reader-page-content{max-width:none;font-size:20px;line-height:1.92}.reader-page-content p{margin-bottom:1.1em}.reader-page-number{bottom:19px}.reader-book-footer{padding:13px 14px 18px}.reader-page-actions .btn{font-size:8px;padding:10px 11px}.reader-engagement-book{padding:20px 14px}.home-pop{width:calc(100vw - 20px);max-height:calc(100vh - 28px);overflow:auto;display:block}.home-pop-art{min-height:0;height:auto;aspect-ratio:2/3;background-size:contain}.home-pop-copy{padding:22px}.home-pop h2{font-size:31px}.author-social-cover{height:190px}.author-social-body{padding:0 15px 22px}.author-social-identity{display:block}.author-social-avatar{width:112px;height:112px;margin-top:-52px}.author-social-main{padding-top:12px}.author-social-name{font-size:27px}.author-social-action{padding-top:12px;justify-content:flex-start}.author-social-stats{gap:16px}.author-social-tabs{margin-top:18px}.author-social-tab{min-width:92px;padding:14px 8px;font-size:8px}.author-social-panel .library-v3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:380px){.reader-page{padding-left:19px;padding-right:19px}.reader-page-content{font-size:19px}.reader-tool{padding:6px 7px}}
 </style>
 </head>
 <body>
@@ -650,23 +682,26 @@ async function openAuthorProfileInHub(author){
     <div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div></div>
   </button>`).join(''):'<div class="author-empty-v3">No published books yet.</div>';
   open(`<div class="author-hub-panel author-profile-view">
-    <div class="author-profile-backbar"><button id="author-profile-back" type="button">← BACK TO AUTHOR HUB</button><span>AUTHOR PROFILE / TIMELINE</span></div>
-    <div class="author-profile author-profile-v3">
-      <div class="author-cover-v3" ${profile.cover_url?`style="background-image:url('${esc(profile.cover_url)}')"`:''}>
-        <div class="author-cover-inner"><div class="author-cover-kicker">Official Author Profile</div><div class="author-cover-title">${esc(displayName)}</div><div class="author-cover-sub">Writer • Storyteller • Creator</div></div>
-      </div>
-      <div class="author-body-v3"><div class="author-identity-v3">
-        ${profile.avatar_url?`<img class="author-avatar-v3" src="${esc(profile.avatar_url)}" alt="${esc(displayName)} profile photo">`:`<div class="author-avatar-v3 author-avatar-fallback-v3">${esc(displayName.charAt(0).toUpperCase())}</div>`}
-        <div><div class="author-name-v3">${esc(displayName)}</div>${profile.display_name&&profile.display_name!==displayName?`<div class="author-handle-v3">${esc(profile.display_name)}</div>`:''}
-        <p class="author-bio-v3">${esc(bio)}</p>
-        <div class="author-stats-v3"><div class="author-stat-v3"><b>${stories.length}</b><span>PUBLISHED WORKS</span></div><div class="author-stat-v3"><b>${fr.count||0}</b><span>FOLLOWERS</span></div><div class="author-stat-v3"><b>${timeline.length}</b><span>UPDATES</span></div></div>${social}</div>
-        <div class="author-actions-v3">${session?.user?.id===author.id?`<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`:`<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}</div>
-      </div>
-      <div class="author-profile-tabs" role="tablist"><button class="author-profile-tab active" data-author-tab="works" type="button">WORKS</button><button class="author-profile-tab" data-author-tab="about" type="button">ABOUT</button><button class="author-profile-tab" data-author-tab="timeline" type="button">TIMELINE</button><button class="author-profile-tab" data-author-tab="sound" type="button">SOUNDTRACK</button></div>
-      <div class="author-tab-panel active" data-author-panel="works"><section class="author-section-v3"><h3>Published Works</h3><div class="section-note">Stories currently available to read from ${esc(displayName)}.</div><div class="library-v3">${libraryHtml}</div></section></div>
-      <div class="author-tab-panel" data-author-panel="about"><section class="author-section-v3"><h3>About the Author</h3><div class="section-note">A closer look at ${esc(displayName)} and their creative world.</div><p class="author-bio-v3" style="max-width:none">${esc(bio)}</p>${social||'<div class="author-empty-v3">No social link added yet.</div>'}</section></div>
-      <div class="author-tab-panel" data-author-panel="timeline"><section class="author-section-v3"><h3>Author Timeline</h3><div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>${timelineHtml}</section></div>
-      <div class="author-tab-panel" data-author-panel="sound"><section class="author-section-v3"><h3>Soundtrack</h3><div class="section-note">Songs and soundtracks shared by ${esc(displayName)}.</div>${musicHtml}</section></div>
+    <div class="author-social-back"><button id="author-profile-back" type="button">← BACK TO AUTHOR LOUNGE</button><span>AVANITAXX STORIES · AUTHOR PROFILE</span></div>
+    <div class="author-profile-social">
+      <div class="author-social-cover" ${profile.cover_url?`style="background-image:url('${esc(profile.cover_url)}')"`:''}></div>
+      <div class="author-social-body">
+        <div class="author-social-identity">
+          ${profile.avatar_url?`<img class="author-social-avatar" src="${esc(profile.avatar_url)}" alt="${esc(displayName)} profile photo">`:`<div class="author-social-avatar author-social-avatar-fallback">${esc(displayName.charAt(0).toUpperCase())}</div>`}
+          <div class="author-social-main">
+            <div class="author-social-name">${esc(displayName)}</div>
+            ${profile.display_name&&profile.display_name!==displayName?`<div class="author-social-handle">${esc(profile.display_name)}</div>`:''}
+            <p class="author-social-bio">${esc(bio)}</p>
+            <div class="author-social-stats"><div class="author-social-stat"><b>${stories.length}</b><span>published works</span></div><div class="author-social-stat"><b>${fr.count||0}</b><span>followers</span></div><div class="author-social-stat"><b>${timeline.length}</b><span>updates</span></div></div>
+            <div class="author-social-info"><span>✦ Writer</span><span>✧ Storyteller</span><span>☼ Avanitaxx Stories</span></div>
+          </div>
+          <div class="author-social-action">${session?.user?.id===author.id?`<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`:`<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}</div>
+        </div>
+        <div class="author-social-tabs" role="tablist"><button class="author-social-tab active" data-author-tab="works" type="button">WORKS</button><button class="author-social-tab" data-author-tab="about" type="button">ABOUT</button><button class="author-social-tab" data-author-tab="timeline" type="button">TIMELINE</button><button class="author-social-tab" data-author-tab="sound" type="button">SOUNDROOM</button></div>
+        <div class="author-social-panel active" data-author-panel="works"><section class="author-section-v3"><h3>Published Works</h3><div class="section-note">Stories currently available to read from ${esc(displayName)}.</div><div class="library-v3">${libraryHtml}</div></section></div>
+        <div class="author-social-panel" data-author-panel="about"><section class="author-section-v3"><h3>About the Author</h3><div class="section-note">A closer look at ${esc(displayName)} and their creative world.</div><p class="author-bio-v3" style="max-width:none">${esc(bio)}</p>${social||'<div class="author-empty-v3">No social link added yet.</div>'}</section></div>
+        <div class="author-social-panel" data-author-panel="timeline"><section class="author-section-v3"><h3>Author Timeline</h3><div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>${timelineHtml}</section></div>
+        <div class="author-social-panel" data-author-panel="sound"><section class="author-section-v3"><h3>Soundroom</h3><div class="section-note">Songs and soundtracks shared by ${esc(displayName)}.</div>${musicHtml}</section></div>
       </div>
     </div>
   </div>`);
@@ -976,7 +1011,7 @@ async function maybeShowHomepageFeature(){
   const stories=await getPublished();if(!stories.length)return;
   const latest=stories.slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0))[0];
   const cover=latest.cover_url||'';
-  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art" ${cover?`style="background-image:url('${esc(cover)}')"`:''}></div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
+  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
   document.getElementById('home-pop-read').onclick=()=>{localStorage.setItem(key,'1');close();openPublicStory(latest.share_slug||latest.id)};
   document.getElementById('home-pop-later').onclick=()=>{localStorage.setItem(key,'1');close()};
   document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
