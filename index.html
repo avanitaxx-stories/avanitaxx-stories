@@ -21,7 +21,7 @@ footer{background:#3b2921;color:#f6e9df;padding:50px 0 25px}.footer-grid{display
 .notify-list{display:grid;gap:9px;max-height:55vh;overflow:auto}.notify-item{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}.notify-item.unread{background:#fff7f5}.notify-item b{font:400 16px Georgia,serif}.notify-time{font-size:9px;color:var(--muted);margin-top:5px}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.upload-preview{width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}.upload-preview.banner{width:100%;height:150px}
 @media(max-width:920px){.navlinks{display:none}.hero-grid,.dash-grid,.editor-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.search{display:none}.author-main{grid-template-columns:120px 1fr}.author-action{grid-column:1/-1;padding-top:0}.avatar{width:120px;height:120px}.story-item{grid-template-columns:60px 1fr}.item-actions{grid-column:1/-1;justify-content:flex-start}.reader-head{grid-template-columns:110px 1fr}.reader-cover{width:110px;height:165px}}
 @media(max-width:560px){.cards{grid-template-columns:repeat(2,1fr);gap:11px}.card-body{padding:11px}.card-title{font-size:15px}.hero{padding-top:42px}.hero-art{min-height:335px}.blob{width:295px;height:295px}.book{width:215px;height:300px}.dash{padding:15px}.dash-top{align-items:flex-start;flex-direction:column}.author-banner{height:175px}.author-main{display:block;padding:0 18px 22px}.avatar{margin-top:-55px}.profile-grid{grid-template-columns:1fr}.reader{padding:20px}.reader-head{display:block}.reader-cover{width:120px;height:180px;margin-bottom:14px}.reader h1{font-size:34px}.reader-content{font-size:17px}.copyright{display:block}.nav{gap:7px}.nav-actions .btn{padding:10px 12px}.bell{min-width:38px}}
-.author-menu-wrap{position:relative}.author-avatar-btn{width:42px;height:42px;padding:0;border:2px solid var(--line);border-radius:50%;background:var(--lightpink);overflow:hidden;display:flex;align-items:center;justify-content:center}.author-avatar-btn img{width:100%;height:100%;object-fit:cover}.author-avatar-fallback{font:700 17px Georgia,serif;color:var(--brown)}.author-menu{position:absolute;right:0;top:52px;width:230px;background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px;z-index:120}.author-menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:var(--brown);font-size:11px;font-weight:800;letter-spacing:.04em}.author-menu button:hover{background:var(--lightpink)}.author-menu .menu-email{padding:10px 12px 8px;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.author-menu .menu-divider{height:1px;background:var(--line);margin:5px 0}.author-menu .menu-owner{color:var(--toffee)}
+.author-menu-wrap{position:relative}.author-avatar-btn{width:43px;height:43px;padding:0;border:2px solid var(--line);border-radius:50%;background:var(--lightpink);overflow:hidden;display:flex;align-items:center;justify-content:center}.author-avatar-btn img{width:100%;height:100%;object-fit:cover}.author-avatar-fallback{font:700 17px Georgia,serif;color:var(--brown)}.author-menu{position:absolute;right:0;top:52px;width:230px;background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px;z-index:120}.author-menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:var(--brown);font-size:11px;font-weight:800;letter-spacing:.04em}.author-menu button:hover{background:var(--lightpink)}.author-menu .menu-email{padding:10px 12px 8px;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.author-menu .menu-divider{height:1px;background:var(--line);margin:5px 0}.author-menu .menu-owner{color:var(--toffee)}
 
 /* STEP 7 — SIGNATURE AUTOMATIC CHAPTER PROMOTION */
 .chapter-feature{padding:34px 0 8px}
@@ -145,14 +145,120 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   .timeline-dot-v3{left:5px}
 }
 
+
+/* ===== AVANITAXX STORIES — AUTHOR HUB / EDITORIAL DIRECTORY ===== */
+.nav-author-link{
+  border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;
+  letter-spacing:.16em;padding:30px 0;position:relative;display:inline-flex;align-items:center;gap:7px;
+}
+.nav-author-link::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}
+.nav-author-link:hover::after{right:0}
+.nav-author-icon{font-size:14px;line-height:1;color:#a77876}
+.public-author-btn{
+  width:43px;height:43px;border:1px solid rgba(74,48,37,.14);border-radius:50%;
+  background:linear-gradient(145deg,#fffdf9,#f1dfdc);color:var(--brown);
+  display:inline-flex;align-items:center;justify-content:center;gap:0;
+  box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow,.22s border-color;
+}
+.public-author-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12);border-color:rgba(149,108,85,.3)}
+.public-author-icon{font-size:19px;line-height:1;color:#9b716d}
+.public-author-label{display:none}
+.footer-link-btn{border:0;background:none;padding:0;color:#cdb9ad;font-size:13px;line-height:1.8;text-align:left;cursor:pointer}
+.footer-link-btn:hover{color:#fff}
+.featured-author-section{display:block}
+.featured-author-section.hidden{display:none!important}
+.featured-author-card{
+  position:relative;display:grid;grid-template-columns:1.1fr .9fr;min-height:330px;
+  overflow:hidden;border:1px solid rgba(74,48,37,.1);border-radius:28px;
+  background:linear-gradient(135deg,#fffdf9,#f2e3df);box-shadow:0 24px 70px rgba(55,35,27,.10);
+}
+.featured-author-copy{padding:45px;position:relative;z-index:2}
+.featured-author-eyebrow{font-size:9px;font-weight:900;letter-spacing:.22em;color:var(--toffee);text-transform:uppercase}
+.featured-author-name{font:400 clamp(40px,5vw,64px)/.95 Georgia,serif;color:var(--ink);margin:13px 0 10px;letter-spacing:-.04em}
+.featured-author-bio{font:15px/1.75 Georgia,serif;color:var(--muted);max-width:580px}
+.featured-author-stats{display:flex;gap:25px;margin:22px 0}
+.featured-author-stats b{display:block;font:400 24px Georgia,serif;color:#392820}
+.featured-author-stats span{font-size:8px;letter-spacing:.12em;color:var(--muted);font-weight:900}
+.featured-author-art{position:relative;min-height:330px;background:#dfc4bf center/cover no-repeat}
+.featured-author-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f2e3df 0%,rgba(242,227,223,.32) 35%,rgba(57,40,32,.08) 100%)}
+.featured-author-avatar{
+  width:112px;height:112px;object-fit:cover;border-radius:50%;border:7px solid #fffdf9;
+  position:absolute;right:42px;bottom:38px;z-index:3;box-shadow:0 18px 45px rgba(55,35,27,.2)
+}
+.author-hub-panel{width:min(1120px,100%);max-height:95vh;overflow:auto;background:var(--cream);border-radius:28px;border:1px solid rgba(255,255,255,.5);box-shadow:0 36px 110px rgba(30,18,14,.4)}
+.author-hub-head{
+  position:sticky;top:0;z-index:8;padding:28px 34px 24px;
+  background:rgba(255,253,249,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(74,48,37,.09)
+}
+.author-hub-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.author-hub-kicker{font-size:9px;font-weight:900;letter-spacing:.23em;color:var(--toffee);text-transform:uppercase}
+.author-hub-title{font:400 clamp(38px,5vw,58px)/.95 Georgia,serif;color:var(--ink);margin:8px 0 6px;letter-spacing:-.04em}
+.author-hub-sub{font:14px/1.65 Georgia,serif;color:var(--muted);max-width:700px}
+.author-hub-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px;flex:0 0 auto}
+.author-search-wrap{position:relative;margin-top:22px}
+.author-search-wrap input{width:100%;padding:17px 20px 17px 48px;border:1px solid rgba(74,48,37,.13);border-radius:15px;background:#fff;outline:0;color:var(--brown);box-shadow:0 8px 25px rgba(55,35,27,.045)}
+.author-search-wrap input:focus{border-color:rgba(149,108,85,.5);box-shadow:0 0 0 4px rgba(217,170,168,.14)}
+.author-search-symbol{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:18px;color:#9b716d}
+.author-hub-body{padding:30px 34px 38px}
+.author-hub-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.author-hub-count{font-size:9px;font-weight:900;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.author-directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.author-directory-card{
+  border:1px solid rgba(74,48,37,.1);background:rgba(255,253,249,.92);border-radius:18px;
+  padding:15px;text-align:left;cursor:pointer;box-shadow:0 10px 30px rgba(55,35,27,.05);
+  transition:.22s transform,.22s box-shadow,.22s border-color;position:relative;overflow:hidden
+}
+.author-directory-card:hover{transform:translateY(-4px);box-shadow:0 20px 45px rgba(55,35,27,.11);border-color:rgba(149,108,85,.25)}
+.author-directory-card::after{content:"VIEW PROFILE →";position:absolute;right:14px;top:14px;font-size:7px;letter-spacing:.14em;color:#a77d6c;opacity:0;transition:.2s}
+.author-directory-card:hover::after{opacity:1}
+.author-directory-cover{height:115px;border-radius:12px;background:linear-gradient(135deg,#5d4032,#d3aaa6);background-size:cover;background-position:center;position:relative;overflow:hidden}
+.author-directory-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(45,29,23,.4))}
+.author-directory-avatar{width:66px;height:66px;object-fit:cover;border-radius:50%;border:5px solid #fffdf9;position:absolute;left:17px;bottom:-26px;z-index:2;background:#f1ddda;box-shadow:0 8px 22px rgba(55,35,27,.15)}
+.author-directory-avatar-fallback{display:flex;align-items:center;justify-content:center;font:400 25px Georgia,serif;color:#563b31}
+.author-directory-copy{padding:34px 5px 5px}
+.author-directory-name{font:400 24px/1.05 Georgia,serif;color:#392820}
+.author-directory-handle{font-size:8px;font-weight:900;letter-spacing:.12em;color:var(--toffee);text-transform:uppercase;margin-top:5px}
+.author-directory-bio{font:12px/1.55 Georgia,serif;color:var(--muted);margin:10px 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.author-directory-meta{display:flex;gap:12px;font-size:8px;letter-spacing:.08em;color:#907a70;text-transform:uppercase}
+.author-directory-meta b{font-size:12px;color:#4a3025;margin-right:3px}
+.author-hub-empty{padding:45px 20px;text-align:center;border:1px dashed var(--line);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.45)}
+.author-profile-view{margin:0}
+.author-profile-backbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 34px;background:#fffdf9;border-bottom:1px solid var(--line)}
+.author-profile-backbar button{border:0;background:none;color:var(--toffee);font-size:10px;font-weight:900;letter-spacing:.12em}
+.author-profile-backbar span{font-size:9px;letter-spacing:.15em;color:var(--muted);font-weight:900;text-transform:uppercase}
+@media(max-width:920px){
+  .author-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .featured-author-card{grid-template-columns:1fr}
+  .featured-author-art{min-height:220px}
+  .featured-author-copy{padding:32px}
+}
+@media(max-width:700px){
+  .author-hub-head{padding:22px 18px 19px}
+  .author-hub-body{padding:22px 18px 28px}
+  .author-hub-title{font-size:42px}
+  .author-directory{grid-template-columns:1fr}
+  .author-hub-top{align-items:center}
+  .author-hub-sub{font-size:13px}
+  .public-author-btn{width:39px;height:39px}
+  .nav-author-link{display:none}
+  .featured-author-copy{padding:28px 22px}
+}
+@media(max-width:560px){
+  .author-profile-backbar{padding:14px 18px}
+  .featured-author-stats{gap:15px}
+  .featured-author-art{min-height:190px}
+  .featured-author-avatar{width:86px;height:86px;right:20px;bottom:20px}
+}
+
 </style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
   <a class="logo" href="#home">Avanitaxx <span>Stories</span></a>
-  <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><a href="#author">AUTHOR</a></nav>
+  <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button"><span class="nav-author-icon">♙</span> AUTHOR</button></nav>
   <div class="nav-actions">
-    <input id="site-search" class="search" placeholder="Search stories…">
+    <input id="site-search" class="search" placeholder="Search stories…"><button id="public-author-btn" class="public-author-btn" type="button" title="Open Author Hub" aria-label="Open Author Hub"><span class="public-author-icon">♙</span><span class="public-author-label">AUTHORS</span></button>
     <button id="notify-btn" class="btn alt icon-btn hidden" type="button" title="Notifications">🔔<span id="notify-badge" class="badge hidden">0</span></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="Author account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
@@ -188,10 +294,21 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 <section class="section altbg" id="recent"><div class="container"><div class="section-head"><div><div class="kicker">Fresh from the library</div><h2>New on the Shelf</h2><p>Latest published stories and chapter updates from Avanitaxx Stories.</p></div></div><div id="recent-books" class="cards"><div class="empty">Loading published books…</div></div></div></section>
 <section class="section" id="recommended"><div class="container"><div class="section-head"><div><div class="kicker">Reader favorites</div><h2>Recommended Reads</h2><p>Stories rising through reads, likes, comments, and recent updates.</p></div></div><div id="recommend-books" class="cards"><div class="empty">Loading recommendations…</div></div></div></section>
-<section class="section altbg" id="author"><div class="container"><div class="section-head"><div><div class="kicker">Meet the writer</div><h2>AVANITAXX — Author Timeline</h2><p>Profile, latest updates, followers, and published library.</p></div></div><div id="public-author-profile" class="author-profile"><div class="empty">Loading author profile…</div></div></div></section>
+<section class="section featured-author-section hidden" id="featured-author-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Featured Creator</div>
+        <h2>In the spotlight</h2>
+        <p>Only selected authors appear here. Everyone else stays in the Author Hub.</p>
+      </div>
+    </div>
+    <div id="featured-author-card"></div>
+  </div>
+</section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><a href="#author">Author Profile</a></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div></footer>
 <div id="overlay" aria-hidden="true"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -308,11 +425,172 @@ async function loadLatestChapterPromotion(){
 
 async function loadHome(){
  try{const stories=await getPublished();await loadLatestChapterPromotion();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
- const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${s.__counts.likes} likes • ${s.__counts.comments} comments • ${Number(s.views)||0} reads`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadPublicAuthorProfile(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
+ const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${s.__counts.likes} likes • ${s.__counts.comments} comments • ${Number(s.views)||0} reads`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadAuthorHubData(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
+
+
+async function getAuthorDirectory(stories=[]){
+  const ids=[...new Set(stories.map(s=>s.owner_id).filter(Boolean))];
+  if(!ids.length)return [];
+  const pr=await sb.from('profiles').select('*').in('id',ids);
+  const profiles=pr.error?[]:(pr.data||[]);
+  return ids.map(id=>{
+    const p=profiles.find(x=>x.id===id)||{id,pen_name:'AVANITAXX'};
+    const works=stories.filter(s=>s.owner_id===id);
+    return {...p,__works:works,__published:works.length};
+  }).sort((a,b)=>(a.pen_name||a.display_name||'').localeCompare(b.pen_name||b.display_name||''));
+}
+
+async function loadAuthorHubData(stories=[]){
+  const authors=await getAuthorDirectory(stories);
+  window.__authorDirectory=authors;
+  const featured=authors.filter(a=>a.featured||a.is_featured||a.promoted||a.is_promoted)[0]||null;
+  const sec=document.getElementById('featured-author-section');
+  const box=document.getElementById('featured-author-card');
+  if(!featured||!sec||!box){sec?.classList.add('hidden');return}
+  const name=featured.pen_name||featured.display_name||'AVANITAXX';
+  const bio=featured.bio||'Writer • Storyteller • Creator';
+  const cover=featured.cover_url||featured.__works[0]?.cover_url||'';
+  const avatar=featured.avatar_url||'';
+  sec.classList.remove('hidden');
+  box.innerHTML=`<article class="featured-author-card">
+    <div class="featured-author-copy">
+      <div class="featured-author-eyebrow">Featured Creator</div>
+      <div class="featured-author-name">${esc(name)}</div>
+      <div class="featured-author-bio">${esc(bio)}</div>
+      <div class="featured-author-stats">
+        <div><b>${featured.__published}</b><span>PUBLISHED WORKS</span></div>
+        <div><b>Featured</b><span>ON AVANITAXX</span></div>
+      </div>
+      <button class="btn" id="featured-author-open" type="button">VIEW AUTHOR PROFILE</button>
+    </div>
+    <div class="featured-author-art" ${cover?`style="background-image:url('${esc(cover)}')"`:''}>
+      ${avatar?`<img class="featured-author-avatar" src="${esc(avatar)}" alt="${esc(name)}">`:''}
+    </div>
+  </article>`;
+  document.getElementById('featured-author-open').onclick=()=>openAuthorHub(featured.id);
+}
+
+function authorCardHtml(a){
+  const name=a.pen_name||a.display_name||'AVANITAXX';
+  const bio=a.bio||'Writer • Storyteller • Creator';
+  const cover=a.cover_url||a.__works[0]?.cover_url||'';
+  const avatar=a.avatar_url||'';
+  return `<button class="author-directory-card" type="button" data-author-id="${esc(a.id)}">
+    <div class="author-directory-cover" ${cover?`style="background-image:url('${esc(cover)}')"`:''}>
+      ${avatar?`<img class="author-directory-avatar" src="${esc(avatar)}" alt="${esc(name)}">`:`<div class="author-directory-avatar author-directory-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</div>`}
+    </div>
+    <div class="author-directory-copy">
+      <div class="author-directory-name">${esc(name)}</div>
+      ${a.display_name&&a.display_name!==name?`<div class="author-directory-handle">${esc(a.display_name)}</div>`:''}
+      <div class="author-directory-bio">${esc(bio)}</div>
+      <div class="author-directory-meta"><span><b>${a.__published}</b> works</span><span>AUTHOR PROFILE</span></div>
+    </div>
+  </button>`;
+}
+
+async function openAuthorHub(authorId=null){
+  const authors=window.__authorDirectory||[];
+  if(authorId){
+    const target=authors.find(a=>a.id===authorId);
+    if(target){await openAuthorProfileInHub(target);return}
+  }
+  open(`<div class="author-hub-panel">
+    <div class="author-hub-head">
+      <div class="author-hub-top">
+        <div>
+          <div class="author-hub-kicker">Avanitaxx Stories</div>
+          <div class="author-hub-title">Author Hub</div>
+          <div class="author-hub-sub">Find the voices behind the stories. Open an author to explore their profile, timeline, published library, and latest updates.</div>
+        </div>
+        <button class="author-hub-close" id="author-hub-close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="author-search-wrap">
+        <span class="author-search-symbol">⌕</span>
+        <input id="author-hub-search" type="search" placeholder="Search author name, pen name, or display name…" autocomplete="off">
+      </div>
+    </div>
+    <div class="author-hub-body">
+      <div class="author-hub-toolbar"><span id="author-hub-count" class="author-hub-count"></span><span class="author-hub-count">Select an author to open their timeline</span></div>
+      <div id="author-directory" class="author-directory"></div>
+    </div>
+  </div>`);
+  document.getElementById('author-hub-close').onclick=close;
+  renderAuthorDirectory(authors);
+  document.getElementById('author-hub-search').oninput=e=>{
+    const q=e.target.value.toLowerCase().trim();
+    renderAuthorDirectory(authors.filter(a=>`${a.pen_name||''} ${a.display_name||''} ${a.bio||''}`.toLowerCase().includes(q)));
+  };
+}
+
+function renderAuthorDirectory(authors){
+  const box=document.getElementById('author-directory'),count=document.getElementById('author-hub-count');
+  if(!box)return;
+  if(count)count.textContent=`${authors.length} ${authors.length===1?'AUTHOR':'AUTHORS'} IN DIRECTORY`;
+  if(!authors.length){box.innerHTML='<div class="author-hub-empty">No authors match your search yet.</div>';return}
+  box.innerHTML=authors.map(authorCardHtml).join('');
+  box.querySelectorAll('.author-directory-card').forEach(b=>b.onclick=()=>openAuthorHub(b.dataset.authorId));
+}
+
+async function openAuthorProfileInHub(author){
+  const stories=author.__works||[];
+  const profile=author;
+  currentAuthorId=author.id;
+  const [fr,tr]=await Promise.all([
+    sb.from('follows').select('*',{count:'exact',head:true}).eq('author_id',author.id),
+    sb.from('owner_timeline').select('*').eq('owner_id',author.id).eq('published',true).order('created_at',{ascending:false}).limit(12)
+  ]);
+  let following=false;
+  if(session&&session.user.id!==author.id){
+    const f=await sb.from('follows').select('id').eq('author_id',author.id).eq('follower_id',session.user.id).maybeSingle();
+    following=!!f.data;
+  }
+  const displayName=profile.pen_name||profile.display_name||'AVANITAXX';
+  const bio=profile.bio||'Author of stories about love, secrets, danger, and unforgettable characters.';
+  const timeline=tr.error?[]:(tr.data||[]);
+  const social=profile.social_url?`<div class="author-social-v3"><a href="${esc(profile.social_url)}" target="_blank" rel="noopener noreferrer">SOCIAL MEDIA ↗</a></div>`:'';
+  const timelineHtml=timeline.length?`<div class="timeline-v3">${timeline.map(x=>{
+    const story=stories.find(s=>s.id===x.story_id),image=x.poster_url||story?.cover_url||'';
+    return `<article class="timeline-item-v3"><span class="timeline-dot-v3"></span><div class="timeline-card-v3">
+      ${image?`<img class="timeline-image-v3" src="${esc(image)}" alt="${esc(x.title||displayName+' update')}" loading="lazy">`:''}
+      <div class="timeline-copy-v3"><div class="timeline-type-v3">${story?`STORY UPDATE · ${esc(story.title)}`:'AUTHOR UPDATE'}</div>
+      <h4 class="timeline-title-v3">${esc(x.title||'Author Update')}</h4>
+      ${x.caption?`<div class="timeline-caption-v3">${esc(x.caption)}</div>`:''}
+      ${x.dialogue?`<div class="timeline-quote-v3">“${esc(x.dialogue)}”</div>`:''}
+      <div class="timeline-meta-v3">${esc(formatDate(x.created_at||x.updated_at))}</div></div>
+    </div></article>`;
+  }).join('')}</div>`:'<div class="author-empty-v3">No public timeline updates yet.</div>';
+  const libraryHtml=stories.length?stories.slice(0,12).map(s=>`<button class="library-card-v3 read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">
+    ${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}
+    <div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div></div>
+  </button>`).join(''):'<div class="author-empty-v3">No published books yet.</div>';
+  open(`<div class="author-hub-panel author-profile-view">
+    <div class="author-profile-backbar"><button id="author-profile-back" type="button">← BACK TO AUTHOR HUB</button><span>AUTHOR PROFILE / TIMELINE</span></div>
+    <div class="author-profile author-profile-v3">
+      <div class="author-cover-v3" ${profile.cover_url?`style="background-image:url('${esc(profile.cover_url)}')"`:''}>
+        <div class="author-cover-inner"><div class="author-cover-kicker">Official Author Profile</div><div class="author-cover-title">${esc(displayName)}</div><div class="author-cover-sub">Writer • Storyteller • Creator</div></div>
+      </div>
+      <div class="author-body-v3"><div class="author-identity-v3">
+        ${profile.avatar_url?`<img class="author-avatar-v3" src="${esc(profile.avatar_url)}" alt="${esc(displayName)} profile photo">`:`<div class="author-avatar-v3 author-avatar-fallback-v3">${esc(displayName.charAt(0).toUpperCase())}</div>`}
+        <div><div class="author-name-v3">${esc(displayName)}</div>${profile.display_name&&profile.display_name!==displayName?`<div class="author-handle-v3">${esc(profile.display_name)}</div>`:''}
+        <p class="author-bio-v3">${esc(bio)}</p>
+        <div class="author-stats-v3"><div class="author-stat-v3"><b>${stories.length}</b><span>PUBLISHED WORKS</span></div><div class="author-stat-v3"><b>${fr.count||0}</b><span>FOLLOWERS</span></div><div class="author-stat-v3"><b>${timeline.length}</b><span>UPDATES</span></div></div>${social}</div>
+        <div class="author-actions-v3">${session?.user?.id===author.id?`<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`:`<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}</div>
+      </div>
+      <div class="author-content-v3"><section class="author-section-v3"><h3>Author Timeline</h3><div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>${timelineHtml}</section>
+      <aside class="author-section-v3"><h3>Library</h3><div class="section-note">Published stories by ${esc(displayName)}.</div><div class="library-v3">${libraryHtml}</div></aside></div>
+      </div>
+    </div>
+  </div>`);
+  document.getElementById('author-profile-back').onclick=()=>openAuthorHub();
+  bindStoryCards();
+  const fp=document.getElementById('follow-author');if(fp)fp.onclick=()=>toggleFollow(author.id,fp);
+  const ep=document.getElementById('edit-profile-public');if(ep)ep.onclick=openProfileEditor;
+}
 
 async function loadPublicAuthorProfile(stories=[]){
   const box=document.getElementById('public-author-profile');
+  if(!box)return;
   let authorId=stories.find(s=>s.owner_id)?.owner_id||null;
   if(!authorId){
     box.innerHTML='<div class="author-empty-v3">Author profile will appear after the first published book.</div>';
@@ -470,7 +748,7 @@ async function openNotifications(){if(!session){openAuth('reader');return}const 
 async function openOwnerTimeline(){if(!session){openAuth('author');return}if(!(await isOwnerAccount())){alert('Owner access only.');return}const r=await sb.from('owner_timeline').select('*').order('created_at',{ascending:false}).limit(100);open(`<div class="panel"><div class="dash"><div class="dash-top"><div><div class="dash-brand">Avanitaxx <span>Stories</span></div><div class="dash-user">OWNER TIMELINE • PRIVATE</div></div><div class="actions" style="margin:0"><button class="btn alt" id="owner-back">BACK</button><button class="btn" id="owner-new-post">+ NEW UPDATE</button></div></div><div id="owner-status" class="status"></div><div id="owner-posts" class="story-list">${r.error?`<div class="empty">${esc(r.error.message)}</div>`:(r.data||[]).length?(r.data||[]).map(x=>`<div class="story-item"><div class="mine-cover cover-fallback" style="font-size:11px;padding:6px">${x.poster_url?'POSTER':'UPDATE'}</div><div><strong>${esc(x.title||'Untitled update')}</strong><div class="story-meta">${x.published?'PUBLISHED':'DRAFT'} • ${esc(formatDate(x.created_at))}</div><div class="story-meta">${esc(x.dialogue||x.caption||'')}</div></div><div class="item-actions"><button class="btn alt owner-edit" data-id="${x.id}">EDIT</button><button class="btn danger owner-delete" data-id="${x.id}">DELETE</button></div></div>`).join(''):`<div class="empty">No timeline updates yet.</div>`}</div></div></div>`);document.getElementById('owner-back').onclick=openAuthorHome;document.getElementById('owner-new-post').onclick=()=>openOwnerTimelineEditor(null);document.querySelectorAll('.owner-edit').forEach(b=>b.onclick=()=>openOwnerTimelineEditor(b.dataset.id));document.querySelectorAll('.owner-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this timeline update?'))return;const d=await sb.from('owner_timeline').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(d.error)alert(d.error.message);else openOwnerTimeline()})}
 async function openOwnerTimelineEditor(id){if(!(await isOwnerAccount()))return;let item={title:'',caption:'',dialogue:'',poster_url:'',published:false,story_id:null,chapter_id:null};if(id){const r=await sb.from('owner_timeline').select('*').eq('id',id).maybeSingle();if(r.data)item=r.data}const stories=await getPublished();open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="owner-edit-close">×</button><div class="kicker">OWNER TIMELINE</div><h2>${id?'Edit':'Create'} update</h2><div id="owner-form-status" class="status"></div><label>STORY</label><select id="ot-story" class="field"><option value="">Select a published story</option>${stories.map(s=>`<option value="${s.id}" ${item.story_id===s.id?'selected':''}>${esc(s.title)}</option>`).join('')}</select><label>TITLE</label><input id="ot-title" class="field" value="${esc(item.title||'')}" placeholder="New chapter / update title"><label>CAPTION</label><textarea id="ot-caption" class="field" placeholder="Short update caption…">${esc(item.caption||'')}</textarea><label>DIALOGUE / QUOTE</label><textarea id="ot-dialogue" class="field" placeholder="Selected dialogue from the chapter…">${esc(item.dialogue||'')}</textarea><label>POSTER IMAGE URL (optional)</label><input id="ot-poster" class="field" type="url" value="${esc(item.poster_url||'')}" placeholder="Leave blank to use the story cover"><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="ot-published" type="checkbox" ${item.published?'checked':''}> Publish this update</label><button class="btn" id="owner-save-update" style="width:100%;margin-top:16px">SAVE UPDATE</button></div>`);document.getElementById('owner-edit-close').onclick=openOwnerTimeline;document.getElementById('owner-save-update').onclick=async()=>{const storyId=document.getElementById('ot-story').value||null;const story=stories.find(s=>s.id===storyId);const payload={owner_id:session.user.id,story_id:storyId,title:document.getElementById('ot-title').value.trim()||null,caption:document.getElementById('ot-caption').value.trim()||null,dialogue:document.getElementById('ot-dialogue').value.trim()||null,poster_url:document.getElementById('ot-poster').value.trim()||story?.cover_url||null,published:document.getElementById('ot-published').checked,updated_at:new Date().toISOString()};const q=id?await sb.from('owner_timeline').update(payload).eq('id',id).eq('owner_id',session.user.id):await sb.from('owner_timeline').insert(payload);if(q.error){notice('owner-form-status',q.error.message);return}openOwnerTimeline()}}
 
-function bindStatic(){document.getElementById('author-btn').onclick=openAuthorHome;document.getElementById('hero-write').onclick=openAuthorHome;document.getElementById('footer-write').onclick=openAuthorHome;document.getElementById('reader-btn').onclick=async()=>{await refreshSession();session?showAccount():openAuth('reader')};document.getElementById('notify-btn').onclick=openNotifications;const avatar=document.getElementById('author-avatar-btn'),menu=document.getElementById('author-menu');if(avatar)avatar.onclick=e=>{e.stopPropagation();menu?.classList.toggle('hidden');avatar.setAttribute('aria-expanded',String(!menu?.classList.contains('hidden')))};document.addEventListener('click',e=>{if(!e.target.closest('#author-menu-wrap')){menu?.classList.add('hidden');avatar?.setAttribute('aria-expanded','false')}});document.getElementById('menu-profile').onclick=()=>{menu.classList.add('hidden');openProfileEditor()};document.getElementById('menu-stories').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-author-home').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-new-story').onclick=()=>{menu.classList.add('hidden');openEditor(null)};document.getElementById('menu-notifications').onclick=()=>{menu.classList.add('hidden');openNotifications()};document.getElementById('menu-owner-timeline').onclick=()=>{menu.classList.add('hidden');openOwnerTimeline()};document.getElementById('menu-logout').onclick=()=>{menu.classList.add('hidden');logout()};document.getElementById('site-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.story-card').forEach(c=>c.style.display=(c.dataset.search||'').includes(q)?'':'none')}}
+function bindStatic(){document.getElementById('author-hub-nav').onclick=()=>openAuthorHub();document.getElementById('public-author-btn').onclick=()=>openAuthorHub();document.getElementById('footer-author-hub').onclick=()=>openAuthorHub();document.getElementById('author-btn').onclick=openAuthorHome;document.getElementById('hero-write').onclick=openAuthorHome;document.getElementById('footer-write').onclick=openAuthorHome;document.getElementById('reader-btn').onclick=async()=>{await refreshSession();session?showAccount():openAuth('reader')};document.getElementById('notify-btn').onclick=openNotifications;const avatar=document.getElementById('author-avatar-btn'),menu=document.getElementById('author-menu');if(avatar)avatar.onclick=e=>{e.stopPropagation();menu?.classList.toggle('hidden');avatar.setAttribute('aria-expanded',String(!menu?.classList.contains('hidden')))};document.addEventListener('click',e=>{if(!e.target.closest('#author-menu-wrap')){menu?.classList.add('hidden');avatar?.setAttribute('aria-expanded','false')}});document.getElementById('menu-profile').onclick=()=>{menu.classList.add('hidden');openProfileEditor()};document.getElementById('menu-stories').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-author-home').onclick=()=>{menu.classList.add('hidden');openAuthorHome()};document.getElementById('menu-new-story').onclick=()=>{menu.classList.add('hidden');openEditor(null)};document.getElementById('menu-notifications').onclick=()=>{menu.classList.add('hidden');openNotifications()};document.getElementById('menu-owner-timeline').onclick=()=>{menu.classList.add('hidden');openOwnerTimeline()};document.getElementById('menu-logout').onclick=()=>{menu.classList.add('hidden');logout()};document.getElementById('site-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.story-card').forEach(c=>c.style.display=(c.dataset.search||'').includes(q)?'':'none')}}
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
 (async()=>{bindStatic();await refreshSession();await loadHome();
   setInterval(loadLatestChapterPromotion,60000);if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
