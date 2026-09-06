@@ -263,6 +263,13 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 #author-btn.hidden{display:none!important}
 
 .music-vault-public{display:grid;gap:10px}.public-music-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.public-music-card audio{width:100%;margin-top:10px}
+
+/* ===== AVANITAXX SOUNDROOM ===== */
+.soundroom-player{position:fixed;right:24px;bottom:24px;z-index:500;display:flex;align-items:flex-end;gap:10px;filter:drop-shadow(0 18px 38px rgba(55,35,27,.16))}.soundroom-player.hidden{display:none!important}.soundroom-disc{width:58px;height:58px;border-radius:50%;border:1px solid rgba(74,48,37,.16);background:radial-gradient(circle at 50% 50%,#f6d9d5 0 13%,#4a3025 14% 20%,#8d5f4e 21% 56%,#2e211c 57% 67%,#a8795b 68% 70%,#fffdf8 71% 100%);display:grid;place-items:center;padding:0;position:relative;flex:none;box-shadow:0 10px 28px rgba(55,35,27,.15);transition:.25s transform}.soundroom-disc:hover{transform:scale(1.06)}.soundroom-disc::after{content:"";position:absolute;inset:-5px;border:1px solid rgba(168,121,91,.22);border-radius:50%;animation:soundroomSpin 7s linear infinite;animation-play-state:paused}.soundroom-disc-glyph{font-size:10px;color:#fffdf8;opacity:.95}.soundroom-player.playing .soundroom-disc,.soundroom-player.playing .soundroom-disc::after{animation-play-state:running}.soundroom-player.playing .soundroom-disc{animation:soundroomSpin 8s linear infinite}.soundroom-panel{width:min(330px,calc(100vw - 105px));background:rgba(255,253,248,.97);backdrop-filter:blur(16px);border:1px solid rgba(74,48,37,.12);border-radius:22px;padding:14px 15px;display:none}.soundroom-player.expanded .soundroom-panel{display:block}.soundroom-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee)}.soundroom-title{font:400 18px/1.15 Georgia,serif;margin-top:4px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-caption{font-size:10px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-minimize{border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;padding:0 4px}.soundroom-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin:13px 0 8px}.soundroom-controls button{width:30px;height:30px;border:0;border-radius:50%;background:#f0dcd9;color:var(--brown);font-weight:900}.soundroom-controls .soundroom-play{width:40px;height:40px;background:var(--brown);color:#fff}.soundroom-progress{display:grid;grid-template-columns:34px 1fr 34px;gap:7px;align-items:center;font-size:8px;color:var(--muted)}.soundroom-progress input{width:100%;accent-color:var(--toffee)}.soundroom-player audio{display:none}@keyframes soundroomSpin{to{transform:rotate(360deg)}}
+.soundroom-public{display:grid;gap:10px}.soundroom-public-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.soundroom-public-card audio{width:100%;margin-top:10px}.soundroom-track-btn{margin-top:10px;border:1px solid var(--line);background:#f8eee9;border-radius:999px;padding:8px 12px;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.06em}.soundroom-track-btn:hover{background:#ead2cd}
+.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:rotate(180deg);display:block}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
+@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn,.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
+.header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
 </style>
 </head>
 <body>
@@ -270,10 +277,10 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   <a class="logo" href="#home">Avanitaxx <span>Stories</span></a>
   <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button"><span class="nav-author-icon">♙</span> AUTHOR</button></nav>
   <div class="nav-actions">
-    <input id="site-search" class="search" placeholder="Search stories…"><button id="public-author-btn" class="public-author-btn" type="button" title="Open Author Hub" aria-label="Open Author Hub"><span class="public-author-icon">♙</span><span class="public-author-label">AUTHORS</span></button>
-    <button id="notify-btn" class="btn alt icon-btn hidden" type="button" title="Notifications">🔔<span id="notify-badge" class="badge hidden">0</span></button>
+    <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button><button id="public-author-btn" class="public-author-btn" type="button" title="Author Hub" aria-label="Author Hub"><span class="public-author-icon">✎</span><span class="public-author-label">AUTHORS</span></button>
+    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
-      <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="Author account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
+      <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
         <div id="author-menu-email" class="menu-email"></div>
         <button id="menu-profile" type="button">👤 MY PROFILE</button>
@@ -322,6 +329,15 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 <footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div></footer>
 <div id="overlay" aria-hidden="true"></div>
+<div id="soundroom-player" class="soundroom-player hidden" aria-label="Avanitaxx Soundroom player">
+  <button id="soundroom-disc" class="soundroom-disc" type="button" title="Open Avanitaxx Soundroom" aria-label="Open Avanitaxx Soundroom"><span class="soundroom-disc-glyph">◉</span></button>
+  <div class="soundroom-panel">
+    <div class="soundroom-top"><div><div class="soundroom-eyebrow">AVANITAXX SOUNDROOM</div><div id="soundroom-title" class="soundroom-title">No soundtrack selected</div><div id="soundroom-caption" class="soundroom-caption">Songs behind the stories.</div></div><button id="soundroom-minimize" class="soundroom-minimize" type="button" title="Minimize">−</button></div>
+    <div class="soundroom-controls"><button id="soundroom-prev" type="button" title="Previous">‹</button><button id="soundroom-play" class="soundroom-play" type="button" title="Play/Pause">▶</button><button id="soundroom-next" type="button" title="Next">›</button></div>
+    <div class="soundroom-progress"><span id="soundroom-current">0:00</span><input id="soundroom-range" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress"><span id="soundroom-duration">0:00</span></div>
+    <audio id="soundroom-audio" preload="metadata"></audio>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
@@ -574,7 +590,7 @@ async function openAuthorProfileInHub(author){
     </div></article>`;
   }).join('')}</div>`:'<div class="author-empty-v3">No public timeline updates yet.</div>';
   const music=mr.error?[]:(mr.data||[]);
-  const musicHtml=music.length?`<div class="music-vault-public">${music.map(x=>`<div class="public-music-card"><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}</div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
+  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<div class="soundroom-public-card"><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}</div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
   const libraryHtml=stories.length?stories.slice(0,12).map(s=>`<button class="library-card-v3 read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">
     ${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}
     <div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div></div>
@@ -656,7 +672,7 @@ async function loadPublicAuthorProfile(stories=[]){
     : '<div class="author-empty-v3">No public timeline updates yet.</div>';
 
   const music=mr.error?[]:(mr.data||[]);
-  const musicHtml=music.length?`<div class="music-vault-public">${music.map(x=>`<div class="public-music-card"><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}</div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
+  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<div class="soundroom-public-card"><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}</div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
 
   const libraryHtml=works.length
     ? works.slice(0,12).map(s=>`<button class="library-card-v3 read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">
@@ -776,6 +792,16 @@ async function uploadOwnerMedia(file){
   return sb.storage.from('owner-media').getPublicUrl(path).data.publicUrl;
 }
 
+let soundroomTracks=[];let soundroomIndex=0;
+function soundroomTime(sec){if(!isFinite(sec)||sec<0)return '0:00';const m=Math.floor(sec/60),ss=Math.floor(sec%60).toString().padStart(2,'0');return `${m}:${ss}`}
+function soundroomSetExpanded(v){const p=document.getElementById('soundroom-player');if(!p)return;p.classList.toggle('expanded',!!v)}
+function soundroomRender(){const p=document.getElementById('soundroom-player'),a=document.getElementById('soundroom-audio');if(!p||!a)return;if(!soundroomTracks.length){p.classList.add('hidden');return}p.classList.remove('hidden');const t=soundroomTracks[soundroomIndex]||{};document.getElementById('soundroom-title').textContent=t.title||'Untitled soundtrack';document.getElementById('soundroom-caption').textContent=t.caption||'Songs behind the stories.';if(a.src!==t.media_url)a.src=t.media_url;document.getElementById('soundroom-play').textContent=a.paused?'▶':'Ⅱ'}
+function soundroomLoadTracks(tracks){soundroomTracks=(tracks||[]).filter(x=>x&&x.media_url);soundroomIndex=0;soundroomRender()}
+function soundroomSelect(trackId){const i=soundroomTracks.findIndex(x=>x.id===trackId);if(i>=0){soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);const a=document.getElementById('soundroom-audio');a.play().catch(()=>{});}}
+function soundroomBind(){const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');if(!p||!a)return;disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));min.onclick=()=>soundroomSetExpanded(false);play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration}}
+async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
+function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
+
 async function openOwnerTimeline(){
   if(!session){openAuth('author');return}
   if(!(await isOwnerAccount())){alert('Owner access only.');return}
@@ -786,11 +812,11 @@ async function openOwnerTimeline(){
   open(`<div class="panel"><div class="dash"><div class="dash-top"><div><div class="dash-brand">Avanitaxx <span>Stories</span></div><div class="dash-user">OWNER TIMELINE • PRIVATE STUDIO</div></div><div class="actions" style="margin:0"><button class="btn alt" id="owner-back">BACK</button></div></div><div id="owner-status" class="status"></div>
   <div class="owner-studio">
     <div class="owner-composer"><div class="kicker">YOUR TIMELINE STUDIO</div><h2 style="margin:4px 0 6px">Everything you want readers to hear, read & join.</h2><div class="meta">Only the verified owner can create timeline posts, upload media, and open community rooms.</div>
-      <div class="owner-tools"><button class="owner-tool active" data-compose="note">✎ Note</button><button class="owner-tool" data-compose="music">♫ Music</button><button class="owner-tool" data-compose="chat">☵ Community Chat</button></div>
+      <div class="owner-tools"><button class="owner-tool active" data-compose="note">✎ Note</button><button class="owner-tool" data-compose="music">◉ Soundroom</button><button class="owner-tool" data-compose="chat">☵ Community Chat</button></div>
       <div id="owner-compose"></div>
     </div>
     <div><div class="kicker">TIMELINE</div><div class="story-list">${rows.length?rows.map(x=>`<div class="owner-card"><div class="owner-icon">${x.dialogue?'❝':'✦'}</div><div class="owner-card-body"><strong>${esc(x.title||'Untitled update')}</strong><div class="story-meta">${x.published?'PUBLISHED':'DRAFT'} • ${esc(formatDate(x.created_at))}</div>${x.caption?`<div style="margin-top:8px">${esc(x.caption)}</div>`:''}${x.dialogue?`<div style="margin-top:8px;font-style:italic">“${esc(x.dialogue)}”</div>`:''}<div class="item-actions" style="margin-top:12px"><button class="btn alt owner-edit" data-id="${x.id}">EDIT</button><button class="btn danger owner-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No timeline notes yet.</div>`}</div></div>
-    <div><div class="kicker">MUSIC VAULT</div><div class="story-list">${mids.length?mids.map(x=>`<div class="owner-card"><div class="owner-icon">♫</div><div class="owner-card-body"><strong>${esc(x.title||'Untitled track')}</strong><div class="owner-small">${x.published?'PUBLISHED':'HIDDEN'} • ${esc(formatDate(x.created_at))}</div>${x.caption?`<div style="margin-top:7px">${esc(x.caption)}</div>`:''}<audio controls preload="none" src="${esc(x.media_url)}"></audio><div class="item-actions" style="margin-top:10px"><button class="btn alt owner-media-toggle" data-id="${x.id}" data-published="${x.published?'1':'0'}">${x.published?'HIDE':'PUBLISH'}</button><button class="btn danger owner-media-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No uploaded music yet.</div>`}</div></div>
+    <div><div class="kicker">AVANITAXX SOUNDROOM</div><div class="story-list">${mids.length?mids.map(x=>`<div class="owner-card"><div class="owner-icon">♫</div><div class="owner-card-body"><strong>${esc(x.title||'Untitled track')}</strong><div class="owner-small">${x.published?'PUBLISHED':'HIDDEN'} • ${esc(formatDate(x.created_at))}</div>${x.caption?`<div style="margin-top:7px">${esc(x.caption)}</div>`:''}<audio controls preload="none" src="${esc(x.media_url)}"></audio><button class="soundroom-track-btn" type="button" data-track-id="${esc(x.id)}">◉ PLAY IN SOUNDROOM</button><div class="item-actions" style="margin-top:10px"><button class="btn alt owner-media-toggle" data-id="${x.id}" data-published="${x.published?'1':'0'}">${x.published?'HIDE':'PUBLISH'}</button><button class="btn danger owner-media-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No uploaded music yet.</div>`}</div></div>
     <div><div class="kicker">COMMUNITY ROOMS</div><div class="story-list">${chatrooms.length?chatrooms.map(x=>`<div class="owner-card"><div class="owner-icon">☵</div><div class="owner-card-body"><div class="owner-room-head"><strong>${esc(x.name||'Community Room')}</strong><span class="owner-small">${x.published?'OPEN':'DRAFT'}</span></div>${x.description?`<div style="margin-top:7px">${esc(x.description)}</div>`:''}<div class="item-actions" style="margin-top:10px"><button class="btn alt owner-chat-open" data-id="${x.id}">OPEN CHAT</button><button class="btn danger owner-room-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No community room yet. You decide when to create one.</div>`}</div></div>
   </div></div></div>`);
   document.getElementById('owner-back').onclick=openAuthorHome;
@@ -826,7 +852,10 @@ async function openOwnerTimelineEditor(id){
 
 function bindStatic(){
   const byId=id=>document.getElementById(id);
+  soundroomBind();
+  document.addEventListener('click',e=>{const b=e.target.closest('.soundroom-track-btn');if(b)soundroomSelect(b.dataset.trackId)});
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
+  byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
   byId('public-author-btn')?.addEventListener('click',()=>openAuthorHub());
   byId('footer-author-hub')?.addEventListener('click',()=>openAuthorHub());
   byId('author-btn')?.addEventListener('click',openAuthorHome);
@@ -872,7 +901,7 @@ function bindStatic(){
 }
 
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
-(async()=>{bindStatic();await refreshSession();await loadHome();
+(async()=>{bindStatic();await refreshSession();await loadSoundroom();await loadHome();
   setInterval(loadLatestChapterPromotion,60000);if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
 })();
 </script>
