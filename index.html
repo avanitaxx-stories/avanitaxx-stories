@@ -384,6 +384,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .author-social-tabs{display:flex;gap:0;border-top:1px solid #eee4df;border-bottom:1px solid #eee4df;margin-top:24px;overflow:auto}.author-social-tab{flex:1;min-width:105px;border:0;background:#fff;padding:16px 12px;color:#766b65;font:700 10px Arial,sans-serif;letter-spacing:.08em;cursor:pointer;position:relative}.author-social-tab.active{color:#9a665f}.author-social-tab.active::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:3px;background:#b77d73;border-radius:3px}
 .author-social-panel{display:none;padding-top:22px}.author-social-panel.active{display:block}.author-social-panel .author-section-v3{background:#fff;border-radius:0;border:0;padding:0}.author-social-panel .author-section-v3 h3{font:700 20px Arial,sans-serif;color:#28201b}.author-social-panel .section-note{font-family:Arial,sans-serif}.author-social-panel .library-v3{grid-template-columns:repeat(3,minmax(0,1fr))}.author-social-panel .library-card-v3{box-shadow:0 5px 18px rgba(55,35,27,.07)}
 .author-social-back{padding:14px 20px;border-bottom:1px solid #eee4df;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px}.author-social-back button{border:0;background:none;color:#9b6d64;font:700 10px Arial,sans-serif;letter-spacing:.08em}.author-social-back span{font-size:8px;color:#968983;letter-spacing:.14em;font-weight:900}
+.crop-layer{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(25,15,11,.56);overflow:auto}.crop-layer .crop-modal{position:relative;max-height:calc(100vh - 36px);overflow:auto}.crop-layer .close{z-index:2}.crop-layer .crop-canvas{touch-action:none}
 .crop-modal{width:min(780px,calc(100vw - 28px));background:#fffdf9;border-radius:22px;padding:22px;box-shadow:0 35px 110px rgba(25,15,11,.4)}.crop-canvas-wrap{background:#2c231f;border-radius:16px;padding:12px;display:grid;place-items:center;overflow:hidden}.crop-canvas{max-width:100%;max-height:52vh;display:block;touch-action:none;cursor:grab;background:#1d1714}.crop-canvas:active{cursor:grabbing}.crop-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:13px}.crop-controls input[type=range]{flex:1;min-width:180px}.crop-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}.crop-note{font-size:10px;color:#8c7b73;line-height:1.5;margin-top:8px}.library-save{margin-top:8px;width:100%;font-size:9px;padding:9px 10px}.library-save.saved{background:#ead5d1}.corner-role{display:inline-flex;align-items:center;gap:5px;font-size:8px;letter-spacing:.08em;font-weight:900;padding:5px 8px;border-radius:999px;background:#f6e6e1;color:#8d5f55}.corner-role.reader{background:#f0ece7;color:#6f625b}.author-directory-meta{align-items:center}.author-directory-meta span:last-child{white-space:nowrap}
 @media (min-width:701px) and (max-width:1100px){.reader-page{width:min(860px,100%);min-height:680px;padding:60px 52px}.reader-page-content{font-size:20px;line-height:1.9;max-width:700px}}
 @media (min-width:1101px){.reader-page-content{font-size:19px;line-height:1.92;max-width:720px}}
@@ -1089,22 +1090,36 @@ async function saveStory(publishState,mode='save'){syncCurrentChapter();const st
 let profileAvatarCropFile=null,profileCoverCropFile=null;
 function openImageCropper(file,ratio=1,title='Crop image'){
   return new Promise((resolve,reject)=>{
+    const overlay=document.getElementById('overlay');
+    if(!overlay||!overlay.classList.contains('open')){reject(new Error('Profile editor is not open.'));return}
     const url=URL.createObjectURL(file),img=new Image();
+    let finished=false;
+    const finish=(value)=>{
+      if(finished)return;
+      finished=true;
+      URL.revokeObjectURL(url);
+      layer?.remove();
+      resolve(value);
+    };
     img.onload=()=>{
       const W=900,H=Math.round(W/ratio),canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
       let scale=Math.max(W/img.width,H/img.height),zoom=1,ox=W/2-img.width*scale/2,oy=H/2-img.height*scale/2,drag=false,sx=0,sy=0,startX=0,startY=0;
-      open(`<div class="crop-modal"><button class="close" id="crop-close">×</button><div class="kicker">IMAGE CROP</div><h2>${esc(title)}</h2><div class="crop-canvas-wrap"><canvas id="crop-canvas" class="crop-canvas" width="${W}" height="${H}"></canvas></div><div class="crop-controls"><span class="meta">ZOOM</span><input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1"></div><div class="crop-note">Drag the image to reposition it. Use the zoom slider to frame the exact part you want.</div><div class="crop-actions"><button class="btn alt" id="crop-cancel">CANCEL</button><button class="btn" id="crop-use">CROP & USE</button></div></div>`);
-      const c=document.getElementById('crop-canvas'),g=c.getContext('2d'),range=document.getElementById('crop-zoom');
+      const layer=document.createElement('div');
+      layer.className='crop-layer';
+      layer.innerHTML=`<div class="crop-modal"><button class="close" id="crop-close" type="button">×</button><div class="kicker">IMAGE CROP</div><h2>${esc(title)}</h2><div class="crop-canvas-wrap"><canvas id="crop-canvas" class="crop-canvas" width="${W}" height="${H}"></canvas></div><div class="crop-controls"><span class="meta">ZOOM</span><input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1"></div><div class="crop-note">Drag the image to reposition it. Use the zoom slider to frame the exact part you want.</div><div class="crop-actions"><button class="btn alt" id="crop-cancel" type="button">CANCEL</button><button class="btn" id="crop-use" type="button">CROP & USE</button></div></div>`;
+      overlay.appendChild(layer);
+      const c=layer.querySelector('#crop-canvas'),g=c.getContext('2d'),range=layer.querySelector('#crop-zoom');
       const draw=()=>{g.clearRect(0,0,W,H);g.fillStyle='#1d1714';g.fillRect(0,0,W,H);const sc=scale*zoom;g.drawImage(img,ox,oy,img.width*sc,img.height*sc)};draw();
       range.oninput=()=>{zoom=Number(range.value);draw()};
       c.onpointerdown=e=>{drag=true;c.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;startX=ox;startY=oy};
       c.onpointermove=e=>{if(!drag)return;ox=startX+(e.clientX-sx)*W/c.clientWidth;oy=startY+(e.clientY-sy)*H/c.clientHeight;draw()};
       c.onpointerup=()=>drag=false;c.onpointercancel=()=>drag=false;
-      const done=v=>{URL.revokeObjectURL(url);close();resolve(v)};
-      document.getElementById('crop-cancel').onclick=()=>done(null);document.getElementById('crop-close').onclick=()=>done(null);
-      document.getElementById('crop-use').onclick=()=>c.toBlob(blob=>{if(!blob){reject(new Error('Could not crop image.'));return}done(new File([blob],file.name.replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'}))},'image/jpeg',.92);
+      layer.querySelector('#crop-cancel').onclick=()=>finish(null);
+      layer.querySelector('#crop-close').onclick=()=>finish(null);
+      layer.querySelector('#crop-use').onclick=()=>c.toBlob(blob=>{if(!blob){reject(new Error('Could not crop image.'));return}finish(new File([blob],file.name.replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'}))},'image/jpeg',.92);
     };
-    img.onerror=()=>reject(new Error('Could not read image.'));img.src=url;
+    img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Could not read image.'))};
+    img.src=url;
   });
 }
 async function openProfileEditor(){
