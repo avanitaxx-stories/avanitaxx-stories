@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories</title>
-<meta name="avx-build" content="2026-09-06-owner-studio-fix-2">
+<meta name="avx-build" content="2026-09-07-book-reader-lounge-feature-1">
 <meta name="description" content="Avanitaxx Stories — read, follow, like, comment, and discover new chapters from AVANITAXX.">
 <style>
 :root{--cream:#f8f1e8;--white:#fffdf8;--brown:#4a3025;--toffee:#a8795b;--pink:#d9a6a6;--lightpink:#f3ddda;--gold:#b89562;--muted:#7d685d;--line:#eaded2;--danger:#9b3d38;--ok:#315c38;--shadow:0 18px 55px rgba(74,48,37,.11)}
@@ -147,6 +147,9 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 }
 
 
+
+.author-profile-tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:0 0 10px;margin:26px 0 22px}.author-profile-tab{border:0;background:transparent;color:var(--muted);padding:10px 13px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.1em;cursor:pointer}.author-profile-tab.active{background:var(--brown);color:#fff}.author-tab-panel{display:none}.author-tab-panel.active{display:block}
+
 /* ===== AVANITAXX STORIES — AUTHOR HUB / EDITORIAL DIRECTORY ===== */
 .nav-author-link{
   border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;
@@ -156,14 +159,13 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .nav-author-link:hover::after{right:0}
 .nav-author-icon{font-size:14px;line-height:1;color:#a77876}
 .public-author-btn{
-  width:43px;height:43px;border:1px solid rgba(74,48,37,.14);border-radius:50%;
-  background:linear-gradient(145deg,#fffdf9,#f1dfdc);color:var(--brown);
-  display:inline-flex;align-items:center;justify-content:center;gap:0;
+  height:43px;border:1px solid rgba(74,48,37,.14);border-radius:999px;
+  padding:0 14px;background:linear-gradient(145deg,#fffdf9,#f1dfdc);color:var(--brown);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
   box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow,.22s border-color;
 }
 .public-author-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12);border-color:rgba(149,108,85,.3)}
-.public-author-icon{font-size:19px;line-height:1;color:#9b716d}
-.public-author-label{display:none}
+.public-author-icon{font-size:17px;line-height:1;color:#a8795b}.public-author-label{display:inline;font-size:8px;font-weight:900;letter-spacing:.13em}
 .footer-link-btn{border:0;background:none;padding:0;color:#cdb9ad;font-size:13px;line-height:1.8;text-align:left;cursor:pointer}
 .footer-link-btn:hover{color:#fff}
 .featured-author-section{display:block}
@@ -266,9 +268,44 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 /* ===== AVANITAXX SOUNDROOM ===== */
 .soundroom-player{position:fixed;right:24px;bottom:24px;z-index:500;display:flex;align-items:flex-end;gap:10px;filter:drop-shadow(0 18px 38px rgba(55,35,27,.16))}.soundroom-player.hidden{display:none!important}.soundroom-disc{width:58px;height:58px;border-radius:50%;border:1px solid rgba(74,48,37,.16);background:radial-gradient(circle at 50% 50%,#f6d9d5 0 13%,#4a3025 14% 20%,#8d5f4e 21% 56%,#2e211c 57% 67%,#a8795b 68% 70%,#fffdf8 71% 100%);display:grid;place-items:center;padding:0;position:relative;flex:none;box-shadow:0 10px 28px rgba(55,35,27,.15);transition:.25s transform}.soundroom-disc:hover{transform:scale(1.06)}.soundroom-disc::after{content:"";position:absolute;inset:-5px;border:1px solid rgba(168,121,91,.22);border-radius:50%;animation:soundroomSpin 7s linear infinite;animation-play-state:paused}.soundroom-disc-glyph{font-size:10px;color:#fffdf8;opacity:.95}.soundroom-player.playing .soundroom-disc,.soundroom-player.playing .soundroom-disc::after{animation-play-state:running}.soundroom-player.playing .soundroom-disc{animation:soundroomSpin 8s linear infinite}.soundroom-panel{width:min(330px,calc(100vw - 105px));background:rgba(255,253,248,.97);backdrop-filter:blur(16px);border:1px solid rgba(74,48,37,.12);border-radius:22px;padding:14px 15px;display:none}.soundroom-player.expanded .soundroom-panel{display:block}.soundroom-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee)}.soundroom-title{font:400 18px/1.15 Georgia,serif;margin-top:4px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-caption{font-size:10px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-minimize{border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;padding:0 4px}.soundroom-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin:13px 0 8px}.soundroom-controls button{width:30px;height:30px;border:0;border-radius:50%;background:#f0dcd9;color:var(--brown);font-weight:900}.soundroom-controls .soundroom-play{width:40px;height:40px;background:var(--brown);color:#fff}.soundroom-progress{display:grid;grid-template-columns:34px 1fr 34px;gap:7px;align-items:center;font-size:8px;color:var(--muted)}.soundroom-progress input{width:100%;accent-color:var(--toffee)}.soundroom-player audio{display:none}@keyframes soundroomSpin{to{transform:rotate(360deg)}}
+
+/* ===== AVANITAXX READER — BOOK MODE ===== */
+.reader.book-reader{width:min(1120px,100%);max-height:96vh;overflow:auto;background:transparent;padding:0;box-shadow:none}
+.reader-book-shell{background:var(--reader-paper,#fffdf8);border:1px solid rgba(74,48,37,.13);border-radius:28px;box-shadow:0 30px 90px rgba(35,23,18,.28);overflow:hidden}
+.reader-book-top{padding:22px 26px 16px;border-bottom:1px solid var(--reader-line,#eaded2);background:var(--reader-paper,#fffdf8);position:sticky;top:0;z-index:6}
+.reader-book-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.reader-book-kicker{font-size:9px;font-weight:900;letter-spacing:.2em;color:var(--toffee);text-transform:uppercase}
+.reader-book-title{font:400 25px Georgia,serif;margin-top:5px;color:var(--reader-ink,#4a3025)}
+.reader-tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.reader-tool{border:1px solid var(--reader-line,#eaded2);background:var(--reader-control,#fff);color:var(--reader-ink,#4a3025);border-radius:999px;padding:8px 11px;font-size:9px;font-weight:900;letter-spacing:.05em}
+.reader-tool.active{background:var(--reader-ink,#4a3025);color:#fff}
+.reader-tool.theme-dark{background:#2e2521;color:#fff}
+.reader-book-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px}
+.reader-chapter-name{font:400 18px Georgia,serif;text-align:center;flex:1;color:var(--reader-ink,#4a3025)}
+.reader-page-stage{padding:28px;background:var(--reader-stage,#f3e9df)}
+.reader-page{min-height:min(610px,68vh);max-width:880px;margin:auto;background:var(--reader-paper,#fffdf8);border:1px solid rgba(74,48,37,.1);box-shadow:0 18px 45px rgba(74,48,37,.10);padding:58px clamp(30px,7vw,82px);position:relative;color:var(--reader-ink,#4a3025)}
+.reader-page::before{content:'';position:absolute;inset:17px;border:1px solid rgba(168,121,91,.13);pointer-events:none}
+.reader-page-number{position:absolute;bottom:23px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.14em;color:var(--reader-muted,#927d72)}
+.reader-page-content{max-width:720px;margin:auto;font:18px/2 Georgia,serif}
+.reader-page-content p{margin:0 0 1.15em}.reader-page-content h1,.reader-page-content h2,.reader-page-content h3{font-family:Georgia,serif;color:var(--reader-ink,#4a3025)}
+.reader-page-content img{max-width:100%;display:block;margin:18px auto}
+.reader-page-empty{text-align:center;color:var(--reader-muted,#927d72);padding-top:130px;font:italic 18px Georgia,serif}
+.reader-book-footer{padding:18px 26px 24px;background:var(--reader-paper,#fffdf8);border-top:1px solid var(--reader-line,#eaded2)}
+.reader-progress-line{height:4px;background:var(--reader-line,#eaded2);border-radius:99px;overflow:hidden;margin-bottom:12px}.reader-progress-line span{display:block;height:100%;background:var(--toffee);transition:.25s width}
+.reader-page-actions{display:flex;justify-content:space-between;align-items:center;gap:10px}.reader-page-count{font-size:9px;letter-spacing:.12em;color:var(--reader-muted,#927d72);font-weight:900}
+.reader-engagement-book{max-width:880px;margin:0 auto;padding:28px;background:var(--reader-paper,#fffdf8)}
+.reader.dark-mode{--reader-paper:#211b18;--reader-stage:#161311;--reader-line:#40332d;--reader-control:#2a221f;--reader-ink:#f2e7df;--reader-muted:#b9a69b}
+.reader.dark-mode .reader-book-shell,.reader.dark-mode .reader-book-top,.reader.dark-mode .reader-book-footer,.reader.dark-mode .reader-engagement-book{background:var(--reader-paper)}
+.reader.dark-mode .reader-page{background:#27201c;border-color:#44352e;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.reader.dark-mode .reader-page::before{border-color:rgba(235,215,200,.1)}
+.reader-settings-note{font-size:8px;color:var(--reader-muted,#927d72);letter-spacing:.08em;text-transform:uppercase}
+.home-community-strip{padding:18px 0 10px}.home-community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.home-community-card{border:1px solid var(--line);background:rgba(255,253,249,.9);border-radius:18px;padding:16px;display:flex;gap:13px;align-items:center;box-shadow:0 9px 28px rgba(55,35,27,.05);cursor:pointer;text-align:left}.home-community-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--lightpink);font-size:19px;flex:none}.home-community-card strong{font:400 19px Georgia,serif}.home-community-card span{display:block;font-size:9px;color:var(--muted);line-height:1.5;margin-top:3px}.home-community-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.home-pop{width:min(540px,100%);background:var(--white);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 35px 110px rgba(25,15,11,.38);position:relative}.home-pop-art{height:190px;background:linear-gradient(135deg,#6f4b3b,#d8aaa7);background-size:cover;background-position:center}.home-pop-copy{padding:24px}.home-pop-kicker{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee);text-transform:uppercase}.home-pop h2{font:400 34px/1.02 Georgia,serif;margin:8px 0}.home-pop p{font:14px/1.7 Georgia,serif;color:var(--muted)}.home-pop-close{position:absolute;right:13px;top:11px;width:37px;height:37px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(40,28,23,.55);color:#fff;font-size:21px}.home-pop-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+@media(max-width:700px){.home-community-grid{grid-template-columns:1fr}.reader-page-stage{padding:13px}.reader-page{padding:44px 25px;min-height:520px}.reader-page-content{font-size:17px}.reader-book-top{padding:18px}.reader-book-footer{padding:15px 18px}.reader-chapter-name{font-size:15px}.home-pop-art{height:150px}}
+
 .soundroom-public{display:grid;gap:10px}.soundroom-public-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.soundroom-public-card audio{width:100%;margin-top:10px}.soundroom-track-btn{margin-top:10px;border:1px solid var(--line);background:#f8eee9;border-radius:999px;padding:8px 12px;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.06em}.soundroom-track-btn:hover{background:#ead2cd}
 .header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:rotate(180deg);display:block}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
-@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn,.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
+@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn{height:40px;padding:0 10px}.public-author-label{font-size:7px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
 .header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
 </style>
 </head>
@@ -277,7 +314,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   <a class="logo" href="#home">Avanitaxx <span>Stories</span></a>
   <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button"><span class="nav-author-icon">♙</span> AUTHOR</button></nav>
   <div class="nav-actions">
-    <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button><button id="public-author-btn" class="public-author-btn" type="button" title="Author Hub" aria-label="Author Hub"><span class="public-author-icon">✎</span><span class="public-author-label">AUTHORS</span></button>
+    <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button><button id="public-author-btn" class="public-author-btn" type="button" title="Author Lounge" aria-label="Author Lounge"><span class="public-author-icon">🪶</span><span class="public-author-label">AUTHOR LOUNGE</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
@@ -311,6 +348,14 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   </div>
 </section>
 
+<section class="home-community-strip" aria-label="Avanitaxx community features">
+  <div class="container"><div class="home-community-grid">
+    <button class="home-community-card" id="home-notes-btn" type="button"><span class="home-community-icon">✦</span><span><strong>Notes</strong><span>Little updates, quotes, and behind-the-story moments from AVANITAXX.</span></span></button>
+    <button class="home-community-card" id="home-chat-btn" type="button"><span class="home-community-icon">☵</span><span><strong>Community Chat</strong><span>Join the reader lounge and see what the community is talking about.</span></span></button>
+    <button class="home-community-card" id="home-sound-btn" type="button"><span class="home-community-icon">◉</span><span><strong>Soundroom</strong><span>Listen to the soundtrack behind the stories while you browse.</span></span></button>
+  </div></div>
+</section>
+
 <section class="section altbg" id="recent"><div class="container"><div class="section-head"><div><div class="kicker">Fresh from the library</div><h2>New on the Shelf</h2><p>Latest published stories and chapter updates from Avanitaxx Stories.</p></div></div><div id="recent-books" class="cards"><div class="empty">Loading published books…</div></div></div></section>
 <section class="section" id="recommended"><div class="container"><div class="section-head"><div><div class="kicker">Reader favorites</div><h2>Recommended Reads</h2><p>Stories rising through reads, likes, comments, and recent updates.</p></div></div><div id="recommend-books" class="cards"><div class="empty">Loading recommendations…</div></div></div></section>
 <section class="section featured-author-section hidden" id="featured-author-section">
@@ -329,6 +374,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 <footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div></footer>
 <div id="overlay" aria-hidden="true"></div>
+<div id="home-pop-anchor"></div>
 <div id="soundroom-player" class="soundroom-player hidden" aria-label="Avanitaxx Soundroom player">
   <button id="soundroom-disc" class="soundroom-disc" type="button" title="Open Avanitaxx Soundroom" aria-label="Open Avanitaxx Soundroom"><span class="soundroom-disc-glyph">◉</span></button>
   <div class="soundroom-panel">
@@ -363,7 +409,7 @@ function isTestStory(s){return /^(test|test book|sample book|demo book|untitled 
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
 async function isOwnerAccount(){if(!session)return false;const r=await sb.from('app_owners').select('user_id').eq('user_id',session.user.id).maybeSingle();return !r.error&&!!r.data}
 async function loadAuthorAvatar(){const wrap=document.getElementById('author-menu-wrap'),content=document.getElementById('author-avatar-content'),email=document.getElementById('author-menu-email');if(!wrap||!content||!session){wrap?.classList.add('hidden');return}wrap.classList.remove('hidden');if(email)email.textContent=session.user.email||'';const r=await sb.from('profiles').select('pen_name,display_name,avatar_url').eq('id',session.user.id).maybeSingle();const p=r.data||{};const name=p.pen_name||p.display_name||session.user.email?.split('@')[0]||'Author';content.innerHTML=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="${esc(name)}">`:`<span class="author-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</span>`;const owner=await isOwnerAccount();document.getElementById('menu-owner-timeline')?.classList.toggle('hidden',!owner);document.getElementById('menu-owner-divider')?.classList.toggle('hidden',!owner)}
-function updateAuthUI(){const author=document.getElementById('author-btn'),reader=document.getElementById('reader-btn'),bell=document.getElementById('notify-btn');if(session){author.textContent='START WRITING';author.classList.add('hidden');reader.textContent='MY ACCOUNT';bell.classList.remove('hidden');loadUnreadCount();loadAuthorAvatar()}else{author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='READER SIGN IN';bell.classList.add('hidden');document.getElementById('author-menu-wrap')?.classList.add('hidden');document.getElementById('author-menu')?.classList.add('hidden')}}
+function updateAuthUI(){const author=document.getElementById('author-btn'),reader=document.getElementById('reader-btn'),bell=document.getElementById('notify-btn');if(session){author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='MY ACCOUNT';bell.classList.remove('hidden');loadUnreadCount();loadAuthorAvatar()}else{author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='READER SIGN IN';bell.classList.add('hidden');document.getElementById('author-menu-wrap')?.classList.add('hidden');document.getElementById('author-menu')?.classList.add('hidden')}}
 
 async function openAuth(mode='reader'){
  const remembered=localStorage.getItem('avx_login_email')||'';
@@ -397,7 +443,7 @@ async function openPasswordRecovery(){
  };
 }
 
-function showAccount(){open(`<div class="modal"><button class="close" id="acc-close">×</button><div class="kicker">ACCOUNT</div><h2>You’re signed in.</h2><p>${esc(session?.user?.email||'Reader')}</p><div class="actions"><button class="btn alt" id="acc-profile">AUTHOR HOME</button><button class="btn" id="acc-logout">LOG OUT</button></div></div>`);document.getElementById('acc-close').onclick=close;document.getElementById('acc-profile').onclick=openAuthorHome;document.getElementById('acc-logout').onclick=logout}
+function showAccount(){open(`<div class="modal"><button class="close" id="acc-close">×</button><div class="kicker">YOUR ACCOUNT</div><h2>You’re signed in.</h2><p>${esc(session?.user?.email||'Reader')}</p><p style="font-size:12px;color:var(--muted);line-height:1.7">Your Reader account can also become a writer account. You can create stories, manage your chapters, and build your public author profile anytime.</p><div class="actions"><button class="btn" id="acc-write">✍ START WRITING</button><button class="btn alt" id="acc-profile">AUTHOR HOME</button><button class="btn" id="acc-logout">LOG OUT</button></div></div>`);document.getElementById('acc-close').onclick=close;document.getElementById('acc-write').onclick=openAuthorHome;document.getElementById('acc-profile').onclick=openAuthorHome;document.getElementById('acc-logout').onclick=logout}
 async function logout(){await sb.auth.signOut();session=null;updateAuthUI();close()}
 
 async function getPublished(){const r=await sb.from('stories').select('*').eq('published',true).order('updated_at',{ascending:false});if(r.error)throw r.error;return (r.data||[]).filter(s=>!isTestStory(s))}
@@ -460,7 +506,7 @@ async function loadLatestChapterPromotion(){
 }
 
 async function loadHome(){
- try{const stories=await getPublished();await loadLatestChapterPromotion();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
+ try{const stories=await getPublished();await loadLatestChapterPromotion();await loadHomepageFeatures();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
  const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${s.__counts.likes} likes • ${s.__counts.comments} comments • ${Number(s.views)||0} reads`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadAuthorHubData(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
 
@@ -536,8 +582,8 @@ async function openAuthorHub(authorId=null){
       <div class="author-hub-top">
         <div>
           <div class="author-hub-kicker">Avanitaxx Stories</div>
-          <div class="author-hub-title">Author Hub</div>
-          <div class="author-hub-sub">Find the voices behind the stories. Open an author to explore their profile, timeline, published library, and latest updates.</div>
+          <div class="author-hub-title">AUTHOR LOUNGE <span style="font-size:.62em;color:#a8795b">🪶</span></div>
+          <div class="author-hub-sub">Meet the voices behind the stories. Search an author, open their profile, browse their library, and follow their latest updates.</div>
         </div>
         <button class="author-hub-close" id="author-hub-close" type="button" aria-label="Close">×</button>
       </div>
@@ -616,12 +662,16 @@ async function openAuthorProfileInHub(author){
         <div class="author-stats-v3"><div class="author-stat-v3"><b>${stories.length}</b><span>PUBLISHED WORKS</span></div><div class="author-stat-v3"><b>${fr.count||0}</b><span>FOLLOWERS</span></div><div class="author-stat-v3"><b>${timeline.length}</b><span>UPDATES</span></div></div>${social}</div>
         <div class="author-actions-v3">${session?.user?.id===author.id?`<button class="btn alt" id="edit-profile-public">EDIT PROFILE</button>`:`<button class="btn" id="follow-author">${following?'FOLLOWING':'FOLLOW'}</button>`}</div>
       </div>
-      <div class="author-content-v3"><section class="author-section-v3"><h3>Author Timeline</h3><div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>${timelineHtml}</section>
-      <aside class="author-section-v3"><h3>Music</h3><div class="section-note">Soundtracks and songs shared by ${esc(displayName)}.</div>${musicHtml}</aside><aside class="author-section-v3"><h3>Library</h3><div class="section-note">Published stories by ${esc(displayName)}.</div><div class="library-v3">${libraryHtml}</div></aside></div>
+      <div class="author-profile-tabs" role="tablist"><button class="author-profile-tab active" data-author-tab="works" type="button">WORKS</button><button class="author-profile-tab" data-author-tab="about" type="button">ABOUT</button><button class="author-profile-tab" data-author-tab="timeline" type="button">TIMELINE</button><button class="author-profile-tab" data-author-tab="sound" type="button">SOUNDTRACK</button></div>
+      <div class="author-tab-panel active" data-author-panel="works"><section class="author-section-v3"><h3>Published Works</h3><div class="section-note">Stories currently available to read from ${esc(displayName)}.</div><div class="library-v3">${libraryHtml}</div></section></div>
+      <div class="author-tab-panel" data-author-panel="about"><section class="author-section-v3"><h3>About the Author</h3><div class="section-note">A closer look at ${esc(displayName)} and their creative world.</div><p class="author-bio-v3" style="max-width:none">${esc(bio)}</p>${social||'<div class="author-empty-v3">No social link added yet.</div>'}</section></div>
+      <div class="author-tab-panel" data-author-panel="timeline"><section class="author-section-v3"><h3>Author Timeline</h3><div class="section-note">Latest public updates, chapter announcements, and featured moments from ${esc(displayName)}.</div>${timelineHtml}</section></div>
+      <div class="author-tab-panel" data-author-panel="sound"><section class="author-section-v3"><h3>Soundtrack</h3><div class="section-note">Songs and soundtracks shared by ${esc(displayName)}.</div>${musicHtml}</section></div>
       </div>
     </div>
   </div>`);
   document.getElementById('author-profile-back').onclick=()=>openAuthorHub();
+  document.querySelectorAll('[data-author-tab]').forEach(tab=>tab.onclick=()=>{const name=tab.dataset.authorTab;document.querySelectorAll('[data-author-tab]').forEach(x=>x.classList.toggle('active',x===tab));document.querySelectorAll('[data-author-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.authorPanel===name))});
   bindStoryCards();
   const fp=document.getElementById('follow-author');if(fp)fp.onclick=()=>toggleFollow(author.id,fp);
   const ep=document.getElementById('edit-profile-public');if(ep)ep.onclick=openProfileEditor;
@@ -755,8 +805,48 @@ async function toggleFollow(authorId,button){if(!session){openAuth('reader');ret
 async function openPublicStory(slugValue){
  let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];history.replaceState(null,'','#story='+encodeURIComponent(currentStory.share_slug||currentStory.id));recordView(currentStory.id);renderReader()}
 async function recordView(storyId){const key='avx_view_'+storyId;if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1');try{await sb.rpc('increment_story_view',{p_story_id:storyId})}catch(e){console.warn('View counter unavailable',e)}}
-function renderReader(){const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};open(`<div class="reader"><button class="close" id="close-reader">×</button><div class="reader-head">${currentStory.cover_url?`<img class="reader-cover" src="${esc(currentStory.cover_url)}" alt="${esc(currentStory.title)} cover">`:`<div class="reader-cover cover-fallback">${esc(currentStory.title)}</div>`}<div><div class="kicker">AVANITAXX STORIES</div><h1>${esc(currentStory.title)}</h1><div class="reader-desc">${esc(currentStory.description||'')}</div><div id="reader-author-mini"></div></div></div><div class="chapter-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS</button><strong>${esc(c.title||('Chapter '+(currentChapter+1)))}</strong><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT →</button></div><article class="reader-content">${renderContent(c.content||'')}</article><div class="engagement"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div></div>`);
- document.getElementById('close-reader').onclick=close;document.getElementById('prev-ch').onclick=()=>{if(currentChapter>0){currentChapter--;renderReader()}};document.getElementById('next-ch').onclick=()=>{if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}};document.getElementById('share-story').onclick=shareCurrentStory;document.getElementById('like-story').onclick=toggleLike;document.getElementById('comment-post').onclick=postComment;loadReaderAuthor();loadInteractions()}
+function readerPageBlocks(content){
+  const clean=renderContent(content||'');
+  const parts=clean.match(/<p[\s\S]*?<\/p>|<h[1-6][\s\S]*?<\/h[1-6]>|<img[\s\S]*?>|<blockquote[\s\S]*?<\/blockquote>/gi)||[];
+  if(!parts.length)return [clean||'<p></p>'];
+  const pages=[];let buf='',count=0;
+  parts.forEach(part=>{buf+=part;count++;if(count>=6){pages.push(buf);buf='';count=0}});
+  if(buf)pages.push(buf);return pages.length?pages:['<p></p>'];
+}
+function readerSettings(){return {theme:localStorage.getItem('avx_reader_theme')||'light',size:Number(localStorage.getItem('avx_reader_size')||18)}}
+function saveReaderSettings(s){localStorage.setItem('avx_reader_theme',s.theme);localStorage.setItem('avx_reader_size',String(s.size))}
+function renderReader(){
+  const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};
+  const settings=readerSettings();
+  const pages=readerPageBlocks(c.content||'');
+  if(!currentStory.__readerPage)currentStory.__readerPage={};
+  currentStory.__readerPage[currentChapter]=Math.min(currentStory.__readerPage[currentChapter]||0,pages.length-1);
+  const pageIndex=currentStory.__readerPage[currentChapter]||0;
+  const isLast=pageIndex>=pages.length-1;
+  const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''}`;
+  root.style.setProperty('--reader-font-size',settings.size+'px');
+  root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top">
+    <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · BOOK MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
+    <div class="reader-tools"><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
+    <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
+  </div><div class="reader-page-stage"><article class="reader-page"><div class="reader-page-content" id="reader-page-content">${pages[pageIndex]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div><div class="reader-page-number">PAGE ${pageIndex+1} OF ${pages.length}</div></article></div>
+  <div class="reader-book-footer"><div class="reader-progress-line"><span style="width:${((pageIndex+1)/pages.length)*100}%"></span></div><div class="reader-page-actions"><button class="btn alt" id="reader-prev-page" ${pageIndex<=0?'disabled':''}>← TURN BACK</button><span class="reader-page-count">${pageIndex+1} / ${pages.length}</span><button class="btn" id="reader-next-page">${isLast?'FINISH CHAPTER':'TURN PAGE →'}</button></div></div>
+  ${isLast?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
+  </div>`;
+  const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open';overlay.setAttribute('aria-hidden','false');
+  const rerender=()=>renderReader();
+  document.getElementById('close-reader').onclick=close;
+  document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(14,settings.size-1);saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(26,settings.size+1);saveReaderSettings(settings);rerender()};
+  document.getElementById('reader-prev-page').onclick=()=>{if(pageIndex>0){currentStory.__readerPage[currentChapter]=pageIndex-1;rerender()}};
+  document.getElementById('reader-next-page').onclick=()=>{if(!isLast){currentStory.__readerPage[currentChapter]=pageIndex+1;rerender()}else if(currentChapter<currentStory.chapters.length-1){currentChapter++;rerender()}};
+  document.getElementById('prev-ch').onclick=()=>{if(currentChapter>0){currentChapter--;renderReader()}};
+  document.getElementById('next-ch').onclick=()=>{if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}};
+  const pc=document.getElementById('reader-page-content');if(pc)pc.style.fontSize=settings.size+'px';
+  if(isLast){document.getElementById('share-story').onclick=shareCurrentStory;document.getElementById('like-story').onclick=toggleLike;document.getElementById('comment-post').onclick=postComment;loadReaderAuthor();loadInteractions()}
+}
 async function loadReaderAuthor(){const box=document.getElementById('reader-author-mini');if(!box)return;const r=await sb.from('profiles').select('*').eq('id',currentStory.owner_id).maybeSingle();const p=r.data||{};box.innerHTML=`<div class="mini-author">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="Author">`:`<div class="avatar-fallback">A</div>`}<div><div class="meta">Written by</div><strong>${esc(p.pen_name||p.display_name||'AVANITAXX')}</strong></div></div>`}
 async function loadInteractions(){const count=await getCounts(currentStory.id);const cc=document.getElementById('engage-counts');if(cc)cc.textContent=`${count.likes} likes • ${count.comments} comments • ${Number(currentStory.views)||0} reads`;const like=document.getElementById('like-story');if(like&&session){const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)like.textContent='♥ LIKED'}await loadComments()}
 async function toggleLike(){if(!session){openAuth('reader');return}const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)await sb.from('story_likes').delete().eq('id',r.data.id);else await sb.from('story_likes').insert({story_id:currentStory.id,user_id:session.user.id});await loadInteractions()}
@@ -858,9 +948,44 @@ async function openOwnerTimelineEditor(id){
   document.getElementById('owner-save-update').onclick=async()=>{const storyId=document.getElementById('ot-story').value||null;const payload={owner_id:session.user.id,story_id:storyId,title:document.getElementById('ot-title').value.trim()||null,caption:document.getElementById('ot-caption').value.trim()||null,dialogue:document.getElementById('ot-dialogue').value.trim()||null,published:document.getElementById('ot-published').checked,updated_at:new Date().toISOString()};const q=id?await sb.from('owner_timeline').update(payload).eq('id',id).eq('owner_id',session.user.id):await sb.from('owner_timeline').insert(payload);if(q.error){notice('owner-form-status',q.error.message);return}openOwnerTimeline()}
 }
 
+
+async function loadHomepageFeatures(){
+  const notesQ=await sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(4);
+  const roomsQ=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(4);
+  const notes=notesQ.error?[]:(notesQ.data||[]),rooms=roomsQ.error?[]:(roomsQ.data||[]);
+  const noteBtn=document.getElementById('home-notes-btn'),chatBtn=document.getElementById('home-chat-btn'),soundBtn=document.getElementById('home-sound-btn');
+  if(noteBtn)noteBtn.onclick=()=>openHomeNotes(notes);
+  if(chatBtn)chatBtn.onclick=()=>openHomeCommunity(rooms);
+  if(soundBtn)soundBtn.onclick=()=>{if(soundroomTracks.length){soundroomSetExpanded(true);soundroomSelect(soundroomTracks[0].id)}else alert('No published soundtrack yet.')};
+  return {notes,rooms};
+}
+function openHomeNotes(notes=[]){
+  open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="home-notes-close">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Behind-the-story thoughts, announcements, favorite lines, and small moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="owner-card"><div class="owner-icon">✦</div><div class="owner-card-body"><strong>${esc(x.title||'Author Note')}</strong>${x.caption?`<div style="margin-top:7px">${esc(x.caption)}</div>`:''}${x.dialogue?`<div style="margin-top:9px;font-style:italic">“${esc(x.dialogue)}”</div>`:''}<div class="owner-small" style="margin-top:8px">${esc(formatDate(x.created_at))}</div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div></div>`);
+  document.getElementById('home-notes-close').onclick=close;
+}
+async function openHomeCommunity(rooms=[]){
+  if(!rooms.length){const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(8);rooms=q.error?[]:(q.data||[])}
+  if(!rooms.length){alert('The community lounge is not open yet.');return}
+  const room=rooms[0];
+  const m=await sb.from('owner_chat_messages').select('*').eq('room_id',room.id).order('created_at',{ascending:true}).limit(120);
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-chat-close">×</button><div class="kicker">COMMUNITY CHAT</div><h2>${esc(room.name||'Avanitaxx Community')}</h2><p>${esc(room.description||'A reader lounge for Avanitaxx Stories.')}</p><div class="owner-chat" style="max-height:48vh;overflow:auto">${m.error?`<div class="empty">${esc(m.error.message)}</div>`:(m.data||[]).length?m.data.map(x=>`<div class="owner-chat-msg"><strong>${esc(x.author_name||'Reader')}</strong><div>${esc(x.message||'')}</div><div class="owner-small">${esc(formatDate(x.created_at))}</div></div>`).join(''):'<div class="empty">No messages yet. Be the first to say hello.</div>'}</div><div class="help" style="margin-top:12px">Community posting permissions are controlled by your Supabase policies. This public view currently shows the conversation safely.</div></div>`);
+  document.getElementById('home-chat-close').onclick=close;
+}
+async function maybeShowHomepageFeature(){
+  const key='avx_home_feature_seen_'+new Date().toISOString().slice(0,10);if(localStorage.getItem(key))return;
+  const stories=await getPublished();if(!stories.length)return;
+  const latest=stories.slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0))[0];
+  const cover=latest.cover_url||'';
+  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art" ${cover?`style="background-image:url('${esc(cover)}')"`:''}></div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
+  document.getElementById('home-pop-read').onclick=()=>{localStorage.setItem(key,'1');close();openPublicStory(latest.share_slug||latest.id)};
+  document.getElementById('home-pop-later').onclick=()=>{localStorage.setItem(key,'1');close()};
+  document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
+}
+
 function bindStatic(){
   const byId=id=>document.getElementById(id);
   soundroomBind();
+  loadHomepageFeatures();
   document.addEventListener('click',e=>{const b=e.target.closest('.soundroom-track-btn');if(b)soundroomSelect(b.dataset.trackId)});
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
   byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
@@ -922,6 +1047,7 @@ async function ensureGoogleProfile(s){
 
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
 (async()=>{bindStatic();await refreshSession();await loadSoundroom();await loadHome();
+setTimeout(()=>maybeShowHomepageFeature(),1200);
   setInterval(loadLatestChapterPromotion,60000);if(location.hash.startsWith('#story=')){const s=decodeURIComponent(location.hash.slice(7));if(s)openPublicStory(s)}})();
 })();
 </script>
