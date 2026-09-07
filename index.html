@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-07-final-full-audit-1">
+<meta name="avx-build" content="2026-09-07-final-reader-content-fix-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -102,6 +102,25 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media(max-width:920px){.hero{padding-top:58px}.hero-grid{gap:30px}.hero-art{min-height:430px}.hero-caption{bottom:4px;transform:translateX(-50%)}.orbit-one{width:390px;height:390px}.orbit-two{width:320px;height:320px}.section{padding:60px 0}.author-main{grid-template-columns:130px 1fr}.avatar{width:128px;height:128px}.chapter-feature-content{padding:32px 28px 34px}}
 @media(max-width:560px){.nav{min-height:68px}.logo{font-size:21px}.nav-actions .btn{font-size:9px;padding:10px}.hero{padding:48px 0 48px}.hero h1{font-size:53px}.hero p{font-size:16px}.hero-notes{display:none}.hero-art{min-height:375px}.premium-book{width:225px;height:320px;padding:26px}.premium-book h2{font-size:35px;margin-top:52px}.orbit-one{width:315px;height:315px}.orbit-two{width:255px;height:255px}.hero-monogram{font-size:225px}.hero-caption{font-size:10px;bottom:0}.chapter-feature-brand{right:14px;top:14px}.section-head h2{font-size:35px}.cards{gap:13px}.story-card{padding:6px;border-radius:13px}.card-title{font-size:16px}.author-banner{height:195px}.author-main{padding:0 18px 24px}.avatar{width:112px;height:112px;margin-top:-52px}.reader-content{font-size:17px}}
 
+
+/* ===== STABLE READER RESTORE ===== */
+.reader.book-reader{width:min(920px,100%);max-height:95vh;overflow:auto;background:var(--white);border-radius:24px;padding:34px;position:relative}
+.reader.book-reader.dark-mode{background:#241b17;color:#fff}
+.reader.book-reader.dark-mode h1,
+.reader.book-reader.dark-mode .reader-content,
+.reader.book-reader.dark-mode .chapter-nav,
+.reader.book-reader.dark-mode .reader-desc{color:#fff}
+.reader.book-reader .reader-content{font-family:Georgia,serif;line-height:2.05;font-size:18px;max-width:760px;margin:auto}
+.reader.book-reader .reader-content p{margin:0 0 1.25em}
+.reader.book-reader .reader-content img{max-width:100%;height:auto}
+@media(max-width:700px){
+  .reader.book-reader{width:100%;max-height:96vh;padding:20px;border-radius:20px}
+  .reader.book-reader .reader-head{display:block}
+  .reader.book-reader .reader-cover{width:120px;height:180px;margin-bottom:14px}
+  .reader.book-reader h1{font-size:34px}
+  .reader.book-reader .reader-content{font-size:20px;line-height:1.9;max-width:none}
+  .reader.book-reader .chapter-nav{position:sticky;top:0;background:inherit;z-index:2}
+}
 
 /* ===== PREMIUM AUTHOR PROFILE / PUBLIC TIMELINE V3 ===== */
 .author-profile-v3{overflow:hidden}
@@ -1042,66 +1061,47 @@ function renderReader(){
   const vw=window.innerWidth||1024;
   const mode=vw<=700?'mobile':(vw<=1100?'tablet':'desktop');
   const mobileLike=mode!=='desktop';
-  const cleanChapterContent=String(c.content||'').replace(/&nbsp;/gi,' ').replace(/\u00a0/g,' ');
-  const pages=readerPageBlocks(cleanChapterContent,mode);
-  if(!currentStory.__readerPage)currentStory.__readerPage={};
-  currentStory.__readerPage[currentChapter]=Math.min(currentStory.__readerPage[currentChapter]||0,pages.length-1);
-  const pageIndex=currentStory.__readerPage[currentChapter]||0;
-  const isLast=pageIndex>=pages.length-1;
-  const root=document.createElement('div');
-  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} ${mobileLike?'reader-mobile-flow':''}`;
-  root.style.setProperty('--reader-font-size',settings.size+'px');
-  if(mobileLike){
-    root.innerHTML=`<div class="reader-mobile-shell">
-      <div class="reader-mobile-header">
-        <button class="reader-mobile-close" id="close-reader" aria-label="Close reader">←</button>
-        <div class="reader-mobile-title-wrap"><div class="reader-book-kicker">AVANITAXX STORIES</div><div class="reader-mobile-story-title">${esc(currentStory.title)}</div></div>
-        <div class="reader-mobile-actions"><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾</button></div>
+  const chapterHtml=renderContent(c.content||'');
+
+  open(`<div class="reader book-reader ${settings.theme==='dark'?'dark-mode':''}">
+    <button class="close" id="close-reader">×</button>
+    <div class="reader-head">
+      ${currentStory.cover_url?`<img class="reader-cover" src="${esc(currentStory.cover_url)}" alt="${esc(currentStory.title)} cover">`:`<div class="reader-cover cover-fallback">${esc(currentStory.title)}</div>`}
+      <div>
+        <div class="kicker">AVANITAXX STORIES</div>
+        <h1>${esc(currentStory.title)}</h1>
+        <div class="reader-desc">${esc(currentStory.description||'')}</div>
+        <div id="reader-author-mini"></div>
       </div>
-      <div class="reader-mobile-story-meta">
-        <h1>${esc(c.title||('Chapter '+(currentChapter+1)))}</h1>
-        <div class="reader-mobile-stats"><span>◉ <b>${Number(currentStory.views)||0}</b> reads</span><span>★ <b id="mobile-like-count">—</b></span><span>● <b id="mobile-comment-count">—</b></span></div>
-        <div id="reader-author-mini" class="reader-mobile-author"><div class="reader-author-placeholder">by <strong>Avanitaxx Stories</strong></div></div>
+    </div>
+    <div class="chapter-nav">
+      <button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS</button>
+      <strong>${esc(c.title||('Chapter '+(currentChapter+1)))}</strong>
+      <button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT →</button>
+    </div>
+    <article class="reader-content">${chapterHtml}</article>
+    <div class="engagement">
+      <div class="engage-row">
+        <button class="btn alt" id="like-story">♡ LIKE</button>
+        <button class="btn alt" id="share-story">↗ SHARE</button>
+        <span id="engage-counts" class="meta">Loading…</span>
       </div>
-      <div class="reader-mobile-tools"><span style="flex:1;text-align:left">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool" id="reader-size-down">A−</button><span id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button></div>
-      <article class="reader-mobile-content" id="reader-page-content">${pages[0]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</article>
-      <div class="reader-mobile-end">
-        <div class="reader-mobile-progress"><span style="width:100%"></span></div>
-        <div class="reader-mobile-chapter-nav">
-          <button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS</button>
-          <span>CHAPTER ${currentChapter+1} / ${currentStory.chapters.length}</span>
-          <button class="btn" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT →</button>
-        </div>
-        <div class="reader-mobile-engagement"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><button class="btn alt library-save" id="reader-library" data-story-id="${esc(currentStory.id)}" type="button">＋ ADD LIBRARY</button><span id="engage-counts" class="meta">Loading…</span></div>
-        <label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div>
-      </div>
-    </div>`;
-  }else{
-    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top">
-      <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · BOOK MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
-      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
-      <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
-    </div><div class="reader-page-stage"><article class="reader-page"><div class="reader-page-content" id="reader-page-content">${pages[pageIndex]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div><div class="reader-page-number">PAGE ${pageIndex+1} OF ${pages.length}</div></article></div>
-    <div class="reader-book-footer"><div class="reader-progress-line"><span style="width:${((pageIndex+1)/pages.length)*100}%"></span></div><div class="reader-page-actions"><button class="btn alt" id="reader-prev-page" ${pageIndex<=0?'disabled':''}>← TURN BACK</button><span class="reader-page-count">${pageIndex+1} / ${pages.length}</span><button class="btn" id="reader-next-page">${isLast?'FINISH CHAPTER':'TURN PAGE →'}</button></div></div>
-    ${isLast?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><button class="btn alt library-save" id="reader-library" data-story-id="${esc(currentStory.id)}" type="button">＋ ADD LIBRARY</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
-    </div>`;
-  }
-  const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open';overlay.setAttribute('aria-hidden','false');
-  const rerender=()=>renderReader();
+      <label>COMMENTS</label>
+      <textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea>
+      <button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button>
+      <div id="comment-status" class="status"></div>
+      <div id="comments-list" style="margin-top:12px">Loading comments…</div>
+    </div>
+  </div>`);
+
   document.getElementById('close-reader').onclick=close;
-  document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(15,settings.size-1);saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);rerender()};
-  if(!mobileLike){
-    document.getElementById('reader-prev-page').onclick=()=>{if(pageIndex>0){currentStory.__readerPage[currentChapter]=pageIndex-1;rerender()}};
-    document.getElementById('reader-next-page').onclick=()=>{if(!isLast){currentStory.__readerPage[currentChapter]=pageIndex+1;rerender()}else if(currentChapter<currentStory.chapters.length-1){currentChapter++;rerender()}};
-  }
   document.getElementById('prev-ch').onclick=()=>{if(currentChapter>0){currentChapter--;renderReader()}};
   document.getElementById('next-ch').onclick=()=>{if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}};
-  const pc=document.getElementById('reader-page-content');if(pc)pc.style.fontSize=settings.size+'px';
-  document.querySelectorAll('.reader-mobile-author').forEach(x=>x.onclick=()=>loadReaderAuthor());
-  document.getElementById('share-story').onclick=shareCurrentStory;document.getElementById('like-story').onclick=toggleLike;document.getElementById('comment-post').onclick=postComment;bindLibraryButtons();loadReaderAuthor();loadInteractions();
+  document.getElementById('share-story').onclick=shareCurrentStory;
+  document.getElementById('like-story').onclick=toggleLike;
+  document.getElementById('comment-post').onclick=postComment;
+  loadReaderAuthor();
+  loadInteractions();
 }
 async function loadReaderAuthor(){const box=document.getElementById('reader-author-mini');if(!box)return;const r=await sb.from('profiles').select('*').eq('id',currentStory.owner_id).maybeSingle();const p=r.data||{};box.innerHTML=`<div class="mini-author">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="Author">`:`<div class="avatar-fallback">A</div>`}<div><div class="meta">Written by</div><strong>${esc(p.pen_name||p.display_name||'AVANITAXX')}</strong></div></div>`}
 async function loadInteractions(){const count=await getCounts(currentStory.id);const cc=document.getElementById('engage-counts');if(cc)cc.textContent=`${count.likes} likes • ${count.comments} comments • ${Number(currentStory.views)||0} reads`;const ml=document.getElementById('mobile-like-count');if(ml)ml.textContent=Number(count.likes)||0;const mc=document.getElementById('mobile-comment-count');if(mc)mc.textContent=Number(count.comments)||0;const like=document.getElementById('like-story');if(like&&session){const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)like.textContent='♥ LIKED'}await loadComments()}
