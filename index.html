@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-07-reader-social-final-fix-3">
+<meta name="avx-build" content="2026-09-07-final-full-audit-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -40,7 +40,7 @@
 .section{padding:58px 0}.section.altbg{background:#fffaf4}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}.section-head h2{font:400 39px Georgia,serif;margin:8px 0}.section-head p{color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.story-card{background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(74,48,37,.05);transition:.2s transform,.2s box-shadow}.story-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.story-cover-btn{display:block;width:100%;padding:0;border:0;background:none}.story-cover{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:linear-gradient(145deg,#8e6249,#d6a5a4)}.cover-fallback{aspect-ratio:2/3;background:linear-gradient(145deg,#8e6249,#d6a5a4);display:flex;align-items:center;justify-content:center;padding:20px;color:#fff;text-align:center;font:28px Georgia,serif}.card-body{padding:15px}.card-title{font:400 19px Georgia,serif;margin:0 0 5px}.story-title-link{color:inherit}.story-title-link:hover{color:var(--toffee)}.meta{font-size:10px;color:var(--muted);line-height:1.55}.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tag{font-size:9px;padding:6px 8px;background:var(--lightpink);border-radius:999px}.empty{grid-column:1/-1;background:var(--white);border:1px dashed var(--line);border-radius:18px;padding:28px;text-align:center;color:var(--muted)}
 .author-profile{background:var(--white);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}.author-banner{height:250px;background:linear-gradient(145deg,#d9a6a6,#8e6249);background-size:cover;background-position:center}.author-main{display:grid;grid-template-columns:150px 1fr auto;gap:22px;align-items:start;padding:0 30px 30px}.avatar{width:145px;height:145px;border-radius:50%;object-fit:cover;background:var(--lightpink);border:7px solid var(--white);margin-top:-65px}.avatar-fallback{display:flex;align-items:center;justify-content:center;font:50px Georgia,serif}.author-copy{padding-top:22px}.author-copy h2{font:400 34px Georgia,serif;margin:0 0 8px}.author-copy p{color:var(--muted);line-height:1.7}.author-stats{display:flex;gap:20px;font-size:11px;margin-top:12px}.author-stats b{font:400 22px Georgia,serif;display:block}.author-action{padding-top:25px}.work-strip{display:flex;gap:12px;overflow:auto;padding-bottom:5px}.work-strip img{width:105px;height:155px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}
 footer{background:#3b2921;color:#f6e9df;padding:50px 0 25px}.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:35px}footer h3{font-family:Georgia,serif}footer p,footer a{color:#cdb9ad;font-size:13px;line-height:1.8}.copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:20px;font-size:11px;color:#aa968b;display:flex;justify-content:space-between}
-#overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(59,41,33,.66);padding:18px;overflow:auto}#overlay.open{display:flex;align-items:center;justify-content:center}.modal{width:min(450px,100%);background:var(--white);border-radius:24px;padding:30px;position:relative;box-shadow:0 30px 100px rgba(0,0,0,.3)}.panel{width:min(1180px,100%);max-height:95vh;overflow:auto;background:var(--cream);border-radius:26px;box-shadow:0 30px 100px rgba(0,0,0,.3)}.close{position:absolute;right:14px;top:8px;border:0;background:none;font-size:28px;color:var(--muted)}.modal h2,.dash h2{font:400 34px Georgia,serif;margin:8px 0}.modal p{color:var(--muted);line-height:1.6;font-size:14px}label{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;margin:15px 0 7px}.field{width:100%;padding:12px;border:1px solid #dfd0c5;border-radius:11px;background:#fff;outline:0}.field:focus{border-color:var(--toffee)}textarea.field{min-height:125px;resize:vertical}.status{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-size:12px}.status.show{display:block}.status.ok{background:#e8f3e9;color:var(--ok)}.status.err{background:#f9e5e2;color:#7b352c}.help{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px} .oauth-divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:9px;letter-spacing:.12em;font-weight:800}.oauth-divider::before,.oauth-divider::after{content:"";height:1px;background:var(--line);flex:1}.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #d9cdc3;background:#fff;color:var(--brown);border-radius:12px;padding:12px 15px;font-size:11px;font-weight:800;letter-spacing:.04em;transition:.18s}.google-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(74,48,37,.08);border-color:#c9b5a6}.google-mark{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px;font-family:Arial,sans-serif;color:#4285f4}
+#overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(59,41,33,.66);padding:18px;overflow:auto}#overlay.open{display:flex;align-items:center;justify-content:center}.modal{width:min(450px,100%);background:var(--white);border-radius:24px;padding:30px;position:relative;box-shadow:0 30px 100px rgba(0,0,0,.3)}.panel{width:min(1180px,100%);max-height:95vh;overflow:auto;background:var(--cream);border-radius:26px;box-shadow:0 30px 100px rgba(0,0,0,.3)}.close{position:absolute;right:14px;top:8px;z-index:20;cursor:pointer;border:0;background:none;font-size:28px;color:var(--muted)}.modal h2,.dash h2{font:400 34px Georgia,serif;margin:8px 0}.modal p{color:var(--muted);line-height:1.6;font-size:14px}label{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;margin:15px 0 7px}.field{width:100%;padding:12px;border:1px solid #dfd0c5;border-radius:11px;background:#fff;outline:0}.field:focus{border-color:var(--toffee)}textarea.field{min-height:125px;resize:vertical}.status{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-size:12px}.status.show{display:block}.status.ok{background:#e8f3e9;color:var(--ok)}.status.err{background:#f9e5e2;color:#7b352c}.help{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px} .oauth-divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted);font-size:9px;letter-spacing:.12em;font-weight:800}.oauth-divider::before,.oauth-divider::after{content:"";height:1px;background:var(--line);flex:1}.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #d9cdc3;background:#fff;color:var(--brown);border-radius:12px;padding:12px 15px;font-size:11px;font-weight:800;letter-spacing:.04em;transition:.18s}.google-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(74,48,37,.08);border-color:#c9b5a6}.google-mark{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px;font-family:Arial,sans-serif;color:#4285f4}
 .dash{padding:26px}.dash-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.dash-brand{font:700 26px Georgia,serif}.dash-brand span{color:var(--pink)}.dash-user{font-size:11px;color:var(--muted);margin-top:4px}.dash-grid{display:grid;grid-template-columns:260px 1fr;gap:18px}.dash-card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 30px rgba(74,48,37,.05)}.stat{background:var(--lightpink);border-radius:15px;padding:14px;margin-top:10px}.stat small{font-size:9px;letter-spacing:.1em}.stat b{display:block;font:400 26px Georgia,serif;margin-top:4px}.story-list{display:grid;gap:10px;margin-top:15px}.story-item{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:11px;background:#fff}.mine-cover{width:70px;height:100px;object-fit:cover;border-radius:8px;background:var(--lightpink)}.story-item strong{font:400 18px Georgia,serif}.story-meta{font-size:10px;color:var(--muted);margin-top:5px}.item-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .editor-grid{display:grid;grid-template-columns:300px 1fr;gap:18px}.chapter-list{display:grid;gap:7px;margin-top:10px}.chapter-row{display:grid;grid-template-columns:1fr 36px;gap:6px}.chapter-btn{width:100%;text-align:left;border:1px solid var(--line);background:#fff;padding:10px;border-radius:9px;color:var(--brown)}.chapter-btn.active{background:var(--lightpink)}.chapter-del{border:1px solid var(--line);background:#fff;border-radius:9px;color:var(--danger)}.toolbar{position:sticky;top:0;z-index:2;display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:var(--white);padding:9px 0;border-bottom:1px solid var(--line)}.tool{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;color:var(--brown);min-width:38px}.toolbar select{width:auto;padding:8px}.rich-editor{min-height:530px;background:#fff;border:1px solid #dfd0c5;border-radius:12px;padding:20px;outline:0;line-height:1.9;font-size:17px;overflow:auto}.rich-editor p{margin:0 0 1em}.rich-editor:focus{border-color:var(--toffee)}.cover-preview{width:145px;height:210px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 .reader{width:min(920px,100%);max-height:95vh;overflow:auto;background:var(--white);border-radius:24px;padding:34px;position:relative}.reader-head{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:start}.reader-cover{width:150px;height:225px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}.reader h1{font-size:44px;margin:0 0 10px}.reader-desc{color:var(--muted);line-height:1.7}.chapter-nav{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:25px 0}.reader-content{line-height:2;font-size:18px;max-width:760px;margin:auto}.reader-content p{margin:0 0 1.25em}.reader-content img{max-width:100%}.engagement{max-width:760px;margin:35px auto 0;border-top:1px solid var(--line);padding-top:22px}.engage-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.comment{display:grid;grid-template-columns:42px 1fr;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.comment-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:var(--lightpink)}.comment-name{font-weight:800;font-size:11px}.comment-time{font-size:9px;color:var(--muted);margin-left:6px}.comment-body{font-size:14px;line-height:1.6;margin-top:5px;white-space:pre-wrap}.comment-actions{display:flex;gap:8px;margin-top:9px}.reply-btn{border:0;background:transparent;color:var(--toffee);font-size:10px;font-weight:800;letter-spacing:.06em;padding:0}.reply-form{margin-top:10px;display:flex;gap:8px;align-items:flex-start}.reply-form .field{min-height:44px;resize:vertical}.reply-list{margin-top:12px;margin-left:18px;padding-left:14px;border-left:2px solid var(--lightpink);display:grid;gap:10px}.comment.reply{padding:10px 0;border-bottom:0}.mini-author{display:flex;gap:10px;align-items:center;margin-top:15px}.mini-author img,.mini-author .avatar-fallback{width:46px;height:46px;border-radius:50%;border:0;margin:0;font-size:18px;background:var(--lightpink)}
@@ -337,7 +337,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media(max-width:700px){.home-community-grid{grid-template-columns:1fr}.reader-page-stage{padding:13px}.reader-page{padding:44px 25px;min-height:520px}.reader-page-content{font-size:17px}.reader-book-top{padding:18px}.reader-book-footer{padding:15px 18px}.reader-chapter-name{font-size:15px}.home-pop-art{height:150px}}
 
 .soundroom-public{display:grid;gap:10px}.soundroom-public-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.soundroom-public-card audio{width:100%;margin-top:10px}.soundroom-track-btn{margin-top:10px;border:1px solid var(--line);background:#f8eee9;border-radius:999px;padding:8px 12px;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.06em}.soundroom-track-btn:hover{background:#ead2cd}
-.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:rotate(180deg);display:block}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
+.header-icon-btn{width:43px;height:43px;vertical-align:middle;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:none;display:block;line-height:1;position:relative;top:0}.header-icon-btn .notify-glyph{font-family:Arial,sans-serif;font-size:24px;font-weight:700;line-height:1;transform:rotate(45deg);display:block;width:17px;height:17px;border:2px solid currentColor;border-radius:9px 9px 5px 5px;position:relative}.header-icon-btn .notify-glyph::before{content:"";position:absolute;left:2px;right:2px;bottom:-5px;height:2px;border-radius:2px;background:currentColor}.header-icon-btn .notify-glyph::after{content:"";position:absolute;left:5px;top:-5px;width:4px;height:4px;border-radius:50%;background:currentColor}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
 @media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn{height:40px;padding:0 10px}.public-author-label{font-size:7px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
 .header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
 
@@ -389,176 +389,6 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media (min-width:1101px){.reader-page-content{font-size:19px;line-height:1.92;max-width:720px}}
 @media (max-width:700px){.public-author-label{display:none}.home-pop-art{min-height:0;aspect-ratio:2/3}.reader.book-reader{width:100%;max-height:100vh}.reader-book-shell{border-radius:0;min-height:100vh}.reader-book-top{padding:13px 14px 12px}.reader-book-title{font-size:20px}.reader-tools{width:100%;gap:5px}.reader-tool{padding:7px 9px;font-size:8px}.reader-book-nav{margin-top:10px}.reader-book-nav .btn{font-size:8px;padding:9px 8px}.reader-chapter-name{font-size:14px}.reader-page-stage{padding:8px}.reader-page{width:100%;min-height:calc(100vh - 235px);padding:48px 23px 62px;border-radius:2px}.reader-page::before{inset:10px}.reader-page-content{max-width:none;font-size:20px;line-height:1.92}.reader-page-content p{margin-bottom:1.1em}.reader-page-number{bottom:19px}.reader-book-footer{padding:13px 14px 18px}.reader-page-actions .btn{font-size:8px;padding:10px 11px}.reader-engagement-book{padding:20px 14px}.home-pop{width:calc(100vw - 20px);max-height:calc(100vh - 28px);overflow:auto;display:block}.home-pop-art{min-height:0;height:auto;aspect-ratio:2/3;background-size:contain}.home-pop-copy{padding:22px}.home-pop h2{font-size:31px}.author-social-cover{height:190px}.author-social-body{padding:0 15px 22px}.author-social-identity{display:block}.author-social-avatar{width:112px;height:112px;margin-top:-52px}.author-social-main{padding-top:12px}.author-social-name{font-size:27px}.author-social-action{padding-top:12px;justify-content:flex-start}.author-social-stats{gap:16px}.author-social-tabs{margin-top:18px}.author-social-tab{min-width:92px;padding:14px 8px;font-size:8px}.author-social-panel .library-v3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:380px){.reader-page{padding-left:19px;padding-right:19px}.reader-page-content{font-size:19px}.reader-tool{padding:6px 7px}}
-
-/* ===== FINAL BUG-FIX PASS — 2026-09-07 ===== */
-.header-icon-btn{flex:0 0 43px;align-self:center;vertical-align:middle;overflow:visible}
-.header-icon-btn>span{display:grid!important;place-items:center;transform:none!important;line-height:1!important;width:100%;height:100%;font-size:18px}
-.header-icon-btn .badge{right:-4px!important;top:-6px!important;min-width:18px;height:18px;padding:0 5px;display:flex;align-items:center;justify-content:center;line-height:1}
-.notes-modal-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:16px}
-.library-save[disabled],.soundroom-like[disabled]{opacity:.62;cursor:wait;transform:none!important}
-.profile-save-note{margin-top:8px;font-size:10px;color:var(--muted);line-height:1.5}
-.community-phone-messages{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-.community-phone-compose{position:sticky;bottom:0;z-index:2}
-@media(max-width:700px){
-  .header-icon-btn{flex-basis:40px}
-  #notify-btn{margin:0;align-self:center}
-  .community-phone-frame{height:calc(100dvh - 28px);max-height:780px;border-width:6px;border-radius:30px}
-  .community-phone-app{height:calc(100% - 22px)}
-  .community-phone-head{padding-right:46px}
-}
-
-
-/* Notes + Music social interactions */
-.social-content{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.social-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.social-like{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900}.social-like.liked{background:#f2d9d7;color:#7f514d}.social-comment-box{margin-top:10px}.social-comment-item{padding:9px 0;border-bottom:1px solid #eee3dc;font-size:13px}.social-comment-meta{font-size:9px;color:var(--muted);margin-bottom:4px}.social-reply{font-size:8px;border:0;background:transparent;color:#8d5f55;font-weight:900;padding:5px 0}.social-replies{margin-left:18px;padding-left:10px;border-left:2px solid #eee0d9}
-
-/* ===== NOTES + SOUNDROOM — MOBILE-FIRST SOCIAL FEED ===== */
-.social-mobile-modal{
-  width:min(760px,100%);
-  max-height:96vh;
-  padding:8px;
-  background:#241814;
-  border-radius:30px;
-  box-shadow:0 35px 110px rgba(25,15,11,.42);
-  position:relative;
-  overflow:hidden;
-}
-.social-mobile-app{
-  height:min(900px,calc(96vh - 16px));
-  max-height:calc(96vh - 16px);
-  display:flex;
-  flex-direction:column;
-  background:#fbf5ef;
-  border-radius:23px;
-  overflow:hidden;
-}
-.social-mobile-header{
-  flex:none;
-  padding:22px 24px 18px;
-  background:rgba(255,253,249,.96);
-  border-bottom:1px solid var(--line);
-}
-.social-mobile-header h2{font:400 30px/1.05 Georgia,serif;margin:7px 0 5px;color:#392820}
-.social-mobile-header p{font:13px/1.6 Georgia,serif;color:var(--muted);margin:0;max-width:620px}
-.social-mobile-feed{
-  flex:1;
-  overflow:auto;
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  padding:18px;
-  display:grid;
-  gap:14px;
-  background:linear-gradient(180deg,#fbf3ee,#f8eee8);
-}
-.social-mobile-footer{
-  flex:none;
-  padding:12px 18px;
-  background:rgba(255,253,249,.96);
-  border-top:1px solid var(--line);
-}
-.social-mobile-close{z-index:8;background:rgba(45,31,25,.72)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important}
-.note-girly{
-  border-radius:20px;
-  box-shadow:0 8px 25px rgba(104,69,60,.08);
-}
-.note-girly-body{padding:16px 17px 15px}
-.note-author-row{display:flex;align-items:center;gap:9px;margin-bottom:13px}
-.note-author-avatar{
-  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-  background:linear-gradient(145deg,#d9aaa8,#956c55);color:#fff;
-  font:700 14px Georgia,serif;flex:none;
-}
-.note-author-row strong{display:block;font-size:9px;letter-spacing:.1em;color:#4b342c}
-.note-author-row span{display:block;font-size:8px;color:var(--muted);margin-top:2px}
-.social-content{margin-top:14px}
-.social-actions{
-  display:flex;gap:7px;align-items:center;flex-wrap:wrap;
-  border-top:1px solid rgba(149,108,85,.12);
-  padding-top:12px;
-}
-.social-like,.social-comment-toggle{
-  min-height:36px;
-  padding:8px 13px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:#fff;
-  color:var(--brown);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:.04em;
-}
-.social-like.liked{background:#f2d9d7;color:#7f514d}
-.social-comment-toggle{cursor:pointer}
-.social-comments{margin-top:5px}
-.social-comment-item{
-  padding:10px 0;
-  border-bottom:1px solid #eee3dc;
-  font-size:12px;
-  line-height:1.5;
-}
-.social-comment-meta{font-size:8px;color:var(--muted);margin-bottom:4px}
-.social-reply{font-size:8px;border:0;background:transparent;color:#8d5f55;font-weight:900;padding:5px 0}
-.social-replies{margin:7px 0 0 14px;padding-left:10px;border-left:2px solid #eee0d9}
-.social-comment-box{margin-top:10px;padding:10px;border-radius:14px;background:#f7ebe6}
-.social-comment-box .field{min-height:44px;margin-bottom:7px;background:#fff}
-.social-post{min-height:38px;padding:9px 13px;border-radius:10px}
-.soundroom-modal .social-mobile-feed{gap:12px}
-.soundroom-mobile-header{background:linear-gradient(145deg,#fffdf9,#f4e7e2)}
-.soundroom-feed-card{
-  display:block;
-  padding:14px;
-  border-radius:20px;
-}
-.soundroom-feed-top{display:flex;gap:12px;align-items:center}
-.soundroom-feed-info{min-width:0}
-.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.18em;color:var(--toffee);margin-bottom:4px}
-.soundroom-feed-info strong{
-  display:block;font:400 20px/1.15 Georgia,serif;color:var(--brown);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
-}
-.soundroom-feed-info .owner-small{margin-top:5px;line-height:1.5}
-.soundroom-feed-card audio{width:100%;margin-top:12px}
-.soundroom-feed-card .soundroom-stats{margin-top:8px}
-@media(max-width:700px){
-  .social-mobile-modal{
-    width:100%;
-    max-height:100dvh;
-    height:100dvh;
-    padding:0;
-    border-radius:0;
-    background:#fbf5ef;
-  }
-  .social-mobile-app{
-    height:100dvh;
-    max-height:100dvh;
-    border-radius:0;
-  }
-  .social-mobile-header{padding:18px 17px 15px}
-  .social-mobile-header h2{font-size:25px}
-  .social-mobile-header p{font-size:11px}
-  .social-mobile-feed{padding:11px 10px 18px;gap:10px}
-  .note-girly{border-radius:17px}
-  .note-girly-media{max-height:none;aspect-ratio:4/3;object-fit:cover}
-  .note-girly-title{font-size:21px}
-  .note-girly-caption{font-size:13px}
-  .note-girly-quote{font-size:13px}
-  .soundroom-feed-card{padding:12px}
-  .soundroom-cover{width:70px;height:70px}
-  .soundroom-feed-info strong{font-size:18px}
-  .social-mobile-footer{padding:10px 12px}
-}
-@media(max-width:380px){
-  .social-actions{gap:5px}
-  .social-like,.social-comment-toggle{font-size:8px;padding:8px 10px}
-  .note-girly-body{padding:14px}
-  .social-mobile-header h2{font-size:23px}
-}
-
-@media(max-width:700px){
-  .soundroom-public-card{grid-template-columns:1fr;align-items:stretch}
-  .soundroom-feed-top{display:flex}
-  .soundroom-public-card .soundroom-cover{width:76px;height:76px}
-  .soundroom-public-card .social-actions{margin-top:2px}
-}
 </style>
 </head>
 <body>
@@ -567,7 +397,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button"><span class="nav-author-icon">♙</span> AUTHOR</button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button><button id="public-author-btn" class="public-author-btn" type="button" title="Authors & Readers Corner" aria-label="Authors & Readers Corner"><span class="public-author-icon">🪶</span><span class="public-author-label">AUTHORS & READERS CORNER</span></button>
-    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
+    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span class="notify-glyph" aria-hidden="true">♢</span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
@@ -947,7 +777,7 @@ async function openAuthorProfileInHub(author){
     </div></article>`;
   }).join('')}</div>`:'<div class="author-empty-v3">No public timeline updates yet.</div>';
   const music=mr.error?[]:(mr.data||[]);
-  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<article class="soundroom-public-card" data-sound-id="${esc(x.id)}"><div class="soundroom-cover-wrap">${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}</div><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}<div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span><button class="soundroom-like" data-sound-like="${esc(x.id)}" type="button">♡ LIKE</button></div><audio controls preload="none" src="${esc(x.media_url)}"></audio><div class="social-content" data-social-type="music" data-social-id="${esc(x.id)}"><div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-reply" type="button">💬 COMMENT</button></div><div class="social-comments"></div><div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div></div></div></article>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
+  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<article class="soundroom-public-card" data-sound-id="${esc(x.id)}"><div class="soundroom-cover-wrap">${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}</div><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}<div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span><button class="soundroom-like" data-sound-like="${esc(x.id)}" type="button">♡ LIKE</button></div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div></article>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
   const libraryHtml=stories.length?stories.slice(0,12).map(s=>`<div class="library-card-v3"><a class="read-story" href="${esc(publicUrl({story:s.share_slug||s.id}))}" data-slug="${esc(s.share_slug||s.id)}">
     ${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}
     <div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div></div></a><button class="btn alt library-save" data-story-id="${esc(s.id)}" type="button">＋ ADD LIBRARY</button></div>`).join(''):'<div class="author-empty-v3">No published books yet.</div>';
@@ -983,13 +813,14 @@ async function openAuthorProfileInHub(author){
   const ep=document.getElementById('edit-profile-public');if(ep)ep.onclick=openProfileEditor;
   document.querySelectorAll('[data-sound-id]').forEach(async card=>{
     const id=card.dataset.soundId;
-    try{const [v,l]=await Promise.all([sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)]);card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));if(session){const me=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(me.data){const likeBtn=card.querySelector('[data-sound-like]');likeBtn?.classList.add('liked');if(likeBtn)likeBtn.textContent='♥ LIKED'}}}catch(e){}
+    try{const [v,l]=await Promise.all([sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)]);card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));if(session){const me=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(me.data)card.querySelector('[data-sound-like]')?.classList.add('liked')}}catch(e){}
     if(!sessionStorage.getItem('avx_sound_view_'+id)){await sb.from('soundroom_views').insert({media_id:id,visitor_key:getVisitorKey()});sessionStorage.setItem('avx_sound_view_'+id,'1')}
   });
   document.querySelectorAll('[data-sound-like]').forEach(b=>b.onclick=async()=>{
     if(!session){openAuth('reader');return}
-    if(b.disabled)return;b.disabled=true;
-    try{const id=b.dataset.soundLike,r=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(r.error)throw r.error;const q=r.data?await sb.from('soundroom_likes').delete().eq('id',r.data.id):await sb.from('soundroom_likes').insert({media_id:id,user_id:session.user.id});if(q.error)throw q.error;const l=await sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id);if(l.error)throw l.error;const liked=!r.data;b.classList.toggle('liked',liked);b.textContent=liked?'♥ LIKED':'♡ LIKE';const card=b.closest('[data-sound-id]');card?.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'))}catch(e){console.error(e);alert(e.message||'Could not update Soundroom like.')}finally{b.disabled=false}
+    const id=b.dataset.soundLike,r=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();
+    if(r.data)await sb.from('soundroom_likes').delete().eq('id',r.data.id);else await sb.from('soundroom_likes').insert({media_id:id,user_id:session.user.id});
+    const l=await sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id);b.classList.toggle('liked',!r.data);const card=b.closest('[data-sound-id]');card?.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));
   });
 
 }
@@ -1120,43 +951,54 @@ async function loadPublicAuthorProfile(stories=[]){
 }
 async function toggleFollow(authorId,button){if(!session){openAuth('reader');return}if(session.user.id===authorId)return;const q=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();if(q.data){const d=await sb.from('follows').delete().eq('id',q.data.id);if(!d.error)button.textContent='FOLLOW'}else{const i=await sb.from('follows').insert({author_id:authorId,follower_id:session.user.id});if(!i.error)button.textContent='FOLLOWING'}const stories=await getPublished();loadPublicAuthorProfile(stories)}
 
+function localLibraryKey(){return session?.user?.id?`avx_library_${session.user.id}`:'avx_library_guest'}
+function getLocalLibrary(){try{return JSON.parse(localStorage.getItem(localLibraryKey())||'[]')}catch{return[]}}
+function setLocalLibrary(rows){try{localStorage.setItem(localLibraryKey(),JSON.stringify(rows))}catch{}}
 async function getLibraryState(storyId){
-  if(!session||!storyId)return false;
-  const r=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).limit(1).maybeSingle();
-  if(r.error){console.warn('Library state:',r.error.message||r.error);return false}
-  return !!r.data;
+  if(!session)return false;
+  const r=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).maybeSingle();
+  if(!r.error)return !!r.data;
+  return getLocalLibrary().includes(storyId);
 }
 async function toggleLibrary(storyId,button){
-  if(!storyId)return;
   if(!session){openAuth('reader');return}
-  const btn=button||document.querySelector(`.library-save[data-story-id="${CSS.escape(String(storyId))}"]`);
-  if(btn?.disabled)return;
-  const oldText=btn?.textContent||'';
-  if(btn){btn.disabled=true;btn.textContent='SAVING…'}
+  if(!button)return;
+  button.disabled=true;
   try{
-    const exists=await getLibraryState(storyId);
-    let r;
-    if(exists){
-      r=await sb.from('user_library').delete().eq('user_id',session.user.id).eq('story_id',storyId);
-    }else{
-      // Re-check before insert so rapid clicks/renders do not create duplicate library rows.
-      const check=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).limit(1).maybeSingle();
-      if(check.error)throw check.error;
-      r=check.data?{error:null}:await sb.from('user_library').insert({user_id:session.user.id,story_id:storyId});
+    const r=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).maybeSingle();
+    if(!r.error){
+      const rows=getLocalLibrary();
+      if(r.data){
+        const d=await sb.from('user_library').delete().eq('user_id',session.user.id).eq('story_id',storyId);
+        if(d.error)throw d.error;
+        const next=rows.filter(id=>id!==storyId);setLocalLibrary(next);
+        button.classList.remove('saved');button.textContent='＋ ADD LIBRARY';
+      }else{
+        const i=await sb.from('user_library').insert({user_id:session.user.id,story_id:storyId});
+        if(i.error)throw i.error;
+        if(!rows.includes(storyId))rows.unshift(storyId);setLocalLibrary(rows);
+        button.classList.add('saved');button.textContent='✓ IN LIBRARY';
+      }
+      return;
     }
-    if(r?.error)throw r.error;
-    const saved=!exists;
-    document.querySelectorAll(`.library-save[data-story-id="${CSS.escape(String(storyId))}"]`).forEach(x=>{x.classList.toggle('saved',saved);x.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
+    // Graceful local fallback when the library table/migration is not available yet.
+    const rows=getLocalLibrary(),idx=rows.indexOf(storyId);
+    if(idx>=0){rows.splice(idx,1);button.classList.remove('saved');button.textContent='＋ ADD LIBRARY'}
+    else{rows.unshift(storyId);button.classList.add('saved');button.textContent='✓ IN LIBRARY'}
+    setLocalLibrary(rows);
   }catch(e){
-    console.error(e);if(btn)btn.textContent=oldText||'＋ ADD LIBRARY';
-    alert((e.message||'Library update failed.')+'\n\nIf this is the first time using Library, make sure the user_library table and its RLS policies are enabled in Supabase.');
-  }finally{if(btn)btn.disabled=false}
+    const rows=getLocalLibrary(),idx=rows.indexOf(storyId);
+    if(idx>=0){rows.splice(idx,1);button.classList.remove('saved');button.textContent='＋ ADD LIBRARY'}
+    else{rows.unshift(storyId);button.classList.add('saved');button.textContent='✓ IN LIBRARY'}
+    setLocalLibrary(rows);
+    const msg=(e?.message||'').toLowerCase();
+    if(!msg.includes('user_library')) console.warn('Library database update failed; local library used instead.',e);
+  }finally{button.disabled=false}
 }
 function bindLibraryButtons(){
   document.querySelectorAll('.library-save').forEach(b=>{
     b.onclick=async e=>{e.preventDefault();e.stopPropagation();await toggleLibrary(b.dataset.storyId,b)};
-    if(session)getLibraryState(b.dataset.storyId).then(saved=>{if(!b.isConnected)return;b.classList.toggle('saved',saved);b.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
-    else{b.classList.remove('saved');b.textContent='＋ ADD LIBRARY'}
+    if(session)getLibraryState(b.dataset.storyId).then(saved=>{b.classList.toggle('saved',saved);b.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
   });
 }
 async function libraryButtonHtml(storyId){
@@ -1164,54 +1006,34 @@ async function libraryButtonHtml(storyId){
   return `<button class="btn alt library-save ${saved?'saved':''}" data-story-id="${esc(storyId)}" type="button">${saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'}</button>`;
 }
 
-async function recordView(storyId){
-  // View tracking must never prevent a published book from opening.
-  try{
-    const id=String(storyId||'').trim();
-    if(!id)return;
-    const key='avx_story_viewed_'+id;
-    const now=Date.now();
-    const last=Number(localStorage.getItem(key)||0);
-    // Count at most one local view per story per 30 minutes.
-    if(last && now-last < 30*60*1000)return;
-    localStorage.setItem(key,String(now));
-  }catch(err){
-    console.warn('recordView skipped:',err);
-  }
+async function openPublicStory(slugValue){
+ let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const [ch,pr]=await Promise.all([sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true}),sb.from('profiles').select('id,pen_name,display_name,avatar_url,social_url').eq('id',currentStory.owner_id).maybeSingle()]);currentStory.chapters=ch.data||[];const publicSlug=currentStory.share_slug||currentStory.id;updatePublicRoute({story:publicSlug});const author=pr.data||{};const authorName=author.pen_name||author.display_name||'AVANITAXX';const seoDescription=seoText(currentStory.description||currentStory.blurb,'Read '+currentStory.title+' online on Avanitaxx Stories. Discover chapters, follow the author, and join the reading community.');const storyUrl=publicUrl({story:publicSlug});setSEO({title:currentStory.title+' — Read Online | Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:storyUrl,type:'book',schema:{'@context':'https://schema.org','@type':'WebPage','name':currentStory.title+' — Avanitaxx Stories','description':seoDescription,'url':storyUrl,'image':currentStory.cover_url||DEFAULT_SEO.image,'isPartOf':{'@type':'WebSite','name':'Avanitaxx Stories','url':SITE_URL},'mainEntity':{'@type':'Book','name':currentStory.title,'description':seoDescription,'image':currentStory.cover_url||DEFAULT_SEO.image,'url':storyUrl,'author':{'@type':'Person','name':authorName,'url':publicUrl({author:currentStory.owner_id}),'image':author.avatar_url||undefined,'sameAs':author.social_url?[author.social_url]:undefined},'publisher':{'@type':'Organization','name':'Avanitaxx Stories','url':SITE_URL}}}});recordView(currentStory.id);renderReader()}
+
+function readerPageBlocks(content,mode='desktop'){
+  const html=String(content||'').trim();
+  if(!html) return ['<div class="reader-page-empty">This chapter has no text yet.</div>'];
+  // Mobile/tablet uses one continuous reading flow. Desktop keeps the book/page experience.
+  if(mode!=='desktop') return [html];
+  const holder=document.createElement('div');
+  holder.innerHTML=html;
+  const nodes=Array.from(holder.childNodes);
+  if(!nodes.length) return [html];
+  const pages=[];
+  let current='';
+  let score=0;
+  const LIMIT=2100;
+  const push=()=>{if(current.trim())pages.push(current);current='';score=0};
+  nodes.forEach(node=>{
+    const part=node.outerHTML || node.textContent || '';
+    const weight=(node.textContent||'').length + 80;
+    if(current && score+weight>LIMIT) push();
+    current+=part;
+    score+=weight;
+  });
+  push();
+  return pages.length?pages:[html];
 }
 
-async function openPublicStory(slugValue){
-  try{
-    const key=String(slugValue||'').trim();
-    if(!key) throw new Error('Missing story link.');
-    let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',key).maybeSingle();
-    if(r.error) throw r.error;
-    if(!r.data){r=await sb.from('stories').select('*').eq('published',true).eq('id',key).maybeSingle();}
-    if(r.error) throw r.error;
-    if(!r.data){alert('Story not found or is no longer published.');return;}
-    currentStory=r.data; currentChapter=0;
-    const [ch,pr]=await Promise.all([
-      sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true}),
-      sb.from('profiles').select('id,pen_name,display_name,avatar_url,social_url').eq('id',currentStory.owner_id).maybeSingle()
-    ]);
-    if(ch.error){
-      console.error('Chapter load error:',ch.error);
-      alert('The book opened, but its chapters could not be read. This usually means the Supabase chapters table does not allow public SELECT access. Apply the Reader Fix SQL included with this update.');
-      return;
-    }
-    currentStory.chapters=(ch.data||[]).filter(x=>String(x.content||'').trim().length>0);
-    if(!currentStory.chapters.length){
-      alert('This published book currently has no readable chapter content. Please open the story in My Stories and SAVE CHANGES again to make sure the chapters were stored.');
-      return;
-    }
-    const publicSlug=currentStory.share_slug||currentStory.id; updatePublicRoute({story:publicSlug});
-    const author=pr.data||{}; const authorName=author.pen_name||author.display_name||'AVANITAXX';
-    const seoDescription=seoText(currentStory.description||currentStory.blurb,'Read '+currentStory.title+' online on Avanitaxx Stories.');
-    const storyUrl=publicUrl({story:publicSlug});
-    setSEO({title:currentStory.title+' — Read Online | Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:storyUrl,type:'book'});
-    recordView(currentStory.id); renderReader();
-  }catch(e){console.error('openPublicStory failed:',e);alert('Could not open this book: '+(e.message||'Unknown error'));}
-}
 function readerSettings(){return {theme:localStorage.getItem('avx_reader_theme')||'light',size:Number(localStorage.getItem('avx_reader_size')||18)}}
 function saveReaderSettings(s){localStorage.setItem('avx_reader_theme',s.theme);localStorage.setItem('avx_reader_size',String(s.size))}
 function renderReader(){
@@ -1292,11 +1114,13 @@ async function shareCurrentStory(){const url=publicUrl({story:currentStory.share
 async function openMyLibrary(){
   await refreshSession();if(!session){openAuth('reader');return}
   const r=await sb.from('user_library').select('id,story_id,created_at').eq('user_id',session.user.id).order('created_at',{ascending:false});
-  if(r.error){open(`<div class="modal"><button class="close" id="library-close">×</button><div class="kicker">MY LIBRARY</div><h2>Your saved books</h2><p class="meta">Run the Avanitaxx library SQL migration first to enable saved books.</p></div>`);document.getElementById('library-close').onclick=close;return}
-  const rows=r.data||[],ids=rows.map(x=>x.story_id);let stories=[];
+  let rows=[];
+  if(!r.error) rows=r.data||[];
+  else rows=getLocalLibrary().map((story_id,i)=>({story_id,created_at:null,id:'local-'+i}));
+  const ids=rows.map(x=>x.story_id);let stories=[];
   if(ids.length){const q=await sb.from('stories').select('*').in('id',ids).eq('published',true);stories=q.error?[]:(q.data||[])}
   const ordered=rows.map(x=>stories.find(s=>s.id===x.story_id)).filter(Boolean);
-  const cards=ordered.length?ordered.map(s=>`<div class="library-card-v3"><div class="read-story" data-slug="${esc(s.share_slug||s.id)}">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}<div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${esc(s.description||'Saved to your library')}</div><button class="btn alt library-save" data-story-id="${esc(s.id)}" type="button">✓ IN LIBRARY</button></div></div></div>`).join(''):'<div class="empty">Your library is empty. Tap ADD LIBRARY on a story you want to keep.</div>';
+  const cards=ordered.length?ordered.map(s=>`<div class="library-card-v3"><div class="read-story" data-slug="${esc(s.share_slug||s.id)}">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}<div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${esc(s.description||'Saved to your library')}</div><button class="btn alt library-save saved" data-story-id="${esc(s.id)}" type="button">✓ IN LIBRARY</button></div></div></div>`).join(''):'<div class="empty">Your library is empty. Tap ADD LIBRARY on a story you want to keep.</div>';
   open(`<div class="author-hub-panel"><div class="author-hub-head"><div class="author-hub-top"><div><div class="author-hub-kicker">Avanitaxx Stories</div><div class="author-hub-title">MY LIBRARY</div><div class="author-hub-sub">Your private shelf of stories you chose to save. Saved books stay on the website and are not offered as downloads.</div></div><button class="author-hub-close" id="library-close" type="button">×</button></div></div><div class="author-hub-body"><div class="library-v3" style="grid-template-columns:repeat(auto-fill,minmax(155px,1fr))">${cards}</div></div></div>`);
   document.getElementById('library-close').onclick=close;bindStoryCards();bindLibraryButtons();
 }
@@ -1387,15 +1211,15 @@ async function openProfileEditor(){
   await refreshSession();if(!session){openAuth('reader');return}
   const r=await sb.from('profiles').select('*').eq('id',session.user.id).maybeSingle(),p=r.data||{};
   profileAvatarCropFile=null;profileCoverCropFile=null;
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="profile-close" type="button" aria-label="Close profile editor">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta">Upload → crop → use → save. Your current photo/banner stays unchanged until SAVE PROFILE succeeds.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/jpeg,image/png,image/webp,image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/jpeg,image/png,image/webp,image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button><div class="profile-save-note">After saving, the new image is stored in Supabase and refreshed in the header and public profile.</div></div>`);
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta">Your profile photo and banner are visible in the Authors & Readers Corner. Choose an image, crop it to the correct shape, then click SAVE PROFILE. The editor will stay open while you crop.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button></div>`);
   document.getElementById('profile-close').onclick=close;
-  const avatarInput=document.getElementById('pf-avatar'),coverInput=document.getElementById('pf-cover');
-  avatarInput.onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>10*1024*1024){notice('profile-status','Profile photo must be 10 MB or smaller.');e.target.value='';return}try{const cropped=await openImageCropper(f,1,'Crop Profile Photo');if(!cropped){e.target.value='';return}profileAvatarCropFile=cropped;const u=URL.createObjectURL(cropped);document.getElementById('pf-avatar-preview').innerHTML=`<img class="upload-preview" src="${u}" alt="Cropped profile photo"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}catch(err){e.target.value='';notice('profile-status',err.message||String(err))}};
-  coverInput.onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>12*1024*1024){notice('profile-status','Banner image must be 12 MB or smaller.');e.target.value='';return}try{const cropped=await openImageCropper(f,16/6,'Crop Banner Cover');if(!cropped){e.target.value='';return}profileCoverCropFile=cropped;const u=URL.createObjectURL(cropped);document.getElementById('pf-cover-preview').innerHTML=`<img class="upload-preview banner" src="${u}" alt="Cropped banner preview"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}catch(err){e.target.value='';notice('profile-status',err.message||String(err))}};
-  document.getElementById('save-profile').onclick=async()=>{const btn=document.getElementById('save-profile');if(btn.disabled)return;btn.disabled=true;const old=btn.textContent;btn.textContent='SAVING…';try{notice('profile-status','Saving profile and media…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'}).select('*').single();if(u.error)throw u.error;profileAvatarCropFile=null;profileCoverCropFile=null;notice('profile-status','Profile saved successfully.',true);await loadAuthorAvatar();await loadHome();setTimeout(()=>openAuthorHub(session.user.id),350)}catch(e){console.error(e);notice('profile-status','Could not save profile: '+(e.message||e))}finally{if(btn.isConnected){btn.disabled=false;btn.textContent=old}}};
+  document.getElementById('pf-avatar').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileAvatarCropFile=await openImageCropper(f,1,'Crop Profile Photo');if(profileAvatarCropFile){const u=URL.createObjectURL(profileAvatarCropFile);document.getElementById('pf-avatar-preview').innerHTML=`<img class="upload-preview" src="${u}" alt="Cropped profile photo"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}}catch(err){notice('profile-status',err.message||String(err))}};
+  document.getElementById('pf-cover').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileCoverCropFile=await openImageCropper(f,16/6,'Crop Banner Cover');if(profileCoverCropFile){const u=URL.createObjectURL(profileCoverCropFile);document.getElementById('pf-cover-preview').innerHTML=`<img class="upload-preview banner" src="${u}" alt="Cropped banner preview"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}}catch(err){notice('profile-status',err.message||String(err))}};
+  document.getElementById('save-profile').onclick=async()=>{try{notice('profile-status','Saving…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});if(u.error)throw u.error;notice('profile-status','Profile saved successfully.',true);await loadHome();setTimeout(openAuthorHub,500)}catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}};
 }
+
 async function loadUnreadCount(){if(!session)return;const r=await sb.from('notifications').select('*',{count:'exact',head:true}).eq('user_id',session.user.id).eq('read',false);const badge=document.getElementById('notify-badge');if(!badge)return;if(!r.error&&(r.count||0)>0){badge.textContent=r.count;badge.classList.remove('hidden')}else badge.classList.add('hidden')}
-async function openNotifications(){if(!session){openAuth('reader');return}const r=await sb.from('notifications').select('*').eq('user_id',session.user.id).order('created_at',{ascending:false}).limit(100);open(`<div class="modal" style="width:min(600px,100%)"><button class="close" id="n-close">×</button><div class="kicker">READER UPDATES</div><h2>Notifications</h2><div class="actions" style="margin:0 0 12px"><button class="btn alt" id="mark-read">MARK ALL READ</button></div><div id="notify-list" class="notify-list">${r.error?'<div class="meta">Notifications need the Supabase setup.</div>':(r.data||[]).length?(r.data||[]).map(n=>`<button class="notify-item ${n.read?'':'unread'} n-open" data-story="${n.story_id||''}" style="text-align:left;color:inherit"><b>${esc(n.message||'New update')}</b><div class="notify-time">${esc(formatDate(n.created_at))}</div></div>`).join(''):'<div class="meta">No notifications yet.</div>'}</div></div>`);document.getElementById('n-close').onclick=close;document.getElementById('mark-read').onclick=async()=>{await sb.from('notifications').update({read:true}).eq('user_id',session.user.id).eq('read',false);loadUnreadCount();openNotifications()};document.querySelectorAll('.n-open').forEach(b=>b.onclick=async()=>{const id=b.dataset.story;if(id){const s=await sb.from('stories').select('share_slug,id').eq('id',id).maybeSingle();if(s.data)openPublicStory(s.data.share_slug||s.data.id)}})}
+async function openNotifications(){if(!session){openAuth('reader');return}const r=await sb.from('notifications').select('*').eq('user_id',session.user.id).order('created_at',{ascending:false}).limit(100);open(`<div class="modal" style="width:min(600px,100%)"><button class="close" id="n-close">×</button><div class="kicker">READER UPDATES</div><h2>Notifications</h2><div class="actions" style="margin:0 0 12px"><button class="btn alt" id="mark-read">MARK ALL READ</button></div><div id="notify-list" class="notify-list">${r.error?'<div class="meta">Notifications need the Supabase setup.</div>':(r.data||[]).length?(r.data||[]).map(n=>`<button class="notify-item ${n.read?'':'unread'} n-open" data-story="${n.story_id||''}" type="button" style="text-align:left;color:inherit;width:100%"><b>${esc(n.message||'New update')}</b><div class="notify-time">${esc(formatDate(n.created_at))}</div></button>`).join(''):'<div class="meta">No notifications yet.</div>'}</div></div>`);document.getElementById('n-close').onclick=close;document.getElementById('mark-read').onclick=async()=>{await sb.from('notifications').update({read:true}).eq('user_id',session.user.id).eq('read',false);loadUnreadCount();openNotifications()};document.querySelectorAll('.n-open').forEach(b=>b.onclick=async()=>{const id=b.dataset.story;if(id){const s=await sb.from('stories').select('share_slug,id').eq('id',id).maybeSingle();if(s.data){close();openPublicStory(s.data.share_slug||s.data.id)}}})}
 
 async function uploadOwnerMedia(file){
   if(!file) return null;
@@ -1415,21 +1239,7 @@ function soundroomSetExpanded(v){const p=document.getElementById('soundroom-play
 function soundroomRender(){const p=document.getElementById('soundroom-player'),a=document.getElementById('soundroom-audio');if(!p||!a)return;if(!soundroomTracks.length){p.classList.add('hidden');return}p.classList.remove('hidden');const t=soundroomTracks[soundroomIndex]||{};document.getElementById('soundroom-title').textContent=t.title||'Untitled soundtrack';document.getElementById('soundroom-caption').textContent=t.caption||'Songs behind the stories.';const art=document.getElementById('soundroom-panel-art');if(art){art.src=t.cover_url||'';art.alt=t.title||'Soundroom cover';art.style.display=t.cover_url?'block':'none';}if(a.src!==t.media_url)a.src=t.media_url;document.getElementById('soundroom-play').textContent=a.paused?'▶':'Ⅱ'}
 function soundroomLoadTracks(tracks){soundroomTracks=(tracks||[]).filter(x=>x&&x.media_url);soundroomIndex=0;soundroomRender()}
 function soundroomSelect(trackId){const i=soundroomTracks.findIndex(x=>x.id===trackId);if(i>=0){soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);const a=document.getElementById('soundroom-audio');a.play().catch(()=>{});}}
-function soundroomBind(){
-  const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');
-  if(!p||!a||!disc||!min||!play||!prev||!next||!range)return;
-  disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));
-  min.onclick=()=>soundroomSetExpanded(false);
-  play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};
-  prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};
-  next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};
-  a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';document.getElementById('header-soundroom-btn')?.classList.add('active')});
-  a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';document.getElementById('header-soundroom-btn')?.classList.remove('active')});
-  a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});
-  a.addEventListener('loadedmetadata',()=>{const d=document.getElementById('soundroom-duration');if(d)d.textContent=soundroomTime(a.duration)});
-  a.addEventListener('timeupdate',()=>{const c=document.getElementById('soundroom-current');if(c)c.textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});
-  range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration};
-}
+function soundroomBind(){const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');if(!p||!a)return;disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));min.onclick=()=>soundroomSetExpanded(false);play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration}}
 async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,cover_url,created_at').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
 
@@ -1503,86 +1313,13 @@ async function loadHomepageFeatures(){
   const noteBtn=document.getElementById('home-notes-btn'),chatBtn=document.getElementById('home-chat-btn'),soundBtn=document.getElementById('home-sound-btn');
   if(noteBtn)noteBtn.onclick=()=>openHomeNotes(notes);
   if(chatBtn)chatBtn.onclick=()=>openHomeCommunity(rooms);
-  if(soundBtn)soundBtn.onclick=()=>openHomeSoundroom(soundroomTracks);
+  if(soundBtn)soundBtn.onclick=()=>{if(soundroomTracks.length){soundroomSetExpanded(true);soundroomSelect(soundroomTracks[0].id)}else alert('No published soundtrack yet.')};
   return {notes,rooms};
 }
 function openHomeNotes(notes=[]){
-  open(`<div class="social-mobile-modal"><button class="close social-mobile-close" id="home-notes-close" type="button" aria-label="Close notes">×</button>
-    <div class="social-mobile-app">
-      <div class="social-mobile-header">
-        <div><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Updates, behind-the-story thoughts, favorite lines, and little moments.</p></div>
-      </div>
-      <div class="social-mobile-feed">
-        ${notes.length?notes.map(x=>`<article class="note-girly">
-          ${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}
-          <div class="note-girly-body">
-            <div class="note-author-row"><div class="note-author-avatar">A</div><div><strong>AVANITAXX</strong><span>${esc(formatDate(x.created_at))}</span></div></div>
-            <div class="note-girly-title">${esc(x.title||'Author Note')}</div>
-            ${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}
-            ${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}
-            <div class="social-content" data-social-type="note" data-social-id="${esc(x.id)}">
-              <div class="social-actions">
-                <button class="social-like" type="button">♡ LIKE</button>
-                <button class="social-comment-toggle" type="button">💬 COMMENT</button>
-              </div>
-              <div class="social-comments"></div>
-              <div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div>
-            </div>
-          </div>
-        </article>`).join(''):'<div class="empty">No public notes yet.</div>'}
-      </div>
-      <div class="social-mobile-footer"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div>
-    </div>
-  </div>`);
-  document.getElementById('home-notes-close').onclick=close;
-  document.getElementById('home-notes-back').onclick=close;
-  socialInitAll(document.getElementById('overlay'));
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div></div>`);
+  document.getElementById('home-notes-close').onclick=close;document.getElementById('home-notes-close').focus();
 }
-
-async function openHomeSoundroom(tracks=[]){
-  if(!tracks.length){
-    const q=await sb.from('owner_timeline_media').select('id,title,caption,media_url,cover_url,created_at').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);
-    tracks=q.error?[]:(q.data||[]);
-  }
-  open(`<div class="social-mobile-modal soundroom-modal"><button class="close social-mobile-close" id="home-sound-close" type="button" aria-label="Close Soundroom">×</button>
-    <div class="social-mobile-app">
-      <div class="social-mobile-header soundroom-mobile-header">
-        <div><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, react, comment, and reply while exploring the author's soundtrack.</p></div>
-      </div>
-      <div class="social-mobile-feed">
-        ${tracks.length?tracks.map(x=>`<article class="soundroom-public-card soundroom-feed-card" data-sound-id="${esc(x.id)}">
-          <div class="soundroom-feed-top">
-            ${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}
-            <div class="soundroom-feed-info"><div class="soundroom-eyebrow">SOUNDROOM</div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small">${esc(x.caption)}</div>`:''}</div>
-          </div>
-          <audio controls preload="none" src="${esc(x.media_url)}"></audio>
-          <div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span></div>
-          <div class="social-content" data-social-type="music" data-social-id="${esc(x.id)}">
-            <div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-comment-toggle" type="button">💬 COMMENT</button></div>
-            <div class="social-comments"></div>
-            <div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div>
-          </div>
-        </article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}
-      </div>
-      <div class="social-mobile-footer"><button class="btn alt" id="home-sound-back" type="button">← BACK</button></div>
-    </div>
-  </div>`);
-  document.getElementById('home-sound-close').onclick=close;
-  document.getElementById('home-sound-back').onclick=close;
-  socialInitAll(document.getElementById('overlay'));
-  document.querySelectorAll('[data-sound-id]').forEach(async card=>{
-    const id=card.dataset.soundId;
-    try{
-      const [v,l]=await Promise.all([
-        sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),
-        sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)
-      ]);
-      card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));
-      card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));
-    }catch(e){}
-  });
-}
-
 async function openHomeCommunity(rooms=[]){
   if(!rooms.length){const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(8);rooms=q.error?[]:(q.data||[])}
   if(!rooms.length){alert('The community lounge is not open yet.');return}
@@ -1594,40 +1331,6 @@ async function openHomeCommunity(rooms=[]){
   document.getElementById('home-chat-close').onclick=close;
   const send=document.getElementById('public-chat-send');if(send)send.onclick=async()=>{if(!session){openAuth('reader');return}const msg=document.getElementById('public-chat-message').value.trim();if(!msg)return;const q=await sb.from('owner_chat_messages').insert({room_id:room.id,owner_id:room.owner_id,sender_id:session.user.id,author_name:session.user.email?.split('@')[0]||'Reader',message:msg});if(q.error)alert(q.error.message);else openHomeCommunity([room])};
 }
-
-async function socialLoad(host){
-  const type=host.dataset.socialType,id=host.dataset.socialId;
-  const commentsBox=host.querySelector('.social-comments'),likeBtn=host.querySelector('.social-like');
-  const [likes,comments]=await Promise.all([
-    sb.from('content_reactions').select('user_id').eq('content_type',type).eq('content_id',id),
-    sb.from('content_comments').select('*').eq('content_type',type).eq('content_id',id).order('created_at',{ascending:true})
-  ]);
-  if(likes.error||comments.error){commentsBox.innerHTML='<div class="meta">Social features need the new Supabase SQL setup.</div>';return;}
-  const lr=likes.data||[], cr=comments.data||[]; const liked=!!(session&&lr.some(x=>x.user_id===session.user.id));
-  likeBtn.textContent=(liked?'♥':'♡')+' '+lr.length+' LIKE'+(lr.length===1?'':'S'); likeBtn.classList.toggle('liked',liked);
-  const top=cr.filter(x=>!x.parent_id), replies={};cr.filter(x=>x.parent_id).forEach(x=>(replies[x.parent_id]||(replies[x.parent_id]=[])).push(x));
-  const one=(x,reply=false)=>`<div class="social-comment-item ${reply?'social-replies':''}"><div class="social-comment-meta">${esc(x.author_name||'Reader')} · ${esc(formatDate(x.created_at))}</div><div>${esc(x.content||'')}</div>${!reply?`<button class="social-reply social-reply-action" data-parent="${esc(x.id)}" type="button">↩ REPLY</button>`:''}</div>`;
-  commentsBox.innerHTML=top.length?top.map(x=>one(x)+(replies[x.id]||[]).map(y=>one(y,true)).join('')).join(''):'<div class="meta">No comments yet.</div>';
-}
-async function socialInitAll(root=document){for(const h of root.querySelectorAll?.('.social-content')||[]) await socialLoad(h)}
-document.addEventListener('click',async e=>{
-  const host=e.target.closest('.social-content');if(!host)return;
-  if((e.target.closest('.social-comment-toggle')||e.target.closest('.social-reply'))&&!e.target.closest('.social-reply-action')){host.querySelector('.social-comment-box')?.classList.toggle('hidden');return;}
-  const type=host.dataset.socialType,id=host.dataset.socialId;
-  if(e.target.closest('.social-like')){
-    if(!session){openAuth('reader');return;} const existing=await sb.from('content_reactions').select('id').eq('content_type',type).eq('content_id',id).eq('user_id',session.user.id).maybeSingle();
-    if(existing.error){alert(existing.error.message);return;} const q=existing.data?await sb.from('content_reactions').delete().eq('id',existing.data.id):await sb.from('content_reactions').insert({content_type:type,content_id:id,user_id:session.user.id}); if(q.error)alert(q.error.message); else socialLoad(host); return;
-  }
-  if(e.target.closest('.social-post')){
-    if(!session){openAuth('reader');return;} const input=host.querySelector('.social-input'),content=input?.value.trim();if(!content)return;
-    const parent=host.dataset.replyParent||null; const name=(session.user.user_metadata?.display_name||session.user.email?.split('@')[0]||'Reader');
-    const q=await sb.from('content_comments').insert({content_type:type,content_id:id,user_id:session.user.id,author_name:name,content,parent_id:parent}); if(q.error)alert(q.error.message);else{input.value='';host.dataset.replyParent='';host.querySelector('.social-comment-box')?.classList.add('hidden');socialLoad(host)} return;
-  }
-  const reply=e.target.closest('.social-reply-action');if(reply){host.dataset.replyParent=reply.dataset.parent;host.querySelector('.social-comment-box')?.classList.remove('hidden');host.querySelector('.social-input')?.focus();}
-});
-const _oldOpenHomeNotes=openHomeNotes; openHomeNotes=function(notes=[]){_oldOpenHomeNotes(notes); socialInitAll(document.getElementById('overlay'));};
-const _oldOpenAuthorHub=openAuthorHub; openAuthorHub=async function(...args){const r=await _oldOpenAuthorHub.apply(this,args);setTimeout(()=>socialInitAll(document),500);return r;};
-
 async function maybeShowHomepageFeature(force=false){
   const last=Number(localStorage.getItem('avx_home_feature_last_shown')||0);
   if(!force && last && Date.now()-last<30*60*1000)return;
@@ -1636,19 +1339,21 @@ async function maybeShowHomepageFeature(force=false){
   const chQ=await sb.from('chapters').select('id,chapter_number,title,content,created_at,updated_at').eq('story_id',latest.id).order('chapter_number',{ascending:false}).limit(1).maybeSingle();
   const chapter=chQ.data||null,hook=pickPromotionHook(chapter?.content||latest.description||'');
   const cover=latest.cover_url||'';
-  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><div class="home-pop-kicker" style="margin-top:12px">${esc((chapter?.title||'NEW CHAPTER')+' · IS NOW LIVE')}</div><div class="home-pop-hook-label" style="margin-top:15px">Hook / Interesting Dialogue</div><div class="home-pop-hook">“${esc(hook)}”</div><p>Open the latest chapter and discover what happens next.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt promo-download" id="home-pop-download">DOWNLOAD PROMO</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
   localStorage.setItem('avx_home_feature_last_shown',String(Date.now()));
+  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><div class="home-pop-kicker" style="margin-top:12px">${esc((chapter?.title||'NEW CHAPTER')+' · IS NOW LIVE')}</div><div class="home-pop-hook-label" style="margin-top:15px">Hook / Interesting Dialogue</div><div class="home-pop-hook">“${esc(hook)}”</div><p>Open the latest chapter and discover what happens next.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt promo-download" id="home-pop-download">DOWNLOAD PROMO</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
   document.getElementById('home-pop-read').onclick=()=>{close();openPublicStory(latest.share_slug||latest.id)};
   document.getElementById('home-pop-download').onclick=()=>downloadPromotionPoster(latest,chapter,hook);
   document.getElementById('home-pop-later').onclick=close;
   document.getElementById('home-pop-close').onclick=close;
 }
 
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const crop=document.querySelector('.crop-layer');if(crop){crop.querySelector('.crop-close')?.click();return}if(document.getElementById('overlay')?.classList.contains('open'))close()}});
+
 function bindStatic(){
   const byId=id=>document.getElementById(id);
   soundroomBind();
   loadHomepageFeatures();
-  document.addEventListener('click',e=>{const b=e.target.closest('.soundroom-track-btn');if(b)soundroomSelect(b.dataset.trackId)});
+  if(!window.__avxSoundroomClickBound){window.__avxSoundroomClickBound=true;document.addEventListener('click',e=>{const b=e.target.closest('.soundroom-track-btn');if(b)soundroomSelect(b.dataset.trackId)})}
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
   byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
   byId('public-author-btn')?.addEventListener('click',()=>openAuthorHub());
