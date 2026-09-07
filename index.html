@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-07-community-soundroom-promo-profile-fix-1">
+<meta name="avx-build" content="2026-09-07-community-soundroom-promo-profile-final-fix-2">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -389,6 +389,24 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media (min-width:1101px){.reader-page-content{font-size:19px;line-height:1.92;max-width:720px}}
 @media (max-width:700px){.public-author-label{display:none}.home-pop-art{min-height:0;aspect-ratio:2/3}.reader.book-reader{width:100%;max-height:100vh}.reader-book-shell{border-radius:0;min-height:100vh}.reader-book-top{padding:13px 14px 12px}.reader-book-title{font-size:20px}.reader-tools{width:100%;gap:5px}.reader-tool{padding:7px 9px;font-size:8px}.reader-book-nav{margin-top:10px}.reader-book-nav .btn{font-size:8px;padding:9px 8px}.reader-chapter-name{font-size:14px}.reader-page-stage{padding:8px}.reader-page{width:100%;min-height:calc(100vh - 235px);padding:48px 23px 62px;border-radius:2px}.reader-page::before{inset:10px}.reader-page-content{max-width:none;font-size:20px;line-height:1.92}.reader-page-content p{margin-bottom:1.1em}.reader-page-number{bottom:19px}.reader-book-footer{padding:13px 14px 18px}.reader-page-actions .btn{font-size:8px;padding:10px 11px}.reader-engagement-book{padding:20px 14px}.home-pop{width:calc(100vw - 20px);max-height:calc(100vh - 28px);overflow:auto;display:block}.home-pop-art{min-height:0;height:auto;aspect-ratio:2/3;background-size:contain}.home-pop-copy{padding:22px}.home-pop h2{font-size:31px}.author-social-cover{height:190px}.author-social-body{padding:0 15px 22px}.author-social-identity{display:block}.author-social-avatar{width:112px;height:112px;margin-top:-52px}.author-social-main{padding-top:12px}.author-social-name{font-size:27px}.author-social-action{padding-top:12px;justify-content:flex-start}.author-social-stats{gap:16px}.author-social-tabs{margin-top:18px}.author-social-tab{min-width:92px;padding:14px 8px;font-size:8px}.author-social-panel .library-v3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:380px){.reader-page{padding-left:19px;padding-right:19px}.reader-page-content{font-size:19px}.reader-tool{padding:6px 7px}}
+
+/* ===== FINAL BUG-FIX PASS — 2026-09-07 ===== */
+.header-icon-btn{flex:0 0 43px;align-self:center;vertical-align:middle;overflow:visible}
+.header-icon-btn>span{display:grid!important;place-items:center;transform:none!important;line-height:1!important;width:100%;height:100%;font-size:18px}
+.header-icon-btn .badge{right:-4px!important;top:-6px!important;min-width:18px;height:18px;padding:0 5px;display:flex;align-items:center;justify-content:center;line-height:1}
+.notes-modal-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:16px}
+.library-save[disabled],.soundroom-like[disabled]{opacity:.62;cursor:wait;transform:none!important}
+.profile-save-note{margin-top:8px;font-size:10px;color:var(--muted);line-height:1.5}
+.community-phone-messages{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.community-phone-compose{position:sticky;bottom:0;z-index:2}
+@media(max-width:700px){
+  .header-icon-btn{flex-basis:40px}
+  #notify-btn{margin:0;align-self:center}
+  .community-phone-frame{height:calc(100dvh - 28px);max-height:780px;border-width:6px;border-radius:30px}
+  .community-phone-app{height:calc(100% - 22px)}
+  .community-phone-head{padding-right:46px}
+}
+
 </style>
 </head>
 <body>
@@ -813,14 +831,13 @@ async function openAuthorProfileInHub(author){
   const ep=document.getElementById('edit-profile-public');if(ep)ep.onclick=openProfileEditor;
   document.querySelectorAll('[data-sound-id]').forEach(async card=>{
     const id=card.dataset.soundId;
-    try{const [v,l]=await Promise.all([sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)]);card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));if(session){const me=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(me.data)card.querySelector('[data-sound-like]')?.classList.add('liked')}}catch(e){}
+    try{const [v,l]=await Promise.all([sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)]);card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));if(session){const me=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(me.data){const likeBtn=card.querySelector('[data-sound-like]');likeBtn?.classList.add('liked');if(likeBtn)likeBtn.textContent='♥ LIKED'}}}catch(e){}
     if(!sessionStorage.getItem('avx_sound_view_'+id)){await sb.from('soundroom_views').insert({media_id:id,visitor_key:getVisitorKey()});sessionStorage.setItem('avx_sound_view_'+id,'1')}
   });
   document.querySelectorAll('[data-sound-like]').forEach(b=>b.onclick=async()=>{
     if(!session){openAuth('reader');return}
-    const id=b.dataset.soundLike,r=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();
-    if(r.data)await sb.from('soundroom_likes').delete().eq('id',r.data.id);else await sb.from('soundroom_likes').insert({media_id:id,user_id:session.user.id});
-    const l=await sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id);b.classList.toggle('liked',!r.data);const card=b.closest('[data-sound-id]');card?.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));
+    if(b.disabled)return;b.disabled=true;
+    try{const id=b.dataset.soundLike,r=await sb.from('soundroom_likes').select('id').eq('media_id',id).eq('user_id',session.user.id).maybeSingle();if(r.error)throw r.error;const q=r.data?await sb.from('soundroom_likes').delete().eq('id',r.data.id):await sb.from('soundroom_likes').insert({media_id:id,user_id:session.user.id});if(q.error)throw q.error;const l=await sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id);if(l.error)throw l.error;const liked=!r.data;b.classList.toggle('liked',liked);b.textContent=liked?'♥ LIKED':'♡ LIKE';const card=b.closest('[data-sound-id]');card?.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'))}catch(e){console.error(e);alert(e.message||'Could not update Soundroom like.')}finally{b.disabled=false}
   });
 
 }
@@ -952,23 +969,42 @@ async function loadPublicAuthorProfile(stories=[]){
 async function toggleFollow(authorId,button){if(!session){openAuth('reader');return}if(session.user.id===authorId)return;const q=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();if(q.data){const d=await sb.from('follows').delete().eq('id',q.data.id);if(!d.error)button.textContent='FOLLOW'}else{const i=await sb.from('follows').insert({author_id:authorId,follower_id:session.user.id});if(!i.error)button.textContent='FOLLOWING'}const stories=await getPublished();loadPublicAuthorProfile(stories)}
 
 async function getLibraryState(storyId){
-  if(!session)return false;
-  const r=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).maybeSingle();
+  if(!session||!storyId)return false;
+  const r=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).limit(1).maybeSingle();
+  if(r.error){console.warn('Library state:',r.error.message||r.error);return false}
   return !!r.data;
 }
 async function toggleLibrary(storyId,button){
+  if(!storyId)return;
   if(!session){openAuth('reader');return}
-  const exists=await getLibraryState(storyId);
-  let r;
-  if(exists) r=await sb.from('user_library').delete().eq('user_id',session.user.id).eq('story_id',storyId);
-  else r=await sb.from('user_library').insert({user_id:session.user.id,story_id:storyId});
-  if(r.error){alert(r.error.message||'Library update failed. Run the Avanitaxx library SQL migration first.');return}
-  button.classList.toggle('saved',!exists);button.textContent=exists?'＋ ADD LIBRARY':'✓ IN LIBRARY';
+  const btn=button||document.querySelector(`.library-save[data-story-id="${CSS.escape(String(storyId))}"]`);
+  if(btn?.disabled)return;
+  const oldText=btn?.textContent||'';
+  if(btn){btn.disabled=true;btn.textContent='SAVING…'}
+  try{
+    const exists=await getLibraryState(storyId);
+    let r;
+    if(exists){
+      r=await sb.from('user_library').delete().eq('user_id',session.user.id).eq('story_id',storyId);
+    }else{
+      // Re-check before insert so rapid clicks/renders do not create duplicate library rows.
+      const check=await sb.from('user_library').select('id').eq('user_id',session.user.id).eq('story_id',storyId).limit(1).maybeSingle();
+      if(check.error)throw check.error;
+      r=check.data?{error:null}:await sb.from('user_library').insert({user_id:session.user.id,story_id:storyId});
+    }
+    if(r?.error)throw r.error;
+    const saved=!exists;
+    document.querySelectorAll(`.library-save[data-story-id="${CSS.escape(String(storyId))}"]`).forEach(x=>{x.classList.toggle('saved',saved);x.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
+  }catch(e){
+    console.error(e);if(btn)btn.textContent=oldText||'＋ ADD LIBRARY';
+    alert((e.message||'Library update failed.')+'\n\nIf this is the first time using Library, make sure the user_library table and its RLS policies are enabled in Supabase.');
+  }finally{if(btn)btn.disabled=false}
 }
 function bindLibraryButtons(){
   document.querySelectorAll('.library-save').forEach(b=>{
     b.onclick=async e=>{e.preventDefault();e.stopPropagation();await toggleLibrary(b.dataset.storyId,b)};
-    if(session)getLibraryState(b.dataset.storyId).then(saved=>{b.classList.toggle('saved',saved);b.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
+    if(session)getLibraryState(b.dataset.storyId).then(saved=>{if(!b.isConnected)return;b.classList.toggle('saved',saved);b.textContent=saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'});
+    else{b.classList.remove('saved');b.textContent='＋ ADD LIBRARY'}
   });
 }
 async function libraryButtonHtml(storyId){
@@ -1154,13 +1190,13 @@ async function openProfileEditor(){
   await refreshSession();if(!session){openAuth('reader');return}
   const r=await sb.from('profiles').select('*').eq('id',session.user.id).maybeSingle(),p=r.data||{};
   profileAvatarCropFile=null;profileCoverCropFile=null;
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta">Your profile photo and banner are visible in the Authors & Readers Corner. Choose an image, crop it to the correct shape, then click SAVE PROFILE. The editor will stay open while you crop.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button></div>`);
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="profile-close" type="button" aria-label="Close profile editor">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta">Upload → crop → use → save. Your current photo/banner stays unchanged until SAVE PROFILE succeeds.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/jpeg,image/png,image/webp,image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/jpeg,image/png,image/webp,image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button><div class="profile-save-note">After saving, the new image is stored in Supabase and refreshed in the header and public profile.</div></div>`);
   document.getElementById('profile-close').onclick=close;
-  document.getElementById('pf-avatar').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileAvatarCropFile=await openImageCropper(f,1,'Crop Profile Photo');if(profileAvatarCropFile){const u=URL.createObjectURL(profileAvatarCropFile);document.getElementById('pf-avatar-preview').innerHTML=`<img class="upload-preview" src="${u}" alt="Cropped profile photo"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}}catch(err){notice('profile-status',err.message||String(err))}};
-  document.getElementById('pf-cover').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileCoverCropFile=await openImageCropper(f,16/6,'Crop Banner Cover');if(profileCoverCropFile){const u=URL.createObjectURL(profileCoverCropFile);document.getElementById('pf-cover-preview').innerHTML=`<img class="upload-preview banner" src="${u}" alt="Cropped banner preview"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}}catch(err){notice('profile-status',err.message||String(err))}};
-  document.getElementById('save-profile').onclick=async()=>{try{notice('profile-status','Saving…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});if(u.error)throw u.error;notice('profile-status','Profile saved successfully.',true);await loadHome();setTimeout(openAuthorHub,500)}catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}};
+  const avatarInput=document.getElementById('pf-avatar'),coverInput=document.getElementById('pf-cover');
+  avatarInput.onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>10*1024*1024){notice('profile-status','Profile photo must be 10 MB or smaller.');e.target.value='';return}try{const cropped=await openImageCropper(f,1,'Crop Profile Photo');if(!cropped){e.target.value='';return}profileAvatarCropFile=cropped;const u=URL.createObjectURL(cropped);document.getElementById('pf-avatar-preview').innerHTML=`<img class="upload-preview" src="${u}" alt="Cropped profile photo"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}catch(err){e.target.value='';notice('profile-status',err.message||String(err))}};
+  coverInput.onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>12*1024*1024){notice('profile-status','Banner image must be 12 MB or smaller.');e.target.value='';return}try{const cropped=await openImageCropper(f,16/6,'Crop Banner Cover');if(!cropped){e.target.value='';return}profileCoverCropFile=cropped;const u=URL.createObjectURL(cropped);document.getElementById('pf-cover-preview').innerHTML=`<img class="upload-preview banner" src="${u}" alt="Cropped banner preview"><div class="author-upload-fix">✓ Cropped and ready. Click SAVE PROFILE below.</div>`}catch(err){e.target.value='';notice('profile-status',err.message||String(err))}};
+  document.getElementById('save-profile').onclick=async()=>{const btn=document.getElementById('save-profile');if(btn.disabled)return;btn.disabled=true;const old=btn.textContent;btn.textContent='SAVING…';try{notice('profile-status','Saving profile and media…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'}).select('*').single();if(u.error)throw u.error;profileAvatarCropFile=null;profileCoverCropFile=null;notice('profile-status','Profile saved successfully.',true);await loadAuthorAvatar();await loadHome();setTimeout(()=>openAuthorHub(session.user.id),350)}catch(e){console.error(e);notice('profile-status','Could not save profile: '+(e.message||e))}finally{if(btn.isConnected){btn.disabled=false;btn.textContent=old}}};
 }
-
 async function loadUnreadCount(){if(!session)return;const r=await sb.from('notifications').select('*',{count:'exact',head:true}).eq('user_id',session.user.id).eq('read',false);const badge=document.getElementById('notify-badge');if(!badge)return;if(!r.error&&(r.count||0)>0){badge.textContent=r.count;badge.classList.remove('hidden')}else badge.classList.add('hidden')}
 async function openNotifications(){if(!session){openAuth('reader');return}const r=await sb.from('notifications').select('*').eq('user_id',session.user.id).order('created_at',{ascending:false}).limit(100);open(`<div class="modal" style="width:min(600px,100%)"><button class="close" id="n-close">×</button><div class="kicker">READER UPDATES</div><h2>Notifications</h2><div class="actions" style="margin:0 0 12px"><button class="btn alt" id="mark-read">MARK ALL READ</button></div><div id="notify-list" class="notify-list">${r.error?'<div class="meta">Notifications need the Supabase setup.</div>':(r.data||[]).length?(r.data||[]).map(n=>`<button class="notify-item ${n.read?'':'unread'} n-open" data-story="${n.story_id||''}" style="text-align:left;color:inherit"><b>${esc(n.message||'New update')}</b><div class="notify-time">${esc(formatDate(n.created_at))}</div></div>`).join(''):'<div class="meta">No notifications yet.</div>'}</div></div>`);document.getElementById('n-close').onclick=close;document.getElementById('mark-read').onclick=async()=>{await sb.from('notifications').update({read:true}).eq('user_id',session.user.id).eq('read',false);loadUnreadCount();openNotifications()};document.querySelectorAll('.n-open').forEach(b=>b.onclick=async()=>{const id=b.dataset.story;if(id){const s=await sb.from('stories').select('share_slug,id').eq('id',id).maybeSingle();if(s.data)openPublicStory(s.data.share_slug||s.data.id)}})}
 
@@ -1182,7 +1218,21 @@ function soundroomSetExpanded(v){const p=document.getElementById('soundroom-play
 function soundroomRender(){const p=document.getElementById('soundroom-player'),a=document.getElementById('soundroom-audio');if(!p||!a)return;if(!soundroomTracks.length){p.classList.add('hidden');return}p.classList.remove('hidden');const t=soundroomTracks[soundroomIndex]||{};document.getElementById('soundroom-title').textContent=t.title||'Untitled soundtrack';document.getElementById('soundroom-caption').textContent=t.caption||'Songs behind the stories.';const art=document.getElementById('soundroom-panel-art');if(art){art.src=t.cover_url||'';art.alt=t.title||'Soundroom cover';art.style.display=t.cover_url?'block':'none';}if(a.src!==t.media_url)a.src=t.media_url;document.getElementById('soundroom-play').textContent=a.paused?'▶':'Ⅱ'}
 function soundroomLoadTracks(tracks){soundroomTracks=(tracks||[]).filter(x=>x&&x.media_url);soundroomIndex=0;soundroomRender()}
 function soundroomSelect(trackId){const i=soundroomTracks.findIndex(x=>x.id===trackId);if(i>=0){soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);const a=document.getElementById('soundroom-audio');a.play().catch(()=>{});}}
-function soundroomBind(){const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');if(!p||!a)return;disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));min.onclick=()=>soundroomSetExpanded(false);play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration}}
+function soundroomBind(){
+  const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');
+  if(!p||!a||!disc||!min||!play||!prev||!next||!range)return;
+  disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));
+  min.onclick=()=>soundroomSetExpanded(false);
+  play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};
+  prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};
+  next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};
+  a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';document.getElementById('header-soundroom-btn')?.classList.add('active')});
+  a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';document.getElementById('header-soundroom-btn')?.classList.remove('active')});
+  a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});
+  a.addEventListener('loadedmetadata',()=>{const d=document.getElementById('soundroom-duration');if(d)d.textContent=soundroomTime(a.duration)});
+  a.addEventListener('timeupdate',()=>{const c=document.getElementById('soundroom-current');if(c)c.textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});
+  range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration};
+}
 async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,cover_url,created_at').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
 
@@ -1260,8 +1310,9 @@ async function loadHomepageFeatures(){
   return {notes,rooms};
 }
 function openHomeNotes(notes=[]){
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div></div>`);
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close" type="button" aria-label="Close notes">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div><div class="notes-modal-actions"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div></div>`);
   document.getElementById('home-notes-close').onclick=close;
+  document.getElementById('home-notes-back').onclick=close;
 }
 async function openHomeCommunity(rooms=[]){
   if(!rooms.length){const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(8);rooms=q.error?[]:(q.data||[])}
@@ -1282,8 +1333,8 @@ async function maybeShowHomepageFeature(force=false){
   const chQ=await sb.from('chapters').select('id,chapter_number,title,content,created_at,updated_at').eq('story_id',latest.id).order('chapter_number',{ascending:false}).limit(1).maybeSingle();
   const chapter=chQ.data||null,hook=pickPromotionHook(chapter?.content||latest.description||'');
   const cover=latest.cover_url||'';
-  localStorage.setItem('avx_home_feature_last_shown',String(Date.now()));
   open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><div class="home-pop-kicker" style="margin-top:12px">${esc((chapter?.title||'NEW CHAPTER')+' · IS NOW LIVE')}</div><div class="home-pop-hook-label" style="margin-top:15px">Hook / Interesting Dialogue</div><div class="home-pop-hook">“${esc(hook)}”</div><p>Open the latest chapter and discover what happens next.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt promo-download" id="home-pop-download">DOWNLOAD PROMO</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
+  localStorage.setItem('avx_home_feature_last_shown',String(Date.now()));
   document.getElementById('home-pop-read').onclick=()=>{close();openPublicStory(latest.share_slug||latest.id)};
   document.getElementById('home-pop-download').onclick=()=>downloadPromotionPoster(latest,chapter,hook);
   document.getElementById('home-pop-later').onclick=close;
