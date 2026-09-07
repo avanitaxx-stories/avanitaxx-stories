@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-07-community-soundroom-promo-profile-final-fix-2">
+<meta name="avx-build" content="2026-09-07-reader-social-final-fix-3">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -407,6 +407,9 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   .community-phone-head{padding-right:46px}
 }
 
+
+/* Notes + Music social interactions */
+.social-content{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.social-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.social-like{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900}.social-like.liked{background:#f2d9d7;color:#7f514d}.social-comment-box{margin-top:10px}.social-comment-item{padding:9px 0;border-bottom:1px solid #eee3dc;font-size:13px}.social-comment-meta{font-size:9px;color:var(--muted);margin-bottom:4px}.social-reply{font-size:8px;border:0;background:transparent;color:#8d5f55;font-weight:900;padding:5px 0}.social-replies{margin-left:18px;padding-left:10px;border-left:2px solid #eee0d9}
 </style>
 </head>
 <body>
@@ -795,7 +798,7 @@ async function openAuthorProfileInHub(author){
     </div></article>`;
   }).join('')}</div>`:'<div class="author-empty-v3">No public timeline updates yet.</div>';
   const music=mr.error?[]:(mr.data||[]);
-  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<article class="soundroom-public-card" data-sound-id="${esc(x.id)}"><div class="soundroom-cover-wrap">${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}</div><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}<div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span><button class="soundroom-like" data-sound-like="${esc(x.id)}" type="button">♡ LIKE</button></div><audio controls preload="none" src="${esc(x.media_url)}"></audio></div></article>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
+  const musicHtml=music.length?`<div class="soundroom-public">${music.map(x=>`<article class="soundroom-public-card" data-sound-id="${esc(x.id)}"><div class="soundroom-cover-wrap">${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}</div><div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small" style="margin-top:4px">${esc(x.caption)}</div>`:''}<div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span><button class="soundroom-like" data-sound-like="${esc(x.id)}" type="button">♡ LIKE</button></div><audio controls preload="none" src="${esc(x.media_url)}"></audio><div class="social-content" data-social-type="music" data-social-id="${esc(x.id)}"><div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-reply" type="button">💬 COMMENT</button></div><div class="social-comments"></div><div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div></div></div></article>`).join('')}</div>`:'<div class="author-empty-v3">No public music yet.</div>';
   const libraryHtml=stories.length?stories.slice(0,12).map(s=>`<div class="library-card-v3"><a class="read-story" href="${esc(publicUrl({story:s.share_slug||s.id}))}" data-slug="${esc(s.share_slug||s.id)}">
     ${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}
     <div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${Array.isArray(s.tags)&&s.tags.length?esc(s.tags.slice(0,2).join(' • ')):'Published story'}</div></div></a><button class="btn alt library-save" data-story-id="${esc(s.id)}" type="button">＋ ADD LIBRARY</button></div>`).join(''):'<div class="author-empty-v3">No published books yet.</div>';
@@ -1013,8 +1016,37 @@ async function libraryButtonHtml(storyId){
 }
 
 async function openPublicStory(slugValue){
- let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const [ch,pr]=await Promise.all([sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true}),sb.from('profiles').select('id,pen_name,display_name,avatar_url,social_url').eq('id',currentStory.owner_id).maybeSingle()]);currentStory.chapters=ch.data||[];const publicSlug=currentStory.share_slug||currentStory.id;updatePublicRoute({story:publicSlug});const author=pr.data||{};const authorName=author.pen_name||author.display_name||'AVANITAXX';const seoDescription=seoText(currentStory.description||currentStory.blurb,'Read '+currentStory.title+' online on Avanitaxx Stories. Discover chapters, follow the author, and join the reading community.');const storyUrl=publicUrl({story:publicSlug});setSEO({title:currentStory.title+' — Read Online | Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:storyUrl,type:'book',schema:{'@context':'https://schema.org','@type':'WebPage','name':currentStory.title+' — Avanitaxx Stories','description':seoDescription,'url':storyUrl,'image':currentStory.cover_url||DEFAULT_SEO.image,'isPartOf':{'@type':'WebSite','name':'Avanitaxx Stories','url':SITE_URL},'mainEntity':{'@type':'Book','name':currentStory.title,'description':seoDescription,'image':currentStory.cover_url||DEFAULT_SEO.image,'url':storyUrl,'author':{'@type':'Person','name':authorName,'url':publicUrl({author:currentStory.owner_id}),'image':author.avatar_url||undefined,'sameAs':author.social_url?[author.social_url]:undefined},'publisher':{'@type':'Organization','name':'Avanitaxx Stories','url':SITE_URL}}}});recordView(currentStory.id);renderReader()}
-
+  try{
+    const key=String(slugValue||'').trim();
+    if(!key) throw new Error('Missing story link.');
+    let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',key).maybeSingle();
+    if(r.error) throw r.error;
+    if(!r.data){r=await sb.from('stories').select('*').eq('published',true).eq('id',key).maybeSingle();}
+    if(r.error) throw r.error;
+    if(!r.data){alert('Story not found or is no longer published.');return;}
+    currentStory=r.data; currentChapter=0;
+    const [ch,pr]=await Promise.all([
+      sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true}),
+      sb.from('profiles').select('id,pen_name,display_name,avatar_url,social_url').eq('id',currentStory.owner_id).maybeSingle()
+    ]);
+    if(ch.error){
+      console.error('Chapter load error:',ch.error);
+      alert('The book opened, but its chapters could not be read. This usually means the Supabase chapters table does not allow public SELECT access. Apply the Reader Fix SQL included with this update.');
+      return;
+    }
+    currentStory.chapters=(ch.data||[]).filter(x=>String(x.content||'').trim().length>0);
+    if(!currentStory.chapters.length){
+      alert('This published book currently has no readable chapter content. Please open the story in My Stories and SAVE CHANGES again to make sure the chapters were stored.');
+      return;
+    }
+    const publicSlug=currentStory.share_slug||currentStory.id; updatePublicRoute({story:publicSlug});
+    const author=pr.data||{}; const authorName=author.pen_name||author.display_name||'AVANITAXX';
+    const seoDescription=seoText(currentStory.description||currentStory.blurb,'Read '+currentStory.title+' online on Avanitaxx Stories.');
+    const storyUrl=publicUrl({story:publicSlug});
+    setSEO({title:currentStory.title+' — Read Online | Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:storyUrl,type:'book'});
+    recordView(currentStory.id); renderReader();
+  }catch(e){console.error('openPublicStory failed:',e);alert('Could not open this book: '+(e.message||'Unknown error'));}
+}
 function readerSettings(){return {theme:localStorage.getItem('avx_reader_theme')||'light',size:Number(localStorage.getItem('avx_reader_size')||18)}}
 function saveReaderSettings(s){localStorage.setItem('avx_reader_theme',s.theme);localStorage.setItem('avx_reader_size',String(s.size))}
 function renderReader(){
@@ -1310,7 +1342,7 @@ async function loadHomepageFeatures(){
   return {notes,rooms};
 }
 function openHomeNotes(notes=[]){
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close" type="button" aria-label="Close notes">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div><div class="notes-modal-actions"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div></div>`);
+  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close" type="button" aria-label="Close notes">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div><div class="social-content" data-social-type="note" data-social-id="${esc(x.id)}"><div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-reply" type="button">💬 COMMENT</button></div><div class="social-comments"></div><div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div></div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div><div class="notes-modal-actions"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div></div>`);
   document.getElementById('home-notes-close').onclick=close;
   document.getElementById('home-notes-back').onclick=close;
 }
@@ -1325,6 +1357,40 @@ async function openHomeCommunity(rooms=[]){
   document.getElementById('home-chat-close').onclick=close;
   const send=document.getElementById('public-chat-send');if(send)send.onclick=async()=>{if(!session){openAuth('reader');return}const msg=document.getElementById('public-chat-message').value.trim();if(!msg)return;const q=await sb.from('owner_chat_messages').insert({room_id:room.id,owner_id:room.owner_id,sender_id:session.user.id,author_name:session.user.email?.split('@')[0]||'Reader',message:msg});if(q.error)alert(q.error.message);else openHomeCommunity([room])};
 }
+
+async function socialLoad(host){
+  const type=host.dataset.socialType,id=host.dataset.socialId;
+  const commentsBox=host.querySelector('.social-comments'),likeBtn=host.querySelector('.social-like');
+  const [likes,comments]=await Promise.all([
+    sb.from('content_reactions').select('user_id').eq('content_type',type).eq('content_id',id),
+    sb.from('content_comments').select('*').eq('content_type',type).eq('content_id',id).order('created_at',{ascending:true})
+  ]);
+  if(likes.error||comments.error){commentsBox.innerHTML='<div class="meta">Social features need the new Supabase SQL setup.</div>';return;}
+  const lr=likes.data||[], cr=comments.data||[]; const liked=!!(session&&lr.some(x=>x.user_id===session.user.id));
+  likeBtn.textContent=(liked?'♥':'♡')+' '+lr.length+' LIKE'+(lr.length===1?'':'S'); likeBtn.classList.toggle('liked',liked);
+  const top=cr.filter(x=>!x.parent_id), replies={};cr.filter(x=>x.parent_id).forEach(x=>(replies[x.parent_id]||(replies[x.parent_id]=[])).push(x));
+  const one=(x,reply=false)=>`<div class="social-comment-item ${reply?'social-replies':''}"><div class="social-comment-meta">${esc(x.author_name||'Reader')} · ${esc(formatDate(x.created_at))}</div><div>${esc(x.content||'')}</div>${!reply?`<button class="social-reply social-reply-action" data-parent="${esc(x.id)}" type="button">↩ REPLY</button>`:''}</div>`;
+  commentsBox.innerHTML=top.length?top.map(x=>one(x)+(replies[x.id]||[]).map(y=>one(y,true)).join('')).join(''):'<div class="meta">No comments yet.</div>';
+}
+async function socialInitAll(root=document){for(const h of root.querySelectorAll?.('.social-content')||[]) await socialLoad(h)}
+document.addEventListener('click',async e=>{
+  const host=e.target.closest('.social-content');if(!host)return;
+  if(e.target.closest('.social-reply')&&!e.target.closest('.social-reply-action')){host.querySelector('.social-comment-box')?.classList.toggle('hidden');return;}
+  const type=host.dataset.socialType,id=host.dataset.socialId;
+  if(e.target.closest('.social-like')){
+    if(!session){openAuth('reader');return;} const existing=await sb.from('content_reactions').select('id').eq('content_type',type).eq('content_id',id).eq('user_id',session.user.id).maybeSingle();
+    if(existing.error){alert(existing.error.message);return;} const q=existing.data?await sb.from('content_reactions').delete().eq('id',existing.data.id):await sb.from('content_reactions').insert({content_type:type,content_id:id,user_id:session.user.id}); if(q.error)alert(q.error.message); else socialLoad(host); return;
+  }
+  if(e.target.closest('.social-post')){
+    if(!session){openAuth('reader');return;} const input=host.querySelector('.social-input'),content=input?.value.trim();if(!content)return;
+    const parent=host.dataset.replyParent||null; const name=(session.user.user_metadata?.display_name||session.user.email?.split('@')[0]||'Reader');
+    const q=await sb.from('content_comments').insert({content_type:type,content_id:id,user_id:session.user.id,author_name:name,content,parent_id:parent}); if(q.error)alert(q.error.message);else{input.value='';host.dataset.replyParent='';host.querySelector('.social-comment-box')?.classList.add('hidden');socialLoad(host)} return;
+  }
+  const reply=e.target.closest('.social-reply-action');if(reply){host.dataset.replyParent=reply.dataset.parent;host.querySelector('.social-comment-box')?.classList.remove('hidden');host.querySelector('.social-input')?.focus();}
+});
+const _oldOpenHomeNotes=openHomeNotes; openHomeNotes=function(notes=[]){_oldOpenHomeNotes(notes); socialInitAll(document.getElementById('overlay'));};
+const _oldOpenAuthorHub=openAuthorHub; openAuthorHub=async function(...args){const r=await _oldOpenAuthorHub.apply(this,args);setTimeout(()=>socialInitAll(document),500);return r;};
+
 async function maybeShowHomepageFeature(force=false){
   const last=Number(localStorage.getItem('avx_home_feature_last_shown')||0);
   if(!force && last && Date.now()-last<30*60*1000)return;
