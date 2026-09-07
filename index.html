@@ -410,6 +410,155 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 
 /* Notes + Music social interactions */
 .social-content{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.social-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.social-like{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900}.social-like.liked{background:#f2d9d7;color:#7f514d}.social-comment-box{margin-top:10px}.social-comment-item{padding:9px 0;border-bottom:1px solid #eee3dc;font-size:13px}.social-comment-meta{font-size:9px;color:var(--muted);margin-bottom:4px}.social-reply{font-size:8px;border:0;background:transparent;color:#8d5f55;font-weight:900;padding:5px 0}.social-replies{margin-left:18px;padding-left:10px;border-left:2px solid #eee0d9}
+
+/* ===== NOTES + SOUNDROOM — MOBILE-FIRST SOCIAL FEED ===== */
+.social-mobile-modal{
+  width:min(760px,100%);
+  max-height:96vh;
+  padding:8px;
+  background:#241814;
+  border-radius:30px;
+  box-shadow:0 35px 110px rgba(25,15,11,.42);
+  position:relative;
+  overflow:hidden;
+}
+.social-mobile-app{
+  height:min(900px,calc(96vh - 16px));
+  max-height:calc(96vh - 16px);
+  display:flex;
+  flex-direction:column;
+  background:#fbf5ef;
+  border-radius:23px;
+  overflow:hidden;
+}
+.social-mobile-header{
+  flex:none;
+  padding:22px 24px 18px;
+  background:rgba(255,253,249,.96);
+  border-bottom:1px solid var(--line);
+}
+.social-mobile-header h2{font:400 30px/1.05 Georgia,serif;margin:7px 0 5px;color:#392820}
+.social-mobile-header p{font:13px/1.6 Georgia,serif;color:var(--muted);margin:0;max-width:620px}
+.social-mobile-feed{
+  flex:1;
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:18px;
+  display:grid;
+  gap:14px;
+  background:linear-gradient(180deg,#fbf3ee,#f8eee8);
+}
+.social-mobile-footer{
+  flex:none;
+  padding:12px 18px;
+  background:rgba(255,253,249,.96);
+  border-top:1px solid var(--line);
+}
+.social-mobile-close{z-index:8;background:rgba(45,31,25,.72)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important}
+.note-girly{
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(104,69,60,.08);
+}
+.note-girly-body{padding:16px 17px 15px}
+.note-author-row{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.note-author-avatar{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#d9aaa8,#956c55);color:#fff;
+  font:700 14px Georgia,serif;flex:none;
+}
+.note-author-row strong{display:block;font-size:9px;letter-spacing:.1em;color:#4b342c}
+.note-author-row span{display:block;font-size:8px;color:var(--muted);margin-top:2px}
+.social-content{margin-top:14px}
+.social-actions{
+  display:flex;gap:7px;align-items:center;flex-wrap:wrap;
+  border-top:1px solid rgba(149,108,85,.12);
+  padding-top:12px;
+}
+.social-like,.social-comment-toggle{
+  min-height:36px;
+  padding:8px 13px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  color:var(--brown);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.social-like.liked{background:#f2d9d7;color:#7f514d}
+.social-comment-toggle{cursor:pointer}
+.social-comments{margin-top:5px}
+.social-comment-item{
+  padding:10px 0;
+  border-bottom:1px solid #eee3dc;
+  font-size:12px;
+  line-height:1.5;
+}
+.social-comment-meta{font-size:8px;color:var(--muted);margin-bottom:4px}
+.social-reply{font-size:8px;border:0;background:transparent;color:#8d5f55;font-weight:900;padding:5px 0}
+.social-replies{margin:7px 0 0 14px;padding-left:10px;border-left:2px solid #eee0d9}
+.social-comment-box{margin-top:10px;padding:10px;border-radius:14px;background:#f7ebe6}
+.social-comment-box .field{min-height:44px;margin-bottom:7px;background:#fff}
+.social-post{min-height:38px;padding:9px 13px;border-radius:10px}
+.soundroom-modal .social-mobile-feed{gap:12px}
+.soundroom-mobile-header{background:linear-gradient(145deg,#fffdf9,#f4e7e2)}
+.soundroom-feed-card{
+  display:block;
+  padding:14px;
+  border-radius:20px;
+}
+.soundroom-feed-top{display:flex;gap:12px;align-items:center}
+.soundroom-feed-info{min-width:0}
+.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.18em;color:var(--toffee);margin-bottom:4px}
+.soundroom-feed-info strong{
+  display:block;font:400 20px/1.15 Georgia,serif;color:var(--brown);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.soundroom-feed-info .owner-small{margin-top:5px;line-height:1.5}
+.soundroom-feed-card audio{width:100%;margin-top:12px}
+.soundroom-feed-card .soundroom-stats{margin-top:8px}
+@media(max-width:700px){
+  .social-mobile-modal{
+    width:100%;
+    max-height:100dvh;
+    height:100dvh;
+    padding:0;
+    border-radius:0;
+    background:#fbf5ef;
+  }
+  .social-mobile-app{
+    height:100dvh;
+    max-height:100dvh;
+    border-radius:0;
+  }
+  .social-mobile-header{padding:18px 17px 15px}
+  .social-mobile-header h2{font-size:25px}
+  .social-mobile-header p{font-size:11px}
+  .social-mobile-feed{padding:11px 10px 18px;gap:10px}
+  .note-girly{border-radius:17px}
+  .note-girly-media{max-height:none;aspect-ratio:4/3;object-fit:cover}
+  .note-girly-title{font-size:21px}
+  .note-girly-caption{font-size:13px}
+  .note-girly-quote{font-size:13px}
+  .soundroom-feed-card{padding:12px}
+  .soundroom-cover{width:70px;height:70px}
+  .soundroom-feed-info strong{font-size:18px}
+  .social-mobile-footer{padding:10px 12px}
+}
+@media(max-width:380px){
+  .social-actions{gap:5px}
+  .social-like,.social-comment-toggle{font-size:8px;padding:8px 10px}
+  .note-girly-body{padding:14px}
+  .social-mobile-header h2{font-size:23px}
+}
+
+@media(max-width:700px){
+  .soundroom-public-card{grid-template-columns:1fr;align-items:stretch}
+  .soundroom-feed-top{display:flex}
+  .soundroom-public-card .soundroom-cover{width:76px;height:76px}
+  .soundroom-public-card .social-actions{margin-top:2px}
+}
 </style>
 </head>
 <body>
@@ -1015,6 +1164,22 @@ async function libraryButtonHtml(storyId){
   return `<button class="btn alt library-save ${saved?'saved':''}" data-story-id="${esc(storyId)}" type="button">${saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'}</button>`;
 }
 
+async function recordView(storyId){
+  // View tracking must never prevent a published book from opening.
+  try{
+    const id=String(storyId||'').trim();
+    if(!id)return;
+    const key='avx_story_viewed_'+id;
+    const now=Date.now();
+    const last=Number(localStorage.getItem(key)||0);
+    // Count at most one local view per story per 30 minutes.
+    if(last && now-last < 30*60*1000)return;
+    localStorage.setItem(key,String(now));
+  }catch(err){
+    console.warn('recordView skipped:',err);
+  }
+}
+
 async function openPublicStory(slugValue){
   try{
     const key=String(slugValue||'').trim();
@@ -1338,14 +1503,86 @@ async function loadHomepageFeatures(){
   const noteBtn=document.getElementById('home-notes-btn'),chatBtn=document.getElementById('home-chat-btn'),soundBtn=document.getElementById('home-sound-btn');
   if(noteBtn)noteBtn.onclick=()=>openHomeNotes(notes);
   if(chatBtn)chatBtn.onclick=()=>openHomeCommunity(rooms);
-  if(soundBtn)soundBtn.onclick=()=>{if(soundroomTracks.length){soundroomSetExpanded(true);soundroomSelect(soundroomTracks[0].id)}else alert('No published soundtrack yet.')};
+  if(soundBtn)soundBtn.onclick=()=>openHomeSoundroom(soundroomTracks);
   return {notes,rooms};
 }
 function openHomeNotes(notes=[]){
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="home-notes-close" type="button" aria-label="Close notes">×</button><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Soft updates, behind-the-story thoughts, favorite lines, and little moments from AVANITAXX.</p><div class="story-list">${notes.length?notes.map(x=>`<article class="note-girly">${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}<div class="note-girly-body"><div class="note-girly-title">${esc(x.title||'Author Note')}</div>${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}<div class="note-girly-meta">${esc(formatDate(x.created_at))} · AVANITAXX</div><div class="social-content" data-social-type="note" data-social-id="${esc(x.id)}"><div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-reply" type="button">💬 COMMENT</button></div><div class="social-comments"></div><div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div></div></div></article>`).join(''):'<div class="empty">No public notes yet.</div>'}</div><div class="notes-modal-actions"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div></div>`);
+  open(`<div class="social-mobile-modal"><button class="close social-mobile-close" id="home-notes-close" type="button" aria-label="Close notes">×</button>
+    <div class="social-mobile-app">
+      <div class="social-mobile-header">
+        <div><div class="kicker">AVANITAXX NOTES</div><h2>Little things from the author.</h2><p>Updates, behind-the-story thoughts, favorite lines, and little moments.</p></div>
+      </div>
+      <div class="social-mobile-feed">
+        ${notes.length?notes.map(x=>`<article class="note-girly">
+          ${x.poster_url?`<img class="note-girly-media" src="${esc(x.poster_url)}" alt="${esc(x.title||'Avanitaxx Note')}" loading="lazy">`:''}
+          <div class="note-girly-body">
+            <div class="note-author-row"><div class="note-author-avatar">A</div><div><strong>AVANITAXX</strong><span>${esc(formatDate(x.created_at))}</span></div></div>
+            <div class="note-girly-title">${esc(x.title||'Author Note')}</div>
+            ${x.caption?`<div class="note-girly-caption">${esc(x.caption)}</div>`:''}
+            ${x.dialogue?`<div class="note-girly-quote">“${esc(x.dialogue)}”</div>`:''}
+            <div class="social-content" data-social-type="note" data-social-id="${esc(x.id)}">
+              <div class="social-actions">
+                <button class="social-like" type="button">♡ LIKE</button>
+                <button class="social-comment-toggle" type="button">💬 COMMENT</button>
+              </div>
+              <div class="social-comments"></div>
+              <div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div>
+            </div>
+          </div>
+        </article>`).join(''):'<div class="empty">No public notes yet.</div>'}
+      </div>
+      <div class="social-mobile-footer"><button class="btn alt" id="home-notes-back" type="button">← BACK</button></div>
+    </div>
+  </div>`);
   document.getElementById('home-notes-close').onclick=close;
   document.getElementById('home-notes-back').onclick=close;
+  socialInitAll(document.getElementById('overlay'));
 }
+
+async function openHomeSoundroom(tracks=[]){
+  if(!tracks.length){
+    const q=await sb.from('owner_timeline_media').select('id,title,caption,media_url,cover_url,created_at').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);
+    tracks=q.error?[]:(q.data||[]);
+  }
+  open(`<div class="social-mobile-modal soundroom-modal"><button class="close social-mobile-close" id="home-sound-close" type="button" aria-label="Close Soundroom">×</button>
+    <div class="social-mobile-app">
+      <div class="social-mobile-header soundroom-mobile-header">
+        <div><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, react, comment, and reply while exploring the author's soundtrack.</p></div>
+      </div>
+      <div class="social-mobile-feed">
+        ${tracks.length?tracks.map(x=>`<article class="soundroom-public-card soundroom-feed-card" data-sound-id="${esc(x.id)}">
+          <div class="soundroom-feed-top">
+            ${x.cover_url?`<img class="soundroom-cover" src="${esc(x.cover_url)}" alt="${esc(x.title||'Soundtrack')} cover" loading="lazy">`:`<div class="soundroom-cover soundroom-cover-fallback">♫</div>`}
+            <div class="soundroom-feed-info"><div class="soundroom-eyebrow">SOUNDROOM</div><strong>${esc(x.title||'Untitled track')}</strong>${x.caption?`<div class="owner-small">${esc(x.caption)}</div>`:''}</div>
+          </div>
+          <audio controls preload="none" src="${esc(x.media_url)}"></audio>
+          <div class="soundroom-stats"><span class="sound-views">◉ — views</span><span class="sound-likes">♡ — likes</span></div>
+          <div class="social-content" data-social-type="music" data-social-id="${esc(x.id)}">
+            <div class="social-actions"><button class="social-like" type="button">♡ LIKE</button><button class="social-comment-toggle" type="button">💬 COMMENT</button></div>
+            <div class="social-comments"></div>
+            <div class="social-comment-box hidden"><textarea class="field social-input" rows="2" placeholder="Write a comment…"></textarea><button class="btn social-post" type="button">POST COMMENT</button></div>
+          </div>
+        </article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}
+      </div>
+      <div class="social-mobile-footer"><button class="btn alt" id="home-sound-back" type="button">← BACK</button></div>
+    </div>
+  </div>`);
+  document.getElementById('home-sound-close').onclick=close;
+  document.getElementById('home-sound-back').onclick=close;
+  socialInitAll(document.getElementById('overlay'));
+  document.querySelectorAll('[data-sound-id]').forEach(async card=>{
+    const id=card.dataset.soundId;
+    try{
+      const [v,l]=await Promise.all([
+        sb.from('soundroom_views').select('*',{count:'exact',head:true}).eq('media_id',id),
+        sb.from('soundroom_likes').select('*',{count:'exact',head:true}).eq('media_id',id)
+      ]);
+      card.querySelector('.sound-views')?.replaceChildren(document.createTextNode('◉ '+(v.count||0)+' views'));
+      card.querySelector('.sound-likes')?.replaceChildren(document.createTextNode('♡ '+(l.count||0)+' likes'));
+    }catch(e){}
+  });
+}
+
 async function openHomeCommunity(rooms=[]){
   if(!rooms.length){const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(8);rooms=q.error?[]:(q.data||[])}
   if(!rooms.length){alert('The community lounge is not open yet.');return}
@@ -1375,7 +1612,7 @@ async function socialLoad(host){
 async function socialInitAll(root=document){for(const h of root.querySelectorAll?.('.social-content')||[]) await socialLoad(h)}
 document.addEventListener('click',async e=>{
   const host=e.target.closest('.social-content');if(!host)return;
-  if(e.target.closest('.social-reply')&&!e.target.closest('.social-reply-action')){host.querySelector('.social-comment-box')?.classList.toggle('hidden');return;}
+  if((e.target.closest('.social-comment-toggle')||e.target.closest('.social-reply'))&&!e.target.closest('.social-reply-action')){host.querySelector('.social-comment-box')?.classList.toggle('hidden');return;}
   const type=host.dataset.socialType,id=host.dataset.socialId;
   if(e.target.closest('.social-like')){
     if(!session){openAuth('reader');return;} const existing=await sb.from('content_reactions').select('id').eq('content_type',type).eq('content_id',id).eq('user_id',session.user.id).maybeSingle();
