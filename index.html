@@ -664,6 +664,72 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 }
 
 
+/* AVX UNIVERSAL SCROLL READER — desktop / laptop / Windows / macOS / iOS */
+/* Keep the same continuous reading experience on every screen size. */
+@media(min-width:701px){
+  #overlay.reader-overlay{
+    align-items:stretch!important;
+    justify-content:center!important;
+    padding:10px!important;
+    overflow:hidden!important;
+  }
+  #overlay.reader-overlay .reader-scroll-mode{
+    width:min(1180px,calc(100vw - 20px))!important;
+    height:calc(100dvh - 20px)!important;
+    max-height:calc(100dvh - 20px)!important;
+    margin:auto!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-book-shell{
+    width:100%;
+    height:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-book-top{
+    flex:0 0 auto;
+    position:sticky!important;
+    top:0;
+    z-index:20;
+    box-shadow:0 6px 20px rgba(55,35,27,.06);
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-scroll{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:auto;
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-scroll-page{
+    width:min(100%,900px);
+    margin:0 auto;
+    padding:58px 72px 100px;
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-page-content{
+    width:100%;
+    max-width:none!important;
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    font-size:var(--reader-font-size,19px)!important;
+    line-height:1.95!important;
+  }
+  #overlay.reader-overlay .reader-scroll-mode .reader-page-content p{margin:0 0 1.2em}
+  #overlay.reader-overlay .reader-scroll-mode .reader-page-content img,
+  #overlay.reader-overlay .reader-scroll-mode .reader-page-content video,
+  #overlay.reader-overlay .reader-scroll-mode .reader-page-content iframe{
+    max-width:100%;
+    height:auto;
+  }
+}
+
 /* AVANITAXX SCROLL READER — natural Wattpad-style continuous reading */
 .reader-scroll-mode{width:min(100%,1100px)!important;max-height:calc(100dvh - 20px)!important;overflow:hidden!important}
 .reader-scroll-mode .reader-book-shell{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden}
