@@ -663,6 +663,45 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   #overlay.reader-overlay .reader-book-nav .btn{padding-left:6px;padding-right:6px}
 }
 
+
+/* AVANITAXX SCROLL READER — natural Wattpad-style continuous reading */
+.reader-scroll-mode{width:min(100%,1100px)!important;max-height:calc(100dvh - 20px)!important;overflow:hidden!important}
+.reader-scroll-mode .reader-book-shell{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.reader-scroll-mode .reader-book-top{flex:0 0 auto;z-index:5}
+.reader-scroll-mode .reader-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-behavior:auto;padding:0}
+.reader-scroll-mode .reader-scroll-page{width:min(100%,820px);margin:0 auto;padding:54px 64px 90px}
+.reader-scroll-mode .reader-page-content{overflow:visible!important;height:auto!important;max-height:none!important;min-height:0!important;font-size:var(--reader-font-size,18px);line-height:1.9;word-wrap:break-word;overflow-wrap:anywhere}
+.reader-scroll-mode .reader-page-content p{margin:0 0 1.15em}
+.reader-scroll-mode .reader-page-content h1,.reader-scroll-mode .reader-page-content h2,.reader-scroll-mode .reader-page-content h3,.reader-scroll-mode .reader-page-content h4{line-height:1.3;margin:1.7em 0 .75em}
+.reader-scroll-mode .reader-page-content img,.reader-scroll-mode .reader-page-content video{max-width:100%;height:auto;display:block;margin:1.4em auto}
+.reader-chapter-end{text-align:center;margin:72px 0 30px;color:#9b7b6a;font:600 11px/1.4 Arial,sans-serif;letter-spacing:.18em}
+.reader-next-chapter-wrap{text-align:center;padding:12px 0 70px}
+.reader-scroll-mode.dark-mode .reader-chapter-end{color:#d7b8aa}
+@media(max-width:700px){
+  .reader-scroll-mode{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;border-radius:0!important}
+  .reader-scroll-mode .reader-book-shell{width:100%;height:100%}
+  .reader-scroll-mode .reader-book-bar{padding:12px 14px 10px}
+  .reader-scroll-mode .reader-book-title{font-size:17px;max-width:46vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .reader-scroll-mode .reader-settings-note{display:none}
+  .reader-scroll-mode .reader-tools{gap:4px;flex-wrap:nowrap}
+  .reader-scroll-mode .reader-tool{min-width:38px;padding:8px 7px;font-size:10px}
+  .reader-scroll-mode .reader-book-nav{gap:7px;padding:9px 10px}
+  .reader-scroll-mode .reader-book-nav .btn{min-width:0;flex:1;padding:9px 6px;font-size:9px;white-space:nowrap}
+  .reader-scroll-mode .reader-chapter-name{flex:0 0 auto;max-width:30%;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .reader-scroll-mode .reader-scroll-page{width:100%;padding:34px 22px 76px}
+  .reader-scroll-mode .reader-page-content{font-size:20px;line-height:1.92}
+  .reader-scroll-mode .reader-page-content p{margin-bottom:1.25em}
+  .reader-scroll-mode .reader-page-content h1{font-size:1.55em}.reader-scroll-mode .reader-page-content h2{font-size:1.4em}.reader-scroll-mode .reader-page-content h3{font-size:1.25em}
+  .reader-chapter-end{margin:60px 0 26px;font-size:10px}
+  .reader-next-chapter-wrap{padding-bottom:60px}
+  .reader-scroll-mode .reader-engagement-book{margin-top:30px}
+}
+@media(max-width:380px){
+  .reader-scroll-mode .reader-book-title{font-size:15px;max-width:42vw}
+  .reader-scroll-mode .reader-tool{padding:7px 5px;min-width:34px;font-size:9px}
+  .reader-scroll-mode .reader-scroll-page{padding-left:19px;padding-right:19px}
+  .reader-scroll-mode .reader-page-content{font-size:19px;line-height:1.9}
+}
 </style>
 </head>
 <body>
@@ -1194,7 +1233,7 @@ async function libraryButtonHtml(storyId){
 }
 
 async function openPublicStory(slugValue){
- let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;currentChapter=0;const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];const publicSlug=currentStory.share_slug||currentStory.id;updatePublicRoute({story:publicSlug});const seoDescription=String(currentStory.description||currentStory.blurb||('Read '+currentStory.title+' online on Avanitaxx Stories. Discover chapters, follow the author, and join the reading community.')).replace(/<[^>]*>/g,'').slice(0,300);setSEO({title:currentStory.title+' — Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:publicUrl({story:publicSlug}),type:'book',schema:{'@context':'https://schema.org','@type':'Book','name':currentStory.title,'description':seoDescription,'image':currentStory.cover_url||DEFAULT_SEO.image,'url':publicUrl({story:publicSlug}),'author':{'@type':'Person','name':currentStory.author_name||currentStory.pen_name||'AVANITAXX'},'publisher':{'@type':'Organization','name':'Avanitaxx Stories'}}});recordView(currentStory.id);renderReader()}
+ let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}currentStory=r.data;const saved=getReaderProgress(currentStory.id);currentChapter=Math.max(0,Math.min(Number(saved.lastChapter)||0,999999));const ch=await sb.from('chapters').select('*').eq('story_id',currentStory.id).order('chapter_number',{ascending:true});currentStory.chapters=ch.data||[];if(currentChapter>=currentStory.chapters.length)currentChapter=Math.max(0,currentStory.chapters.length-1);const publicSlug=currentStory.share_slug||currentStory.id;updatePublicRoute({story:publicSlug});const seoDescription=String(currentStory.description||currentStory.blurb||('Read '+currentStory.title+' online on Avanitaxx Stories. Discover chapters, follow the author, and join the reading community.')).replace(/<[^>]*>/g,'').slice(0,300);setSEO({title:currentStory.title+' — Avanitaxx Stories',description:seoDescription,image:currentStory.cover_url||DEFAULT_SEO.image,url:publicUrl({story:publicSlug}),type:'book',schema:{'@context':'https://schema.org','@type':'Book','name':currentStory.title,'description':seoDescription,'image':currentStory.cover_url||DEFAULT_SEO.image,'url':publicUrl({story:publicSlug}),'author':{'@type':'Person','name':currentStory.author_name||currentStory.pen_name||'AVANITAXX'},'publisher':{'@type':'Organization','name':'Avanitaxx Stories'}}});recordView(currentStory.id);renderReader()}
 async function recordView(storyId){const key='avx_view_'+storyId;if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1');try{await sb.rpc('increment_story_view',{p_story_id:storyId})}catch(e){console.warn('View counter unavailable',e)}}
 function readerPageBlocks(content,mode='desktop'){
   const clean=renderContent(content||'');
@@ -1237,104 +1276,69 @@ function readerPageBlocks(content,mode='desktop'){
 }
 function readerSettings(){return {theme:localStorage.getItem('avx_reader_theme')||'light',size:Number(localStorage.getItem('avx_reader_size')||18)}}
 function saveReaderSettings(s){localStorage.setItem('avx_reader_theme',s.theme);localStorage.setItem('avx_reader_size',String(s.size))}
-function renderReader(){
+function getReaderProgress(storyId){
+  try{return JSON.parse(localStorage.getItem('avx_reader_progress_'+storyId)||'{}')}catch{return {}}
+}
+function saveReaderProgress(){
+  if(!currentStory?.id)return;
+  const sc=document.getElementById('reader-scroll');
+  if(!sc)return;
+  const data=getReaderProgress(currentStory.id);
+  data[currentChapter]={scrollTop:sc.scrollTop||0,savedAt:Date.now()};
+  data.lastChapter=currentChapter;
+  try{localStorage.setItem('avx_reader_progress_'+currentStory.id,JSON.stringify(data))}catch{}
+}
+function renderReader(restoreScroll=true){
   const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};
   const settings=readerSettings();
-  const vw=window.innerWidth||1024;
-  const mode=vw<=700?'mobile':(vw<=1100?'tablet':'desktop');
-  const mobileLike=mode!=='desktop';
-  const pages=readerPageBlocks(c.content||'',mode);
-  if(!currentStory.__readerPage)currentStory.__readerPage={};
-  currentStory.__readerPage[currentChapter]=Math.min(currentStory.__readerPage[currentChapter]||0,pages.length-1);
-  const pageIndex=currentStory.__readerPage[currentChapter]||0;
-  const isLast=pageIndex>=pages.length-1;
   const root=document.createElement('div');
-  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} ${mobileLike?'reader-mobile-flow':''}`;
+  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} reader-scroll-mode`;
   root.style.setProperty('--reader-font-size',settings.size+'px');
 
-  root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top">
-    <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · BOOK MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
-    <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
-    <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
-  </div><div class="reader-page-stage"><article class="reader-page" id="reader-page"><div class="reader-page-content" id="reader-page-content">${pages[pageIndex]||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div><div class="reader-page-number">PAGE ${pageIndex+1} OF ${pages.length}</div></article></div>
-  <div class="reader-book-footer"><div class="reader-progress-line"><span style="width:${((pageIndex+1)/pages.length)*100}%"></span></div><div class="reader-page-actions"><button class="btn alt" id="reader-prev-page" ${pageIndex<=0?'disabled':''}>← TURN BACK</button><span class="reader-page-count">${pageIndex+1} / ${pages.length}</span><button class="btn" id="reader-next-page">${isLast?'FINISH CHAPTER':'TURN PAGE →'}</button></div></div>
-  ${isLast?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><button class="btn alt library-save" id="reader-library" data-story-id="${esc(currentStory.id)}" type="button">＋ ADD LIBRARY</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
+  root.innerHTML=`<div class="reader-book-shell">
+    <div class="reader-book-top">
+      <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · READING MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div></div>
+      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
+      <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
+    </div>
+    <main class="reader-scroll" id="reader-scroll">
+      <article class="reader-scroll-page">
+        <div class="reader-page-content" id="reader-page-content">${renderContent(c.content||'')||'<div class="reader-page-empty">This chapter has no text yet.</div>'}</div>
+        <div class="reader-chapter-end"><span>— END OF ${esc(c.title||('CHAPTER '+(currentChapter+1))).toUpperCase()} —</span></div>
+        ${currentChapter<currentStory.chapters.length-1?`<div class="reader-next-chapter-wrap"><button class="btn" id="next-chapter-bottom">NEXT CHAPTER →</button></div>`:''}
+        ${currentChapter>=currentStory.chapters.length-1?`<div class="reader-engagement-book"><div class="engage-row"><button class="btn alt" id="like-story">♡ LIKE</button><button class="btn alt" id="share-story">↗ SHARE</button><button class="btn alt library-save" id="reader-library" data-story-id="${esc(currentStory.id)}" type="button">＋ ADD LIBRARY</button><span id="engage-counts" class="meta">Loading…</span></div><label>COMMENTS</label><textarea id="comment-text" class="field" placeholder="Share your thoughts about this story…"></textarea><button class="btn" id="comment-post" style="margin-top:9px">POST COMMENT</button><div id="comment-status" class="status"></div><div id="comments-list" style="margin-top:12px">Loading comments…</div></div>`:''}
+      </article>
+    </main>
   </div>`;
 
   const overlay=document.getElementById('overlay');
   overlay.innerHTML='';overlay.appendChild(root);overlay.className='open reader-overlay';overlay.setAttribute('aria-hidden','false');
 
-  const rerender=()=>renderReader();
-  let flipping=false;
-  const turnPage=(direction)=>{
-    if(flipping)return;
-    const nextIndex=pageIndex+direction;
-    if(nextIndex<0)return;
-    if(nextIndex>=pages.length){
-      if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}
-      return;
-    }
-    const page=document.getElementById('reader-page');
-    if(!page){currentStory.__readerPage[currentChapter]=nextIndex;rerender();return}
-    flipping=true;
-    page.classList.remove('flip-next','flip-prev');
-    void page.offsetWidth;
-    page.classList.add(direction>0?'flip-next':'flip-prev');
-    setTimeout(()=>{
-      currentStory.__readerPage[currentChapter]=nextIndex;
-      flipping=false;
-      renderReader();
-    },390);
-  };
-
-  document.getElementById('close-reader').onclick=close;
-  document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(15,settings.size-1);saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);rerender()};
-  document.getElementById('reader-prev-page').onclick=()=>turnPage(-1);
-  document.getElementById('reader-next-page').onclick=()=>turnPage(1);
-  document.getElementById('prev-ch').onclick=()=>{if(currentChapter>0){currentChapter--;renderReader()}};
-  document.getElementById('next-ch').onclick=()=>{if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader()}};
-
-  const pageStage=root.querySelector('.reader-page-stage');
-  let touchX=0,touchY=0,touchTime=0;
-  if(pageStage){
-    pageStage.addEventListener('touchstart',e=>{
-      const t=e.changedTouches?.[0];if(!t)return;
-      touchX=t.clientX;touchY=t.clientY;touchTime=Date.now();
-    },{passive:true});
-    pageStage.addEventListener('touchmove',e=>{
-      const t=e.changedTouches?.[0];if(!t)return;
-      const dx=t.clientX-touchX,dy=t.clientY-touchY;
-      if(Math.abs(dx)>18 && Math.abs(dx)>Math.abs(dy)*1.2)e.preventDefault();
-    },{passive:false});
-    pageStage.addEventListener('touchend',e=>{
-      const t=e.changedTouches?.[0];if(!t)return;
-      const dx=t.clientX-touchX,dy=t.clientY-touchY,dt=Date.now()-touchTime;
-      if(dt<850 && Math.abs(dx)>38 && Math.abs(dx)>Math.abs(dy)*1.15) turnPage(dx<0?1:-1);
-    },{passive:false});
-    pageStage.addEventListener('click',e=>{
-      if(e.target.closest('button,a,textarea,input'))return;
-      const rect=pageStage.getBoundingClientRect();
-      if(e.clientX<rect.left+rect.width*.35)turnPage(-1);
-      else if(e.clientX>rect.left+rect.width*.65)turnPage(1);
+  const sc=root.querySelector('#reader-scroll');
+  const progress=getReaderProgress(currentStory.id);
+  const savedTop=Number(progress?.[currentChapter]?.scrollTop||0);
+  let saveTimer;
+  if(sc){
+    sc.addEventListener('scroll',()=>{clearTimeout(saveTimer);saveTimer=setTimeout(saveReaderProgress,120)}, {passive:true});
+    requestAnimationFrame(()=>{
+      if(restoreScroll)sc.scrollTop=savedTop;
+      else sc.scrollTop=0;
     });
   }
-  root.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();turnPage(1)}
-    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();turnPage(-1)}
-    if(e.key==='Escape')close();
-  });
-  root.tabIndex=0;
-  root.focus({preventScroll:true});
+
+  document.getElementById('close-reader').onclick=()=>{saveReaderProgress();close()};
+  document.getElementById('reader-light').onclick=()=>{saveReaderProgress();settings.theme='light';saveReaderSettings(settings);renderReader(true)};
+  document.getElementById('reader-dark').onclick=()=>{saveReaderProgress();settings.theme='dark';saveReaderSettings(settings);renderReader(true)};
+  document.getElementById('reader-size-down').onclick=()=>{saveReaderProgress();settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};
+  document.getElementById('reader-size-up').onclick=()=>{saveReaderProgress();settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};
+  document.getElementById('prev-ch').onclick=()=>{saveReaderProgress();if(currentChapter>0){currentChapter--;renderReader(true)}};
+  document.getElementById('next-ch').onclick=()=>{saveReaderProgress();if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader(true)}};
+  document.getElementById('next-chapter-bottom')?.addEventListener('click',()=>{saveReaderProgress();if(currentChapter<currentStory.chapters.length-1){currentChapter++;renderReader(false)}});
 
   const pc=root.querySelector('#reader-page-content');
   if(pc){
     pc.style.fontSize=settings.size+'px';
     if(settings.theme==='dark'){
-      // Published chapters may carry editor inline colors. Strip those colors
-      // in Dark Mode so ALL books remain readable, regardless of their source.
       pc.style.setProperty('color','#fffaf5','important');
       pc.style.setProperty('background','transparent','important');
       pc.querySelectorAll('*').forEach(el=>{
@@ -1345,14 +1349,13 @@ function renderReader(){
     }
   }
   root.querySelectorAll('.reader-mobile-author').forEach(x=>x.onclick=()=>loadReaderAuthor());
-  const shareBtn=root.querySelector('#share-story');
-  const likeBtn=root.querySelector('#like-story');
-  const commentBtn=root.querySelector('#comment-post');
+  const shareBtn=root.querySelector('#share-story'),likeBtn=root.querySelector('#like-story'),commentBtn=root.querySelector('#comment-post');
   if(shareBtn)shareBtn.onclick=shareCurrentStory;
   if(likeBtn)likeBtn.onclick=toggleLike;
   if(commentBtn)commentBtn.onclick=postComment;
   bindLibraryButtons();loadReaderAuthor();loadInteractions();
 }
+
 async function loadReaderAuthor(){const box=document.getElementById('reader-author-mini');if(!box)return;const r=await sb.from('profiles').select('*').eq('id',currentStory.owner_id).maybeSingle();const p=r.data||{};box.innerHTML=`<div class="mini-author">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="Author">`:`<div class="avatar-fallback">A</div>`}<div><div class="meta">Written by</div><strong>${esc(p.pen_name||p.display_name||'AVANITAXX')}</strong></div></div>`}
 async function loadInteractions(){const count=await getCounts(currentStory.id);const cc=document.getElementById('engage-counts');if(cc)cc.textContent=`${count.likes} likes • ${count.comments} comments • ${Number(currentStory.views)||0} reads`;const ml=document.getElementById('mobile-like-count');if(ml)ml.textContent=Number(count.likes)||0;const mc=document.getElementById('mobile-comment-count');if(mc)mc.textContent=Number(count.comments)||0;const like=document.getElementById('like-story');if(like&&session){const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)like.textContent='♥ LIKED'}await loadComments()}
 async function toggleLike(){if(!session){openAuth('reader');return}const r=await sb.from('story_likes').select('id').eq('story_id',currentStory.id).eq('user_id',session.user.id).maybeSingle();if(r.data)await sb.from('story_likes').delete().eq('id',r.data.id);else await sb.from('story_likes').insert({story_id:currentStory.id,user_id:session.user.id});await loadInteractions()}
