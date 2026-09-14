@@ -1772,5 +1772,18 @@ setTimeout(()=>maybeShowHomepageFeature(),1200);
   setInterval(loadLatestChapterPromotion,60000);const params=new URLSearchParams(location.search);if(params.get('story'))openPublicStory(params.get('story'));else if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}})();
 })();
 </script>
+  <script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js")
+            .then(function (registration) {
+                console.log("Avanitaxx Stories PWA is ready:", registration.scope);
+            })
+            .catch(function (error) {
+                console.error("PWA Service Worker registration failed:", error);
+            });
+    });
+}
+</script>
 </body>
 </html>
