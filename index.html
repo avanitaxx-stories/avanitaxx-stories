@@ -954,59 +954,44 @@ async function loadLatestChapterPromotion(){
   const box=document.getElementById('latest-promo');
   if(!box)return;
   try{
-    const stories=await getPublished();
-    if(!stories.length){box.classList.add('chapter-feature-empty');box.innerHTML='';return;}
-
-    let newestStory=null,newestChapter=null,newestTime=0;
-    for(const story of stories){
-      const r=await sb.from('chapters')
-        .select('id,chapter_number,title,created_at,updated_at')
-        .eq('story_id',story.id)
-        .order('chapter_number',{ascending:false})
-        .limit(1)
-        .maybeSingle();
-      if(r.error||!r.data)continue;
-      const t=Date.parse(r.data.updated_at||r.data.created_at||story.updated_at||story.created_at||0);
-      if(t>newestTime){newestTime=t;newestStory=story;newestChapter=r.data;}
-    }
-    if(!newestStory||!newestChapter){
+    const r=await sb.rpc('get_published_promotion_hooks');
+    if(r.error||!Array.isArray(r.data)||!r.data.length){
       box.classList.add('chapter-feature-empty');box.innerHTML='';return;
     }
-
-    // Do not expose chapter body text on the public homepage.
-    // Chapter content is now protected for signed-in readers only.
-    const raw=String(newestStory.description||newestStory.blurb||'A brand-new chapter is waiting for you.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-    let quote=raw.replace(/^["“”'‘’\s]+|["“”'‘’\s]+$/g,'');
-    if(quote.length>190)quote=quote.slice(0,187).replace(/\s+\S*$/,'')+'…';
-    if(!quote)quote='A brand-new chapter is waiting for you.';
-
-    const chapterNo=newestChapter.chapter_number!=null
-      ? `Chapter ${esc(newestChapter.chapter_number)}`
-      : esc(newestChapter.title||'New Chapter');
-
-    const cover=newestStory.cover_url
-      ? `<img src="${esc(newestStory.cover_url)}" alt="${esc(newestStory.title)} cover" loading="eager">`
-      : `<div style="height:100%;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;font:400 26px Georgia,serif;color:#5c4032">${esc(newestStory.title)}</div>`;
-
-    box.classList.remove('chapter-feature-empty');
-    box.innerHTML=`
-      <div class="chapter-feature-art">${cover}</div>
-      <div class="chapter-feature-brand">Avanitaxx Stories</div>
-      <div class="chapter-feature-content">
-        <div class="chapter-feature-kicker">Just Published</div>
-        <h2>${esc(newestStory.title)}</h2>
-        <span class="chapter-feature-chapter">${chapterNo} · IS NOW LIVE</span>
-        <p class="chapter-feature-quote">${esc(quote)}</p>
-        <div class="chapter-feature-meta">A new chapter from Avanitaxx Stories</div>
-        <button class="chapter-feature-read" id="promo-read-now" type="button">READ CHAPTER <span>→</span></button>
-      </div>`;
-    document.getElementById('promo-read-now').onclick=()=>openPublicStory(newestStory.share_slug||newestStory.id);
+    const promos=r.data.filter(x=>String(x.hook_dialogue||'').trim());
+    if(!promos.length){box.classList.add('chapter-feature-empty');box.innerHTML='';return;}
+    let promoIndex=0;
+    const renderPromo=()=>{
+      const item=promos[promoIndex%promos.length];
+      const chapterNo=item.chapter_number!=null?`Chapter ${esc(item.chapter_number)}`:esc(item.chapter_title||'New Chapter');
+      const cover=item.cover_url
+        ? `<img src="${esc(item.cover_url)}" alt="${esc(item.story_title)} cover" loading="eager">`
+        : `<div style="height:100%;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;font:400 26px Georgia,serif;color:#5c4032">${esc(item.story_title)}</div>`;
+      let quote=String(item.hook_dialogue||'').trim().replace(/^['“”]+|['“”]+$/g,'');
+      if(quote.length>210)quote=quote.slice(0,207).replace(/\s+\S*$/,'')+'…';
+      box.classList.remove('chapter-feature-empty');
+      box.innerHTML=`
+        <div class="chapter-feature-art">${cover}</div>
+        <div class="chapter-feature-brand">Avanitaxx Stories</div>
+        <div class="chapter-feature-content">
+          <div class="chapter-feature-kicker">Just Published</div>
+          <h2>${esc(item.story_title)}</h2>
+          <span class="chapter-feature-chapter">${chapterNo} · IS NOW LIVE</span>
+          <p class="chapter-feature-quote">${esc(quote)}</p>
+          <div class="chapter-feature-meta">A memorable line from the latest chapter</div>
+          <button class="chapter-feature-read" id="promo-read-now" type="button">READ CHAPTER <span>→</span></button>
+        </div>`;
+      document.getElementById('promo-read-now').onclick=()=>openPublicStory(item.share_slug||item.story_id);
+      promoIndex++;
+    };
+    renderPromo();
+    clearInterval(window.avxPromoTimer);
+    window.avxPromoTimer=promos.length>1?setInterval(renderPromo,7000):null;
   }catch(e){
     console.error('Automatic promotion error:',e);
     box.classList.add('chapter-feature-empty');box.innerHTML='';
   }
 }
-
 async function loadHome(){
  try{const stories=await getPublished();await loadLatestChapterPromotion();await loadHomepageFeatures();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
  const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads • ${s.__counts.likes} likes • ${s.__counts.comments} comments`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadAuthorHubData(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
