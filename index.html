@@ -185,13 +185,6 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .nav-author-link::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}
 .nav-author-link:hover::after{right:0}
 .nav-author-icon{width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center;color:#8f6657;flex:0 0 23px}.nav-author-icon svg{width:23px;height:23px;display:block;overflow:visible}.nav-author-icon .pen{fill:#8f6657}.nav-author-icon .pen-detail,.nav-author-icon .book{fill:none;stroke:#8f6657;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.nav-author-icon .book{fill:#f2dfd8;stroke:#8f6657}.nav-author-link:hover .nav-author-icon{color:#6f493d;transform:translateY(-1px)}
-.public-author-btn{
-  height:43px;border:1px solid rgba(74,48,37,.14);border-radius:999px;
-  padding:0 14px;background:linear-gradient(145deg,#fffdf9,#f1dfdc);color:var(--brown);
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow,.22s border-color;
-}
-.public-author-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12);border-color:rgba(149,108,85,.3)}
 .public-author-icon{font-size:17px;line-height:1;color:#a8795b}.public-author-label{display:inline;font-size:8px;font-weight:900;letter-spacing:.13em}
 .footer-link-btn{border:0;background:none;padding:0;color:#cdb9ad;font-size:13px;line-height:1.8;text-align:left;cursor:pointer}
 .footer-link-btn:hover{color:#fff}
@@ -270,7 +263,6 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   .author-directory{grid-template-columns:1fr}
   .author-hub-top{align-items:center}
   .author-hub-sub{font-size:13px}
-  .public-author-btn{width:39px;height:39px}
   .nav-author-link{display:none}
   .featured-author-copy{padding:28px 22px}
 }
@@ -331,8 +323,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 @media(max-width:700px){.home-community-grid{grid-template-columns:1fr}.reader-page-stage{padding:13px}.reader-page{padding:44px 25px;min-height:520px}.reader-page-content{font-size:17px}.reader-book-top{padding:18px}.reader-book-footer{padding:15px 18px}.reader-chapter-name{font-size:15px}.home-pop-art{height:150px}}
 
 .soundroom-public{display:grid;gap:10px}.soundroom-public-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.soundroom-public-card audio{width:100%;margin-top:10px}.soundroom-track-btn{margin-top:10px;border:1px solid var(--line);background:#f8eee9;border-radius:999px;padding:8px 12px;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.06em}.soundroom-track-btn:hover{background:#ead2cd}
-.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:none;display:block;line-height:1}.header-icon-btn .badge{right:-2px;top:-5px}.public-author-btn{position:relative}.public-author-btn::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(185,126,125,.18);border-radius:50%;transform:scale(.9);transition:.22s}.public-author-btn:hover::before{transform:scale(1.08)}
-@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.public-author-btn{height:40px;padding:0 10px}.public-author-label{font-size:7px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
+.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:none;display:block;line-height:1}.header-icon-btn .badge{right:-2px;top:-5px}@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
 .header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
 
 /* ===== AVANITAXX READER / RESPONSIVE READING FIX ===== */
@@ -810,7 +801,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   <a class="logo" href="#home">Avanitaxx <span>Stories</span></a>
   <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button" aria-label="Author Hub"><span class="nav-author-icon" aria-hidden="true"><svg viewBox="0 0 36 36" role="img"><path class="pen" d="M24.9 3.8c1.2-1.2 3.1-1.2 4.3 0l3 3c1.2 1.2 1.2 3.1 0 4.3L15 28.3l-7.2 1.8 1.8-7.2L24.9 3.8Z"/><path class="pen-detail" d="m22.5 6.2 7.3 7.3M11.2 22.7l3.1 3.1"/><path class="book" d="M5 30.8c4.2-2.1 8.1-2 12.1.2V20.9c-4-2.2-7.9-2.3-12.1-.2v10.1ZM31 30.8c-4.2-2.1-8.1-2-12.1.2V20.9c4-2.2 7.9-2.3 12.1-.2v10.1ZM17.1 21.1c.6-.3 1.2-.4 1.8-.4s1.2.1 1.8.4"/></svg></span> AUTHOR</button></nav>
   <div class="nav-actions">
-    <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button><button id="public-author-btn" class="public-author-btn" type="button" title="Authors & Readers Corner" aria-label="Authors & Readers Corner"><span class="public-author-icon">🪶</span><span class="public-author-label">AUTHORS & READERS CORNER</span></button>
+    <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
@@ -1637,7 +1628,6 @@ function bindStatic(){
   document.addEventListener('click',e=>{const b=e.target.closest('.soundroom-track-btn');if(b)soundroomSelect(b.dataset.trackId)});
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
   byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
-  byId('public-author-btn')?.addEventListener('click',()=>openAuthorHub());
   byId('footer-author-hub')?.addEventListener('click',()=>openAuthorHub());
   byId('author-btn')?.addEventListener('click',openAuthorHome);
   byId('hero-write')?.addEventListener('click',openAuthorHome);
