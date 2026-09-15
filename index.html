@@ -832,6 +832,55 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .book-reader.avx-owner-ready .avx-owner-shot{display:inline-flex;}
 @media print{body.avx-print-blocked *{visibility:hidden!important;}body.avx-print-blocked:before{content:'Printing this book is disabled. Please read online on Avanitaxx Stories.';visibility:visible;display:block;position:fixed;inset:20%;font:700 22px Arial,sans-serif;text-align:center;}}
 </style>
+
+<style id="avx-genre-homepage">
+/* ===== AVANITAXX STORIES — WATTPAD / GOODNOVEL-INSPIRED GENRE SHELVES ===== */
+.genre-library{padding-top:68px;padding-bottom:78px;background:linear-gradient(180deg,rgba(255,253,249,.72),rgba(246,239,232,.92));}
+.genre-library-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:30px;}
+.genre-library-head h2{font:400 46px/1 Georgia,serif;letter-spacing:-.03em;color:#36241d;margin:8px 0;}
+.genre-library-head p{font:14px/1.65 Georgia,serif;color:var(--muted);margin:0;}
+.genre-hint{font-size:8px;font-weight:900;letter-spacing:.16em;color:#96776a;white-space:nowrap;padding-bottom:7px;}
+.genre-hint span{font-size:14px;margin-left:7px;}
+.genre-shelves{display:grid;gap:36px;}
+.genre-shelf{padding:24px 0 4px;border-top:1px solid rgba(74,48,37,.10);}
+.genre-shelf:first-child{border-top:0;padding-top:0;}
+.genre-shelf-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:17px;}
+.genre-title-row{display:flex;align-items:center;gap:11px;}
+.genre-title-row h3{font:400 31px/1 Georgia,serif;color:#38251e;margin:0;letter-spacing:-.02em;}
+.genre-icon{width:34px;height:34px;border-radius:10px;background:#f0dcd9;color:#8e6257;display:grid;place-items:center;font:700 16px Georgia,serif;border:1px solid rgba(149,108,85,.10);}
+.genre-shelf-head p{margin:6px 0 0 45px;color:#806e66;font:12px/1.5 Georgia,serif;}
+.genre-count{font-size:8px;font-weight:900;letter-spacing:.13em;color:#a08072;white-space:nowrap;}
+.genre-track{display:flex;gap:17px;overflow-x:auto;overflow-y:hidden;padding:5px 4px 18px 2px;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+.genre-track::-webkit-scrollbar{height:5px;}
+.genre-track::-webkit-scrollbar-thumb{background:#d9c4ba;border-radius:99px;}
+.genre-book-card{flex:0 0 174px;scroll-snap-align:start;background:rgba(255,253,249,.96);border:1px solid rgba(74,48,37,.10);border-radius:14px;padding:7px;box-shadow:0 10px 28px rgba(55,35,27,.07);transition:.2s transform,.2s box-shadow;overflow:hidden;}
+.genre-book-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(55,35,27,.13);}
+.genre-cover-btn{position:relative;display:block;width:100%;border:0;padding:0;background:none;overflow:hidden;border-radius:10px;cursor:pointer;}
+.genre-book-cover{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;background:#e8d7cf;transition:.3s transform;}
+.genre-book-card:hover .genre-book-cover{transform:scale(1.025);}
+.genre-cover-fallback{display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;background:linear-gradient(145deg,#6f4b3b,#ba8c78);color:#fff;font:22px Georgia,serif;}
+.genre-read-badge{position:absolute;left:9px;bottom:9px;padding:7px 9px;border-radius:7px;background:rgba(45,31,25,.88);color:#fff;font-size:7px;font-weight:900;letter-spacing:.12em;opacity:0;transform:translateY(4px);transition:.2s;}
+.genre-book-card:hover .genre-read-badge,.genre-cover-btn:focus .genre-read-badge{opacity:1;transform:translateY(0);}
+.genre-book-info{padding:11px 4px 7px;}
+.genre-book-info h3{font:400 17px/1.18 Georgia,serif;color:#392820;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:40px;}
+.genre-book-meta{font-size:8px;color:#927d73;margin-top:6px;letter-spacing:.04em;}
+@media(max-width:700px){
+ .genre-library{padding-top:52px;padding-bottom:60px;}
+ .genre-library-head{align-items:flex-start;flex-direction:column;margin-bottom:23px;}
+ .genre-library-head h2{font-size:37px;}
+ .genre-hint{padding:0;}
+ .genre-shelves{gap:27px;}
+ .genre-shelf-head{align-items:flex-start;}
+ .genre-title-row h3{font-size:27px;}
+ .genre-shelf-head p{margin-left:45px;font-size:11px;max-width:280px;}
+ .genre-count{padding-top:10px;}
+ .genre-track{gap:11px;padding-bottom:13px;}
+ .genre-book-card{flex-basis:143px;padding:6px;border-radius:12px;}
+ .genre-book-info{padding:9px 3px 5px;}
+ .genre-book-info h3{font-size:15px;min-height:35px;}
+}
+@media(max-width:420px){.genre-book-card{flex-basis:132px}.genre-title-row h3{font-size:25px}.genre-icon{width:31px;height:31px;font-size:14px}.genre-shelf-head p{margin-left:42px;max-width:230px;}.genre-count{font-size:7px;}}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -880,7 +929,13 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   </div></div>
 </section>
 
-<section class="section altbg" id="recent"><div class="container"><div class="section-head"><div><div class="kicker">Fresh from the library</div><h2>New on the Shelf</h2><p>Latest published stories and chapter updates from Avanitaxx Stories.</p></div></div><div id="recent-books" class="cards"><div class="empty">Loading published books…</div></div></div></section>
+<section class="section genre-library" id="recent"><div class="container">
+  <div class="genre-library-head">
+    <div><div class="kicker">Published Books</div><h2>Explore by Genre</h2><p>Find your next story by the world you want to enter.</p></div>
+    <div class="genre-hint">SWIPE TO EXPLORE <span>→</span></div>
+  </div>
+  <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
+</div></section>
 <section class="section" id="recommended"><div class="container"><div class="section-head"><div><div class="kicker">Reader favorites</div><h2>Recommended Reads</h2><p>Stories rising through reads, likes, comments, and recent updates.</p></div></div><div id="recommend-books" class="cards"><div class="empty">Loading recommendations…</div></div></div></section>
 <section class="section featured-author-section hidden" id="featured-author-section">
   <div class="container">
@@ -1029,9 +1084,51 @@ async function loadLatestChapterPromotion(){
     box.classList.add('chapter-feature-empty');box.innerHTML='';
   }
 }
+function storyHasGenre(story,genre){
+  const tags=Array.isArray(story?.tags)?story.tags:[];
+  const hay=tags.map(x=>String(x||'').toLowerCase().trim());
+  const aliases={
+    romance:['romance','romantic','love story','love'],
+    mafia:['mafia','mafia romance','mob','gangster','crime romance'],
+    vampire:['vampire','vampires','vampire romance'],
+    fantasy:['fantasy','fantasy romance','supernatural','magic','paranormal'],
+    erotic:['erotic','erotica','mature','18+','adult','adult romance']
+  };
+  return (aliases[genre]||[genre]).some(a=>hay.some(t=>t===a||t.includes(a)));
+}
+function genreBookCard(s){
+  const reads=Number(s.views)||0;
+  const tags=Array.isArray(s.tags)?s.tags:[];
+  return `<article class="genre-book-card" data-search="${esc((s.title+' '+(s.description||'')+' '+tags.join(' ')).toLowerCase())}">
+    <button class="genre-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button" aria-label="Read ${esc(s.title)}">
+      ${s.cover_url?`<img class="genre-book-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="genre-book-cover genre-cover-fallback">${esc(s.title)}</div>`}
+      <span class="genre-read-badge">READ NOW</span>
+    </button>
+    <div class="genre-book-info"><h3>${esc(s.title)}</h3><div class="genre-book-meta">${reads.toLocaleString()} reads</div></div>
+  </article>`;
+}
+function renderGenreShelves(stories){
+  const box=document.getElementById('genre-shelves');if(!box)return;
+  const genres=[
+    {key:'romance',icon:'♡',name:'Romance',note:'Love stories, passion, and unforgettable hearts.'},
+    {key:'mafia',icon:'♠',name:'Mafia',note:'Dangerous men, power, secrets, and obsession.'},
+    {key:'vampire',icon:'☾',name:'Vampire',note:'Dark immortal worlds and forbidden desire.'},
+    {key:'fantasy',icon:'✦',name:'Fantasy',note:'Magic, supernatural worlds, and extraordinary love.'},
+    {key:'erotic',icon:'18+',name:'Erotic',note:'Mature stories for adult readers.'}
+  ];
+  const html=genres.map(g=>{
+    const books=stories.filter(s=>storyHasGenre(s,g.key));
+    if(!books.length)return '';
+    return `<section class="genre-shelf" data-genre="${g.key}">
+      <div class="genre-shelf-head"><div><div class="genre-title-row"><span class="genre-icon">${g.icon}</span><h3>${g.name}</h3></div><p>${g.note}</p></div><span class="genre-count">${books.length} ${books.length===1?'BOOK':'BOOKS'}</span></div>
+      <div class="genre-track">${books.map(genreBookCard).join('')}</div>
+    </section>`;
+  }).join('');
+  box.innerHTML=html||'<div class="empty">Published books will appear here once their genre tags are added.</div>';
+}
 async function loadHome(){
- try{const stories=await getPublished();await loadLatestChapterPromotion();await loadHomepageFeatures();const recent=document.getElementById('recent-books'),rec=document.getElementById('recommend-books');recent.innerHTML=stories.length?stories.slice(0,8).map(s=>coverOnlyCard(s)).join(''):'<div class="empty">No published books yet.</div>';
- const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads • ${s.__counts.likes} likes • ${s.__counts.comments} comments`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadAuthorHubData(stories)}catch(e){console.error(e);document.getElementById('recent-books').innerHTML='<div class="empty">Could not load stories. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
+ try{const stories=await getPublished();await loadLatestChapterPromotion();await loadHomepageFeatures();renderGenreShelves(stories);
+ const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));enriched.sort((a,b)=>{const score=x=>(Number(x.views)||0)*.25+x.__counts.likes*4+x.__counts.comments*6+Math.max(0,20-(Date.now()-Date.parse(x.updated_at||x.created_at||0))/86400000);return score(b)-score(a)});const rec=document.getElementById('recommend-books');rec.innerHTML=enriched.length?enriched.slice(0,8).map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads • ${s.__counts.likes} likes • ${s.__counts.comments} comments`)).join(''):'<div class="empty">Recommendations will appear after books are published.</div>';bindStoryCards();await loadAuthorHubData(stories)}catch(e){console.error(e);document.getElementById('genre-shelves').innerHTML='<div class="empty">Could not load published books. Run the supplied Supabase setup and check RLS policies.</div>';document.getElementById('recommend-books').innerHTML='<div class="empty">Could not load recommendations.</div>'}}
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
 
 
