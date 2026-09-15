@@ -794,6 +794,32 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
   .feature-chat-compose{margin:14px -14px -24px;padding:10px 14px 14px}
 }
 @media(max-width:380px){.feature-modal-head h2{font-size:22px}.feature-note-image{max-height:300px}}
+
+/* ===== WRITER'S LOUNGE — GOODNOVEL-INSPIRED, TOFFEE EDITION =====
+   Scoped to the writer dashboard only. Existing IDs/actions are preserved.
+*/
+.writer-lounge{padding:22px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px}
+.writer-sidebar{background:linear-gradient(180deg,#3b2921,#4b3328);color:#fff7f1;border-radius:22px;padding:18px;min-height:620px;display:flex;flex-direction:column}
+.writer-sidebar-brand{font:700 22px Georgia,serif;margin:2px 4px 22px}.writer-sidebar-brand span{color:#d9aaa8}
+.writer-sidebar-label{font-size:8px;letter-spacing:.18em;font-weight:900;color:#d7b9aa;margin:0 8px 9px;text-transform:uppercase}
+.writer-side-nav{display:grid;gap:6px}.writer-side-btn{width:100%;border:1px solid transparent;background:transparent;color:#f7eee7;text-align:left;border-radius:11px;padding:11px 12px;font-size:10px;font-weight:900;letter-spacing:.04em;cursor:pointer}
+.writer-side-btn:hover,.writer-side-btn.active{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.1)}.writer-side-btn .ws-icon{display:inline-block;width:22px;opacity:.9}
+.writer-side-note{margin-top:auto;padding:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);border-radius:14px;color:#d9c4b8;font-size:9px;line-height:1.65}
+.writer-main{min-width:0}.writer-topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin:2px 2px 18px}
+.writer-kicker{font-size:9px;letter-spacing:.2em;color:var(--toffee);font-weight:900;text-transform:uppercase}
+.writer-title{font:400 clamp(34px,4.2vw,52px)/.95 Georgia,serif;color:var(--ink);margin:7px 0 6px;letter-spacing:-.04em}
+.writer-subtitle{font:13px/1.6 Georgia,serif;color:var(--muted);max-width:620px}
+.writer-account{font-size:9px;color:var(--muted);padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;white-space:nowrap}
+.writer-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.writer-action{border:1px solid var(--line);background:#fff;color:var(--brown);border-radius:10px;padding:10px 13px;font-size:9px;font-weight:900;letter-spacing:.05em;cursor:pointer}.writer-action.primary{background:var(--brown);color:#fff;border-color:var(--brown)}
+.writer-dashboard-grid{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:16px}.writer-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+.writer-stat-card{background:#fffdf9;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden}.writer-stat-card::after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-35px;top:-35px;background:rgba(217,170,168,.18)}
+.writer-stat-label{font-size:8px;letter-spacing:.14em;font-weight:900;color:var(--muted);text-transform:uppercase}.writer-stat-value{font:400 31px Georgia,serif;color:var(--brown);margin-top:5px}
+.writer-workspace{background:#fffdf9;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow-soft)}.writer-workspace-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.writer-workspace-title{font:400 28px Georgia,serif;color:var(--brown);margin:4px 0 0}.writer-list-label{font-size:8px;letter-spacing:.14em;color:var(--muted);font-weight:900;text-transform:uppercase}
+.writer-right-stack{display:grid;gap:12px;align-content:start}.writer-mini-card{background:linear-gradient(145deg,#fffdf9,#f5e9e3);border:1px solid var(--line);border-radius:16px;padding:16px}.writer-mini-card h3{font:400 21px Georgia,serif;margin:4px 0 7px;color:var(--brown)}.writer-mini-card p{font-size:10px;line-height:1.65;color:var(--muted);margin:0}.writer-mini-card .mini-rule{height:1px;background:var(--line);margin:12px 0}.writer-tip{font:italic 13px/1.55 Georgia,serif;color:#684d40}
+.writer-lounge-footer{margin-top:14px;padding:13px 15px;border-radius:13px;background:#f7eee8;border:1px solid #eadbd1;color:#775f53;font-size:9px;line-height:1.6}
+@media(max-width:920px){.writer-lounge{grid-template-columns:1fr}.writer-sidebar{min-height:0}.writer-side-nav{grid-template-columns:repeat(4,1fr)}.writer-side-note{display:none}.writer-dashboard-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.writer-lounge{padding:14px}.writer-side-nav{grid-template-columns:repeat(2,1fr)}.writer-topbar{display:block}.writer-account{display:inline-block;margin-top:12px}.writer-stats{grid-template-columns:1fr 1fr}.writer-workspace{padding:14px}}
+
 </style>
 </head>
 <body>
@@ -1404,7 +1430,69 @@ async function openMyLibrary(){
   document.getElementById('library-close').onclick=close;bindStoryCards();bindLibraryButtons();
 }
 
-async function openAuthorHome(){await refreshSession();if(!session){openAuth('author');return}open(`<div class="panel"><div class="dash"><div class="dash-top"><div><div class="dash-brand">Avanitaxx <span>Stories</span></div><div class="dash-user">Signed in as ${esc(session.user.email)}</div></div><div class="actions" style="margin:0"><button class="btn alt" id="dash-profile">AUTHOR PROFILE</button><button class="btn alt" id="dash-home">HOME</button><button class="btn" id="dash-logout">LOG OUT</button></div></div><div class="dash-grid"><aside class="dash-card"><div class="kicker">AUTHOR HOME</div><h2>Your Library</h2><button class="btn" id="new-story" style="width:100%">+ NEW STORY</button><div class="stat"><small>YOUR STORIES</small><b id="story-count">0</b></div><div class="stat"><small>PUBLISHED</small><b id="pub-count">0</b></div><button class="btn danger" id="cleanup-test" style="width:100%;margin-top:12px">REMOVE TEST BOOKS</button><div class="help">This removes only your stories whose title is exactly Test, Test Book, Sample Book, Demo Book, Untitled Story, or the same name followed by a number.</div></aside><section class="dash-card"><div class="kicker">MY STORIES</div><h2>Stories</h2><div id="dash-list" class="story-list">Loading…</div></section></div></div></div>`);document.getElementById('dash-home').onclick=close;document.getElementById('dash-logout').onclick=logout;document.getElementById('dash-profile').onclick=openProfileEditor;document.getElementById('new-story').onclick=()=>openEditor(null);document.getElementById('cleanup-test').onclick=cleanupTestBooks;loadMine()}
+async function openAuthorHome(){
+  await refreshSession();if(!session){openAuth('author');return}
+  open(`<div class="panel"><div class="writer-lounge">
+    <aside class="writer-sidebar">
+      <div class="writer-sidebar-brand">Avanitaxx <span>Stories</span></div>
+      <div class="writer-sidebar-label">Writer's Lounge</div>
+      <div class="writer-side-nav">
+        <button class="writer-side-btn active" id="wl-overview" type="button"><span class="ws-icon">⌂</span>Overview</button>
+        <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon">▤</span>My Stories</button>
+        <button class="writer-side-btn" id="wl-new" type="button"><span class="ws-icon">＋</span>New Story</button>
+        <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon">◎</span>Author Profile</button>
+      </div>
+      <div class="writer-side-note"><strong>YOUR WRITING SPACE</strong><br>A focused home for your stories, drafts, publishing controls, and author identity — kept in the warm Avanitaxx toffee aesthetic.</div>
+    </aside>
+    <main class="writer-main">
+      <div class="writer-topbar">
+        <div>
+          <div class="writer-kicker">WRITER'S LOUNGE</div>
+          <div class="writer-title">Welcome back, Writer.</div>
+          <div class="writer-subtitle">Manage your stories, prepare new chapters, and keep your author space organized.</div>
+          <div class="writer-actions">
+            <button class="writer-action primary" id="new-story" type="button">＋ NEW STORY</button>
+            <button class="writer-action" id="dash-profile" type="button">AUTHOR PROFILE</button>
+            <button class="writer-action" id="dash-home" type="button">HOME</button>
+            <button class="writer-action" id="dash-logout" type="button">LOG OUT</button>
+          </div>
+        </div>
+        <div class="writer-account">${esc(session.user.email)}</div>
+      </div>
+      <div class="writer-dashboard-grid">
+        <section>
+          <div class="writer-stats">
+            <div class="writer-stat-card"><div class="writer-stat-label">Your Stories</div><div class="writer-stat-value" id="story-count">0</div></div>
+            <div class="writer-stat-card"><div class="writer-stat-label">Published</div><div class="writer-stat-value" id="pub-count">0</div></div>
+          </div>
+          <div class="writer-workspace">
+            <div class="writer-workspace-head"><div><div class="writer-list-label">Publishing Desk</div><div class="writer-workspace-title">My Stories</div></div><div class="writer-list-label">Latest activity</div></div>
+            <div id="dash-list" class="story-list">Loading…</div>
+          </div>
+          <div class="writer-lounge-footer">Your existing story editor, publishing controls, covers, chapters, and read insights remain unchanged.</div>
+        </section>
+        <aside class="writer-right-stack">
+          <div class="writer-mini-card"><div class="writer-kicker">Quick Start</div><h3>Keep writing.</h3><p>Create a story, upload its cover, add chapters, then publish when you're ready.</p><div class="mini-rule"></div><button class="writer-action primary" id="wl-new-quick" type="button" style="width:100%">＋ CREATE STORY</button></div>
+          <div class="writer-mini-card"><div class="writer-kicker">Writer's Note</div><div class="writer-tip">“Every chapter is a small door. Give your readers a reason to open the next one.”</div></div>
+          <div class="writer-mini-card"><div class="writer-kicker">Author Space</div><h3>Your Profile</h3><p>Update your author identity, photo, banner, and public presence from Author Profile.</p><div class="mini-rule"></div><button class="writer-action" id="wl-profile-quick" type="button" style="width:100%">OPEN PROFILE</button></div>
+          <div class="writer-mini-card"><div class="writer-kicker">Maintenance</div><p>Remove obvious test/sample books from your account when you are ready to clean your publishing desk.</p><button class="btn danger" id="cleanup-test" type="button" style="width:100%;margin-top:12px">REMOVE TEST BOOKS</button></div>
+        </aside>
+      </div>
+    </main>
+  </div></div>`);
+  document.getElementById('dash-home').onclick=close;
+  document.getElementById('dash-logout').onclick=logout;
+  document.getElementById('dash-profile').onclick=openProfileEditor;
+  document.getElementById('wl-profile').onclick=openProfileEditor;
+  document.getElementById('wl-profile-quick').onclick=openProfileEditor;
+  document.getElementById('new-story').onclick=()=>openEditor(null);
+  document.getElementById('wl-new').onclick=()=>openEditor(null);
+  document.getElementById('wl-new-quick').onclick=()=>openEditor(null);
+  document.getElementById('wl-overview').onclick=()=>document.getElementById('dash-list')?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('wl-stories').onclick=()=>document.getElementById('dash-list')?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('cleanup-test').onclick=cleanupTestBooks;
+  loadMine();
+}
 async function getStoryReadInsights(storyId){
   if(!session||!storyId)return null;
   const r=await sb.rpc('get_story_read_insights',{p_story_id:storyId});
