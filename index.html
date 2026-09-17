@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-17-series-reading-1">
+<meta name="avx-build" content="2026-09-17-official-identity-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -832,6 +832,47 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .series-fields{margin-top:2px;padding:13px 13px 4px;border:1px solid var(--line);border-radius:14px;background:#fbf3ef}.series-fields.hidden{display:none!important}.series-fields-note{font-size:9px;color:var(--muted);line-height:1.5;margin-top:5px}
 #recommended .cards{grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}#recommended .story-card{padding:6px;border-radius:13px}#recommended .story-cover-btn{border-radius:9px}#recommended .card-body{padding:10px 5px 7px}#recommended .card-title{font-size:16px;line-height:1.12}#recommended .tag-row{display:none}#recommended .meta{font-size:8px;line-height:1.4}
 @media(max-width:1100px){#recommended .cards{grid-template-columns:repeat(5,minmax(0,1fr))}}@media(max-width:820px){#recommended .cards{grid-template-columns:repeat(4,minmax(0,1fr))}.series-book{flex-basis:140px}}@media(max-width:560px){#recommended .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}#recommended .story-card{padding:5px}#recommended .card-title{font-size:14px}#recommended .meta{font-size:7px}.series-shelf{padding:13px;border-radius:18px}.series-shelf-title{font-size:23px}.series-shelf-head{align-items:start}.series-book{flex-basis:125px}.series-book-title{font-size:14px}}@media(max-width:390px){#recommended .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== AVANITAXX STORIES — OFFICIAL IDENTITY / POLICY CENTER ===== */
+.nav-policy-link{
+  border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;
+  letter-spacing:.16em;padding:30px 0;position:relative;cursor:pointer;
+}
+.nav-policy-link::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}
+.nav-policy-link:hover::after{right:0}
+.policy-panel{width:min(1080px,100%);max-height:94vh;overflow:auto;background:#fffdf9;border-radius:28px;border:1px solid rgba(74,48,37,.12);box-shadow:0 36px 110px rgba(30,18,14,.4)}
+.policy-head{position:sticky;top:0;z-index:5;background:rgba(255,253,249,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:28px 34px 22px}
+.policy-brand{font:700 14px/1 Georgia,serif;letter-spacing:.12em;color:var(--brown);text-transform:uppercase}
+.policy-kicker{font-size:8px;font-weight:900;letter-spacing:.22em;color:var(--toffee);text-transform:uppercase;margin-top:12px}
+.policy-title{font:400 clamp(38px,5vw,58px)/.95 Georgia,serif;color:var(--ink);margin:8px 0}
+.policy-sub{font:14px/1.7 Georgia,serif;color:var(--muted);max-width:760px}
+.policy-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.policy-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:8px;font-weight:900;letter-spacing:.08em;color:var(--brown);cursor:pointer}
+.policy-tab.active{background:var(--brown);color:#fff;border-color:var(--brown)}
+.policy-body{padding:30px 34px 42px}
+.policy-section{display:none}
+.policy-section.active{display:block}
+.policy-section h2{font:400 34px/1.1 Georgia,serif;color:#392820;margin:0 0 9px}
+.policy-section h3{font:400 21px Georgia,serif;color:#392820;margin:25px 0 7px}
+.policy-section p,.policy-section li{font:14px/1.8 Georgia,serif;color:#66574f}
+.policy-section ul{padding-left:22px}
+.policy-note{padding:16px 18px;background:#fbf2ee;border:1px solid #eadbd4;border-radius:15px;margin:18px 0}
+.policy-identity{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.policy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:21px}
+.policy-motto{font:italic 22px/1.5 Georgia,serif;color:#6a5145}
+.policy-meta{font-size:9px;letter-spacing:.1em;color:#9a8479;text-transform:uppercase;margin-top:15px}
+.policy-closebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:22px}
+.policy-closebar button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-size:9px;font-weight:900;color:var(--brown)}
+.policy-contact-box{background:linear-gradient(135deg,#fffaf6,#f3e2de);border:1px solid #eadbd4;border-radius:20px;padding:22px}
+.policy-report-list{display:grid;gap:10px;margin-top:15px}
+.policy-report-item{padding:13px 15px;background:#fff;border:1px solid var(--line);border-radius:13px;font-size:12px;line-height:1.65;color:var(--muted)}
+.policy-footer-note{border-top:1px solid var(--line);margin-top:30px;padding-top:18px;font-size:10px;line-height:1.7;color:#927d72}
+@media(max-width:700px){
+  .nav-policy-link{display:none}
+  .policy-head{padding:22px 18px 18px}.policy-body{padding:22px 18px 30px}
+  .policy-identity{grid-template-columns:1fr}.policy-section h2{font-size:29px}
+}
+
 </style>
 
 <style id="avx-content-protection-styles">
@@ -968,7 +1009,7 @@ button,input,textarea,select{max-width:100%;}
 <body>
 <header class="site-header"><div class="container nav">
   <a class="logo" href="#home">Avanitaxx <span>Stories</span></a>
-  <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="author-hub-nav" class="nav-author-link" type="button" aria-label="Author Hub"><span class="nav-author-icon" aria-hidden="true"><svg viewBox="0 0 36 36" role="img"><path class="pen" d="M24.9 3.8c1.2-1.2 3.1-1.2 4.3 0l3 3c1.2 1.2 1.2 3.1 0 4.3L15 28.3l-7.2 1.8 1.8-7.2L24.9 3.8Z"/><path class="pen-detail" d="m22.5 6.2 7.3 7.3M11.2 22.7l3.1 3.1"/><path class="book" d="M5 30.8c4.2-2.1 8.1-2 12.1.2V20.9c-4-2.2-7.9-2.3-12.1-.2v10.1ZM31 30.8c-4.2-2.1-8.1-2-12.1.2V20.9c4-2.2 7.9-2.3 12.1-.2v10.1ZM17.1 21.1c.6-.3 1.2-.4 1.8-.4s1.2.1 1.8.4"/></svg></span> AUTHOR</button></nav>
+  <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="nav-about-btn" class="nav-policy-link" type="button">ABOUT</button><button id="author-hub-nav" class="nav-author-link" type="button" aria-label="Author Hub"><span class="nav-author-icon" aria-hidden="true"><svg viewBox="0 0 36 36" role="img"><path class="pen" d="M24.9 3.8c1.2-1.2 3.1-1.2 4.3 0l3 3c1.2 1.2 1.2 3.1 0 4.3L15 28.3l-7.2 1.8 1.8-7.2L24.9 3.8Z"/><path class="pen-detail" d="m22.5 6.2 7.3 7.3M11.2 22.7l3.1 3.1"/><path class="book" d="M5 30.8c4.2-2.1 8.1-2 12.1.2V20.9c-4-2.2-7.9-2.3-12.1-.2v10.1ZM31 30.8c-4.2-2.1-8.1-2-12.1.2V20.9c4-2.2 7.9-2.3 12.1-.2v10.1ZM17.1 21.1c.6-.3 1.2-.4 1.8-.4s1.2.1 1.8.4"/></svg></span> AUTHOR</button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories…"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
@@ -1035,7 +1076,43 @@ button,input,textarea,select{max-width:100%;}
 </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h3>Avanitaxx Stories</h3><p>Where every story finds its reader.</p></div><div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#recommended">Recommended</a></div><div><h3>Author</h3><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button></div><div><h3>For Writers</h3><button id="footer-write" class="btn alt" type="button">Author Home</button></div></div><div class="copyright"><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span><span>Written with love by AVANITAXX.</span></div></div><div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div></footer>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>AVANITAXX STORIES</h3>
+        <p>A home for stories, imagination, and the voices behind every page.</p>
+        <p style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9f8b81">Official Website • Est. 2026</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <a href="#home">Home</a><br>
+        <a href="#recent">Recent Books</a><br>
+        <a href="#recommended">Recommended</a><br>
+        <button id="footer-about" class="footer-link-btn" type="button">About Avanitaxx Stories</button>
+      </div>
+      <div>
+        <h3>Policies</h3>
+        <button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br>
+        <button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br>
+        <button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br>
+        <button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button>
+      </div>
+      <div>
+        <h3>Help &amp; Contact</h3>
+        <button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button><br>
+        <button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button>
+        <br><br>
+        <button id="footer-write" class="btn alt" type="button">Author Home</button>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>AVANITAXX STORIES — OFFICIAL WEBSITE</span>
+      <span>© 2026 Avanitaxx Stories. All Rights Reserved.</span>
+    </div>
+  </div>
+  <div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div>
+</footer>
 <div id="overlay" aria-hidden="true"></div>
 <div id="home-pop-anchor"></div>
 <div id="soundroom-player" class="soundroom-player hidden" aria-label="Avanitaxx Soundroom player">
@@ -1906,6 +1983,155 @@ async function maybeShowHomepageFeature(){
   document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
 }
 
+
+/* ===== OFFICIAL IDENTITY / POLICY CENTER ===== */
+const AVX_POLICY_TEXT = {
+  about: {
+    kicker:'OFFICIAL IDENTITY',
+    title:'About Avanitaxx Stories',
+    body:`<div class="policy-identity">
+      <div class="policy-card">
+        <div class="policy-kicker">AVANITAXX STORIES</div>
+        <div class="policy-motto">A home for stories, imagination, and the voices behind every page.</div>
+        <p>Avanitaxx Stories is an independent online reading and writing space created to give readers a place to discover original stories, follow new chapters, explore authors, and take part in a respectful reading community.</p>
+        <p>The website is built around the work of AVANITAXX and may also feature invited or published writers whose stories appear through the platform. Published books, author profiles, reading features, community spaces, and Soundroom content are presented as part of the Avanitaxx Stories experience.</p>
+      </div>
+      <div class="policy-card">
+        <div class="policy-kicker">FOR READERS</div>
+        <h3>What you can find here</h3>
+        <ul>
+          <li>Original published stories and chapter updates.</li>
+          <li>Series collections, recommendations, and author profiles.</li>
+          <li>Reader accounts, personal libraries, likes, comments, and replies where enabled.</li>
+          <li>Community Lounge / Community Chat spaces when available.</li>
+          <li>Notes, Soundroom entries, and other creator updates.</li>
+        </ul>
+        <div class="policy-meta">AVANITAXX STORIES • OFFICIAL WEBSITE</div>
+      </div>
+    </div>
+    <div class="policy-note"><strong>Purpose:</strong> to provide a dedicated home for reading, writing, discovery, and community interaction while protecting the creative work published here.</div>`
+  },
+  terms: {
+    kicker:'SITE RULES',
+    title:'Terms & Conditions',
+    body:`<p>By accessing or using Avanitaxx Stories, you agree to use the website lawfully, respectfully, and only for the purposes allowed by these Terms. If you do not agree, please do not use features that require acceptance of these rules.</p>
+      <h3>1. Readers and accounts</h3><ul>
+        <li>You are responsible for keeping your account credentials secure and for activity performed through your account.</li>
+        <li>Do not impersonate another person, create deceptive identities, abuse account systems, or attempt to access another user's account.</li>
+        <li>Some reading, library, commenting, community, or author features may require an account.</li>
+      </ul>
+      <h3>2. Authors / owners</h3><ul>
+        <li>Authors must only publish material they own, are authorized to publish, or have the necessary rights to use.</li>
+        <li>Authors are responsible for the accuracy of titles, descriptions, cover files, chapter content, artwork, and other material they submit.</li>
+        <li>Owner-only tools, moderation tools, publishing controls, and private studio features must not be shared or used to bypass access controls.</li>
+      </ul>
+      <h3>3. Published stories</h3><ul>
+        <li>Published stories may be edited, unpublished, reorganized, or removed by the authorized owner/platform administrator when necessary.</li>
+        <li>Readers may read published material through the website but do not receive ownership or republication rights merely by accessing it.</li>
+      </ul>
+      <h3>4. Comments and community interactions</h3><ul>
+        <li>Do not post harassment, threats, hate-based abuse, sexual exploitation content, spam, scams, unlawful material, or content intended to disrupt the community.</li>
+        <li>Do not post another person's private information without permission.</li>
+        <li>Comments, replies, images, and community messages may be removed when they violate these Terms or the Community Guidelines.</li>
+      </ul>
+      <h3>5. Prohibited use</h3><ul>
+        <li>No scraping, automated extraction, mass downloading, unauthorized copying, republishing, or attempts to defeat technical protections around reader content.</li>
+        <li>No interference with the website, authentication, storage, database, or other technical services.</li>
+      </ul>
+      <h3>6. Enforcement</h3><p>Avanitaxx Stories may restrict, suspend, or remove access to features or accounts when reasonably necessary to protect users, authors, content, or the website.</p>`
+  },
+  privacy: {
+    kicker:'YOUR INFORMATION',
+    title:'Privacy Policy',
+    body:`<p>This Privacy Policy explains, in plain language, the categories of information that may be handled when you use Avanitaxx Stories. It should be read together with the website's Terms &amp; Conditions.</p>
+      <h3>Information associated with accounts</h3><p>When you create or use an account, the website may handle account identifiers and profile information such as email address, display name, pen name, avatar, and other profile fields that you choose to provide. Authentication and related account services are provided through the site's connected backend service.</p>
+      <h3>Reading and library activity</h3><p>Depending on the features you use, the site may store reading progress, chapter-read activity, story view/read counts, saved library entries, likes, and similar interaction records. These records help provide features such as continuing a book, maintaining a personal library, and displaying engagement counts.</p>
+      <h3>Comments and community data</h3><p>Comments, replies, community messages, uploaded community images, timestamps, and associated account identifiers may be stored so that conversations and moderation can function. Community areas may also record membership or invitation information.</p>
+      <h3>Technical and local storage</h3><p>The website may use browser storage for functions such as authentication persistence, reading progress, interface state, and feature notices. The site may also use standard technical information handled by hosting, authentication, analytics, security, or advertising services when those services are enabled.</p>
+      <h3>How information is used</h3><ul><li>To provide accounts and requested website features.</li><li>To save reading and library preferences.</li><li>To display comments, community interactions, and author content.</li><li>To maintain security, prevent abuse, and troubleshoot technical issues.</li><li>To understand website usage and support future site operations, including advertising where enabled.</li></ul>
+      <h3>Sharing</h3><p>Public profile information, published stories, comments, and community posts may be visible to other visitors when the relevant feature is public. Account and backend data may be processed by service providers that operate authentication, hosting, storage, security, or advertising functions.</p>
+      <h3>Your choices</h3><p>You may stop using the site, log out, or request correction/removal of information where applicable. Some records may need to be retained when required for security, legal, operational, or dispute-resolution purposes.</p>
+      <div class="policy-note"><strong>Important:</strong> this page describes the website's current intended data practices. Before using it as a formal legal compliance document for a commercial launch, have the final policy reviewed for the laws that apply to your business and audience.</div>`
+  },
+  copyright: {
+    kicker:'CREATIVE RIGHTS',
+    title:'Copyright / Content Policy',
+    body:`<p>Avanitaxx Stories is a publishing and reading platform. Stories, chapters, book titles, character concepts, character names, descriptions, cover designs, illustrations, artwork, graphics, author materials, and other original writings or creative assets published through the website are protected content unless a different license or ownership statement is expressly provided.</p>
+      <h3>What is not allowed</h3><ul>
+        <li>Copying or reproducing a story, chapter, scene, character, cover, artwork, or substantial portion of content without permission.</li>
+        <li>Re-uploading or republishing content on another website, app, social page, document, channel, or reading platform without authorization.</li>
+        <li>Removing ownership notices or presenting another person's work as your own.</li>
+        <li>Using automated tools to harvest or archive the site's protected story content.</li>
+      </ul>
+      <h3>Limited reader use</h3><p>Readers may access and enjoy published stories through the website for personal reading. Access to a story does not transfer copyright, ownership, adaptation rights, translation rights, commercial rights, or republication rights.</p>
+      <h3>Copyright concerns</h3><p>If you believe material on Avanitaxx Stories infringes your copyright or other rights, use the Contact / Report section and provide enough information to identify the material, explain your concern, and provide a reliable way to follow up. Reports should be made in good faith and should not contain intentionally false claims.</p>
+      <h3>Author submissions</h3><p>By submitting material for publication, an author represents that they have the necessary rights or permission to submit that material. The platform may request clarification or supporting information when ownership is disputed.</p>`
+  },
+  community: {
+    kicker:'READ WITH RESPECT',
+    title:'Community Guidelines',
+    body:`<p>Avanitaxx Stories is intended to be a welcoming space for readers and writers. Community features may include comments, replies, Community Lounge / Community Chat, Soundroom discussions, and other interactions.</p>
+      <h3>Keep conversations respectful</h3><ul>
+        <li>Discuss stories, ideas, and creative work without attacking other members.</li>
+        <li>No bullying, harassment, threats, stalking, or targeted abuse.</li>
+        <li>No hateful attacks based on protected characteristics or identity.</li>
+        <li>No spam, repetitive promotion, scams, phishing, or deceptive links.</li>
+        <li>Do not share private or identifying information about another person without permission.</li>
+      </ul>
+      <h3>Comments, replies, and images</h3><p>Keep comments relevant to the story or community conversation. Do not upload illegal, abusive, exploitative, or otherwise inappropriate material. Images shared in community areas may be moderated or removed.</p>
+      <h3>Community Lounge</h3><p>Some community rooms may be invitation-only and owner-controlled. Membership does not give a member moderation or ownership rights. The room owner or authorized moderator may manage invitations and remove messages or members when necessary.</p>
+      <h3>Moderation</h3><p>Content may be reviewed, hidden, deleted, or restricted when it violates these Guidelines, the Terms, or applicable law. Serious or repeated violations may result in loss of community or account access.</p>`
+  },
+  contact: {
+    kicker:'HELP • REPORT • COPYRIGHT',
+    title:'Contact / Report',
+    body:`<div class="policy-contact-box">
+      <h3 style="margin-top:0">How to report an issue</h3>
+      <p>For now, use this section as the official reporting route while the site's dedicated contact endpoint is being finalized. When contacting AVANITAXX STORIES, include the information below so the report can be reviewed efficiently.</p>
+      <div class="policy-report-list">
+        <div class="policy-report-item"><strong>Inappropriate content:</strong> story title or community room, exact location, what happened, and why it violates the rules.</div>
+        <div class="policy-report-item"><strong>Copyright concern:</strong> your name/rights basis, the exact story or asset involved, what you believe was copied, and evidence or a link showing the original work when available.</div>
+        <div class="policy-report-item"><strong>Account or safety issue:</strong> describe the problem without sending passwords, verification codes, or other sensitive credentials.</div>
+        <div class="policy-report-item"><strong>Technical problem:</strong> describe the page/feature, device or browser if relevant, and the error message you saw.</div>
+      </div>
+    </div>
+    <h3>Official identity</h3><p><strong>AVANITAXX STORIES — OFFICIAL WEBSITE</strong></p>
+    <p>This website is the official online reading and writing home represented by the Avanitaxx Stories brand. Contact details can be added here once the final official support email or contact form endpoint is selected.</p>
+    <div class="policy-note"><strong>Privacy reminder:</strong> never send your password, authentication code, payment card number, or other sensitive credential in a report.</div>`
+  }
+};
+
+function openPolicyCenter(section='about'){
+  const key=AVX_POLICY_TEXT[section]?section:'about';
+  const tabs=Object.keys(AVX_POLICY_TEXT).map(k=>{
+    const labels={about:'ABOUT',terms:'TERMS',privacy:'PRIVACY',copyright:'COPYRIGHT',community:'COMMUNITY',contact:'CONTACT / REPORT'};
+    return `<button class="policy-tab ${k===key?'active':''}" data-policy-tab="${k}" type="button">${labels[k]}</button>`;
+  }).join('');
+  const sections=Object.entries(AVX_POLICY_TEXT).map(([k,v])=>
+    `<section class="policy-section ${k===key?'active':''}" data-policy-section="${k}">
+      <div class="policy-closebar"><span class="policy-kicker">${v.kicker}</span><button id="policy-close-top" type="button">CLOSE</button></div>
+      <h2>${v.title}</h2><div class="policy-copy">${v.body}</div>
+    </section>`).join('');
+  open(`<div class="policy-panel">
+    <div class="policy-head">
+      <div class="policy-brand">AVANITAXX STORIES</div>
+      <div class="policy-kicker">OFFICIAL WEBSITE • IDENTITY &amp; POLICIES</div>
+      <div class="policy-title">The home behind the stories.</div>
+      <div class="policy-sub">About the platform, rules for using it, privacy information, creative-rights protection, community standards, and reporting guidance.</div>
+      <div class="policy-tabs">${tabs}</div>
+    </div>
+    <div class="policy-body">${sections}
+      <div class="policy-footer-note">Last reviewed for this site build: September 17, 2026. This information is intended to describe the site's current practices and rules; it is not a substitute for jurisdiction-specific legal advice.</div>
+    </div>
+  </div>`);
+  const setTab=k=>{
+    document.querySelectorAll('[data-policy-tab]').forEach(b=>b.classList.toggle('active',b.dataset.policyTab===k));
+    document.querySelectorAll('[data-policy-section]').forEach(x=>x.classList.toggle('active',x.dataset.policySection===k));
+  };
+  document.querySelectorAll('[data-policy-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.policyTab));
+  document.getElementById('policy-close-top')?.addEventListener('click',close);
+}
+
 function bindStatic(){
   const byId=id=>document.getElementById(id);
   soundroomBind();
@@ -1914,6 +2140,13 @@ function bindStatic(){
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
   byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
   byId('footer-author-hub')?.addEventListener('click',()=>openAuthorHub());
+  byId('nav-about-btn')?.addEventListener('click',()=>openPolicyCenter('about'));
+  byId('footer-about')?.addEventListener('click',()=>openPolicyCenter('about'));
+  byId('footer-terms')?.addEventListener('click',()=>openPolicyCenter('terms'));
+  byId('footer-privacy')?.addEventListener('click',()=>openPolicyCenter('privacy'));
+  byId('footer-copyright')?.addEventListener('click',()=>openPolicyCenter('copyright'));
+  byId('footer-community')?.addEventListener('click',()=>openPolicyCenter('community'));
+  byId('footer-contact')?.addEventListener('click',()=>openPolicyCenter('contact'));
   byId('author-btn')?.addEventListener('click',openAuthorHome);
   byId('hero-write')?.addEventListener('click',openAuthorHome);
   byId('footer-write')?.addEventListener('click',openAuthorHome);
