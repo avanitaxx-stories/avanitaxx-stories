@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-22-facebook-inspired-notes-timeline-1">
+<meta name="avx-build" content="2026-09-22-teaser-first-carousel-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#f8f1e8">
@@ -2227,6 +2227,24 @@ button,input,textarea,select{max-width:100%;}
   .fb-note-image{max-height:430px}
 }
 </style>
+
+
+<script id="avx-teaser-hook-helper">
+/* Carousel hook priority: teaser/description first, dialogue only as fallback. */
+window.avxCarouselHook = function(item){
+  item = item || {};
+  return String(
+    item.teaser ||
+    item.description ||
+    item.desc ||
+    item.chosenDialogue ||
+    item.chosen_dialogue ||
+    item.dialogue ||
+    item.title ||
+    ''
+  ).trim();
+};
+</script>
 
 </head>
 <body>
