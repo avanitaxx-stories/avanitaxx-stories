@@ -2439,6 +2439,71 @@ body{background:var(--editorial-paper)}
   .hero-cover-tagline{font-size:13px;line-height:1.55;}
 }
 </style>
+
+<style id="avx-carousel-mobile-blurb-v2">
+/* Carousel-only responsive fix: keeps the homepage layout intact. */
+.premium-cinematic-description{
+  margin:8px 0 0;
+  color:rgba(250,238,226,.88);
+  font-size:12px;
+  line-height:1.5;
+  max-width:540px;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+}
+.premium-cinematic-description-empty{color:rgba(245,232,220,.58)}
+.premium-cinematic-hook{margin-bottom:0}
+@media(max-width:700px){
+  .premium-cinematic-section{padding:10px 0 18px}
+  .premium-cinematic-carousel{
+    min-height:0;
+    height:auto;
+    aspect-ratio:1 / 1.08;
+    max-height:460px;
+    border-radius:16px;
+  }
+  .premium-cinematic-stage,.premium-cinematic-slide{min-height:0;height:100%}
+  .premium-cinematic-backdrop{height:48%;inset:0;background-size:cover;background-position:center top}
+  .premium-cinematic-overlay{
+    inset:0;
+    background:linear-gradient(180deg,rgba(12,7,6,.04) 0%,rgba(12,7,6,.10) 27%,rgba(12,7,6,.88) 49%,#120b09 66%,#120b09 100%)
+  }
+  .premium-cinematic-cover-wrap{width:104px;height:148px;max-height:none;right:16px;top:15px;transform:none}
+  .premium-cinematic-cover,.premium-cinematic-cover-fallback{
+    width:100%;height:100%;object-fit:contain;background:#2b1915;border-radius:4px 9px 9px 4px;box-shadow:8px 12px 26px rgba(0,0,0,.38)
+  }
+  .premium-cinematic-content{width:100%;min-height:0;height:100%;justify-content:flex-end;padding:0 17px 50px}
+  .premium-cinematic-kicker{font-size:7px;letter-spacing:.17em;gap:7px}
+  .premium-cinematic-kicker::before{width:25px}
+  .premium-cinematic-title{max-width:78%;margin:7px 0 5px;font-size:30px;line-height:.96}
+  .premium-cinematic-author{font-size:7px;letter-spacing:.15em}
+  .premium-cinematic-rule{width:42px;margin:10px 0 8px}
+  .premium-cinematic-hook,.premium-cinematic-description{max-width:100%;font-size:12px;line-height:1.36}
+  .premium-cinematic-hook{margin:0}
+  .premium-cinematic-description{margin-top:7px;-webkit-line-clamp:3;color:rgba(250,238,226,.86)}
+  .premium-cinematic-meta{margin-top:8px;gap:5px;max-height:29px;overflow:hidden}
+  .premium-cinematic-pill{min-height:22px;padding:4px 7px;font-size:6px}
+  .premium-cinematic-read{margin-top:10px;min-width:0;padding:9px 12px;border-radius:8px;font-size:8px}
+  .premium-cinematic-controls{left:16px;right:16px;bottom:11px}
+  .premium-cinematic-arrow{width:29px;height:29px;font-size:14px}
+  .premium-cinematic-corner{right:0;top:0;width:64%;height:50%;opacity:.22}
+  .premium-cinematic-as-mark{top:10px;right:10px;width:42px;height:42px}
+  .premium-cinematic-as-mark svg{width:34px;height:34px}
+  .premium-cinematic-as-mark .as-letter{font-size:14px}
+}
+@media(max-width:380px){
+  .premium-cinematic-carousel{aspect-ratio:1 / 1.12;max-height:430px}
+  .premium-cinematic-cover-wrap{width:91px;height:130px;right:13px;top:13px}
+  .premium-cinematic-content{padding-left:14px;padding-right:14px;padding-bottom:46px}
+  .premium-cinematic-title{font-size:27px;max-width:80%}
+  .premium-cinematic-hook,.premium-cinematic-description{font-size:11px;line-height:1.34}
+  .premium-cinematic-description{-webkit-line-clamp:2}
+  .premium-cinematic-read{margin-top:8px;padding:8px 11px}
+  .premium-cinematic-controls{left:13px;right:13px;bottom:9px}
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -2696,7 +2761,8 @@ async function loadLatestChapterPromotion(stories=[]){
     const series=String(s.series_name||'').trim()
       ? `${esc(s.series_name)}${Number(s.series_book_number)>0?` · BOOK ${Number(s.series_book_number)}`:''}`
       : '';
-    return {story:s,quote,chapterNo,genre,series,hook};
+    const blurb=String(s.description||s.blurb||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+    return {story:s,quote,blurb,chapterNo,genre,series,hook};
   });
 
   let index=0,timer=null,paused=false,touchStartX=0;
@@ -2708,9 +2774,12 @@ async function loadLatestChapterPromotion(stories=[]){
     const cover=s.cover_url
       ? `<img class="premium-cinematic-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="${index===0?'eager':'lazy'}">`
       : `<div class="premium-cinematic-cover-fallback">${esc(s.title)}</div>`;
-    const quote=item.quote
-      ? `<p class="premium-cinematic-quote">${esc(item.quote)}</p>`
-      : `<p class="premium-cinematic-quote" style="color:rgba(245,232,220,.72);font-size:13px">Open the book to discover its chapters and story world.</p>`;
+    const hook=item.quote
+      ? `<p class="premium-cinematic-quote premium-cinematic-hook">${esc(item.quote)}</p>`
+      : '';
+    const blurb=item.blurb
+      ? `<p class="premium-cinematic-description">${esc(item.blurb)}</p>`
+      : `<p class="premium-cinematic-description premium-cinematic-description-empty">Discover the story, meet the characters, and start reading.</p>`;
     const meta=[
       item.chapterNo,
       item.series?item.series:null,
@@ -2747,7 +2816,8 @@ async function loadLatestChapterPromotion(stories=[]){
             <h2 class="premium-cinematic-title">${esc(s.title)}</h2>
             <div class="premium-cinematic-author">A NOVEL BY ${esc(s.author_name||s.pen_name||'AVANITAXX')}</div>
             <div class="premium-cinematic-rule"></div>
-            ${quote}
+            ${hook}
+            ${blurb}
             <div class="premium-cinematic-meta">${meta}</div>
             <button class="premium-cinematic-read" id="premium-cinematic-read" type="button">READ NOW <span>→</span></button>
           </div>
