@@ -1531,6 +1531,373 @@ button,input,textarea,select{max-width:100%;}
   .cards{gap:9px;}
   .genre-book-card{flex-basis:126px;min-width:126px;}
 }
+
+/* ===== COMPACT HEADER / MOBILE-FIRST NAVIGATION ===== */
+.site-header .nav{
+  min-height:64px;
+  gap:12px;
+  width:min(1180px,calc(100% - 28px));
+}
+.site-header .logo{
+  flex:0 0 auto;
+  min-width:0;
+}
+.site-header .logo-title{
+  white-space:nowrap;
+}
+.site-header .navlinks{
+  flex:0 1 auto;
+  min-width:0;
+  gap:18px;
+}
+.site-header .navlinks a,
+.site-header .nav-author-link{
+  white-space:nowrap;
+}
+.site-header .nav-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 1 auto;
+  min-width:0;
+}
+.site-header .search{
+  width:150px;
+  max-width:18vw;
+  min-width:100px;
+  height:38px;
+  padding:9px 12px;
+}
+.site-header .header-soundroom-btn,
+.site-header .header-icon-btn,
+.site-header .author-avatar-btn{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+}
+.site-header .header-icon-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#fff;
+  color:var(--brown);
+  padding:0;
+}
+.site-header .header-icon-btn .badge{
+  right:-4px;
+  top:-5px;
+}
+.site-header .nav-actions .btn{
+  min-height:38px;
+  padding:9px 12px;
+  white-space:nowrap;
+}
+
+/* Medium screens: remove wide text navigation before it can force horizontal scrolling. */
+@media (max-width:1080px){
+  .site-header .navlinks{
+    display:none;
+  }
+  .site-header .nav{
+    gap:8px;
+  }
+  .site-header .search{
+    max-width:none;
+    width:150px;
+  }
+}
+
+/* Tablet/mobile: header behaves like a compact reading-app toolbar. */
+@media (max-width:700px){
+  .site-header{
+    width:100%;
+    overflow:visible;
+  }
+  .site-header .nav{
+    width:calc(100% - 24px);
+    min-height:58px;
+    padding:7px 0;
+    gap:6px;
+  }
+  .site-header .logo{
+    gap:6px;
+    min-width:0;
+  }
+  .site-header .logo-feather{
+    width:20px;
+    height:20px;
+  }
+  .site-header .logo-title{
+    font-size:18px;
+  }
+  .site-header .nav-actions{
+    gap:5px;
+  }
+  .site-header .search{
+    width:clamp(82px,25vw,145px);
+    min-width:82px;
+    height:36px;
+    padding:8px 10px;
+    font-size:11px;
+  }
+  .site-header .header-soundroom-btn{
+    display:none;
+  }
+  .site-header .header-icon-btn,
+  .site-header .author-avatar-btn{
+    width:36px;
+    height:36px;
+    flex-basis:36px;
+  }
+  .site-header .nav-actions .btn{
+    min-height:36px;
+    padding:8px 9px;
+    font-size:8px;
+  }
+}
+
+/* Small phones: prioritize logo + search + notification/account icons. */
+@media (max-width:520px){
+  .site-header .nav{
+    width:calc(100% - 18px);
+  }
+  .site-header .logo-title{
+    font-size:16px;
+  }
+  .site-header .logo-feather{
+    width:18px;
+    height:18px;
+  }
+  .site-header .search{
+    width:clamp(72px,22vw,105px);
+    min-width:72px;
+    font-size:10px;
+  }
+  .site-header .nav-actions .btn{
+    display:none;
+  }
+  .site-header .header-icon-btn,
+  .site-header .author-avatar-btn{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+}
+
+/* Very narrow phones: don't let the header create a horizontal page. */
+@media (max-width:380px){
+  .site-header .nav{
+    width:calc(100% - 12px);
+    gap:4px;
+  }
+  .site-header .logo{
+    gap:4px;
+  }
+  .site-header .logo-title{
+    font-size:15px;
+  }
+  .site-header .search{
+    width:70px;
+    min-width:70px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+  .site-header .header-icon-btn,
+  .site-header .author-avatar-btn{
+    width:32px;
+    height:32px;
+    flex-basis:32px;
+  }
+}
+
+</style>
+
+
+<style id="avx-compact-logo-fix">
+/* Final compact header refinement */
+.site-header .nav{
+  min-height:62px !important;
+  gap:12px !important;
+}
+
+.site-header .logo{
+  font-size:21px !important;
+  line-height:1 !important;
+  gap:6px !important;
+  flex:0 0 auto !important;
+  white-space:nowrap !important;
+}
+
+.site-header .logo-feather{
+  width:28px !important;
+  height:28px !important;
+  max-width:28px !important;
+  object-fit:contain !important;
+}
+
+.site-header .logo-title{
+  font-size:21px !important;
+  line-height:1 !important;
+}
+
+.site-header .navlinks{
+  gap:16px !important;
+  flex-shrink:1 !important;
+}
+
+.site-header .nav-actions{
+  gap:6px !important;
+  min-width:0 !important;
+  flex-shrink:1 !important;
+}
+
+.site-header .search{
+  width:145px !important;
+  max-width:145px !important;
+  min-width:0 !important;
+}
+
+.site-header .header-icon-btn,
+.site-header .author-avatar-btn{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  flex:0 0 34px !important;
+}
+
+.site-header .nav-actions .btn{
+  padding:8px 10px !important;
+  font-size:9px !important;
+  white-space:nowrap !important;
+}
+
+@media (max-width:1080px){
+  .site-header .nav{
+    width:min(1180px,calc(100% - 24px)) !important;
+    gap:8px !important;
+  }
+  .site-header .navlinks{
+    display:none !important;
+  }
+  .site-header .search{
+    width:170px !important;
+    max-width:170px !important;
+  }
+}
+
+@media (max-width:700px){
+  .site-header .nav{
+    min-height:58px !important;
+    width:calc(100% - 20px) !important;
+    padding:6px 0 !important;
+    gap:6px !important;
+  }
+
+  .site-header .logo{
+    font-size:18px !important;
+    gap:4px !important;
+  }
+
+  .site-header .logo-title{
+    font-size:18px !important;
+  }
+
+  .site-header .logo-feather{
+    width:23px !important;
+    height:23px !important;
+    max-width:23px !important;
+  }
+
+  .site-header .nav-actions{
+    gap:4px !important;
+    margin-left:auto !important;
+  }
+
+  .site-header .search{
+    width:min(150px,32vw) !important;
+    max-width:150px !important;
+    height:34px !important;
+    padding:0 9px !important;
+    font-size:11px !important;
+  }
+
+  .site-header .header-soundroom-btn{
+    display:none !important;
+  }
+
+  .site-header .header-icon-btn,
+  .site-header .author-avatar-btn{
+    width:32px !important;
+    height:32px !important;
+    min-width:32px !important;
+    flex-basis:32px !important;
+  }
+
+  .site-header .nav-actions .btn{
+    font-size:8px !important;
+    padding:7px 8px !important;
+  }
+}
+
+@media (max-width:520px){
+  .site-header .nav{
+    width:calc(100% - 14px) !important;
+    gap:5px !important;
+  }
+
+  .site-header .logo{
+    font-size:17px !important;
+  }
+
+  .site-header .logo-title{
+    font-size:17px !important;
+  }
+
+  .site-header .logo-feather{
+    width:21px !important;
+    height:21px !important;
+    max-width:21px !important;
+  }
+
+  .site-header .search{
+    width:min(125px,30vw) !important;
+    max-width:125px !important;
+  }
+
+  .site-header .nav-actions .btn{
+    display:none !important;
+  }
+}
+
+@media (max-width:380px){
+  .site-header .logo-title{
+    font-size:15px !important;
+  }
+
+  .site-header .logo-feather{
+    width:19px !important;
+    height:19px !important;
+    max-width:19px !important;
+  }
+
+  .site-header .search{
+    width:min(108px,29vw) !important;
+    max-width:108px !important;
+    font-size:10px !important;
+  }
+
+  .site-header .header-icon-btn,
+  .site-header .author-avatar-btn{
+    width:30px !important;
+    height:30px !important;
+    min-width:30px !important;
+    flex-basis:30px !important;
+  }
+}
 </style>
 
 </head>
