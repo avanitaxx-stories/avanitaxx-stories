@@ -2504,6 +2504,25 @@ body{background:var(--editorial-paper)}
   .premium-cinematic-controls{left:13px;right:13px;bottom:9px}
 }
 </style>
+<style id="avx-header-ranking-dashboard-v1">
+.navlinks button.nav-policy-link{border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.16em;padding:30px 0;position:relative;cursor:pointer}
+.navlinks button.nav-policy-link::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}
+.navlinks button.nav-policy-link:hover::after{right:0}
+.rank-panel{width:min(980px,100%);max-height:95vh;overflow:auto;background:var(--cream);border-radius:24px;padding:0;box-shadow:0 36px 110px rgba(30,18,14,.38);border:1px solid rgba(255,255,255,.55)}
+.rank-head{padding:30px 34px 24px;background:linear-gradient(135deg,#fffdf9,#f3e4df);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.rank-kicker{font-size:9px;font-weight:900;letter-spacing:.22em;color:var(--toffee);text-transform:uppercase}
+.rank-title{font:400 clamp(38px,5vw,58px)/.95 Georgia,serif;color:var(--ink);margin:8px 0 7px;letter-spacing:-.04em}
+.rank-sub{font:14px/1.6 Georgia,serif;color:var(--muted);max-width:680px}
+.rank-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px}
+.rank-list{padding:22px 28px 30px;display:grid;gap:10px}
+.rank-row{display:grid;grid-template-columns:46px 62px minmax(0,1fr) auto;gap:14px;align-items:center;background:#fffdf9;border:1px solid var(--line);border-radius:14px;padding:10px 13px}
+.rank-no{font:400 25px Georgia,serif;color:#9b7667;text-align:center}
+.rank-cover{width:62px;height:84px;border-radius:7px;object-fit:cover;background:#eadbd4}
+.rank-cover-fallback{width:62px;height:84px;border-radius:7px;background:linear-gradient(145deg,#6f4b3b,#ba8c78);display:grid;place-items:center;text-align:center;color:#fff;font:14px Georgia,serif;padding:7px}
+.rank-info{min-width:0}.rank-story-title{font:400 21px/1.15 Georgia,serif;color:#392820;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rank-author{font-size:9px;color:var(--toffee);letter-spacing:.08em;text-transform:uppercase;margin-top:5px}.rank-desc{font-size:11px;line-height:1.5;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.rank-reads{font-size:9px;font-weight:900;letter-spacing:.12em;color:#80675b;white-space:nowrap}
+@media(max-width:700px){.rank-head{padding:24px 18px 20px}.rank-list{padding:15px 14px 22px}.rank-row{grid-template-columns:32px 52px minmax(0,1fr);gap:10px}.rank-cover,.rank-cover-fallback{width:52px;height:72px}.rank-story-title{font-size:17px}.rank-reads{grid-column:3;justify-self:start;margin-top:4px}.rank-desc{font-size:10px}}
+@media(max-width:560px){.navlinks{gap:15px}.navlinks button.nav-policy-link{font-size:9px;padding:25px 0}.navlinks button.nav-policy-link::after{bottom:15px}.rank-title{font-size:40px}}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -2516,7 +2535,7 @@ body{background:var(--editorial-paper)}
         Avanitaxx <span>Stories</span>
     </span>
 </a>
-  <nav class="navlinks"><a href="#home">HOME</a><a href="#recent">RECENT</a><a href="#recommended">RECOMMENDS</a><button id="nav-about-btn" class="nav-policy-link" type="button">ABOUT</button><button id="author-hub-nav" class="nav-author-link" type="button" aria-label="Author Hub"><span class="nav-author-icon" aria-hidden="true"><svg viewBox="0 0 36 36" role="img"><path class="pen" d="M24.9 3.8c1.2-1.2 3.1-1.2 4.3 0l3 3c1.2 1.2 1.2 3.1 0 4.3L15 28.3l-7.2 1.8 1.8-7.2L24.9 3.8Z"/><path class="pen-detail" d="m22.5 6.2 7.3 7.3M11.2 22.7l3.1 3.1"/><path class="book" d="M5 30.8c4.2-2.1 8.1-2 12.1.2V20.9c-4-2.2-7.9-2.3-12.1-.2v10.1ZM31 30.8c-4.2-2.1-8.1-2-12.1.2V20.9c4-2.2 7.9-2.3 12.1-.2v10.1ZM17.1 21.1c.6-.3 1.2-.4 1.8-.4s1.2.1 1.8.4"/></svg></span> AUTHOR</button></nav>
+  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
@@ -2526,9 +2545,7 @@ body{background:var(--editorial-paper)}
         <div id="author-menu-email" class="menu-email"></div>
         <button id="menu-profile" type="button">👤 MY PROFILE</button>
         <button id="menu-stories" type="button">📚 MY STORIES</button><button id="menu-library" type="button">🔖 MY LIBRARY</button>
-        <button id="menu-author-home" type="button">✍️ AUTHOR HOME</button>
-        <button id="menu-new-story" type="button">📝 CREATE STORY</button>
-        <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
+                <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
         <div id="menu-owner-divider" class="menu-divider"></div>
         <button id="menu-owner-timeline" class="menu-owner" type="button">✍️ AUTHOR LOUNGE</button>
         <div class="menu-divider"></div>
@@ -4348,6 +4365,23 @@ function bindStatic(){
   byId('menu-notifications')?.addEventListener('click',()=>{menu?.classList.add('hidden');openNotifications()});
   byId('menu-owner-timeline')?.addEventListener('click',()=>{menu?.classList.add('hidden');openOwnerTimeline()});
   byId('menu-logout')?.addEventListener('click',()=>{menu?.classList.add('hidden');logout()});
+  byId('nav-dashboard-btn')?.addEventListener('click',()=>{ if(session) openAuthorHome(); else openAuth('author'); });
+  byId('nav-ranking-btn')?.addEventListener('click',openRanking);
+
+  async function openRanking(){
+    const overlay=document.getElementById('overlay');
+    open(`<div class="rank-panel"><div class="rank-head"><div><div class="rank-kicker">AVANITAXX STORIES</div><div class="rank-title">Story Ranking</div><div class="rank-sub">Ranked by total reads. Published stories with the highest recorded read count appear first.</div></div><button class="rank-close" id="rank-close" type="button" aria-label="Close">×</button></div><div id="rank-list" class="rank-list"><div class="empty">Loading rankings…</div></div></div>`);
+    byId('rank-close')?.addEventListener('click',close);
+    try{
+      const stories=await getPublished();
+      const ranked=stories.map(x=>({...x,__reads:Number(x.views)||0})).sort((a,b)=>b.__reads-a.__reads);
+      const el=byId('rank-list');
+      if(!ranked.length){el.innerHTML='<div class="empty">No published stories yet.</div>';return}
+      el.innerHTML=ranked.map((x,i)=>`<article class="rank-row"><div class="rank-no">${i+1}</div>${x.cover_url?`<img class="rank-cover" src="${esc(x.cover_url)}" alt="${esc(x.title)} book cover" loading="lazy">`:`<div class="rank-cover-fallback">${esc(x.title)}</div>`}<div class="rank-info"><div class="rank-story-title">${esc(x.title)}</div><div class="rank-author">${esc(x.author_name||x.author||'Avanitaxx Author')}</div><div class="rank-desc">${esc(x.description||'')}</div></div><div class="rank-reads">${x.__reads.toLocaleString()} READS</div></article>`).join('');
+      el.querySelectorAll('.rank-row').forEach((row,i)=>row.addEventListener('click',()=>openPublicStory(ranked[i].share_slug||ranked[i].id)));
+    }catch(err){byId('rank-list').innerHTML=`<div class="empty">Unable to load rankings right now.<br><small>${esc(err.message||'Please try again.')}</small></div>`}
+  }
+
   const siteSearch=byId('site-search');
   if(siteSearch){
     siteSearch.addEventListener('click',e=>e.stopPropagation());
