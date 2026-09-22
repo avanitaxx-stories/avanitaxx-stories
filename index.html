@@ -1898,6 +1898,28 @@ button,input,textarea,select{max-width:100%;}
     flex-basis:30px !important;
   }
 }
+
+/* ===== AVANITAXX COMMUNITY CHAT — MESSENGER STYLE UPGRADE ===== */
+.community-messenger{width:min(1120px,100%);height:min(88dvh,820px);padding:0!important;overflow:hidden;background:#f6f1ec;border-radius:26px;display:flex;flex-direction:column}
+.cm-head{height:76px;flex:0 0 76px;display:flex;align-items:center;gap:13px;padding:10px 18px;background:rgba(255,253,249,.97);border-bottom:1px solid rgba(74,48,37,.10);backdrop-filter:blur(16px)}
+.cm-room-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,#5b3c30,#c89b91);color:#fff;display:grid;place-items:center;font:700 18px Georgia,serif;flex:none;box-shadow:0 7px 18px rgba(55,35,27,.14);overflow:hidden}
+.cm-room-info{min-width:0;flex:1}.cm-room-name{font:700 17px/1.2 Georgia,serif;color:#33231d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cm-room-status{font-size:9px;color:#8c746a;margin-top:4px;letter-spacing:.04em}.cm-room-status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#5f8a67;margin-right:5px}
+.cm-head-actions{display:flex;align-items:center;gap:7px}.cm-head-btn{width:38px;height:38px;border:1px solid rgba(74,48,37,.10);background:#fff;border-radius:50%;display:grid;place-items:center;color:#5d473d;font-size:16px}.cm-head-btn:hover{background:#f3e6e0}.cm-close{font-size:22px}
+.cm-layout{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:0;flex:1}
+.cm-sidebar{background:#fffdf9;border-right:1px solid rgba(74,48,37,.10);display:flex;flex-direction:column;min-width:0}
+.cm-sidebar-title{padding:18px 17px 9px;font:700 21px Georgia,serif;color:#382720}.cm-search{margin:0 13px 12px;position:relative}.cm-search input{width:100%;border:0;background:#f2ece7;border-radius:12px;padding:10px 12px 10px 34px;outline:0;font-size:11px;color:#4d3b34}.cm-search span{position:absolute;left:12px;top:9px;color:#91786e;font-size:13px}
+.cm-room-list{overflow:auto;padding:0 8px 14px}.cm-room-item{width:100%;border:0;background:transparent;text-align:left;padding:10px;border-radius:13px;display:flex;gap:10px;align-items:center;cursor:pointer}.cm-room-item:hover{background:#f8f0eb}.cm-room-item.active{background:#f1dfda}.cm-room-item-avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(145deg,#6a493b,#d1aaa3);color:#fff;display:grid;place-items:center;font:700 15px Georgia,serif;flex:none}.cm-room-item-copy{min-width:0}.cm-room-item-name{font-size:12px;font-weight:800;color:#403029;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cm-room-item-desc{font-size:9px;color:#927e75;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cm-sidebar-note{margin:auto 12px 14px;padding:11px 12px;border-radius:13px;background:#f8f1eb;color:#87736a;font-size:9px;line-height:1.55}
+.cm-main{min-width:0;display:flex;flex-direction:column;background:#f5eee9}
+.cm-message-scroll{flex:1;min-height:0;overflow-y:auto;padding:22px 24px 18px;scroll-behavior:smooth;background:radial-gradient(circle at 15% 15%,rgba(217,170,168,.10),transparent 30%),linear-gradient(180deg,#f7f0eb,#f3ece7)}
+.cm-date-divider{text-align:center;margin:4px 0 18px;color:#9a877e;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.cm-message{display:flex;gap:8px;align-items:flex-end;margin:4px 0;max-width:82%}.cm-message.mine{margin-left:auto;flex-direction:row-reverse}.cm-avatar{width:30px;height:30px;border-radius:50%;background:#dfcbc5;color:#63483b;display:grid;place-items:center;font:700 11px Georgia,serif;flex:none;overflow:hidden}.cm-avatar img{width:100%;height:100%;object-fit:cover}.cm-message-body{min-width:0}.cm-sender{font-size:8px;font-weight:900;letter-spacing:.05em;color:#887168;margin:0 0 4px 4px}.cm-message.mine .cm-sender{text-align:right;margin:0 4px 4px 0}.cm-bubble{position:relative;padding:10px 13px;border-radius:17px 17px 17px 5px;background:#fffdfb;border:1px solid rgba(74,48,37,.07);box-shadow:0 3px 10px rgba(55,35,27,.045);color:#45352e;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.cm-message.mine .cm-bubble{border-radius:17px 17px 5px 17px;background:#5a4034;color:#fff8f3;border-color:#5a4034}.cm-time{font-size:8px;color:#9d8980;margin:4px 5px 0}.cm-message.mine .cm-time{text-align:right}.cm-reply-quote{border-left:3px solid #c99a91;background:rgba(74,48,37,.055);padding:6px 8px;border-radius:6px;margin-bottom:7px;font-size:9px;color:#7a665d}.cm-message.mine .cm-reply-quote{background:rgba(255,255,255,.12);border-color:#e3bdb6;color:#f8e9e3}.cm-image{display:block;max-width:min(310px,70vw);max-height:300px;border-radius:12px;margin-top:7px;object-fit:cover;cursor:zoom-in}.cm-actions{display:flex;gap:9px;margin-top:5px;opacity:0;transition:.15s}.cm-message:hover .cm-actions{opacity:1}.cm-actions button{border:0;background:none;color:#8a7369;font-size:8px;font-weight:900;padding:0;cursor:pointer}.cm-empty{height:100%;display:grid;place-items:center;text-align:center;color:#907d74;font-size:12px;padding:40px}.cm-empty strong{display:block;font:400 25px Georgia,serif;color:#554139;margin-bottom:7px}
+.cm-compose{flex:none;background:rgba(255,253,249,.98);border-top:1px solid rgba(74,48,37,.10);padding:10px 16px 13px;backdrop-filter:blur(14px)}.cm-replying{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:8px 11px;border-left:3px solid #b98279;background:#f7ece8;border-radius:8px;font-size:9px;color:#7c665d}.cm-replying strong{font-size:10px;color:#49362e}.cm-reply-cancel{margin-left:auto;border:0;background:none;color:#9a6e67;font-size:9px;font-weight:900;cursor:pointer}.cm-input-row{display:flex;align-items:flex-end;gap:7px}.cm-input-wrap{flex:1;display:flex;align-items:flex-end;gap:4px;background:#f2ece7;border:1px solid transparent;border-radius:17px;padding:4px 6px 4px 11px}.cm-input-wrap:focus-within{border-color:#d8b6af;background:#fff}.cm-input{flex:1;min-height:39px;max-height:120px;border:0;background:transparent;outline:0;resize:none;padding:9px 4px;font-size:12px;line-height:1.45;color:#43332c}.cm-compose-icon{width:32px;height:32px;border:0;background:transparent;border-radius:50%;color:#866b61;font-size:16px;cursor:pointer}.cm-compose-icon:hover{background:#e9ddd7}.cm-send{width:42px;height:42px;border:0;border-radius:50%;background:#4c352b;color:#fff;font-size:16px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(57,40,32,.16)}.cm-send:hover{transform:translateY(-1px)}.cm-attach-label{display:grid;place-items:center;cursor:pointer}.cm-attach-label input{display:none}.cm-compose-help{font-size:8px;color:#a18e85;margin:6px 4px 0}.cm-file-name{font-size:9px;color:#8d7369;margin:5px 4px 0}
+.cm-mobile-back{display:none}
+@media(max-width:760px){
+ .community-messenger{height:calc(100dvh - 16px);max-height:none;border-radius:20px}.cm-layout{grid-template-columns:1fr}.cm-sidebar{display:none}.cm-mobile-back{display:grid}.cm-head{height:68px;flex-basis:68px;padding:8px 10px}.cm-room-avatar{width:43px;height:43px}.cm-room-name{font-size:15px}.cm-message-scroll{padding:17px 12px 14px}.cm-message{max-width:90%}.cm-avatar{width:27px;height:27px}.cm-bubble{font-size:12px}.cm-image{max-width:75vw}.cm-compose{padding:8px 9px 11px}.cm-compose-help{display:none}.cm-head-actions .cm-head-btn:nth-child(2){display:none}
+}
+@media(max-width:430px){.cm-head-actions .cm-head-btn{width:34px;height:34px}.cm-message{max-width:94%}.cm-bubble{padding:9px 11px}.cm-input-wrap{border-radius:16px}.cm-send{width:39px;height:39px}}
+
 </style>
 
 </head>
@@ -3046,16 +3068,194 @@ async function openHomeNotes(notes=[]){
   document.getElementById('home-notes-close').onclick=close;const viewer=document.getElementById('note-image-viewer'),large=document.getElementById('note-image-large');document.getElementById('note-image-close').onclick=()=>viewer.classList.remove('open');viewer.onclick=e=>{if(e.target===viewer)viewer.classList.remove('open')};document.querySelectorAll('[data-note-image]').forEach(img=>img.onclick=()=>{large.src=img.src;large.alt=img.alt||'Expanded note image';viewer.classList.add('open')});notes.forEach(x=>renderFeatureComments('note',x.id,`note-comments-${x.id}`,x.owner_id));
 }
 async function openHomeCommunity(rooms=[]){
-  if(!rooms.length){const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(8);rooms=q.error?[]:(q.data||[])}
+  if(!rooms.length){
+    const q=await sb.from('owner_chat_rooms').select('*').eq('published',true).order('created_at',{ascending:false}).limit(12);
+    rooms=q.error?[]:(q.data||[]);
+  }
   if(!rooms.length){alert('The community lounge is not open yet.');return}
-  const room=rooms[0];const m=await sb.from('owner_chat_messages').select('*').eq('room_id',room.id).order('created_at',{ascending:true}).limit(60);let isMember=false,isOwner=false;
-  if(session){isOwner=await isOwnerAccount();if(!isOwner){const me=await sb.from('owner_chat_members').select('id').eq('room_id',room.id).eq('user_id',session.user.id).maybeSingle();isMember=!!me.data}}
-  const rows=m.data||[];
-  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="home-chat-close" aria-label="Close community lounge">×</button><div class="kicker">COMMUNITY LOUNGE</div><h2>${esc(room.name||'Avanitaxx Community')}</h2><p>${esc(room.description||'A reader lounge for Avanitaxx Stories.')}</p></div><div class="feature-modal-scroll"><div class="owner-chat" id="public-chat-list">${m.error?`<div class="empty">${esc(m.error.message)}</div>`:rows.length?rows.map(x=>`<div class="owner-chat-msg" data-message-id="${esc(x.id)}"><strong>${esc(x.author_name||'Reader')}</strong>${x.reply_to?`<div class="chat-msg-reply">Replying to another message</div>`:''}${x.message?`<div style="margin-top:3px;white-space:pre-wrap;line-height:1.6">${esc(x.message)}</div>`:''}${x.image_url?`<img class="chat-attachment" src="${esc(x.image_url)}" alt="Shared image" loading="lazy">`:''}<div class="owner-small">${esc(formatDate(x.created_at))}</div><div class="chat-msg-actions">${session&&((isMember||isOwner))?`<button class="public-reply-btn" data-id="${esc(x.id)}">↩ REPLY</button>`:''}</div></div>`).join(''):'<div class="empty">No messages yet. Be the first to say hello.</div>'}</div>${session&&(isMember||isOwner)?`<div id="public-chat-replying" class="chat-replying hidden"><span>Replying to a message</span><button id="public-chat-cancel-reply">CANCEL</button></div><div class="feature-chat-compose"><div class="chat-compose-row"><textarea id="public-chat-message" class="field" rows="3" placeholder="Write to the community…"></textarea><button class="btn" id="public-chat-send">SEND</button></div><label style="display:flex;align-items:center;gap:8px;margin-top:8px"><input id="public-chat-image" type="file" accept="image/*"><span class="help">Send a picture • automatically compressed</span></label></div>`:`<div class="help" style="margin-top:12px">${session?'This room is invite-only. The owner controls membership.':'Sign in and receive an invitation from AVANITAXX to participate in this community.'}</div>`}</div></div>`);
-  document.getElementById('home-chat-close').onclick=close;
-  let replyTo=null;const cancel=()=>{replyTo=null;document.getElementById('public-chat-replying')?.classList.add('hidden')};document.getElementById('public-chat-cancel-reply')?.addEventListener('click',cancel);
-  document.querySelectorAll('.public-reply-btn').forEach(b=>b.onclick=()=>{replyTo=b.dataset.id;document.getElementById('public-chat-replying')?.classList.remove('hidden');document.getElementById('public-chat-message')?.focus()});
-  document.getElementById('public-chat-send')?.addEventListener('click',async()=>{try{const msg=document.getElementById('public-chat-message').value.trim(),file=document.getElementById('public-chat-image').files?.[0];if(!msg&&!file)return;let image_url=null;if(file)image_url=await uploadCommunityImage(file);const q=await sb.from('owner_chat_messages').insert({room_id:room.id,owner_id:room.owner_id,author_name:session.user.user_metadata?.display_name||session.user.email?.split('@')[0]||'Reader',message:msg||null,sender_id:session.user.id,image_url,reply_to:replyTo});if(q.error)throw q.error;openHomeCommunity([room])}catch(e){alert(e.message||String(e))}});
+
+  let activeRoom=rooms[0];
+  let replyTo=null;
+  let replyLabel='';
+  let currentRows=[];
+
+  const loadRoom=async(room)=>{
+    activeRoom=room;
+    const m=await sb.from('owner_chat_messages').select('*').eq('room_id',room.id).order('created_at',{ascending:true}).limit(100);
+    currentRows=m.error?[]:(m.data||[]);
+
+    let isMember=false,isOwner=false;
+    if(session){
+      isOwner=await isOwnerAccount();
+      if(!isOwner){
+        const me=await sb.from('owner_chat_members').select('id').eq('room_id',room.id).eq('user_id',session.user.id).maybeSingle();
+        isMember=!!me.data;
+      }
+    }
+
+    const ids=[room.owner_id,...currentRows.map(x=>x.sender_id).filter(Boolean)];
+    let pmap={};
+    if(ids.length){
+      const pr=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',[...new Set(ids)]);
+      (pr.data||[]).forEach(p=>pmap[p.id]=p);
+    }
+
+    const canChat=!!session&&(isMember||isOwner);
+    const list=document.getElementById('cm-message-list');
+    if(!list)return;
+
+    const initials=p=>((p?.pen_name||p?.display_name||'R').trim().slice(0,1)||'R').toUpperCase();
+    const avatar=p=>p?.avatar_url
+      ? `<img src="${esc(p.avatar_url)}" alt="" loading="lazy">`
+      : esc(initials(p));
+
+    let lastDay='';
+    const html=currentRows.length?currentRows.map(x=>{
+      const mine=!!session&&x.sender_id===session.user.id;
+      const p=pmap[x.sender_id]||{};
+      const day=new Date(x.created_at).toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
+      let divider='';
+      if(day!==lastDay){lastDay=day;divider=`<div class="cm-date-divider">${esc(day)}</div>`}
+      const reply=currentRows.find(r=>r.id===x.reply_to);
+      const replyAuthor=reply?(reply.author_name||'Member'):'';
+      const replyText=reply?(reply.message||'Photo'):'';
+      return `${divider}
+        <div class="cm-message ${mine?'mine':''}" data-message-id="${esc(x.id)}">
+          <div class="cm-avatar">${avatar(p)}</div>
+          <div class="cm-message-body">
+            ${!mine?`<div class="cm-sender">${esc(x.author_name||p.pen_name||p.display_name||'Reader')}${x.sender_id===room.owner_id?' · AVANITAXX':''}</div>`:''}
+            <div class="cm-bubble">
+              ${reply?`<div class="cm-reply-quote"><strong>${esc(replyAuthor)}</strong><br>${esc(replyText.slice(0,120))}</div>`:''}
+              ${x.message?`<div style="white-space:pre-wrap">${esc(x.message)}</div>`:''}
+              ${x.image_url?`<img class="cm-image" src="${esc(x.image_url)}" alt="Shared image" loading="lazy">`:''}
+            </div>
+            <div class="cm-time">${esc(formatDate(x.created_at))}</div>
+            ${canChat?`<div class="cm-actions"><button class="cm-reply-btn" data-id="${esc(x.id)}" data-label="${esc((x.message||'Photo').slice(0,80))}">↩ REPLY</button></div>`:''}
+          </div>
+        </div>`;
+    }).join(''):`<div class="cm-empty"><div><strong>Welcome to the community</strong>Start the conversation and make this space yours.</div></div>`;
+
+    list.innerHTML=html;
+
+    document.querySelectorAll('.cm-reply-btn').forEach(b=>b.onclick=()=>{
+      replyTo=b.dataset.id;replyLabel=b.dataset.label||'Message';
+      const bar=document.getElementById('cm-replying');
+      if(bar){bar.classList.remove('hidden');bar.querySelector('.cm-reply-text').textContent=replyLabel}
+      document.getElementById('cm-message')?.focus();
+    });
+
+    const scroll=document.getElementById('cm-message-scroll');
+    if(scroll)scroll.scrollTop=scroll.scrollHeight;
+
+    const composer=document.getElementById('cm-composer');
+    if(composer){
+      composer.innerHTML=canChat?`
+        <div id="cm-replying" class="cm-replying hidden">
+          <span>↩</span><div>Replying to <strong class="cm-reply-text"></strong></div>
+          <button class="cm-reply-cancel" id="cm-reply-cancel">CANCEL</button>
+        </div>
+        <div class="cm-input-row">
+          <div class="cm-input-wrap">
+            <label class="cm-attach-label cm-compose-icon" title="Attach photo">＋<input id="cm-image" type="file" accept="image/*"></label>
+            <textarea id="cm-message" class="cm-input" rows="1" placeholder="Write a message…"></textarea>
+            <button class="cm-compose-icon" id="cm-emoji" type="button" title="Add emoji">☺</button>
+          </div>
+          <button class="cm-send" id="cm-send" type="button" title="Send">➤</button>
+        </div>
+        <div id="cm-file-name" class="cm-file-name"></div>
+        <div class="cm-compose-help">Private community • Be respectful • Images are compressed automatically</div>`
+      :`<div class="cm-compose-help" style="padding:6px 2px">${session?'This community is invite-only. Ask AVANITAXX for an invitation.':'Sign in and receive an invitation from AVANITAXX to participate.'}</div>`;
+
+      document.getElementById('cm-reply-cancel')?.addEventListener('click',()=>{
+        replyTo=null;replyLabel='';
+        document.getElementById('cm-replying')?.classList.add('hidden');
+      });
+
+      const image=document.getElementById('cm-image');
+      image?.addEventListener('change',()=>{
+        document.getElementById('cm-file-name').textContent=image.files?.[0]?`Attached: ${image.files[0].name}`:'';
+      });
+
+      document.getElementById('cm-emoji')?.addEventListener('click',()=>{
+        const input=document.getElementById('cm-message');if(!input)return;
+        input.value+=(input.value?' ':'')+'😊';input.focus();
+      });
+
+      const send=async()=>{
+        try{
+          const input=document.getElementById('cm-message');
+          const file=document.getElementById('cm-image')?.files?.[0];
+          const msg=input?.value.trim()||'';
+          if(!msg&&!file)return;
+          let image_url=null;if(file)image_url=await uploadCommunityImage(file);
+          const q=await sb.from('owner_chat_messages').insert({
+            room_id:room.id,owner_id:room.owner_id,
+            author_name:session.user.user_metadata?.display_name||session.user.email?.split('@')[0]||'Reader',
+            message:msg||null,sender_id:session.user.id,image_url,reply_to:replyTo
+          });
+          if(q.error)throw q.error;
+          replyTo=null;replyLabel='';
+          await loadRoom(room);
+        }catch(e){alert(e.message||String(e))}
+      };
+      document.getElementById('cm-send')?.addEventListener('click',send);
+      document.getElementById('cm-message')?.addEventListener('keydown',e=>{
+        if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}
+      });
+    }
+  };
+
+  const roomItems=rooms.map(r=>`
+    <button class="cm-room-item ${r.id===activeRoom.id?'active':''}" data-room-id="${esc(r.id)}">
+      <span class="cm-room-item-avatar">${esc(((r.name||'A').trim().slice(0,1)||'A').toUpperCase())}</span>
+      <span class="cm-room-item-copy"><span class="cm-room-item-name">${esc(r.name||'Avanitaxx Community')}</span><span class="cm-room-item-desc">${esc(r.description||'Reader community')}</span></span>
+    </button>`).join('');
+
+  open(`<div class="community-messenger" role="dialog" aria-label="Community Chat">
+    <div class="cm-head">
+      <button class="cm-head-btn cm-mobile-back" id="cm-back" type="button" title="Back">‹</button>
+      <div class="cm-room-avatar" id="cm-room-avatar">${esc(((activeRoom.name||'A').trim().slice(0,1)||'A').toUpperCase())}</div>
+      <div class="cm-room-info"><div class="cm-room-name" id="cm-room-name">${esc(activeRoom.name||'Avanitaxx Community')}</div><div class="cm-room-status" id="cm-room-status">Community chat · Invite-only</div></div>
+      <div class="cm-head-actions">
+        <button class="cm-head-btn" id="cm-info" type="button" title="Community information">ⓘ</button>
+        <button class="cm-head-btn cm-close" id="cm-close" type="button" title="Close">×</button>
+      </div>
+    </div>
+    <div class="cm-layout">
+      <aside class="cm-sidebar">
+        <div class="cm-sidebar-title">Messages</div>
+        <div class="cm-search"><span>⌕</span><input id="cm-search" type="search" placeholder="Search communities…"></div>
+        <div class="cm-room-list" id="cm-room-list">${roomItems}</div>
+        <div class="cm-sidebar-note">A private space for readers and writers. Keep conversations respectful and welcoming.</div>
+      </aside>
+      <main class="cm-main">
+        <div class="cm-message-scroll" id="cm-message-scroll"><div id="cm-message-list"></div></div>
+        <div class="cm-compose" id="cm-composer"></div>
+      </main>
+    </div>
+  </div>`);
+
+  document.getElementById('cm-close').onclick=close;
+  document.getElementById('cm-back').onclick=close;
+
+  document.getElementById('cm-info').onclick=()=>{
+    alert(`${activeRoom.name||'Avanitaxx Community'}\n\n${activeRoom.description||'A reader community on Avanitaxx Stories.'}\n\nThis community is invitation-only.`);
+  };
+
+  document.querySelectorAll('.cm-room-item').forEach(btn=>btn.onclick=async()=>{
+    const r=rooms.find(x=>String(x.id)===String(btn.dataset.roomId));if(!r)return;
+    document.querySelectorAll('.cm-room-item').forEach(x=>x.classList.toggle('active',x===btn));
+    document.getElementById('cm-room-name').textContent=r.name||'Avanitaxx Community';
+    document.getElementById('cm-room-avatar').textContent=((r.name||'A').trim().slice(0,1)||'A').toUpperCase();
+    await loadRoom(r);
+  });
+
+  document.getElementById('cm-search')?.addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.cm-room-item').forEach(b=>b.classList.toggle('hidden',q&&!b.textContent.toLowerCase().includes(q)));
+  });
+
+  await loadRoom(activeRoom);
 }
 async function maybeShowHomepageFeature(){
   const key='avx_home_feature_seen_'+new Date().toISOString().slice(0,10);if(localStorage.getItem(key))return;
