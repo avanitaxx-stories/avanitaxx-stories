@@ -2246,6 +2246,76 @@ window.avxCarouselHook = function(item){
 };
 </script>
 
+
+<style id="avx-author-social-v4">
+/* ===== AUTHOR LOUNGE / FACEBOOK-LIKE TIMELINE V4 ===== */
+.author-social-shell{width:min(1120px,100%);max-height:95vh;overflow:auto;background:#f4eee8;border-radius:24px}
+.author-social-head{position:sticky;top:0;z-index:10;padding:20px 24px 16px;background:rgba(255,253,249,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.author-social-head-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.author-social-title{font:400 31px Georgia,serif;color:#392820;margin:4px 0}
+.author-social-sub{font-size:10px;color:var(--muted);line-height:1.5}
+.author-social-close{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px}
+.author-social-body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(220px,.45fr);gap:16px;padding:18px}
+.author-social-main{min-width:0}
+.author-social-side{display:grid;gap:12px;align-content:start}
+.author-social-card,.author-social-side-card{background:#fffdf9;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px rgba(55,35,27,.055)}
+.author-social-card{padding:15px}
+.author-social-side-card{padding:14px}
+.author-social-card h3,.author-social-side-card h3{font:400 20px Georgia,serif;margin:2px 0 5px}
+.author-social-note{font-size:10px;color:var(--muted);line-height:1.55}
+.author-social-tools{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.author-social-tool{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-size:9px;font-weight:900;color:var(--brown)}
+.author-social-tool.active{background:var(--brown);color:#fff}
+.author-social-feed{display:grid;gap:13px;margin-top:14px}
+.author-post{background:#fff;border:1px solid rgba(74,48,37,.10);border-radius:15px;overflow:hidden;box-shadow:0 7px 22px rgba(55,35,27,.045)}
+.author-post-head{display:flex;gap:10px;align-items:center;padding:13px 14px 7px}
+.author-post-avatar{width:40px;height:40px;border-radius:50%;background:var(--lightpink);overflow:hidden;display:grid;place-items:center;font:700 15px Georgia,serif;color:var(--brown);flex:none}
+.author-post-avatar img{width:100%;height:100%;object-fit:cover}
+.author-post-author{font-size:12px;font-weight:900;color:#392820}
+.author-post-meta{font-size:8px;color:var(--muted);margin-top:3px}
+.author-post-menu{margin-left:auto;border:0;background:transparent;color:#8d7b72;font-weight:900;letter-spacing:.1em}
+.author-post-body{padding:4px 15px 12px}
+.author-post-type{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--toffee);font-weight:900}
+.author-post-title{font:400 21px/1.18 Georgia,serif;margin:6px 0 5px;color:#392820}
+.author-post-caption{font:13px/1.65 Georgia,serif;color:#66564e;white-space:pre-wrap}
+.author-post-quote{margin-top:9px;padding:10px 12px;background:#fbf4f1;border-left:2px solid var(--pink);font:italic 13px/1.55 Georgia,serif;color:#654d41}
+.author-post-album{display:grid;gap:3px;padding:0 3px 3px}
+.author-post-album.n1{grid-template-columns:1fr}.author-post-album.n2{grid-template-columns:1fr 1fr}
+.author-post-album.n3,.author-post-album.n4,.author-post-album.n5{grid-template-columns:repeat(2,1fr)}
+.author-post-album.n3 img:first-child{grid-row:span 2}
+.author-post-album.n5 img:first-child{grid-row:span 2}
+.author-post-album.featured{grid-template-columns:1.6fr 1fr}
+.author-post-album.featured img:first-child{grid-row:span 2}
+.author-post-album.stack{grid-template-columns:1fr}
+.author-post-album img{width:100%;height:155px;object-fit:cover;display:block;cursor:pointer}
+.author-post-album.n1 img,.author-post-album.stack img{height:260px}
+.author-post-album.featured img:first-child{height:313px}.author-post-album.featured img:not(:first-child){height:155px}
+.author-post-album img:hover{filter:brightness(.97)}
+.author-post-footer{padding:8px 13px 11px}
+.author-post-stats{display:flex;justify-content:space-between;gap:8px;font-size:8px;color:#96857c;margin-bottom:7px}
+.author-post-actions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #eee5df;border-bottom:1px solid #eee5df}
+.author-post-action{border:0;background:#fff;padding:9px 5px;color:#6f625b;font-size:9px;font-weight:900}
+.author-post-action:hover{background:#faf4f0;color:#392820}
+.author-reactions{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.author-reaction{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 8px;font-size:10px;cursor:pointer}
+.author-reaction.active{background:#f4e0dc;border-color:#d9aaa8}
+.author-reaction-count{font-size:8px;color:var(--muted)}
+.author-post-comments{padding:4px 0 0}
+.author-post-comments .feature-comment-form{display:flex;gap:7px;align-items:flex-end}
+.author-post-comments textarea{min-height:42px}
+.author-social-status{margin:10px 0}
+.author-social-side-list{display:grid;gap:7px;margin-top:9px}
+.author-social-side-item{display:flex;gap:8px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.author-social-side-cover{width:34px;height:46px;object-fit:cover;border-radius:6px;background:var(--lightpink);flex:none}
+.author-social-side-copy{min-width:0}.author-social-side-copy b{display:block;font:400 13px Georgia,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.author-social-side-copy span{font-size:8px;color:var(--muted)}
+.author-composer-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.author-composer-grid .wide{grid-column:1/-1}
+.author-album-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.author-album-preview img{width:100%;height:70px;object-fit:cover;border-radius:7px}
+@media(max-width:800px){.author-social-body{grid-template-columns:1fr}.author-social-side{display:none}}
+@media(max-width:560px){.author-social-head{padding:16px}.author-social-body{padding:10px}.author-composer-grid{grid-template-columns:1fr}.author-composer-grid .wide{grid-column:auto}.author-post-album img{height:125px}.author-post-album.n1 img,.author-post-album.stack img{height:210px}.author-post-title{font-size:19px}}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -2271,8 +2341,8 @@ window.avxCarouselHook = function(item){
         <button id="menu-author-home" type="button">✍️ AUTHOR HOME</button>
         <button id="menu-new-story" type="button">📝 CREATE STORY</button>
         <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
-        <div id="menu-owner-divider" class="menu-divider hidden"></div>
-        <button id="menu-owner-timeline" class="menu-owner hidden" type="button">👑 OWNER TIMELINE</button>
+        <div id="menu-owner-divider" class="menu-divider"></div>
+        <button id="menu-owner-timeline" class="menu-owner" type="button">✍️ AUTHOR LOUNGE</button>
         <div class="menu-divider"></div>
         <button id="menu-logout" type="button">🚪 SIGN OUT</button>
       </div>
@@ -2415,7 +2485,7 @@ function notice(id,text,ok=false){const e=typeof id==='string'?document.getEleme
 function isTestStory(s){return /^(test|test book|sample book|demo book|untitled story)(\s*\d+)?$/i.test(String(s?.title||'').trim())}
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
 async function isOwnerAccount(){if(!session)return false;const r=await sb.from('app_owners').select('user_id').eq('user_id',session.user.id).maybeSingle();return !r.error&&!!r.data}
-async function loadAuthorAvatar(){const wrap=document.getElementById('author-menu-wrap'),content=document.getElementById('author-avatar-content'),email=document.getElementById('author-menu-email');if(!wrap||!content||!session){wrap?.classList.add('hidden');return}wrap.classList.remove('hidden');if(email)email.textContent=session.user.email||'';const r=await sb.from('profiles').select('pen_name,display_name,avatar_url').eq('id',session.user.id).maybeSingle();const p=r.data||{};const name=p.pen_name||p.display_name||session.user.email?.split('@')[0]||'Author';content.innerHTML=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="${esc(name)}">`:`<span class="author-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</span>`;const owner=await isOwnerAccount();document.getElementById('menu-owner-timeline')?.classList.toggle('hidden',!owner);document.getElementById('menu-owner-divider')?.classList.toggle('hidden',!owner)}
+async function loadAuthorAvatar(){const wrap=document.getElementById('author-menu-wrap'),content=document.getElementById('author-avatar-content'),email=document.getElementById('author-menu-email');if(!wrap||!content||!session){wrap?.classList.add('hidden');return}wrap.classList.remove('hidden');if(email)email.textContent=session.user.email||'';const r=await sb.from('profiles').select('pen_name,display_name,avatar_url').eq('id',session.user.id).maybeSingle();const p=r.data||{};const name=p.pen_name||p.display_name||session.user.email?.split('@')[0]||'Author';content.innerHTML=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="${esc(name)}">`:`<span class="author-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</span>`;document.getElementById('menu-owner-timeline')?.classList.remove('hidden');document.getElementById('menu-owner-divider')?.classList.remove('hidden')}
 function updateAuthUI(){const author=document.getElementById('author-btn'),reader=document.getElementById('reader-btn'),bell=document.getElementById('notify-btn');if(session){author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='MY ACCOUNT';bell.classList.remove('hidden');loadUnreadCount();loadAuthorAvatar();avxStartNotificationPolling().catch(()=>{})}else{avxStopNotificationPolling();author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='READER SIGN IN';bell.classList.add('hidden');document.getElementById('author-menu-wrap')?.classList.add('hidden');document.getElementById('author-menu')?.classList.add('hidden')}}
 
 async function openAuth(mode='reader'){
@@ -3151,7 +3221,7 @@ async function loadMine(){const r=await sb.from('stories').select('*').eq('owner
   const visibleStories=stories.filter(s=>filter==='ALL'||normalizeStoryStatus(s)===filter);
   list.innerHTML=visibleStories.map(s=>{const ins=insightMap[s.id];const total=Number(ins?.total_chapter_opens??s.views??0);const readers=Number(ins?.unique_readers??0);const repeats=Math.max(0,total-readers);return `<div class="story-item">${s.cover_url?`<img class="mine-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} cover">`:`<div class="mine-cover cover-fallback" style="font-size:11px;padding:6px">NO COVER</div>`}<div><strong>${esc(s.title)}</strong><div class="story-item-status">${storyStatusBadge(s)}</div><div class="story-meta">${s.published?'PUBLISHED':'UNPUBLISHED'}${s.series_name?` • SERIES${Number(s.series_book_number)>0?` · BOOK ${Number(s.series_book_number)}`:''}`:''} • ${esc(s.share_slug||'')}</div><div class="story-meta">Updated ${esc(formatDate(s.updated_at||s.created_at))}</div>${s.published?`<div class="story-meta story-read-count">${total.toLocaleString()} reads • ${readers.toLocaleString()} readers</div><div class="story-meta">${repeats.toLocaleString()} repeat chapter opens</div>`:''}</div><div class="item-actions"><button class="btn alt edit-mine" data-id="${s.id}">EDIT</button>${s.published?`<button class="btn alt open-mine" data-slug="${esc(s.share_slug||s.id)}">VIEW</button>`:''}<button class="btn ${s.published?'alt':''} toggle-mine" data-id="${s.id}" data-pub="${s.published}">${s.published?'UNPUBLISH':'PUBLISH'}</button><button class="btn danger delete-mine" data-id="${s.id}">DELETE</button></div></div>`}).join('');list.querySelectorAll('.edit-mine').forEach(b=>b.onclick=()=>openEditor(b.dataset.id));list.querySelectorAll('.open-mine').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));list.querySelectorAll('.toggle-mine').forEach(b=>b.onclick=()=>togglePublish(b.dataset.id,b.dataset.pub==='true'));list.querySelectorAll('.delete-mine').forEach(b=>b.onclick=()=>deleteStory(b.dataset.id))}
 async function cleanupTestBooks(){if(!confirm('Permanently delete your obvious test/sample books and their chapters?'))return;const r=await sb.from('stories').select('id,title').eq('owner_id',session.user.id);if(r.error)return alert(r.error.message);const tests=(r.data||[]).filter(isTestStory);if(!tests.length)return alert('No obvious test book was found.');for(const s of tests)await sb.from('stories').delete().eq('id',s.id).eq('owner_id',session.user.id);alert(tests.length+' test book(s) deleted.');await loadMine();await loadHome()}
-async function togglePublish(id,isPublished){if(isPublished){if(!confirm('Unpublish this story? It will disappear from the homepage.'))return;const r=await sb.from('stories').update({published:false,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);if(r.error)alert(r.error.message);else{loadMine();loadHome()}return}const s=await sb.from('stories').select('cover_url').eq('id',id).eq('owner_id',session.user.id).single();if(!s.data?.cover_url){alert('Please edit this story and upload a book cover before publishing.');return}const r=await sb.from('stories').update({published:true,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);if(r.error)alert(r.error.message);else{loadMine();loadHome()}}
+async function togglePublish(id,isPublished){if(isPublished){if(!confirm('Unpublish this story? It will disappear from the homepage.'))return;const r=await sb.from('stories').update({published:false,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);if(r.error)alert(r.error.message);else{loadMine();loadHome()}return}const s=await sb.from('stories').select('*').eq('id',id).eq('owner_id',session.user.id).single();if(!s.data?.cover_url){alert('Please edit this story and upload a book cover before publishing.');return}const r=await sb.from('stories').update({published:true,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);if(r.error)alert(r.error.message);else{const fresh=await sb.from('stories').select('*').eq('id',id).eq('owner_id',session.user.id).maybeSingle();if(fresh.data)await upsertAutoTimelinePost('STORY',fresh.data);loadMine();loadHome()}}
 async function deleteStory(id){if(!confirm('Permanently delete this story, chapters, likes and comments?'))return;const r=await sb.from('stories').delete().eq('id',id).eq('owner_id',session.user.id);if(r.error)alert(r.error.message);else{await loadMine();await loadHome()}}
 
 async function getStoryWithChapters(id){const s=await sb.from('stories').select('*').eq('id',id).eq('owner_id',session.user.id).single();if(s.error)return s;const c=await sb.from('chapters').select('*').eq('story_id',id).order('chapter_number',{ascending:true});s.data.chapters=c.data||[];return s}
@@ -3164,6 +3234,15 @@ function renderChapterList(){const box=document.getElementById('chapter-list');i
 function loadChapterFields(){const c=editorChapters[editorChapterIndex];document.getElementById('ed-ctitle').value=c.title||('Chapter '+(editorChapterIndex+1));document.getElementById('ed-content').innerHTML=looksHtml(c.content)?safeHtml(c.content):renderContent(c.content||'')}
 async function uploadImage(bucket,file,prefix=''){if(!file)return null;if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8)||'jpg';const path=`${session.user.id}/${prefix}${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const u=await sb.storage.from(bucket).upload(path,file,{upsert:false,contentType:file.type||'image/jpeg'});if(u.error)throw u.error;return sb.storage.from(bucket).getPublicUrl(path).data.publicUrl}
 async function uniqueSlug(title,id=null){const base=slugify(title);let s=base,n=2;while(n<30){let q=sb.from('stories').select('id').eq('share_slug',s).limit(1);if(id)q=q.neq('id',id);const r=await q;if(r.error)throw r.error;if(!r.data?.length)return s;s=base+'-'+n++}return base+'-'+Date.now()}
+async function upsertAutoTimelinePost(kind, story, chapter=null){
+  if(!session||!story?.id||!story.published)return;
+  const sourceKey=kind==='STORY'?`story:${story.id}:published`:`chapter:${story.id}:${chapter?.chapter_number||0}`;
+  const title=kind==='STORY'?`Published: ${story.title}`:`Updated Chapter ${chapter?.chapter_number||''}: ${chapter?.title||'New chapter'}`;
+  const caption=kind==='STORY'?(story.description||`A new story is now published: ${story.title}`):`Chapter ${chapter?.chapter_number||''} of ${story.title} is now live.`;
+  const payload={owner_id:session.user.id,story_id:story.id,chapter_id:chapter?.id||null,post_type:kind,source_key:sourceKey,media_urls:story.cover_url?[story.cover_url]:[],poster_url:story.cover_url||null,album_layout:'featured',title,caption,dialogue:null,published:true,updated_at:new Date().toISOString()};
+  const q=await sb.from('owner_timeline').upsert(payload,{onConflict:'owner_id,source_key'});
+  if(q.error)console.warn('Automatic timeline post unavailable:',q.error.message);
+}
 async function saveStory(publishState,mode='save'){syncCurrentChapter();const st=document.getElementById('editor-status'),title=document.getElementById('ed-title').value.trim();if(!title){notice(st,'Please enter a story title.');return}if(!session){notice(st,'Your session expired. Sign in again.');return}try{notice(st,'Saving…',true);
   const wasExisting=!!editorStory.id;
   const wasPublished=!!editorStory.published;
@@ -3171,6 +3250,7 @@ async function saveStory(publishState,mode='save'){syncCurrentChapter();const st
   let oldChapterCount=0;let oldChapterSignature='';
   if(wasExisting){const old=await sb.from('chapters').select('chapter_number,title,content,published').eq('story_id',editorStory.id).order('chapter_number',{ascending:true});if(!old.error){const oldRows=old.data||[];oldChapterCount=oldRows.length;hadPublishedChapter=oldRows.some(c=>c.published);oldChapterSignature=JSON.stringify(oldRows.filter(c=>c.published).map(c=>({n:c.chapter_number,t:c.title||'',c:c.content||''})))} }
   let coverUrl=editorStory.cover_url||null;if(editorCoverFile)coverUrl=await uploadImage('story-covers',editorCoverFile,'cover-');if(publishState&&!coverUrl){notice(st,'Upload a book cover before publishing. The homepage uses the actual book cover image.');return}const tags=document.getElementById('ed-tags').value.split(',').map(x=>x.trim()).filter(Boolean);const isSeries=document.getElementById('ed-story-type').value==='series';const seriesName=isSeries?document.getElementById('ed-series-name').value.trim()||null:null;const rawBookNo=isSeries?Number(document.getElementById('ed-series-book').value):null;const seriesBookNumber=isSeries&&(Number.isFinite(rawBookNo)&&rawBookNo>0)?Math.floor(rawBookNo):null;if(isSeries&&!seriesName){notice(st,'Please enter a Series Name for a Series Story.');return}const selectedStatus=document.getElementById('ed-story-status')?.value||normalizeStoryStatus(editorStory);const storyStatus=publishState?(selectedStatus==='UNPUBLISHED'?'ON-GOING':selectedStatus):'UNPUBLISHED';const payload={title,description:document.getElementById('ed-desc').value.trim()||null,cover_url:coverUrl,tags,published:publishState,story_status:storyStatus,series_name:seriesName,series_book_number:seriesBookNumber,updated_at:new Date().toISOString()};let r;if(editorStory.id){payload.share_slug=editorStory.share_slug||await uniqueSlug(title,editorStory.id);r=await sb.from('stories').update(payload).eq('id',editorStory.id).eq('owner_id',session.user.id).select('*').single()}else{payload.share_slug=await uniqueSlug(title);r=await sb.from('stories').insert({...payload,owner_id:session.user.id}).select('*').single()}if(r.error)throw r.error;editorStory={...r.data};const storyId=r.data.id;const d=await sb.from('chapters').delete().eq('story_id',storyId);if(d.error)throw d.error;const rows=editorChapters.map((c,i)=>({story_id:storyId,chapter_number:i+1,title:c.title||('Chapter '+(i+1)),content:c.content||'',published:!!c.published}));if(rows.length){const cr=await sb.from('chapters').insert(rows);if(cr.error)throw cr.error}
+  if(publishState){if(!wasPublished)await upsertAutoTimelinePost('STORY',r.data);if(oldChapterSignature!==JSON.stringify(rows.filter(x=>x.published).map(c=>({n:c.chapter_number,t:c.title||'',c:c.content||''})))){const latest=[...rows].reverse().find(c=>c.published);if(latest){const latestSaved=await sb.from('chapters').select('id,chapter_number,title,published').eq('story_id',storyId).eq('chapter_number',latest.chapter_number).maybeSingle();if(latestSaved.data)await upsertAutoTimelinePost('CHAPTER',r.data,latestSaved.data)}}}
   if(publishState){const newPublishedRows=rows.filter(x=>x.published);const newChapterSignature=JSON.stringify(newPublishedRows.map(c=>({n:c.chapter_number,t:c.title||'',c:c.content||''})));const metaChanged=wasExisting&&(editorStory.title||'')!==(r.data.title||'')||(wasExisting&&(editorStory.description||'')!==(r.data.description||''))||(wasExisting&&(editorStory.cover_url||'')!==(r.data.cover_url||''));if(!wasExisting)await avxNotifyStoryFollowers(r.data,'new');else if(!wasPublished)await avxNotifyStoryFollowers(r.data,'new');else if(oldChapterSignature!==newChapterSignature||metaChanged)await avxNotifyStoryFollowers(r.data,'update')}
   editorCoverFile=null;notice(st,mode==='unpublish'?'Story saved and unpublished.':publishState?'Story saved and published. Your cover now appears on the homepage.':'Changes saved as draft.',true);await loadHome();setTimeout(openAuthorHome,500)}catch(e){console.error(e);notice(st,'Save failed: '+(e.message||e))}}
 
@@ -3319,98 +3399,177 @@ async function openSoundroomModal(){
   document.getElementById('soundroom-close').onclick=close;tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});
 }
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
+async function getAuthorTimelineProfile(userId){
+  if(!userId)return {};
+  try{const r=await sb.from('profiles').select('display_name,pen_name,avatar_url').eq('id',userId).maybeSingle();return r.data||{};}catch(e){return {}}
+}
+function timelineMedia(x){
+  let a=Array.isArray(x?.media_urls)?x.media_urls.filter(Boolean):[];
+  if(!a.length&&x?.poster_url)a=[x.poster_url];
+  return a.slice(0,9);
+}
+function timelineAlbumHtml(x){
+  const a=timelineMedia(x);if(!a.length)return '';
+  const layout=['grid','featured','stack'].includes(x.album_layout)?x.album_layout:(a.length===1?'stack':a.length===2?'grid':'featured');
+  const cls=`author-post-album ${layout} n${Math.min(a.length,5)}`;
+  return `<div class="${cls}">${a.map((u,i)=>`<img src="${esc(u)}" alt="${esc(x.title||'Timeline image')} ${i+1}" loading="lazy" data-timeline-image="${esc(u)}">`).join('')}</div>`;
+}
+async function getTimelineReactions(ids){
+  if(!ids.length)return {};
+  const r=await sb.from('author_timeline_reactions').select('timeline_id,user_id,reaction').in('timeline_id',ids);
+  const map={};(r.data||[]).forEach(x=>{(map[x.timeline_id]||(map[x.timeline_id]=[])).push(x)});return map;
+}
+async function renderTimelineReactions(postId,boxId){
+  const box=document.getElementById(boxId);if(!box)return;
+  const r=await sb.from('author_timeline_reactions').select('user_id,reaction').eq('timeline_id',postId);
+  if(r.error){box.innerHTML='';return}
+  const rows=r.data||[], mine=session?rows.find(x=>x.user_id===session.user.id):null;
+  const counts={};rows.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);
+  const types=[['❤️','Love'],['👍','Like'],['😂','Haha'],['😮','Wow'],['😢','Sad']];
+  box.innerHTML=types.map(([emoji,label])=>`<button type="button" class="author-reaction ${mine?.reaction===emoji?'active':''}" data-reaction="${emoji}" title="${label}">${emoji} ${counts[emoji]?`<span class="author-reaction-count">${counts[emoji]}</span>`:''}</button>`).join('');
+  box.querySelectorAll('[data-reaction]').forEach(b=>b.onclick=async()=>{
+    if(!session){openAuth('reader');return}
+    const reaction=b.dataset.reaction;
+    if(mine?.reaction===reaction)await sb.from('author_timeline_reactions').delete().eq('timeline_id',postId).eq('user_id',session.user.id);
+    else {
+      const q=await sb.from('author_timeline_reactions').upsert({timeline_id:postId,user_id:session.user.id,reaction},{onConflict:'timeline_id,user_id'});
+      if(q.error){alert(q.error.message);return}
+    }
+    renderTimelineReactions(postId,boxId);
+  });
+}
 async function openOwnerTimeline(){
   if(!session){openAuth('author');return}
-  if(!(await isOwnerAccount())){alert('Owner access only.');return}
-  const r=await sb.from('owner_timeline').select('*').order('created_at',{ascending:false}).limit(100);
-  const media=await sb.from('owner_timeline_media').select('*').eq('owner_id',session.user.id).order('created_at',{ascending:false}).limit(50);
-  const rooms=await sb.from('owner_chat_rooms').select('*').eq('owner_id',session.user.id).order('created_at',{ascending:false}).limit(30);
-  const rows=r.error?[]:(r.data||[]), mids=media.error?[]:(media.data||[]), chatrooms=rooms.error?[]:(rooms.data||[]);
-  open(`<div class="panel"><div class="dash"><div class="dash-top"><div><div class="dash-brand">Avanitaxx <span>Stories</span></div><div class="dash-user">OWNER TIMELINE • PRIVATE STUDIO</div></div><div class="actions" style="margin:0"><button class="btn alt" id="owner-back">BACK</button></div></div><div id="owner-status" class="status"></div>
-  <div class="owner-studio">
-    <div class="owner-composer"><div class="kicker">YOUR TIMELINE STUDIO</div><h2 style="margin:4px 0 6px">Everything you want readers to hear, read & join.</h2><div class="meta">Only the verified owner can create timeline posts, upload media, and open community rooms.</div>
-      <div class="owner-tools"><button class="owner-tool active" data-compose="note">📝 Note</button><button class="owner-tool" data-compose="music">🎧 Soundroom</button><button class="owner-tool" data-compose="chat">💬 Community Chat</button></div>
-      <div id="owner-compose"></div>
-    </div>
-    <div><div class="kicker">TIMELINE</div><div class="story-list">${rows.length?rows.map(x=>`<div class="owner-card"><div class="owner-icon">${x.dialogue ? '❝' : ''}-card-body"><strong>${esc(x.title||'Untitled update')}</strong><div class="story-meta">${x.published?'PUBLISHED':'DRAFT'} • ${esc(formatDate(x.created_at))}</div>${x.poster_url?`<img class="feature-media" src="${esc(x.poster_url)}" alt="">`:''}${x.caption?`<div style="margin-top:8px">${esc(x.caption)}</div>`:''}${x.dialogue?`<div style="margin-top:8px;font-style:italic">“${esc(x.dialogue)}”</div>`:''}<div class="item-actions" style="margin-top:12px"><button class="btn alt owner-edit" data-id="${x.id}">EDIT</button><button class="btn danger owner-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No timeline notes yet.</div>`}</div></div>
-    <div><div class="kicker">AVANITAXX SOUNDROOM</div><div class="story-list">${mids.length?mids.map(x=>`<div class="owner-card"><div class="owner-icon">♫</div><div class="owner-card-body"><strong>${esc(x.title||'Untitled track')}</strong><div class="owner-small">${x.published?'PUBLISHED':'HIDDEN'} • ${esc(formatDate(x.created_at))}</div>${x.cover_url?`<img class="feature-cover" src="${esc(x.cover_url)}" alt="">`:''}${x.caption?`<div style="margin-top:7px">${esc(x.caption)}</div>`:''}<audio controls preload="none" src="${esc(x.media_url)}"></audio><button class="soundroom-track-btn" type="button" data-track-id="${esc(x.id)}">◉ PLAY IN SOUNDROOM</button><div class="item-actions" style="margin-top:10px"><button class="btn alt owner-media-toggle" data-id="${x.id}" data-published="${x.published?'1':'0'}">${x.published?'HIDE':'PUBLISH'}</button><button class="btn danger owner-media-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No uploaded music yet.</div>`}</div></div>
-    <div><div class="kicker">COMMUNITY ROOMS</div><div class="story-list">${chatrooms.length?chatrooms.map(x=>`<div class="owner-card"><div class="owner-icon">☵</div><div class="owner-card-body"><div class="owner-room-head"><strong>${esc(x.name||'Community Room')}</strong><span class="owner-small">${x.published?'OPEN':'DRAFT'}</span></div>${x.description?`<div style="margin-top:7px">${esc(x.description)}</div>`:''}<div class="item-actions" style="margin-top:10px"><button class="btn alt owner-chat-open" data-id="${x.id}">OPEN CHAT</button><button class="btn danger owner-room-delete" data-id="${x.id}">DELETE</button></div></div></div>`).join(''):`<div class="empty">No community room yet. You decide when to create one.</div>`}</div></div>
-  </div></div></div>`);
-  document.getElementById('owner-back').onclick=openAuthorHome;
-  const composeNote=()=>{document.getElementById('owner-compose').innerHTML=`<div class="profile-grid"><div><label>TITLE</label><input id="ot-title" class="field" placeholder="A note for your readers"><label>CAPTION / NOTE</label><textarea id="ot-caption" class="field" rows="5" placeholder="Write something personal, an announcement, a thought, or a behind-the-scenes note…"></textarea></div><div><label>DIALOGUE / QUOTE (OPTIONAL)</label><textarea id="ot-dialogue" class="field" rows="5" placeholder="A memorable line…"></textarea><label>NOTE IMAGE (OPTIONAL)</label><input id="ot-image" class="field" type="file" accept="image/*"><div class="help">Owner-only image upload. The image is resized and compressed before storage.</div><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="ot-published" type="checkbox" checked> Publish this note</label></div></div><button class="btn" id="owner-save-note" style="width:100%;margin-top:14px">PUBLISH NOTE</button>`;document.getElementById('owner-save-note').onclick=async()=>{try{notice('owner-status','Publishing…',true);const f=document.getElementById('ot-image').files?.[0];let poster=null;if(f){const optimized=await optimizeImageFile(f,1600,.82);poster=await uploadOwnerMedia(optimized)}const q=await sb.from('owner_timeline').insert({owner_id:session.user.id,title:document.getElementById('ot-title').value.trim()||null,caption:document.getElementById('ot-caption').value.trim()||null,dialogue:document.getElementById('ot-dialogue').value.trim()||null,poster_url:poster,published:document.getElementById('ot-published').checked,updated_at:new Date().toISOString()});if(q.error)throw q.error;if(document.getElementById('ot-published')?.checked){await avxNotifyFollowers({authorId:session.user.id,storyId:null,message:`✦ AVANITAXX posted a new author update: ${document.getElementById('ot-title').value.trim()||'Author Note'}`})}openOwnerTimeline()}catch(e){notice('owner-status',e.message||String(e))}}};
-  const composeMusic=()=>{document.getElementById('owner-compose').innerHTML=`<label>TRACK TITLE</label><input id="om-title" class="field" placeholder="Song / soundtrack title"><label>SHORT NOTE (OPTIONAL)</label><textarea id="om-caption" class="field" rows="3" placeholder="Why this song belongs here…"></textarea><label>ALBUM / COVER IMAGE (OPTIONAL)</label><input id="om-cover" class="field" type="file" accept="image/*"><label>AUDIO FILE</label><input id="om-file" class="field" type="file" accept="audio/*"><div class="help">Owner-only upload. Cover art is optimized before storage; audio stays in Supabase Storage.</div><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="om-published" type="checkbox" checked> Show this music publicly</label><button class="btn" id="owner-save-music" style="width:100%;margin-top:14px">UPLOAD MUSIC</button>`;document.getElementById('owner-save-music').onclick=async()=>{try{notice('owner-status','Uploading music…',true);const f=document.getElementById('om-file').files?.[0];if(!f)throw new Error('Please choose an audio file.');let cover=null;const cf=document.getElementById('om-cover').files?.[0];if(cf)cover=await uploadOwnerMedia(await optimizeImageFile(cf,1200,.82));const url=await uploadOwnerMedia(f);const q=await sb.from('owner_timeline_media').insert({owner_id:session.user.id,title:document.getElementById('om-title').value.trim()||f.name,caption:document.getElementById('om-caption').value.trim()||null,media_url:url,media_type:'audio',published:document.getElementById('om-published').checked,cover_url:cover});if(q.error)throw q.error;openOwnerTimeline()}catch(e){notice('owner-status',e.message||String(e))}}};
-  const composeChat=()=>{document.getElementById('owner-compose').innerHTML=`<label>COMMUNITY NAME</label><input id="oc-name" class="field" placeholder="e.g. Avanitaxx Readers Lounge"><label>DESCRIPTION</label><textarea id="oc-desc" class="field" rows="3" placeholder="What is this community for?"></textarea><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="oc-published" type="checkbox" checked> Open this community to readers</label><button class="btn" id="owner-create-room" style="width:100%;margin-top:14px">CREATE COMMUNITY CHAT</button>`;document.getElementById('owner-create-room').onclick=async()=>{try{notice('owner-status','Creating community…',true);const q=await sb.from('owner_chat_rooms').insert({owner_id:session.user.id,name:document.getElementById('oc-name').value.trim()||'Avanitaxx Community',description:document.getElementById('oc-desc').value.trim()||null,published:document.getElementById('oc-published').checked});if(q.error)throw q.error;openOwnerTimeline()}catch(e){notice('owner-status',e.message||String(e))}}};
-  document.querySelectorAll('[data-compose]').forEach(b=>{b.type='button';b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();document.querySelectorAll('[data-compose]').forEach(x=>x.classList.remove('active'));b.classList.add('active');const fn={note:composeNote,music:composeMusic,chat:composeChat}[b.dataset.compose];if(fn)fn()})});
-  composeNote();
-  document.querySelectorAll('.owner-edit').forEach(b=>b.onclick=()=>openOwnerTimelineEditor(b.dataset.id));
-  document.querySelectorAll('.owner-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this timeline note?'))return;const d=await sb.from('owner_timeline').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(d.error)alert(d.error.message);else openOwnerTimeline()});
-  document.querySelectorAll('.owner-media-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this music entry?'))return;const d=await sb.from('owner_timeline_media').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(d.error)alert(d.error.message);else openOwnerTimeline()});
-  document.querySelectorAll('.owner-media-toggle').forEach(b=>b.onclick=async()=>{const next=b.dataset.published!=='1';const q=await sb.from('owner_timeline_media').update({published:next}).eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerTimeline()});
-  document.querySelectorAll('.owner-room-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this community room?'))return;const d=await sb.from('owner_chat_rooms').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(d.error)alert(d.error.message);else openOwnerTimeline()});
-  document.querySelectorAll('.owner-chat-open').forEach(b=>b.onclick=()=>openOwnerCommunity(b.dataset.id));
-}
-
-async function openOwnerCommunity(roomId){
-  if(!(await isOwnerAccount()))return;
-  const rr=await sb.from('owner_chat_rooms').select('*').eq('id',roomId).eq('owner_id',session.user.id).maybeSingle();
-  if(rr.error||!rr.data){alert(rr.error?.message||'Community not found.');return}
-  const [m,members]=await Promise.all([
-    sb.from('owner_chat_messages').select('*').eq('room_id',roomId).order('created_at',{ascending:true}).limit(80),
-    sb.from('owner_chat_members').select('*').eq('room_id',roomId).eq('owner_id',session.user.id).limit(100)
+  const [postsQ,storiesQ]=await Promise.all([
+    sb.from('owner_timeline').select('*').or(`published.eq.true,owner_id.eq.${session.user.id}`).order('created_at',{ascending:false}).limit(80),
+    sb.from('stories').select('id,title,cover_url,published,updated_at').eq('published',true).order('updated_at',{ascending:false}).limit(40)
   ]);
-  const memberRows=members.data||[];let pmap={};const ids=memberRows.map(x=>x.user_id).filter(Boolean);if(ids.length){const pr=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',ids);(pr.data||[]).forEach(p=>pmap[p.id]=p)}
-  const memberList=memberRows.map(x=>`<span class="chat-member-pill">${esc(pmap[x.user_id]?.pen_name||pmap[x.user_id]?.display_name||'Member')} <button class="owner-remove-member" data-id="${esc(x.id)}" style="border:0;background:none;cursor:pointer">×</button></span>`).join('');
-  open(`<div class="panel feature-owner-panel"><div class="dash"><div class="feature-owner-head"><div><div class="dash-brand">Avanitaxx <span>Stories</span></div><div class="dash-user">COMMUNITY CHAT • OWNER CONTROL</div></div><button class="btn alt" id="chat-back">BACK</button></div><div id="chat-status" class="status"></div><div class="owner-composer"><div class="kicker">${esc(rr.data.name)}</div><div class="meta">You control invitations and moderation. Members can chat, reply, and send pictures.</div><div class="owner-invite-row"><input id="chat-invite" class="field" placeholder="Invite by pen name or display name"><button class="btn" id="chat-invite-btn">INVITE</button></div><div class="chat-members">${memberList||'<span class="meta">No invited members yet.</span>'}</div><div class="owner-chat" id="owner-chat-list" style="max-height:52vh;overflow:auto;margin-top:14px">${m.error?`<div class="empty">${esc(m.error.message)}</div>`:(m.data||[]).length?m.data.map(x=>`<div class="owner-chat-msg" data-message-id="${esc(x.id)}"><strong>${esc(x.author_name||'Reader')}</strong><div>${x.reply_to?`<div class="chat-msg-reply">Replying to a message</div>`:''}${x.message?`<div>${esc(x.message)}</div>`:''}${x.image_url?`<img class="chat-attachment" src="${esc(x.image_url)}" alt="Shared image" loading="lazy">`:''}</div><div class="owner-small">${esc(formatDate(x.created_at))}</div><div class="chat-msg-actions"><button class="owner-chat-delete" data-id="${esc(x.id)}">DELETE</button></div></div>`).join(''):`<div class="empty">No messages yet.</div>`}</div><div class="chat-compose-row"><textarea id="chat-message" class="field" rows="3" placeholder="Write a message as the owner…"></textarea><button class="btn" id="chat-send">POST</button></div><label style="display:flex;align-items:center;gap:8px;margin-top:8px"><input id="chat-image" type="file" accept="image/*"> <span class="help">Optional image • compressed automatically</span></label></div></div></div>`);
-  document.getElementById('chat-back').onclick=openOwnerTimeline;
-  document.getElementById('chat-invite-btn').onclick=async()=>{try{const q=document.getElementById('chat-invite').value.trim();if(!q)return;let pr=await sb.from('profiles').select('id,display_name,pen_name').or(`display_name.ilike.%${q}%,pen_name.ilike.%${q}%`).limit(5);if(pr.error)throw pr.error;const target=(pr.data||[])[0];if(!target)throw new Error('No member profile matched that name or email.');const ins=await sb.from('owner_chat_members').insert({room_id:roomId,user_id:target.id,owner_id:session.user.id});if(ins.error)throw ins.error;document.getElementById('chat-invite').value='';openOwnerCommunity(roomId)}catch(e){notice('chat-status',e.message||String(e))}};
-  document.querySelectorAll('.owner-remove-member').forEach(b=>b.onclick=async()=>{if(!confirm('Remove this member from the room?'))return;const q=await sb.from('owner_chat_members').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerCommunity(roomId)});
-  document.querySelectorAll('.owner-chat-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this message?'))return;const q=await sb.from('owner_chat_messages').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerCommunity(roomId)});
-  document.getElementById('chat-send').onclick=async()=>{try{const msg=document.getElementById('chat-message').value.trim(),file=document.getElementById('chat-image').files?.[0];if(!msg&&!file)return;let image_url=null;if(file)image_url=await uploadCommunityImage(file);const q=await sb.from('owner_chat_messages').insert({room_id:roomId,owner_id:session.user.id,author_name:'AVANITAXX',message:msg||null,sender_id:session.user.id,image_url,reply_to:null});if(q.error)throw q.error;openOwnerCommunity(roomId)}catch(e){notice('chat-status',e.message||String(e))}};
-   /* OWNER CHAT: live Supabase Realtime listener */
-   let ownerChatChannel=null;
-   const ownerChatList=document.getElementById('owner-chat-list');
-   const appendOwnerLiveMessage=(x)=>{
-     if(!ownerChatList||!x)return;
-     const key=String(x.id);
-     if(ownerChatList.querySelector(`[data-message-id="${CSS.escape(key)}"]`))return;
-     const el=document.createElement('div');
-     el.className='owner-chat-msg';
-     el.dataset.messageId=key;
-     el.innerHTML=`<strong>${esc(x.author_name||'Reader')}</strong><div>${x.reply_to?'<div class="chat-msg-reply">Replying to a message</div>':''}${x.message?`<div>${esc(x.message)}</div>`:''}${x.image_url?`<img class="chat-attachment" src="${esc(x.image_url)}" alt="Shared image" loading="lazy">`:''}</div><div class="owner-small">${esc(formatDate(x.created_at))}</div><div class="chat-msg-actions"><button class="owner-chat-delete" data-id="${esc(x.id)}">DELETE</button></div>`;
-     ownerChatList.appendChild(el);
-     ownerChatList.scrollTop=ownerChatList.scrollHeight;
-   };
-   const startOwnerChatRealtime=()=>{
-     try{
-       if(ownerChatChannel)sb.removeChannel(ownerChatChannel);
-       ownerChatChannel=sb.channel(`avx-owner-chat-${roomId}`)
-         .on('postgres_changes',{event:'INSERT',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${roomId}`},payload=>{
-           appendOwnerLiveMessage(payload.new);
-           if(payload.new.sender_id!==session.user.id){
-             const box=document.getElementById('chat-status');
-             if(box){box.textContent='New message received live.';box.className='status show ok';setTimeout(()=>box.classList.remove('show'),2200);}
-           }
-         })
-         .on('postgres_changes',{event:'DELETE',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${roomId}`},payload=>{
-           ownerChatList?.querySelector(`[data-message-id="${CSS.escape(String(payload.old.id))}"]`)?.remove();
-         })
-         .subscribe(status=>{
-           const box=document.getElementById('chat-status');
-           if(status==='SUBSCRIBED'&&box){box.textContent='Live chat connected.';box.className='status show ok';setTimeout(()=>box.classList.remove('show'),1800);}
-           if((status==='CHANNEL_ERROR'||status==='TIMED_OUT')&&box){box.textContent='Live connection interrupted. Reconnecting…';box.className='status show err';setTimeout(startOwnerChatRealtime,2500);}
-         });
-     }catch(e){}
-   };
-   startOwnerChatRealtime();
-   const oldChatBack=document.getElementById('chat-back');
-   if(oldChatBack)oldChatBack.onclick=()=>{if(ownerChatChannel)sb.removeChannel(ownerChatChannel);openOwnerTimeline();};
-}
+  const posts=postsQ.error?[]:(postsQ.data||[]),stories=storiesQ.error?[]:(storiesQ.data||[]);
+  const mine=posts.filter(x=>x.owner_id===session.user.id);
+  const profiles={};
+  for(const x of posts){if(!profiles[x.owner_id])profiles[x.owner_id]=await getAuthorTimelineProfile(x.owner_id)}
+  const reactionMap=await getTimelineReactions(posts.map(x=>x.id));
+  const postCard=x=>{
+    const p=profiles[x.owner_id]||{},author=p.pen_name||p.display_name||'Author',av=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(author.slice(0,1).toUpperCase());
+    const type=x.post_type==='CHAPTER'?'Updated Chapter':x.post_type==='STORY'?'Published Story':'Author Post';
+    const commentsId=`timeline-comments-${x.id}`,reactionId=`timeline-reactions-${x.id}`;
+    const rr=reactionMap[x.id]||[], counts={};rr.forEach(r=>counts[r.reaction]=(counts[r.reaction]||0)+1);
+    const total=rr.length;
+    return `<article class="author-post" data-timeline-id="${esc(x.id)}">
+      <div class="author-post-head"><div class="author-post-avatar">${av}</div><div><div class="author-post-author">${esc(author)}</div><div class="author-post-meta">${esc(formatDate(x.created_at))} · ${esc(type)} · ${x.published?'Public':'Draft'}</div></div><button class="author-post-menu" type="button">•••</button></div>
+      <div class="author-post-body"><div class="author-post-type">${esc(type)}</div><h3 class="author-post-title">${esc(x.title||'Untitled update')}</h3>${x.caption?`<div class="author-post-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="author-post-quote">“${esc(x.dialogue)}”</div>`:''}</div>
+      ${timelineAlbumHtml(x)}
+      <div class="author-post-footer"><div class="author-post-stats"><span>${total?`${total} reaction${total===1?'':'s'}`:'Be the first to react'}</span><span>${x.owner_id===session.user.id?'Your post':''}</span></div>
+        <div class="author-post-actions"><button class="author-post-action" data-react-open="${reactionId}">❤️ React</button><button class="author-post-action" data-comment-open="${commentsId}">💬 Comment</button><button class="author-post-action" data-share-timeline="${esc(x.id)}">↗ Share</button></div>
+        <div id="${reactionId}" class="author-reactions"></div>
+        <div id="${commentsId}" class="author-post-comments"></div>
+        ${x.owner_id===session.user.id?`<div style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px"><button class="btn alt timeline-edit" data-id="${esc(x.id)}">EDIT</button><button class="btn danger timeline-delete" data-id="${esc(x.id)}">DELETE</button></div>`:''}
+      </div>
+    </article>`;
+  };
+  open(`<div class="author-social-shell">
+    <div class="author-social-head"><div class="author-social-head-row"><div><div class="kicker">AVANITAXX AUTHOR LOUNGE</div><h2 class="author-social-title">The Author Timeline</h2><div class="author-social-sub">A shared newsroom for every author — publish story launches, chapter updates, notes and image albums, then interact with the whole community.</div></div><button class="author-social-close" id="author-social-close" aria-label="Close">×</button></div></div>
+    <div class="author-social-body">
+      <main class="author-social-main">
+        <section class="author-social-card">
+          <div class="kicker">CREATE A POST</div><h3>What’s new in your story world?</h3><div class="author-social-note">Your post belongs to your signed-in author account. Published posts are visible to all readers and authors.</div>
+          <div class="author-social-tools"><button class="author-social-tool active" data-post-mode="POST">📝 Author Post</button><button class="author-social-tool" data-post-mode="STORY">📖 Published Story</button><button class="author-social-tool" data-post-mode="CHAPTER">📚 Updated Chapter</button></div>
+          <div id="author-composer"></div><div id="author-social-status" class="status author-social-status"></div>
+        </section>
+        <div class="author-social-feed">${posts.length?posts.map(postCard).join(''):'<div class="author-social-card"><b>No timeline posts yet.</b><div class="author-social-note" style="margin-top:5px">Be the first author to share an update.</div></div>'}</div>
+      </main>
+      <aside class="author-social-side">
+        <section class="author-social-side-card"><div class="kicker">YOUR ACCOUNT</div><h3>Author Lounge</h3><div class="author-social-note">You have ${mine.length} timeline post${mine.length===1?'':'s'}. All authors can publish and interact here.</div><button class="btn" id="author-new-post" style="width:100%;margin-top:10px">+ NEW POST</button></section>
+        <section class="author-social-side-card"><div class="kicker">PUBLISHED STORIES</div><div class="author-social-side-list">${stories.slice(0,6).map(st=>`<div class="author-social-side-item"><img class="author-social-side-cover" src="${esc(st.cover_url||'')}" alt="" onerror="this.style.display='none'"><div class="author-social-side-copy"><b>${esc(st.title)}</b><span>${esc(formatDate(st.updated_at))}</span></div></div>`).join('')||'<div class="author-social-note">No published stories yet.</div>'}</div></section>
+      </aside>
+    </div>
+  </div>
+  <div id="author-timeline-viewer" class="fb-note-image-viewer" role="dialog" aria-label="Timeline image viewer"><button type="button" id="author-timeline-viewer-close">×</button><img id="author-timeline-viewer-img" alt=""></div>`);
 
+  document.getElementById('author-social-close').onclick=close;
+  const viewer=document.getElementById('author-timeline-viewer'),viewerImg=document.getElementById('author-timeline-viewer-img');
+  viewer.onclick=e=>{if(e.target===viewer)viewer.classList.remove('open')};document.getElementById('author-timeline-viewer-close').onclick=()=>viewer.classList.remove('open');
+  document.querySelectorAll('[data-timeline-image]').forEach(img=>img.onclick=()=>{viewerImg.src=img.dataset.timelineImage;viewer.classList.add('open')});
+  document.querySelectorAll('[data-comment-open]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.commentOpen)?.scrollIntoView({behavior:'smooth',block:'center'}));
+  document.querySelectorAll('[data-react-open]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.reactOpen)?.scrollIntoView({behavior:'smooth',block:'center'}));
+  document.querySelectorAll('[data-share-timeline]').forEach(b=>b.onclick=async()=>{
+    const url=`${location.origin}${location.pathname}?timeline=${encodeURIComponent(b.dataset.shareTimeline)}`;
+    try{await navigator.clipboard.writeText(url);alert('Timeline share link copied.')}catch(e){prompt('Copy this timeline link:',url)}
+  });
+  document.querySelectorAll('.timeline-edit').forEach(b=>b.onclick=()=>openOwnerTimelineEditor(b.dataset.id));
+  document.querySelectorAll('.timeline-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this timeline post?'))return;const q=await sb.from('owner_timeline').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerTimeline()});
+  for(const x of posts){await renderTimelineReactions(x.id,`timeline-reactions-${x.id}`);await renderFeatureComments('timeline',x.id,`timeline-comments-${x.id}`,x.owner_id)}
+
+  const publishedStories=stories;
+  const renderComposer=async mode=>{
+    const isStory=mode==='STORY',isChapter=mode==='CHAPTER';
+    const storyOptions=publishedStories.map(st=>`<option value="${esc(st.id)}">${esc(st.title)}</option>`).join('');
+    document.getElementById('author-composer').innerHTML=`<div class="author-composer-grid">
+      ${isStory||isChapter?`<div><label>STORY</label><select id="at-story" class="field"><option value="">Choose a published story</option>${storyOptions}</select></div>`:''}
+      ${isChapter?`<div><label>CHAPTER</label><select id="at-chapter" class="field"><option value="">Choose a chapter</option></select></div>`:''}
+      <div class="wide"><label>TITLE</label><input id="at-title" class="field" placeholder="${isStory?'Published story title':isChapter?'Chapter update title':'Post title'}"></div>
+      <div class="wide"><label>CAPTION</label><textarea id="at-caption" class="field" rows="4" placeholder="${isChapter?'Tell readers what changed in this chapter…':'Share an update with the author community…'}"></textarea></div>
+      <div class="wide"><label>QUOTE / DIALOGUE <span class="meta">(optional)</span></label><textarea id="at-dialogue" class="field" rows="2" placeholder="A favorite line or teaser…"></textarea></div>
+      <div><label>ALBUM LAYOUT</label><select id="at-layout" class="field"><option value="grid">Auto / Grid</option><option value="featured">Featured + supporting images</option><option value="stack">Album stack</option></select></div>
+      <div><label>IMAGES</label><input id="at-images" class="field" type="file" accept="image/*" multiple><div class="help">Multiple images become a compact album automatically.</div><div id="at-preview" class="author-album-preview"></div></div>
+      <div class="wide"><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="at-published" type="checkbox" checked> Publish to the community timeline</label></div>
+      <button class="btn wide" id="at-save" type="button">PUBLISH POST</button>
+    </div>`;
+    if(isChapter){
+      const loadChapters=async()=>{
+        const sid=document.getElementById('at-story').value;if(!sid)return;
+        const q=await sb.from('chapters').select('id,chapter_number,title,published').eq('story_id',sid).eq('published',true).order('chapter_number',{ascending:true});
+        const c=document.getElementById('at-chapter');if(c)c.innerHTML='<option value="">Choose a published chapter</option>'+(q.data||[]).map(x=>`<option value="${esc(x.id)}">${esc(x.chapter_number+'. '+(x.title||'Chapter '+x.chapter_number))}</option>`).join('');
+      };
+      document.getElementById('at-story').onchange=loadChapters;await loadChapters();
+    }
+    document.getElementById('at-images').onchange=e=>{
+      const files=[...(e.target.files||[])].slice(0,9),preview=document.getElementById('at-preview');preview.innerHTML='';
+      files.forEach(f=>{const img=document.createElement('img');img.src=URL.createObjectURL(f);preview.appendChild(img)});
+    };
+    document.getElementById('at-save').onclick=async()=>{
+      try{
+        notice('author-social-status','Publishing…',true);
+        const storyId=document.getElementById('at-story')?.value||null,chapterId=document.getElementById('at-chapter')?.value||null;
+        let title=document.getElementById('at-title').value.trim(),caption=document.getElementById('at-caption').value.trim(),dialogue=document.getElementById('at-dialogue').value.trim();
+        let selectedStory=storyId?publishedStories.find(x=>x.id===storyId):null;
+        let selectedChapter=null;
+        if(chapterId){const cq=await sb.from('chapters').select('id,chapter_number,title').eq('id',chapterId).maybeSingle();selectedChapter=cq.data||null}
+        if(isStory&&selectedStory){title=title||selectedStory.title;caption=caption||selectedStory.description||`Now published: ${selectedStory.title}`;}
+        if(isChapter&&selectedChapter){title=title||`Chapter ${selectedChapter.chapter_number}: ${selectedChapter.title||'New chapter'}`;caption=caption||`An updated chapter of ${selectedStory?.title||'my story'} is now live.`;}
+        const files=[...(document.getElementById('at-images').files||[])].slice(0,9);
+        let media=[];
+        for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1400,.8)));
+        if(isStory&&selectedStory?.cover_url&&!media.length)media=[selectedStory.cover_url];
+        if(isChapter&&selectedStory?.cover_url&&!media.length)media=[selectedStory.cover_url];
+        const postType=isStory?'STORY':isChapter?'CHAPTER':'NOTE';
+        const payload={owner_id:session.user.id,story_id:storyId,chapter_id:chapterId,post_type:postType,media_urls:media,poster_url:media[0]||null,album_layout:document.getElementById('at-layout').value,title:title||'Author update',caption:caption||null,dialogue:dialogue||null,published:document.getElementById('at-published').checked,updated_at:new Date().toISOString()};
+        const q=await sb.from('owner_timeline').insert(payload);if(q.error)throw q.error;
+        openOwnerTimeline();
+      }catch(e){notice('author-social-status',e.message||String(e))}
+    };
+  };
+  document.querySelectorAll('[data-post-mode]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-post-mode]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderComposer(b.dataset.postMode)});
+  document.getElementById('author-new-post').onclick=()=>{document.querySelector('[data-post-mode="POST"]')?.click();window.scrollTo({top:0,behavior:'smooth'})};
+  await renderComposer('POST');
+}
 async function openOwnerTimelineEditor(id){
-  if(!(await isOwnerAccount()))return;let item={title:'',caption:'',dialogue:'',poster_url:'',published:false,story_id:null,chapter_id:null};if(id){const r=await sb.from('owner_timeline').select('*').eq('id',id).maybeSingle();if(r.data)item=r.data}const stories=await getPublished();
-  open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="owner-edit-close">×</button><div class="kicker">OWNER TIMELINE</div><h2>${id?'Edit':'Create'} note</h2><div id="owner-form-status" class="status"></div><label>STORY (OPTIONAL)</label><select id="ot-story" class="field"><option value="">General owner note</option>${stories.map(s=>`<option value="${s.id}" ${item.story_id===s.id?'selected':''}>${esc(s.title)}</option>`).join('')}</select><label>TITLE</label><input id="ot-title" class="field" value="${esc(item.title||'')}"><label>CAPTION</label><textarea id="ot-caption" class="field">${esc(item.caption||'')}</textarea><label>DIALOGUE / QUOTE</label><textarea id="ot-dialogue" class="field">${esc(item.dialogue||'')}</textarea><label>NOTE IMAGE (OPTIONAL)</label><input id="ot-edit-image" class="field" type="file" accept="image/*"><div class="help">${item.poster_url?'Current image will stay unless you upload a new one.':'Add an optional note image.'}</div><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="ot-published" type="checkbox" ${item.published?'checked':''}> Publish this update</label><button class="btn" id="owner-save-update" style="width:100%;margin-top:16px">SAVE NOTE</button></div>`);
-  document.getElementById('owner-edit-close').onclick=openOwnerTimeline;
-  document.getElementById('owner-save-update').onclick=async()=>{const storyId=document.getElementById('ot-story').value||null;let poster=item.poster_url||null;const imageFile=document.getElementById('ot-edit-image')?.files?.[0];if(imageFile)poster=await uploadOwnerMedia(await optimizeImageFile(imageFile,1600,.82));const payload={owner_id:session.user.id,story_id:storyId,poster_url:poster,title:document.getElementById('ot-title').value.trim()||null,caption:document.getElementById('ot-caption').value.trim()||null,dialogue:document.getElementById('ot-dialogue').value.trim()||null,published:document.getElementById('ot-published').checked,updated_at:new Date().toISOString()};const q=id?await sb.from('owner_timeline').update(payload).eq('id',id).eq('owner_id',session.user.id):await sb.from('owner_timeline').insert(payload);if(q.error){notice('owner-form-status',q.error.message);return}openOwnerTimeline()}
+  if(!session)return;
+  const r=id?await sb.from('owner_timeline').select('*').eq('id',id).eq('owner_id',session.user.id).maybeSingle():{data:null};
+  if(id&&(!r.data||r.error)){alert(r.error?.message||'Post not found.');return}
+  const item=r.data||{title:'',caption:'',dialogue:'',poster_url:'',published:true,story_id:null,chapter_id:null,post_type:'NOTE',media_urls:[],album_layout:'grid'};
+  const stories=await getPublished();
+  open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="timeline-edit-close">×</button><div class="kicker">AUTHOR TIMELINE</div><h2>${id?'Edit':'Create'} post</h2><div id="timeline-edit-status" class="status"></div><label>STORY (OPTIONAL)</label><select id="et-story" class="field"><option value="">General author post</option>${stories.map(st=>`<option value="${st.id}" ${item.story_id===st.id?'selected':''}>${esc(st.title)}</option>`).join('')}</select><label>TITLE</label><input id="et-title" class="field" value="${esc(item.title||'')}"><label>CAPTION</label><textarea id="et-caption" class="field">${esc(item.caption||'')}</textarea><label>QUOTE / DIALOGUE</label><textarea id="et-dialogue" class="field">${esc(item.dialogue||'')}</textarea><label>ALBUM LAYOUT</label><select id="et-layout" class="field"><option value="grid" ${item.album_layout==='grid'?'selected':''}>Auto / Grid</option><option value="featured" ${item.album_layout==='featured'?'selected':''}>Featured + supporting</option><option value="stack" ${item.album_layout==='stack'?'selected':''}>Album stack</option></select><label>ADD IMAGES</label><input id="et-images" class="field" type="file" accept="image/*" multiple><div class="help">Existing album images remain. New images are appended.</div><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="et-published" type="checkbox" ${item.published?'checked':''}> Publish this post</label><button class="btn" id="et-save" style="width:100%;margin-top:15px">SAVE POST</button></div>`);
+  document.getElementById('timeline-edit-close').onclick=openOwnerTimeline;
+  document.getElementById('et-save').onclick=async()=>{
+    try{
+      let media=timelineMedia(item);
+      const files=[...(document.getElementById('et-images').files||[])].slice(0,9-media.length);
+      for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1400,.8)));
+      const q=await sb.from('owner_timeline').update({story_id:document.getElementById('et-story').value||null,title:document.getElementById('et-title').value.trim()||null,caption:document.getElementById('et-caption').value.trim()||null,dialogue:document.getElementById('et-dialogue').value.trim()||null,media_urls:media,poster_url:media[0]||null,album_layout:document.getElementById('et-layout').value,published:document.getElementById('et-published').checked,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);
+      if(q.error)throw q.error;openOwnerTimeline();
+    }catch(e){notice('timeline-edit-status',e.message||String(e))}
+  };
 }
 
 
