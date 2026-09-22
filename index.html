@@ -3050,6 +3050,44 @@ async function openOwnerCommunity(roomId){
   document.querySelectorAll('.owner-remove-member').forEach(b=>b.onclick=async()=>{if(!confirm('Remove this member from the room?'))return;const q=await sb.from('owner_chat_members').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerCommunity(roomId)});
   document.querySelectorAll('.owner-chat-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this message?'))return;const q=await sb.from('owner_chat_messages').delete().eq('id',b.dataset.id).eq('owner_id',session.user.id);if(q.error)alert(q.error.message);else openOwnerCommunity(roomId)});
   document.getElementById('chat-send').onclick=async()=>{try{const msg=document.getElementById('chat-message').value.trim(),file=document.getElementById('chat-image').files?.[0];if(!msg&&!file)return;let image_url=null;if(file)image_url=await uploadCommunityImage(file);const q=await sb.from('owner_chat_messages').insert({room_id:roomId,owner_id:session.user.id,author_name:'AVANITAXX',message:msg||null,sender_id:session.user.id,image_url,reply_to:null});if(q.error)throw q.error;openOwnerCommunity(roomId)}catch(e){notice('chat-status',e.message||String(e))}};
+   /* OWNER CHAT: live Supabase Realtime listener */
+   let ownerChatChannel=null;
+   const ownerChatList=document.getElementById('owner-chat-list');
+   const appendOwnerLiveMessage=(x)=>{
+     if(!ownerChatList||!x)return;
+     const key=String(x.id);
+     if(ownerChatList.querySelector(`[data-message-id="${CSS.escape(key)}"]`))return;
+     const el=document.createElement('div');
+     el.className='owner-chat-msg';
+     el.dataset.messageId=key;
+     el.innerHTML=`<strong>${esc(x.author_name||'Reader')}</strong><div>${x.reply_to?'<div class="chat-msg-reply">Replying to a message</div>':''}${x.message?`<div>${esc(x.message)}</div>`:''}${x.image_url?`<img class="chat-attachment" src="${esc(x.image_url)}" alt="Shared image" loading="lazy">`:''}</div><div class="owner-small">${esc(formatDate(x.created_at))}</div><div class="chat-msg-actions"><button class="owner-chat-delete" data-id="${esc(x.id)}">DELETE</button></div>`;
+     ownerChatList.appendChild(el);
+     ownerChatList.scrollTop=ownerChatList.scrollHeight;
+   };
+   const startOwnerChatRealtime=()=>{
+     try{
+       if(ownerChatChannel)sb.removeChannel(ownerChatChannel);
+       ownerChatChannel=sb.channel(`avx-owner-chat-${roomId}`)
+         .on('postgres_changes',{event:'INSERT',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${roomId}`},payload=>{
+           appendOwnerLiveMessage(payload.new);
+           if(payload.new.sender_id!==session.user.id){
+             const box=document.getElementById('chat-status');
+             if(box){box.textContent='New message received live.';box.className='status show ok';setTimeout(()=>box.classList.remove('show'),2200);}
+           }
+         })
+         .on('postgres_changes',{event:'DELETE',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${roomId}`},payload=>{
+           ownerChatList?.querySelector(`[data-message-id="${CSS.escape(String(payload.old.id))}"]`)?.remove();
+         })
+         .subscribe(status=>{
+           const box=document.getElementById('chat-status');
+           if(status==='SUBSCRIBED'&&box){box.textContent='Live chat connected.';box.className='status show ok';setTimeout(()=>box.classList.remove('show'),1800);}
+           if((status==='CHANNEL_ERROR'||status==='TIMED_OUT')&&box){box.textContent='Live connection interrupted. Reconnecting…';box.className='status show err';setTimeout(startOwnerChatRealtime,2500);}
+         });
+     }catch(e){}
+   };
+   startOwnerChatRealtime();
+   const oldChatBack=document.getElementById('chat-back');
+   if(oldChatBack)oldChatBack.onclick=()=>{if(ownerChatChannel)sb.removeChannel(ownerChatChannel);openOwnerTimeline();};
 }
 
 async function openOwnerTimelineEditor(id){
@@ -3196,7 +3234,7 @@ async function openHomeCommunity(rooms=[]){
       .on('postgres_changes',{event:'DELETE',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${room.id}`},async payload=>{currentRows=currentRows.filter(x=>x.id!==payload.old.id);await renderRows();})
       .on('postgres_changes',{event:'INSERT',schema:'public',table:'owner_chat_message_reactions'},async()=>{await loadReactions()})
       .on('postgres_changes',{event:'UPDATE',schema:'public',table:'owner_chat_typing',filter:`room_id=eq.${room.id}`},payload=>{if(payload.new.user_id!==me){const t=document.getElementById('cm-typing');if(t)t.textContent='Someone is typing…';setTimeout(()=>{if(t)t.textContent=''},2500)}})
-      .subscribe();
+       .subscribe(status=>{const s=document.getElementById('cm-room-status');if(!s)return;if(status==='SUBSCRIBED')s.innerHTML='Community chat · <span class="cm-live-dot"></span> Live · Invite-only';if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')s.textContent='Community chat · Reconnecting…';});
   };
 
   const sendTyping=async active=>{
