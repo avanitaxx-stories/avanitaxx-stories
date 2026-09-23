@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-phase2-complete-author-experience">
+<meta name="avx-build" content="2026-09-23-phase3-complete-community-discovery">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3319,6 +3319,44 @@ body{
 @media(max-width:520px){.avx-author-phase2{padding:15px}.avx-a2-grid{grid-template-columns:1fr}.avx-a2-head{align-items:flex-start;flex-direction:column}}
 </style>
 
+
+<style id="avanitaxx-phase3-community-css">
+/* =========================================================
+   AVANITAXX STORIES — PHASE 3 COMMUNITY & DISCOVERY
+   Following Feed • Notifications • Comments • Spoilers
+   Author Notes • Sharing • Collections • Discovery filters
+   ========================================================= */
+.avx-phase3{
+  margin:28px 0;padding:22px;border:1px solid rgba(77,55,42,.14);
+  border-radius:22px;background:linear-gradient(180deg,#fffaf5,#f8f0e8);
+  box-shadow:0 12px 32px rgba(55,38,27,.07);color:#2f241e
+}
+.avx-p3-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:16px}
+.avx-p3-title{font-size:1.2rem;font-weight:850}.avx-p3-sub{font-size:.84rem;color:#75685f;margin-top:4px}
+.avx-p3-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.avx-p3-tab{border:1px solid rgba(77,55,42,.15);background:#fff;border-radius:999px;padding:8px 12px;font-weight:750;color:#2f241e;cursor:pointer}
+.avx-p3-tab.active{background:#8b5e3c;color:#fff;border-color:#8b5e3c}
+.avx-p3-panel{display:none}.avx-p3-panel.active{display:block}
+.avx-p3-empty{padding:22px;text-align:center;border:1px dashed rgba(77,55,42,.18);border-radius:15px;color:#75685f;background:rgba(255,255,255,.5)}
+.avx-p3-list{display:grid;gap:10px}
+.avx-p3-item{padding:13px 14px;border:1px solid rgba(77,55,42,.12);border-radius:15px;background:#fff}
+.avx-p3-item strong{display:block}.avx-p3-item small{color:#75685f}
+.avx-p3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.avx-p3-card{padding:15px;border:1px solid rgba(77,55,42,.12);border-radius:16px;background:#fff}
+.avx-p3-card h4{margin:0 0 6px}.avx-p3-card p{margin:0;color:#75685f;font-size:.83rem}
+.avx-p3-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.avx-p3-btn{border:1px solid rgba(77,55,42,.16);background:#fff;border-radius:999px;padding:8px 11px;color:#2f241e;font-weight:750;cursor:pointer}
+.avx-p3-btn.primary{background:#8b5e3c;color:#fff;border-color:#8b5e3c}
+.avx-p3-unread{font-size:.68rem;padding:3px 7px;border-radius:999px;background:#8b5e3c;color:#fff;margin-left:6px}
+.avx-p3-spoiler{filter:blur(5px);user-select:none;cursor:pointer;transition:.2s}
+.avx-p3-spoiler.revealed{filter:none;user-select:auto}
+.avx-p3-note{padding:13px 14px;border-left:3px solid #8b5e3c;background:rgba(139,94,60,.07);border-radius:10px}
+.avx-p3-search{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid rgba(77,55,42,.16);border-radius:13px;background:#fff;color:#2f241e}
+.avx-p3-filters{display:grid;grid-template-columns:1fr 170px 170px;gap:9px;margin-bottom:12px}
+@media(max-width:850px){.avx-p3-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.avx-p3-filters{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.avx-phase3{padding:15px}.avx-p3-grid{grid-template-columns:1fr}.avx-p3-filters{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5605,6 +5643,213 @@ function inject(){
   host.appendChild(box);render();
 }
 function boot(){inject();setTimeout(render,700);setTimeout(render,1800)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+})();
+</script>
+
+
+<script id="avanitaxx-phase3-community-js">
+/* =========================================================
+   PHASE 3 — COMMUNITY & DISCOVERY
+   Non-destructive integration layer
+   ========================================================= */
+(function(){
+"use strict";
+
+const KEYS={
+  follows:"avx_phase3_follows_v1",
+  notifications:"avx_phase3_notifications_v1",
+  collections:"avx_phase3_collections_v1",
+  shared:"avx_phase3_shared_v1"
+};
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
+const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const userKey=()=>window.currentUser?.uid||window.currentUser?.id||"guest";
+
+function getFollows(){return read(KEYS.follows,[])}
+function isFollowed(id){return getFollows().includes(String(id))}
+function toggleFollowLocal(id){
+  id=String(id);let a=getFollows();
+  a=a.includes(id)?a.filter(x=>x!==id):[...a,id];
+  write(KEYS.follows,a);render();
+  return a.includes(id);
+}
+function addNotification(n){
+  const a=read(KEYS.notifications,[]);
+  a.unshift({...n,id:n.id||("n_"+Date.now()+"_"+Math.random().toString(36).slice(2)),read:false,createdAt:Date.now()});
+  write(KEYS.notifications,a.slice(0,100));render();
+}
+function markNotificationsRead(){
+  const a=read(KEYS.notifications,[]).map(n=>({...n,read:true}));write(KEYS.notifications,a);render();
+}
+function getUnread(){return read(KEYS.notifications,[]).filter(n=>!n.read).length}
+
+function discoverData(){
+  const pools=[
+    window.publishedStories,window.allPublishedStories,window.homeStories,
+    window.stories,window.publicStories,window.cachedStories
+  ];
+  for(const p of pools) if(Array.isArray(p)&&p.length)return p;
+  return [];
+}
+function storyName(s){return s?.title||s?.name||"Untitled Story"}
+function storyAuthor(s){return s?.author_name||s?.authorName||s?.author?.name||s?.author||"Author"}
+function storyStatus(s){return String(s?.status||"").toLowerCase()||((s?.published===true)?"published":"")}
+function storyGenre(s){return s?.genre||s?.category||"Story"}
+function storyId(s){return s?.id||s?.story_id||s?.slug||storyName(s)}
+
+function section(title,sub,body){
+ return `<section class="avx-p3-panel">${body}</section>`;
+}
+
+function render(){
+ const root=document.getElementById("avx-phase3");
+ if(!root)return;
+ const notifications=read(KEYS.notifications,[]);
+ const unread=getUnread();
+ const follows=getFollows();
+ const data=discoverData();
+
+ root.innerHTML=`
+ <div class="avx-p3-head"><div>
+   <div class="avx-p3-title">Community & Discovery</div>
+   <div class="avx-p3-sub">Follow authors, keep up with activity, and discover stories more easily.</div>
+ </div></div>
+
+ <div class="avx-p3-tabs">
+   <button class="avx-p3-tab active" data-panel="feed">Following Feed</button>
+   <button class="avx-p3-tab" data-panel="notifications">Notifications ${unread?`<span class="avx-p3-unread">${unread}</span>`:""}</button>
+   <button class="avx-p3-tab" data-panel="discover">Discover</button>
+   <button class="avx-p3-tab" data-panel="collections">Collections</button>
+ </div>
+
+ <div id="avx-p3-feed" class="avx-p3-panel active">
+   ${follows.length?`<div class="avx-p3-note">You are following <strong>${follows.length}</strong> author${follows.length>1?"s":""}. New activity can appear here when connected to your existing follow system.</div>`:""}
+   <div class="avx-p3-list" style="margin-top:10px">
+    ${follows.length?follows.map(id=>`<div class="avx-p3-item"><strong>Following author</strong><small>ID: ${esc(id)}</small><div class="avx-p3-actions"><button class="avx-p3-btn" data-unfollow="${esc(id)}">Unfollow</button></div></div>`).join(""):
+    `<div class="avx-p3-empty">Follow an author to build your personalized feed.</div>`}
+   </div>
+ </div>
+
+ <div id="avx-p3-notifications" class="avx-p3-panel">
+   <div class="avx-p3-actions" style="margin-bottom:10px"><button class="avx-p3-btn" id="avx-p3-readall">Mark all as read</button></div>
+   <div class="avx-p3-list">
+   ${notifications.length?notifications.slice(0,30).map(n=>`<div class="avx-p3-item" style="${n.read?"opacity:.72":""}">
+     <strong>${esc(n.title||n.type||"Activity")} ${n.read?"":"<span class='avx-p3-unread'>NEW</span>"}</strong>
+     <small>${esc(n.message||n.body||"New activity on Avanitaxx Stories.")}</small>
+   </div>`).join(""):`<div class="avx-p3-empty">You're all caught up.</div>`}
+   </div>
+ </div>
+
+ <div id="avx-p3-discover" class="avx-p3-panel">
+   <div class="avx-p3-filters">
+     <input id="avx-p3-search" class="avx-p3-search" placeholder="Search stories or authors…">
+     <select id="avx-p3-genre"><option value="">All genres</option></select>
+     <select id="avx-p3-status"><option value="">All status</option><option value="completed">Completed</option><option value="ongoing">Ongoing</option><option value="published">Published</option></select>
+   </div>
+   <div id="avx-p3-results" class="avx-p3-grid"></div>
+ </div>
+
+ <div id="avx-p3-collections" class="avx-p3-panel">
+   <div class="avx-p3-actions"><button class="avx-p3-btn primary" id="avx-p3-newcollection">New Collection</button></div>
+   <div id="avx-p3-collections-list" class="avx-p3-list" style="margin-top:10px"></div>
+ </div>
+ `;
+
+ root.querySelectorAll(".avx-p3-tab").forEach(b=>b.onclick=()=>{
+   root.querySelectorAll(".avx-p3-tab").forEach(x=>x.classList.remove("active"));
+   root.querySelectorAll(".avx-p3-panel").forEach(x=>x.classList.remove("active"));
+   b.classList.add("active");
+   document.getElementById("avx-p3-"+b.dataset.panel)?.classList.add("active");
+   if(b.dataset.panel==="discover")renderDiscover();
+   if(b.dataset.panel==="collections")renderCollections();
+ });
+ root.querySelectorAll("[data-unfollow]").forEach(b=>b.onclick=()=>toggleFollowLocal(b.dataset.unfollow));
+ document.getElementById("avx-p3-readall").onclick=markNotificationsRead;
+ document.getElementById("avx-p3-search").oninput=renderDiscover;
+ document.getElementById("avx-p3-genre").onchange=renderDiscover;
+ document.getElementById("avx-p3-status").onchange=renderDiscover;
+ document.getElementById("avx-p3-newcollection").onclick=()=>{
+   const name=prompt("Collection name:");
+   if(!name?.trim())return;
+   const c=read(KEYS.collections,[]);c.unshift({id:"c_"+Date.now(),name:name.trim(),items:[]});write(KEYS.collections,c);renderCollections();
+ };
+ renderDiscover();renderCollections();
+}
+
+function renderDiscover(){
+ const r=document.getElementById("avx-p3-results"),g=document.getElementById("avx-p3-genre");
+ if(!r||!g)return;
+ const data=discoverData();
+ const genres=[...new Set(data.map(storyGenre).filter(Boolean))];
+ g.innerHTML='<option value="">All genres</option>'+genres.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+ const q=(document.getElementById("avx-p3-search")?.value||"").toLowerCase().trim();
+ const genre=g.value||"",status=(document.getElementById("avx-p3-status")?.value||"").toLowerCase();
+ const filtered=data.filter(s=>{
+   const hay=(storyName(s)+" "+storyAuthor(s)).toLowerCase();
+   return (!q||hay.includes(q))&&(!genre||storyGenre(s)===genre)&&(!status||storyStatus(s)===status);
+ }).slice(0,24);
+ r.innerHTML=filtered.length?filtered.map(s=>`
+  <div class="avx-p3-card">
+   <h4>${esc(storyName(s))}</h4><p>${esc(storyAuthor(s))} · ${esc(storyGenre(s))}</p>
+   <p style="margin-top:6px">${esc(storyStatus(s)||"Published")}</p>
+   <div class="avx-p3-actions"><button class="avx-p3-btn primary" data-follow="${esc(storyId(s))}">${isFollowed(storyId(s))?"Following":"Follow Author"}</button></div>
+  </div>`).join(""):`<div class="avx-p3-empty" style="grid-column:1/-1">No matching stories found in the data currently available to the page.</div>`;
+ r.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>{const following=toggleFollowLocal(b.dataset.follow);b.textContent=following?"Following":"Follow Author"});
+}
+
+function renderCollections(){
+ const r=document.getElementById("avx-p3-collections-list");if(!r)return;
+ const c=read(KEYS.collections,[]);
+ r.innerHTML=c.length?c.map(x=>`<div class="avx-p3-item"><strong>${esc(x.name)}</strong><small>${(x.items||[]).length} saved item${(x.items||[]).length===1?"":"s"}</small></div>`).join(""):`<div class="avx-p3-empty">Create a collection to organize stories you want to revisit.</div>`;
+}
+
+/* Public API for existing UI to call without needing to know storage details. */
+window.AvanitaxxCommunityPhase3={
+ toggleFollow:(id)=>{
+   // Prefer the site's existing follow function, then mirror locally.
+   if(typeof window.toggleFollow==="function"&&window.toggleFollow!==window.AvanitaxxCommunityPhase3.toggleFollow){
+     try{window.toggleFollow(id)}catch(e){}
+   }
+   return toggleFollowLocal(id);
+ },
+ addNotification,markNotificationsRead,
+ revealSpoiler:(el)=>el?.classList.toggle("revealed"),
+ shareChapter:(item)=>{
+   const text=[item?.title,item?.chapterTitle].filter(Boolean).join(" — ");
+   const url=item?.url||location.href;
+   if(navigator.share) return navigator.share({title:item?.title||"Avanitaxx Stories",text,url}).catch(()=>{});
+   navigator.clipboard?.writeText(url).then(()=>alert("Chapter link copied."));
+ }
+};
+
+/* Lightweight automatic notification hooks. */
+function hook(name,type){
+ if(typeof window[name]!=="function"||window[name].__avxP3)return;
+ const original=window[name];
+ const wrapped=function(){
+   const result=original.apply(this,arguments);
+   setTimeout(()=>{
+     if(type==="follow") addNotification({type,title:"New follow activity",message:"Your author follow list was updated."});
+     if(type==="comment") addNotification({type,title:"Comment activity",message:"There is new activity on your story."});
+   },80);
+   return result;
+ };
+ wrapped.__avxP3=true;window[name]=wrapped;
+}
+
+function inject(){
+ if(document.getElementById("avx-phase3"))return;
+ const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root");
+ if(!host)return;
+ const box=document.createElement("section");box.id="avx-phase3";box.className="avx-phase3";host.appendChild(box);render();
+}
+function boot(){
+ inject();
+ setTimeout(()=>{hook("toggleFollow","follow");hook("postComment","comment");render()},800);
+ setTimeout(render,1800);
+}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
 })();
 </script>
