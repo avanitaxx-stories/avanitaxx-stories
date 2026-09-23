@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-author-center-elegant-icons-v2">
+<meta name="avx-build" content="2026-09-23-phase1-complete-reader-experience">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3224,6 +3224,80 @@ body{
 @media(max-width:920px){.writer-lounge{grid-template-columns:1fr!important}.writer-sidebar{min-height:auto!important;padding:24px 16px!important}.writer-side-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.writer-side-note{display:none}.writer-main{padding:28px 24px 30px!important}}
 @media(max-width:600px){.writer-side-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.writer-side-btn{min-height:58px!important}.writer-main{padding:23px 16px 26px!important}.writer-title{font-size:39px!important}.writer-account{display:none}.writer-actions .writer-action{flex:1}}
 </style>
+
+<style id="avanitaxx-phase1-reader-css">
+/* =========================================================
+   AVANITAXX STORIES — PHASE 1 COMPLETE READER EXPERIENCE
+   Continue Reading • History • Bookmarks • New Chapters
+   Reader controls
+   ========================================================= */
+:root{
+  --avx-reader-accent:#8b5e3c;
+  --avx-reader-accent-2:#b88962;
+  --avx-reader-ink:#2f241e;
+  --avx-reader-muted:#75685f;
+  --avx-reader-surface:#fffaf5;
+  --avx-reader-border:rgba(77,55,42,.14);
+}
+.avx-phase1-section{
+  margin:28px 0;
+  padding:22px;
+  border:1px solid var(--avx-reader-border);
+  border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,250,245,.98),rgba(250,244,238,.96));
+  box-shadow:0 12px 32px rgba(55,38,27,.07);
+}
+.avx-phase1-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.avx-phase1-title{font-size:1.15rem;font-weight:800;letter-spacing:.02em;color:var(--avx-reader-ink)}
+.avx-phase1-sub{font-size:.84rem;color:var(--avx-reader-muted);margin-top:4px}
+.avx-phase1-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.avx-phase1-card{
+  position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  border:1px solid var(--avx-reader-border);border-radius:18px;background:#fff;
+}
+.avx-phase1-cover{width:100%;aspect-ratio:3/4;object-fit:cover;background:#eee}
+.avx-phase1-body{padding:13px}
+.avx-phase1-story{font-weight:800;color:var(--avx-reader-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.avx-phase1-chapter{font-size:.8rem;color:var(--avx-reader-muted);margin-top:4px}
+.avx-phase1-progress{height:5px;border-radius:999px;background:rgba(90,70,55,.12);overflow:hidden;margin:11px 0}
+.avx-phase1-progress>span{display:block;height:100%;width:0;background:var(--avx-reader-accent);border-radius:999px}
+.avx-phase1-actions{display:flex;gap:7px;flex-wrap:wrap}
+.avx-phase1-btn{
+  border:1px solid var(--avx-reader-border);border-radius:999px;padding:8px 11px;
+  background:#fff;color:var(--avx-reader-ink);font-weight:700;cursor:pointer;font-size:.78rem
+}
+.avx-phase1-btn.primary{background:var(--avx-reader-accent);color:#fff;border-color:transparent}
+.avx-phase1-empty{padding:24px;text-align:center;color:var(--avx-reader-muted);border:1px dashed var(--avx-reader-border);border-radius:16px}
+.avx-phase1-badge{
+  position:absolute;top:10px;left:10px;padding:5px 8px;border-radius:999px;
+  background:var(--avx-reader-accent);color:#fff;font-size:.68rem;font-weight:800
+}
+.avx-reader-tools{
+  display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+  padding:10px;margin:10px 0;border:1px solid var(--avx-reader-border);border-radius:16px;
+  background:rgba(255,250,245,.92);position:sticky;top:0;z-index:20
+}
+.avx-reader-tools button,.avx-reader-tools select{
+  border:1px solid var(--avx-reader-border);border-radius:999px;background:#fff;
+  color:var(--avx-reader-ink);padding:8px 11px;font-weight:700
+}
+.avx-reader-bookmarked{background:var(--avx-reader-accent)!important;color:#fff!important}
+.avx-history-row,.avx-bookmark-row{
+  display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--avx-reader-border)
+}
+.avx-history-row:last-child,.avx-bookmark-row:last-child{border-bottom:0}
+.avx-history-meta{min-width:0;flex:1}
+.avx-history-meta strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.avx-history-meta small{color:var(--avx-reader-muted)}
+.avx-new-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#b45b43;margin-right:5px}
+@media(max-width:900px){.avx-phase1-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  .avx-phase1-section{padding:15px;border-radius:17px}
+  .avx-phase1-grid{grid-template-columns:1fr}
+  .avx-phase1-head{align-items:flex-start;flex-direction:column}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5265,5 +5339,179 @@ function showCommunityNewMessage(row,room){
   document.addEventListener('click',e=>{if(drawer.classList.contains('open')&&!drawer.contains(e.target)&&e.target!==toggle)setOpen(false)});
 })();
 </script>
+
+<script id="avanitaxx-phase1-reader-js">
+/* =========================================================
+   PHASE 1 READER EXPERIENCE
+   Non-destructive integration layer
+   ========================================================= */
+(function(){
+  "use strict";
+  const K = {
+    history:"avx_reader_history_v1",
+    bookmarks:"avx_reader_bookmarks_v1"
+  };
+
+  const safeJSON=(key,fallback)=>{
+    try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}
+  };
+  const saveJSON=(key,val)=>{try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}};
+  const esc=(v)=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+  const getHistory=()=>safeJSON(K.history,[]);
+  const getBookmarks=()=>safeJSON(K.bookmarks,[]);
+  const currentUserKey=()=>window.currentUser?.uid||window.currentUser?.id||"guest";
+
+  function storyKey(story,chapter){
+    return String(story?.id||story?.story_id||story?.slug||story?.title||"story")+
+      "::"+String(chapter?.id||chapter?.chapter_id||chapter?.number||chapter?.chapter_number||chapter?.title||"chapter");
+  }
+
+  function upsertHistory(item){
+    const h=getHistory().filter(x=>x.key!==item.key);
+    h.unshift({...item,updatedAt:Date.now(),userKey:currentUserKey()});
+    saveJSON(K.history,h.slice(0,50));
+    renderPhase1();
+  }
+
+  function addBookmark(item){
+    const b=getBookmarks();
+    if(!b.some(x=>x.key===item.key)){b.unshift({...item,createdAt:Date.now(),userKey:currentUserKey()});saveJSON(K.bookmarks,b.slice(0,100))}
+    renderPhase1();
+  }
+
+  function removeBookmark(key){
+    saveJSON(K.bookmarks,getBookmarks().filter(x=>x.key!==key)); renderPhase1();
+  }
+
+  function phase1ProgressPercent(item){
+    const p=Number(item.progress);
+    if(Number.isFinite(p)) return Math.max(0,Math.min(100,p));
+    const cur=Number(item.chapterNumber||item.chapter||0), total=Number(item.totalChapters||0);
+    return total>0?Math.max(0,Math.min(100,cur/total*100)):0;
+  }
+
+  function getCurrentReaderItem(){
+    const s=window.currentStory||window.activeStory||window.readerStory||null;
+    const c=window.currentChapter||window.activeChapter||window.readerChapter||null;
+    if(!s&&!c)return null;
+    return {
+      key:storyKey(s||{},c||{}),
+      storyId:s?.id||s?.story_id||null,
+      chapterId:c?.id||c?.chapter_id||null,
+      title:s?.title||s?.name||"Story",
+      chapterTitle:c?.title||c?.name||("Chapter "+(c?.number||c?.chapter_number||"")),
+      chapterNumber:c?.number||c?.chapter_number||"",
+      totalChapters:s?.chapter_count||s?.totalChapters||s?.total_chapters||0,
+      cover:s?.cover_url||s?.cover||s?.image_url||s?.image||"",
+      progress:Number(window.readerProgress||c?.progress||0)
+    };
+  }
+
+  function recordFromGlobals(){
+    const item=getCurrentReaderItem();
+    if(item && item.title!=="Story") upsertHistory(item);
+  }
+
+  window.AvanitaxxReaderPhase1 = {
+    addBookmark,removeBookmark,upsertHistory,getHistory,getBookmarks,recordFromGlobals
+  };
+
+  function card(item,bookmark=false){
+    const pct=phase1ProgressPercent(item);
+    const cover=item.cover||"";
+    const safeCover=cover?`<img class="avx-phase1-cover" src="${esc(cover)}" alt="${esc(item.title)}" loading="lazy">`:`<div class="avx-phase1-cover"></div>`;
+    const action = bookmark
+      ? `<button class="avx-phase1-btn avx-phase1-bookmark-remove" data-key="${esc(item.key)}">Remove</button>`
+      : `<button class="avx-phase1-btn primary avx-phase1-continue" data-key="${esc(item.key)}">Continue →</button>`;
+    return `<article class="avx-phase1-card">
+      ${bookmark?"<span class='avx-phase1-badge'>BOOKMARKED</span>":""}
+      ${safeCover}<div class="avx-phase1-body">
+      <div class="avx-phase1-story">${esc(item.title)}</div>
+      <div class="avx-phase1-chapter">${esc(item.chapterTitle||("Chapter "+(item.chapterNumber||"")))}</div>
+      <div class="avx-phase1-progress"><span style="width:${pct}%"></span></div>
+      <div class="avx-phase1-chapter">${Math.round(pct)}% read</div>
+      <div class="avx-phase1-actions">${action}</div>
+      </div></article>`;
+  }
+
+  function section(id,title,sub,content){
+    return `<section id="${id}" class="avx-phase1-section"><div class="avx-phase1-head">
+      <div><div class="avx-phase1-title">${title}</div><div class="avx-phase1-sub">${sub}</div></div>
+    </div>${content}</section>`;
+  }
+
+  function renderPhase1(){
+    const root=document.getElementById("avx-phase1-reader");
+    if(!root)return;
+    const history=getHistory().filter(x=>x.userKey===currentUserKey()||!x.userKey);
+    const bookmarks=getBookmarks().filter(x=>x.userKey===currentUserKey()||!x.userKey);
+    const cont=history.filter(x=>phase1ProgressPercent(x)<100).slice(0,8);
+    const recent=history.slice(0,10);
+    root.innerHTML =
+      section("avx-continue-reading","Continue Reading","Pick up exactly where you left off.",
+        cont.length?`<div class="avx-phase1-grid">${cont.map(x=>card(x)).join("")}</div>`:
+        `<div class="avx-phase1-empty">Your started stories will appear here automatically as you read.</div>`) +
+      section("avx-reading-history","Reading History","Your most recently opened chapters.",
+        recent.length?`<div>${recent.map(x=>`<div class="avx-history-row"><div class="avx-history-meta"><strong>${esc(x.title)}</strong><small>${esc(x.chapterTitle||"Chapter")} · ${Math.round(phase1ProgressPercent(x))}% read</small></div><button class="avx-phase1-btn avx-phase1-continue" data-key="${esc(x.key)}">Open</button></div>`).join("")}</div>`:
+        `<div class="avx-phase1-empty">No reading history yet.</div>`) +
+      section("avx-bookmarks","Chapter Bookmarks","Save chapters you want to return to.",
+        bookmarks.length?`<div class="avx-phase1-grid">${bookmarks.map(x=>card(x,true)).join("")}</div>`:
+        `<div class="avx-phase1-empty">No bookmarked chapters yet.</div>`);
+    root.querySelectorAll(".avx-phase1-bookmark-remove").forEach(btn=>btn.onclick=()=>removeBookmark(btn.dataset.key));
+    root.querySelectorAll(".avx-phase1-continue").forEach(btn=>btn.onclick=()=>{
+      const item=[...history,...bookmarks].find(x=>x.key===btn.dataset.key);
+      if(item) openStoredItem(item);
+    });
+  }
+
+  function openStoredItem(item){
+    // Reuse existing site navigation functions when available.
+    const fns=["openPublicStory","openStory","openReader","readStory"];
+    for(const n of fns){
+      if(typeof window[n]==="function"){
+        try{
+          if(item.storyId && item.chapterId) return window[n](item.storyId,item.chapterId);
+          if(item.storyId) return window[n](item.storyId);
+          return window[n](item.title);
+        }catch(e){}
+      }
+    }
+    if(item.url) window.location.href=item.url;
+  }
+
+  function inject(){
+    if(document.getElementById("avx-phase1-reader"))return;
+    // Prefer an existing homepage/main content area without deleting existing UI.
+    const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root")||document.body;
+    if(!host)return;
+    const root=document.createElement("div");
+    root.id="avx-phase1-reader";
+    host.appendChild(root);
+    renderPhase1();
+  }
+
+  // Reader hooks: wrap known progress-saving functions if they exist.
+  function hook(name){
+    if(typeof window[name]!=="function"||window[name].__avxPhase1)return;
+    const original=window[name];
+    const wrapped=function(){
+      const result=original.apply(this,arguments);
+      setTimeout(recordFromGlobals,50);
+      return result;
+    };
+    wrapped.__avxPhase1=true; window[name]=wrapped;
+  }
+
+  function boot(){
+    inject();
+    ["saveReaderProgress","recordChapterView"].forEach(hook);
+    setTimeout(recordFromGlobals,700);
+  }
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+})();
+</script>
+
 </body>
 </html>
