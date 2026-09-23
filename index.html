@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#8b0000">
+<meta name="theme-color" content="#3A2419">
 <link rel="apple-touch-icon" href="./56b88dd7-311e-4bb6-8e60-af0fcb1736e2.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,7 +10,7 @@
 <meta name="avx-build" content="2026-09-22-teaser-first-carousel-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
-<meta name="theme-color" content="#f8f1e8">
+<meta name="theme-color" content="#F5EDE3">
 <meta name="googlebot" content="index,follow">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://avanitaxx-stories.github.io/avanitaxx-stories/">
@@ -2537,6 +2537,274 @@ body{background:var(--editorial-paper)}
     try { if (typeof gtag === 'function') gtag('event', name, params); } catch (e) {}
   }
 </script>
+
+<!-- AVANITAXX STORIES — SIGNATURE TOFFEE / COFFEE VISUAL SYSTEM -->
+<style id="avx-signature-theme">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root{
+  --cream:#F5EDE3;
+  --white:#FFFCF7;
+  --brown:#3A2419;
+  --ink:#24150F;
+  --toffee:#9A633E;
+  --toffee-deep:#704126;
+  --caramel:#C58A55;
+  --latte:#E5CDB6;
+  --foam:#FFF8EF;
+  --coffee:#2B1912;
+  --gold:#B98A4B;
+  --muted:#78645A;
+  --line:#E5D5C5;
+  --lightpink:#F0E0D2;
+  --pink:#CDAA82;
+  --deep:#20120D;
+  --danger:#963F35;
+  --ok:#3D6647;
+  --shadow:0 22px 65px rgba(58,36,25,.13);
+  --shadow-soft:0 12px 35px rgba(58,36,25,.075);
+}
+
+html,body{background:var(--cream);color:var(--brown)}
+body{
+  font-family:'DM Sans',Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 10% 5%,rgba(197,138,85,.09),transparent 28%),
+    radial-gradient(circle at 92% 14%,rgba(229,205,182,.24),transparent 30%),
+    linear-gradient(180deg,#FBF6EF 0%,#F5EDE3 45%,#F8F1E8 100%);
+}
+body::before{
+  opacity:.11;
+  background-image:radial-gradient(rgba(58,36,25,.22) .55px,transparent .55px);
+  background-size:9px 9px;
+}
+h1,h2,h3,h4,.logo,.card-title,.story-item strong,.dash-brand,
+.modal h2,.dash h2,.reader h1,.featured-author-name,.author-cover-title,
+.author-name-v3,.author-hub-title,.timeline-title-v3,.library-card-title-v3,
+.section-head h2,.chapter-feature-content h2,.premium-book h2,.book h2,
+.hero h1{
+  font-family:'Playfair Display',Georgia,serif;
+}
+.hero p,.reader-content,.reader-desc,.timeline-caption-v3,.author-bio-v3,
+.author-directory-bio,.featured-author-bio,.chapter-feature-quote,
+.owner-small{font-family:'DM Sans',Arial,Helvetica,sans-serif}
+
+/* Header / navigation */
+.site-header{
+  background:rgba(255,252,247,.93);
+  border-bottom:1px solid rgba(112,65,38,.14);
+  box-shadow:0 7px 26px rgba(58,36,25,.045);
+}
+.nav{min-height:80px}
+.logo{
+  color:var(--coffee);
+  font-weight:700;
+  letter-spacing:-.035em;
+}
+.logo span{color:var(--toffee)}
+.navlinks{gap:27px}
+.navlinks a,.nav-author-link{
+  color:#5A4133;
+  font-weight:700;
+}
+.navlinks a::after,.nav-author-link::after{background:var(--caramel)}
+.navlinks a:hover,.nav-author-link:hover{color:var(--toffee-deep)}
+.search{
+  background:#FFFDF9;
+  border-color:#DCC9B7;
+  color:var(--brown);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+.search::placeholder{color:#9A8578}
+
+/* Buttons and controls */
+.btn{
+  background:linear-gradient(180deg,#4B2D20,#2F1B13);
+  color:#FFF9F1;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 8px 20px rgba(47,27,19,.15);
+}
+.btn:hover{background:linear-gradient(180deg,#5B3929,#382117)}
+.btn.alt{
+  background:#EAD7C4;
+  color:#4A2D20;
+}
+.btn.ghost{
+  background:#FFFCF7;
+  border-color:#DCC8B6;
+}
+.btn.danger{background:#963F35}
+.icon-btn{border-radius:12px}
+
+/* Hero — signature coffee editorial */
+.hero{padding:88px 0 72px}
+.hero::before{
+  background:radial-gradient(circle,rgba(197,138,85,.19),rgba(197,138,85,0) 68%);
+}
+.hero::after{
+  background:radial-gradient(circle,rgba(185,138,75,.13),transparent 70%);
+}
+.kicker,.hero-notes{color:var(--toffee-deep)}
+.hero h1{color:var(--ink)}
+.hero h1 em{color:var(--toffee)}
+.hero p{color:#6E594E}
+.hero-notes i{background:#CBAE8D}
+.hero-orbit{border-color:rgba(112,65,38,.16)}
+.orbit-two{border-color:rgba(154,99,62,.22)}
+.hero-monogram{color:rgba(154,99,62,.09)}
+.premium-book{
+  background:linear-gradient(145deg,#21130E 0,#503124 57%,#98613E 100%);
+  box-shadow:22px 34px 70px rgba(48,31,25,.27);
+}
+.book-rule{background:#D9B27C}
+.book-stamp{border-color:rgba(232,211,192,.34);color:#F1DEC9}
+.hero-caption{
+  background:rgba(255,252,247,.88);
+  border-color:rgba(112,65,38,.14);
+  color:#684936;
+}
+
+/* Signature chapter feature */
+.chapter-feature-card{
+  background:#F4E6D8;
+  border-color:rgba(112,65,38,.16);
+  box-shadow:0 24px 70px rgba(69,45,35,.14);
+}
+.chapter-feature-card::before{
+  background:linear-gradient(105deg,#FAF1E7 0,rgba(250,241,231,.96) 40%,rgba(244,230,216,.60) 60%,rgba(244,230,216,.08) 100%);
+}
+.chapter-feature-art::after{
+  background:linear-gradient(90deg,#FAF1E7 0%,rgba(250,241,231,.86) 12%,rgba(250,241,231,.08) 68%);
+}
+.chapter-feature-kicker{color:var(--toffee-deep)}
+.chapter-feature-kicker::before{background:var(--caramel)}
+.chapter-feature-content h2{color:#382218}
+.chapter-feature-chapter{
+  color:#704126;
+  background:rgba(255,252,247,.72);
+  border-color:rgba(154,99,62,.25);
+}
+.chapter-feature-quote{color:#664D3F}
+.chapter-feature-quote::before{color:#B78357}
+.chapter-feature-meta{color:#8B6C5B}
+.chapter-feature-read{background:#382218}
+
+/* Sections / cards */
+.section.altbg{
+  background:rgba(255,252,247,.66);
+  border-top-color:rgba(112,65,38,.07);
+  border-bottom-color:rgba(112,65,38,.07);
+}
+.section-head h2{color:#352116}
+.section-head p{color:#766158}
+.story-card{
+  background:rgba(255,252,247,.95);
+  border-color:rgba(112,65,38,.13);
+  box-shadow:var(--shadow-soft);
+}
+.story-card:hover{box-shadow:0 24px 50px rgba(58,36,25,.15)}
+.story-cover-btn{background:#E9D7C5}
+.cover-fallback{
+  background:linear-gradient(145deg,#5C3928,#B97A4D);
+}
+.card-title{color:#382218}
+.meta{color:#806B5D}
+.tag{
+  background:#EDE0D2;
+  border-color:rgba(154,99,62,.12);
+  color:#654533;
+}
+
+/* Forms / modals / dashboard */
+.modal,.panel,.reader{
+  background:var(--white);
+  border-color:rgba(112,65,38,.13);
+}
+.field{
+  background:#FFFDF9;
+  border-color:#DCC9B7;
+}
+.field:focus{border-color:var(--toffee);box-shadow:0 0 0 3px rgba(197,138,85,.11)}
+.google-btn{background:#FFFCF7;border-color:#DCC9B7}
+.stat{background:#EFE0D1}
+.story-item{background:#FFFDF9;border-color:#E4D5C7}
+.story-manage-toggle{background:#F2E5D9}
+.story-manage-menu{background:#FFFCF7}
+.chapter-btn.active{background:#EFE0D1}
+.tool,.toolbar,.rich-editor{background:#FFFDF9;border-color:#DCC9B7}
+.rich-editor:focus{border-color:var(--toffee)}
+.status-ongoing{background:#F2E5D6;color:#80562F;border-color:#E3CCB4}
+.status-completed{background:#E7EEE6;color:#3D6647;border-color:#CADBC9}
+.status-unpublished,.status-draft{background:#ECE4DE;color:#75635A;border-color:#DDD0C6}
+
+/* Reader */
+.reader h1{color:#2F1C14}
+.reader-content{color:#3D2D24}
+.chapter-nav{border-color:#E6D8CC}
+.reply-btn{color:var(--toffee)}
+.reply-list{border-left-color:#DCC3AA}
+.mini-author img,.mini-author .avatar-fallback{background:#EAD9C7}
+
+/* Author surfaces */
+.author-profile-v3,.featured-author-card,.author-directory-card,
+.author-section-v3,.library-card-v3,.timeline-card-v3,.owner-composer,.owner-card{
+  background:#FFFDF9;
+  border-color:rgba(112,65,38,.12);
+}
+.author-cover-v3{
+  background:linear-gradient(135deg,#2F1B13,#8E5B3B 55%,#C89B6F);
+}
+.author-handle-v3,.featured-author-eyebrow,.author-hub-kicker,
+.author-directory-handle,.timeline-type-v3{color:var(--toffee-deep)}
+.author-social-v3 a{background:#FFFDF9;border-color:#E0D0C0}
+.author-social-v3 a:hover{background:#F1E2D3}
+.timeline-dot-v3{background:var(--caramel)}
+.timeline-quote-v3{border-left-color:var(--caramel);background:#F7EEE5;color:#654A3A}
+.author-directory-cover{background:linear-gradient(135deg,#4B2D20,#B57B52)}
+.featured-author-card{background:linear-gradient(135deg,#FFFDF9,#F0E1D3)}
+.featured-author-art{background-color:#DEC3AA}
+.author-hub-head{background:rgba(255,252,247,.95)}
+.author-search-wrap input{background:#FFFDF9;border-color:#DCC9B7}
+.author-search-wrap input:focus{border-color:rgba(154,99,62,.5);box-shadow:0 0 0 4px rgba(197,138,85,.13)}
+.author-hub-close{background:#FFFDF9;border-color:#DCC9B7}
+.author-profile-backbar{background:#FFFDF9}
+
+/* Notifications / toasts */
+.notify-item.unread{background:linear-gradient(135deg,#FFF9F2,#F7EDE3);border-color:#E6D2BE}
+.notify-dot{background:#B77949}
+.notify-item.read .notify-dot{background:#D9CDC2}
+.avx-notify-toast{background:linear-gradient(135deg,#FFF9F2,#F4E8DD);border-color:rgba(118,82,67,.16)}
+.avx-notify-art{background:#E9D8C8;color:#7D563E}
+.avx-notify-kicker{color:#946346}
+.avx-notify-title{color:#392218}
+.avx-notify-message{color:#6F5B50}
+
+/* Owner / timeline */
+.owner-composer{background:linear-gradient(135deg,#FFFDF9,#F3E4D7)}
+.owner-tool{background:#FFFDF9;border-color:#E1D1C0}
+.owner-tool.active{background:#3A2419}
+.owner-chat{background:#F5EDE3}
+.owner-room{background:#FFFDF9}
+
+/* Footer — espresso signature */
+footer{
+  background:#24150F;
+  color:#F5E8DC;
+}
+footer::before{color:rgba(255,255,255,.027)}
+footer p,footer a{color:#CDB9AA}
+footer h3{color:#F7EDE5}
+.copyright{border-top-color:rgba(255,255,255,.12);color:#A99589}
+
+/* Consistent responsive typography */
+@media(max-width:560px){
+  .logo{font-size:21px}
+  .hero h1{font-size:53px}
+  .section-head h2{font-size:35px}
+  .card-title{font-size:16px}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
