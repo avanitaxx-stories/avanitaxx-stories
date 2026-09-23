@@ -1383,8 +1383,13 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .genre-title-row{display:flex;align-items:center;gap:11px;}
 .genre-title-row h3{font:400 31px/1 Georgia,serif;color:#38251e;margin:0;letter-spacing:-.02em;}
 .genre-icon{width:34px;height:34px;border-radius:10px;background:#f0dcd9;color:#8e6257;display:grid;place-items:center;font:700 16px Georgia,serif;border:1px solid rgba(149,108,85,.10);}
-.genre-shelf-head p{margin:6px 0 0 45px;color:#806e66;font:12px/1.5 Georgia,serif;}
-.genre-count{font-size:8px;font-weight:900;letter-spacing:.13em;color:#a08072;white-space:nowrap;}
+.genre-shelf-head p{margin:6px 0 0 45px;color:#3b2922;font:600 12px/1.5 Georgia,serif;}
+.genre-count{font-size:8px;font-weight:900;letter-spacing:.13em;color:#4b3329;white-space:nowrap;}
+/* Deep, readable genre heading text — keep the existing genre icons unchanged. */
+.genre-shelf-head,.genre-shelf-head h3,.genre-title-row h3,.genre-shelf-head p,.genre-count{color:#2b1b16 !important;text-shadow:none !important;}
+.genre-title-row h3{font-weight:700 !important;}
+.genre-shelf-head p{font-weight:600 !important;}
+.genre-count{font-weight:900 !important;}
 .genre-track{display:flex;gap:17px;overflow-x:auto;overflow-y:hidden;padding:5px 4px 18px 2px;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
 .genre-track::-webkit-scrollbar{height:5px;}
 .genre-track::-webkit-scrollbar-thumb{background:#d9c4ba;border-radius:99px;}
@@ -2979,6 +2984,111 @@ body{
   border-color:#8D624C!important;
   box-shadow:0 18px 38px rgba(55,35,27,.13)!important;
 }
+</style>
+
+<style id="avx-deep-readable-text-fix">
+/* ===== DEEP TEXT VISIBILITY FIX — PUBLISHED BOOKS / CHAPTER CONTENT ===== */
+/* Keep the existing light/dark reader themes, but prevent author-pasted
+   light text from disappearing on the light reading page. */
+.reader:not(.dark-mode) .reader-page-content,
+.reader:not(.dark-mode) .reader-page-content p,
+.reader:not(.dark-mode) .reader-page-content div,
+.reader:not(.dark-mode) .reader-page-content span,
+.reader:not(.dark-mode) .reader-page-content strong,
+.reader:not(.dark-mode) .reader-page-content em,
+.reader:not(.dark-mode) .reader-page-content b,
+.reader:not(.dark-mode) .reader-page-content i,
+.reader:not(.dark-mode) .reader-page-content u,
+.reader:not(.dark-mode) .reader-page-content h1,
+.reader:not(.dark-mode) .reader-page-content h2,
+.reader:not(.dark-mode) .reader-page-content h3,
+.reader:not(.dark-mode) .reader-page-content h4,
+.reader:not(.dark-mode) .reader-page-content h5,
+.reader:not(.dark-mode) .reader-page-content h6,
+.reader:not(.dark-mode) .reader-page-content blockquote,
+.reader:not(.dark-mode) .reader-content,
+.reader:not(.dark-mode) .reader-content p,
+.reader:not(.dark-mode) .reader-content div,
+.reader:not(.dark-mode) .reader-content span,
+.reader:not(.dark-mode) .reader-content strong,
+.reader:not(.dark-mode) .reader-content em,
+.reader:not(.dark-mode) .reader-content b,
+.reader:not(.dark-mode) .reader-content i,
+.reader:not(.dark-mode) .chapter-content,
+.reader:not(.dark-mode) .chapter-content p,
+.reader:not(.dark-mode) .chapter-content div,
+.reader:not(.dark-mode) .chapter-content span,
+.reader:not(.dark-mode) .chapter-content strong,
+.reader:not(.dark-mode) .chapter-content em,
+.reader:not(.dark-mode) .reading-pane,
+.reader:not(.dark-mode) .reading-pane p,
+.reader:not(.dark-mode) .reading-pane div,
+.reader:not(.dark-mode) .reading-pane span {
+  color:#261915 !important;
+  text-shadow:none !important;
+}
+/* Preserve readable links without bringing back pale text. */
+.reader:not(.dark-mode) .reader-page-content a,
+.reader:not(.dark-mode) .reader-content a,
+.reader:not(.dark-mode) .chapter-content a,
+.reader:not(.dark-mode) .reading-pane a {
+  color:#704b3a !important;
+}
+</style>
+<style id="avx-homepage-deep-text-final">
+/* Final homepage readability pass — text only; existing icons are intentionally untouched. */
+#home .home-community-card strong,
+#home .home-community-card > span:not(.home-community-icon) > span,
+#home .genre-library-head .kicker,
+#home .genre-library-head h2,
+#home .genre-library-head p,
+#home .genre-hint,
+#home #recommended .kicker,
+#home #recommended h2,
+#home #recommended .section-head p,
+#home #series-stories .kicker,
+#home #series-stories h2,
+#home #series-stories .section-head p,
+#home #featured-author-section .kicker,
+#home #featured-author-section h2,
+#home #featured-author-section .section-head p,
+#home .genre-shelf-head,
+#home .genre-shelf-head h3,
+#home .genre-shelf-head p,
+#home .genre-count,
+#home .genre-book-info h3,
+#home .genre-book-meta,
+#home .card-title,
+#home .meta,
+#home .tag,
+#home .empty {
+  color:#2b1b16 !important;
+  text-shadow:none !important;
+}
+#home .home-community-card strong,
+#home .genre-shelf-head h3,
+#home .genre-book-info h3,
+#home .card-title,
+#home #recommended h2,
+#home #series-stories h2,
+#home #featured-author-section h2,
+#home .genre-library-head h2 { font-weight:700 !important; }
+#home .home-community-card > span:not(.home-community-icon) > span,
+#home .genre-library-head p,
+#home .genre-shelf-head p,
+#home .section-head p,
+#home .genre-book-meta,
+#home .meta { color:#4b342a !important; }
+#home .genre-hint { color:#4b342a !important; font-weight:900 !important; }
+#home .kicker { color:#5a3b2d !important; font-weight:900 !important; }
+#home .tag { color:#4b342a !important; font-weight:700 !important; }
+#home .empty { color:#4b342a !important; }
+#home .hero-cover-head b,
+#home .hero-cover-head span,
+#home .hero-cover-tagline { color:#2b1b16 !important; text-shadow:none !important; }
+/* Keep the cinematic carousel's intentionally light-on-dark typography unchanged. */
+#home .premium-cinematic-section,
+#home .premium-cinematic-section * { }
 </style>
 </head>
 <body>
