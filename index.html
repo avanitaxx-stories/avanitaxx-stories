@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-phase3-complete-community-discovery">
+<meta name="avx-build" content="2026-09-23-phase4-final-polish-performance-seo-accessibility">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3357,6 +3357,43 @@ body{
 @media(max-width:560px){.avx-phase3{padding:15px}.avx-p3-grid{grid-template-columns:1fr}.avx-p3-filters{grid-template-columns:1fr}}
 </style>
 
+
+<style id="avanitaxx-phase4-final-polish-css">
+/* AVANITAXX STORIES — PHASE 4 FINAL POLISH */
+html{scroll-behavior:smooth}
+img{max-width:100%}
+button,input,select,textarea{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+ outline:3px solid rgba(139,94,60,.35);outline-offset:2px
+}
+[aria-hidden="true"]{pointer-events:none}
+.avx-p4-status{
+ position:fixed;left:16px;bottom:16px;z-index:9999;padding:9px 12px;border-radius:999px;
+ background:#2f241e;color:#fff;font-size:12px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.16);
+ opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none
+}
+.avx-p4-status.show{opacity:1;transform:none}
+.avx-p4-tools{
+ display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0
+}
+.avx-p4-tools button{
+ border:1px solid rgba(77,55,42,.15);background:#fff;border-radius:999px;padding:8px 12px;
+ color:#2f241e;font-weight:750;cursor:pointer
+}
+.avx-p4-skip{
+ position:fixed;left:10px;top:10px;z-index:10000;transform:translateY(-150%);
+ padding:10px 14px;border-radius:10px;background:#2f241e;color:#fff
+}
+.avx-p4-skip:focus{transform:none}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+@media print{
+ header,nav,footer,.avx-p4-status,.avx-p4-skip,button{display:none!important}
+ body{background:#fff!important;color:#111!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5849,6 +5886,111 @@ function boot(){
  inject();
  setTimeout(()=>{hook("toggleFollow","follow");hook("postComment","comment");render()},800);
  setTimeout(render,1800);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+})();
+</script>
+
+
+<script id="avanitaxx-phase4-final-polish-js">
+/* =========================================================
+   PHASE 4 — FINAL POLISH / PERFORMANCE / SEO / ACCESSIBILITY
+   Non-destructive hardening layer
+   ========================================================= */
+(function(){
+"use strict";
+
+const status=(msg)=>{
+ let el=document.getElementById("avx-p4-status");
+ if(!el){el=document.createElement("div");el.id="avx-p4-status";el.className="avx-p4-status";el.setAttribute("role","status");document.body.appendChild(el)}
+ el.textContent=msg;el.classList.add("show");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("show"),1800);
+};
+
+function accessibility(){
+ document.documentElement.lang=document.documentElement.lang||"en";
+ const main=document.querySelector("main");
+ if(main&&!main.id){main.id="main-content"}
+ if(main)main.setAttribute("tabindex","-1");
+
+ const skip=document.createElement("a");
+ skip.href=main?"#"+main.id:"#top";
+ skip.className="avx-p4-skip";skip.textContent="Skip to main content";
+ document.body.prepend(skip);
+
+ document.querySelectorAll("img").forEach(img=>{
+   if(!img.hasAttribute("alt"))img.setAttribute("alt","");
+   img.loading=img.loading||"lazy";
+   img.decoding=img.decoding||"async";
+ });
+ document.querySelectorAll("button").forEach(b=>{
+   if(!b.getAttribute("aria-label")&&!b.textContent.trim()){
+     const title=b.getAttribute("title");
+     if(title)b.setAttribute("aria-label",title);
+   }
+ });
+ document.querySelectorAll("input,select,textarea").forEach(el=>{
+   if(!el.getAttribute("aria-label")){
+     const ph=el.getAttribute("placeholder");
+     if(ph)el.setAttribute("aria-label",ph);
+   }
+ });
+}
+
+function seo(){
+ let canonical=document.querySelector('link[rel="canonical"]');
+ if(!canonical){
+   canonical=document.createElement("link");canonical.rel="canonical";canonical.href=location.href.split("#")[0];
+   document.head.appendChild(canonical);
+ }
+ let meta=document.querySelector('meta[name="robots"]');
+ if(!meta){meta=document.createElement("meta");meta.name="robots";meta.content="index,follow";document.head.appendChild(meta)}
+
+ // Preserve an existing title/description; only fill gaps.
+ if(!document.title)document.title="Avanitaxx Stories — Read Stories Online";
+ if(!document.querySelector('meta[name="description"]')){
+   const m=document.createElement("meta");m.name="description";
+   m.content="Read and discover stories, authors, chapters and original fiction on Avanitaxx Stories.";
+   document.head.appendChild(m);
+ }
+}
+
+function performance(){
+ // Defer non-critical images without touching data URLs or already eager assets.
+ document.querySelectorAll("img").forEach(img=>{
+   if(!img.hasAttribute("loading"))img.loading="lazy";
+   if(!img.hasAttribute("decoding"))img.decoding="async";
+ });
+ // Mark external links safely.
+ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+   const rel=(a.getAttribute("rel")||"").split(/\s+/).filter(Boolean);
+   if(!rel.includes("noopener"))rel.push("noopener");
+   if(!rel.includes("noreferrer"))rel.push("noreferrer");
+   a.setAttribute("rel",rel.join(" "));
+ });
+}
+
+function addReaderUtility(){
+ // Add a tiny non-invasive utility row only when a reader/content area exists.
+ const host=document.querySelector("#readerView,#reader-view,.reader-content,.chapter-content,[data-reader-content]");
+ if(!host||document.getElementById("avx-p4-tools"))return;
+ const tools=document.createElement("div");tools.id="avx-p4-tools";tools.className="avx-p4-tools";
+ tools.setAttribute("aria-label","Reader utilities");
+ tools.innerHTML='<button type="button" id="avx-p4-print">Print chapter</button><button type="button" id="avx-p4-top">Back to top</button>';
+ host.parentNode.insertBefore(tools,host);
+ document.getElementById("avx-p4-print").onclick=()=>window.print();
+ document.getElementById("avx-p4-top").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function errorGuard(){
+ window.addEventListener("error",e=>{
+   // Avoid breaking the page; expose a quiet status only for user-triggered/runtime errors.
+   if(e?.message) status("Some content could not be loaded. Please try again.");
+ });
+}
+
+function boot(){
+ accessibility();seo();performance();addReaderUtility();errorGuard();
+ status("Avanitaxx Stories polished");
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
 })();
