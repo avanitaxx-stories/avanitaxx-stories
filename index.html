@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-22-teaser-first-carousel-1">
+<meta name="avx-build" content="2026-09-23-author-center-unified-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3090,6 +3090,112 @@ body{
 #home .premium-cinematic-section,
 #home .premium-cinematic-section * { }
 </style>
+
+<style id="avx-author-center-upgrade">
+/* ===== AVANITAXX AUTHOR CENTER — UNIFIED AUTHOR WORKSPACE ===== */
+.writer-lounge{
+  padding:28px;
+  grid-template-columns:238px minmax(0,1fr);
+  gap:22px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(217,170,168,.13),transparent 30%),
+    linear-gradient(180deg,#fbf7f1 0,#f6efe8 100%);
+}
+.writer-sidebar{
+  min-height:690px;
+  border-radius:26px;
+  padding:20px 16px;
+  background:linear-gradient(160deg,#2d201b 0%,#463027 55%,#5a3d31 100%);
+  box-shadow:0 22px 55px rgba(55,35,27,.18);
+  position:sticky;
+  top:12px;
+  align-self:start;
+}
+.writer-sidebar-brand{font-size:24px;margin:3px 6px 28px}
+.writer-sidebar-label{padding:0 9px;margin-bottom:10px;color:#dcbfb1;letter-spacing:.2em}
+.writer-side-nav{gap:7px}
+.writer-side-btn{
+  min-height:45px;
+  padding:12px 13px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  transition:.18s ease;
+}
+.writer-side-btn:hover,.writer-side-btn.active{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.12);
+  transform:translateX(2px);
+}
+.writer-side-btn .ws-icon{
+  width:27px;
+  font-size:14px;
+  text-align:center;
+  color:#e7cfc2;
+}
+.writer-side-note{padding:15px;border-radius:16px;line-height:1.7;background:rgba(255,255,255,.065)}
+.writer-main{padding:2px 0}
+.writer-topbar{margin:0 2px 22px;padding:4px 2px}
+.writer-kicker{letter-spacing:.22em}
+.writer-title{font-size:clamp(38px,4.5vw,58px);max-width:720px}
+.writer-subtitle{font-size:14px;max-width:700px}
+.writer-account{box-shadow:0 8px 22px rgba(55,35,27,.05);background:rgba(255,255,255,.72)}
+.writer-actions{gap:8px}
+.writer-action{min-height:42px;padding:11px 15px;border-radius:12px;transition:.18s ease}
+.writer-action:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(55,35,27,.08)}
+.writer-dashboard-grid{grid-template-columns:minmax(0,1fr) 265px;gap:18px}
+.writer-stats{gap:14px;margin-bottom:18px}
+.writer-stat-card{min-height:106px;padding:19px;border-radius:18px}
+.writer-stat-value{font-size:34px}
+.writer-workspace{border-radius:22px;padding:22px}
+.writer-workspace-head{margin-bottom:17px}
+.writer-workspace-title{font-size:31px}
+.story-status-switch{position:sticky;top:0;z-index:3;backdrop-filter:blur(12px);margin-bottom:18px;box-shadow:0 7px 20px rgba(55,35,27,.035)}
+.writer-mini-card{border-radius:18px;padding:18px;box-shadow:0 10px 28px rgba(55,35,27,.055)}
+.writer-mini-card h3{font-size:22px}
+.writer-lounge-footer{border-radius:15px}
+#menu-author-center{background:#f3e2de;color:#4a3025;font-weight:900}
+#menu-author-center:hover{background:#ead0cb}
+
+/* Community Lounge opened from the unified center */
+.author-social-shell{width:min(1180px,100%);max-height:94vh;border-radius:26px;box-shadow:0 34px 100px rgba(30,18,14,.32)}
+.author-social-head{padding:24px 30px 19px}
+.author-social-body{grid-template-columns:minmax(0,1fr) 285px;gap:20px;padding:22px 26px 28px}
+.author-social-card,.author-social-side-card{border-radius:18px}
+.author-social-card{padding:18px}
+.author-post{border-radius:18px}
+.author-social-title{font-size:35px}
+
+/* Profile editor uses the same spacing language */
+.profile-grid{gap:20px}
+.profile-grid > div{background:#fffdf9;border:1px solid var(--line);border-radius:18px;padding:18px}
+.upload-preview{border-radius:15px;box-shadow:0 10px 25px rgba(55,35,27,.08)}
+.modal:has(.profile-grid){border-radius:24px;padding:28px}
+
+@media(max-width:920px){
+  .writer-lounge{grid-template-columns:1fr;padding:20px}
+  .writer-sidebar{position:relative;top:auto;min-height:0}
+  .writer-side-nav{grid-template-columns:repeat(3,1fr)}
+  .writer-side-note{display:none}
+  .writer-dashboard-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .writer-lounge{padding:12px}
+  .writer-sidebar{padding:16px;border-radius:20px}
+  .writer-side-nav{grid-template-columns:repeat(2,1fr)}
+  .writer-side-btn{min-height:43px;padding:10px}
+  .writer-topbar{padding:0;margin-bottom:15px}
+  .writer-title{font-size:38px}
+  .writer-workspace{padding:14px;border-radius:18px}
+  .writer-stats{gap:8px}
+  .writer-stat-card{padding:14px;min-height:92px}
+  .writer-dashboard-grid{gap:12px}
+  .author-social-body{padding:12px}
+  .author-social-head{padding:17px}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -3110,11 +3216,9 @@ body{
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
         <div id="author-menu-email" class="menu-email"></div>
-        <button id="menu-profile" type="button">👤 MY PROFILE</button>
-        <button id="menu-stories" type="button">📚 MY STORIES</button><button id="menu-library" type="button">🔖 MY LIBRARY</button>
-                <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
-        <div id="menu-owner-divider" class="menu-divider"></div>
-        <button id="menu-owner-timeline" class="menu-owner" type="button">✍️ AUTHOR LOUNGE</button>
+        <button id="menu-author-center" class="menu-owner" type="button">✍️ AUTHOR CENTER</button>
+        <button id="menu-library" type="button">🔖 MY LIBRARY</button>
+        <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
         <div class="menu-divider"></div>
         <button id="menu-logout" type="button">🚪 SIGN OUT</button>
       </div>
@@ -3935,24 +4039,26 @@ async function openAuthorHome(){
   open(`<div class="panel"><div class="writer-lounge">
     <aside class="writer-sidebar">
       <div class="writer-sidebar-brand">Avanitaxx <span>Stories</span></div>
-      <div class="writer-sidebar-label">Writer's Lounge</div>
+      <div class="writer-sidebar-label">Author Center</div>
       <div class="writer-side-nav">
         <button class="writer-side-btn active" id="wl-overview" type="button"><span class="ws-icon">⌂</span>Overview</button>
         <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon">▤</span>My Stories</button>
         <button class="writer-side-btn" id="wl-new" type="button"><span class="ws-icon">＋</span>New Story</button>
-        <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon">◎</span>Author Profile</button>
+        <button class="writer-side-btn" id="wl-lounge" type="button"><span class="ws-icon">✦</span>Author Lounge</button>
+        <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon">◎</span>My Profile</button>
+        <button class="writer-side-btn" id="wl-hub" type="button"><span class="ws-icon">◌</span>Author Hub</button>
       </div>
-      <div class="writer-side-note"><strong>YOUR WRITING SPACE</strong><br>A focused home for your stories, drafts, publishing controls, and author identity — kept in the warm Avanitaxx toffee aesthetic.</div>
+      <div class="writer-side-note"><strong>ONE AUTHOR SPACE</strong><br>Your stories, community posts, public author profile, and publishing tools now live under one clean Author Center. Every signed-in author can use these sections.</div>
     </aside>
     <main class="writer-main">
       <div class="writer-topbar">
         <div>
-          <div class="writer-kicker">WRITER'S LOUNGE</div>
-          <div class="writer-title">Welcome back, Writer.</div>
-          <div class="writer-subtitle">Manage your stories, prepare new chapters, and keep your author space organized.</div>
+          <div class="writer-kicker">AVANITAXX AUTHOR CENTER</div>
+          <div class="writer-title">Your author space, together.</div>
+          <div class="writer-subtitle">Write, publish, connect with other authors, and manage your public profile from one organized workspace.</div>
           <div class="writer-actions">
             <button class="writer-action primary" id="new-story" type="button">＋ NEW STORY</button>
-            <button class="writer-action" id="dash-profile" type="button">AUTHOR PROFILE</button>
+            <button class="writer-action" id="dash-profile" type="button">MY PROFILE</button>
             <button class="writer-action" id="dash-home" type="button">HOME</button>
             <button class="writer-action" id="dash-logout" type="button">LOG OUT</button>
           </div>
@@ -3992,6 +4098,8 @@ async function openAuthorHome(){
   document.getElementById('dash-profile').onclick=openProfileEditor;
   document.getElementById('wl-profile').onclick=openProfileEditor;
   document.getElementById('wl-profile-quick').onclick=openProfileEditor;
+  document.getElementById('wl-lounge').onclick=openOwnerTimeline;
+  document.getElementById('wl-hub').onclick=()=>openAuthorHub();
   document.getElementById('new-story').onclick=()=>openEditor(null);
   document.getElementById('wl-new').onclick=()=>openEditor(null);
   document.getElementById('wl-new-quick').onclick=()=>openEditor(null);
@@ -4978,13 +5086,9 @@ function bindStatic(){
   const avatar=byId('author-avatar-btn'),menu=byId('author-menu');
   if(avatar)avatar.onclick=e=>{e.preventDefault();e.stopPropagation();menu?.classList.toggle('hidden');avatar.setAttribute('aria-expanded',String(!menu?.classList.contains('hidden')))};
   document.addEventListener('click',e=>{if(!e.target.closest('#author-menu-wrap')){menu?.classList.add('hidden');avatar?.setAttribute('aria-expanded','false')}});
-  byId('menu-profile')?.addEventListener('click',()=>{menu?.classList.add('hidden');openProfileEditor()});
-  byId('menu-stories')?.addEventListener('click',()=>{menu?.classList.add('hidden');openAuthorHome()});
+  byId('menu-author-center')?.addEventListener('click',()=>{menu?.classList.add('hidden');openAuthorHome()});
   byId('menu-library')?.addEventListener('click',()=>{menu?.classList.add('hidden');openMyLibrary()});
-  byId('menu-author-home')?.addEventListener('click',()=>{menu?.classList.add('hidden');openAuthorHome()});
-  byId('menu-new-story')?.addEventListener('click',()=>{menu?.classList.add('hidden');openEditor(null)});
   byId('menu-notifications')?.addEventListener('click',()=>{menu?.classList.add('hidden');openNotifications()});
-  byId('menu-owner-timeline')?.addEventListener('click',()=>{menu?.classList.add('hidden');openOwnerTimeline()});
   byId('menu-logout')?.addEventListener('click',()=>{menu?.classList.add('hidden');logout()});
   byId('nav-dashboard-btn')?.addEventListener('click',()=>{ if(session) openAuthorHome(); else openAuth('author'); });
   byId('nav-ranking-btn')?.addEventListener('click',openRanking);
