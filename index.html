@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-author-center-unified-1">
+<meta name="avx-build" content="2026-09-23-author-center-elegant-icons-v2">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3196,6 +3196,34 @@ body{
 }
 </style>
 
+<style id="avx-author-center-elegant-icons">
+.writer-lounge{grid-template-columns:252px minmax(0,1fr)!important;gap:0!important;padding:0!important;min-height:700px;background:linear-gradient(135deg,#fbf7f2,#f5ece5)}
+.writer-sidebar{position:relative;min-height:700px!important;padding:30px 18px 24px!important;background:linear-gradient(165deg,#3b2922,#2b1d18 62%,#241713)!important;border-right:1px solid rgba(255,255,255,.08);box-shadow:18px 0 45px rgba(49,31,24,.10);overflow:hidden}
+.writer-sidebar:before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-120px;top:-90px;border:1px solid rgba(231,205,181,.12);box-shadow:0 0 0 28px rgba(231,205,181,.025),0 0 0 58px rgba(231,205,181,.018);pointer-events:none}
+.writer-sidebar-brand{position:relative;z-index:2;margin:2px 12px 26px;color:#fff8f1!important;font:700 22px/1 Georgia,serif!important;letter-spacing:-.025em}
+.writer-sidebar-brand span{color:#d9aaa8!important}
+.writer-sidebar-label{position:relative;z-index:2;margin:0 12px 11px!important;color:#c8afa2!important;font-size:8px!important;font-weight:900!important;letter-spacing:.22em!important;text-transform:uppercase}
+.writer-side-nav{position:relative;z-index:3;display:grid;gap:7px}
+.writer-side-btn{width:100%;min-height:52px!important;display:flex!important;align-items:center!important;gap:12px!important;padding:9px 11px!important;border:1px solid transparent!important;border-radius:14px!important;background:transparent!important;color:#d9ccc4!important;font-size:10px!important;font-weight:900!important;letter-spacing:.07em!important;text-align:left!important;transition:.22s ease!important}
+.writer-side-btn:hover{color:#fff!important;background:rgba(255,255,255,.065)!important;border-color:rgba(255,255,255,.08)!important;transform:translateX(2px)}
+.writer-side-btn.active{color:#fff!important;background:linear-gradient(135deg,rgba(217,170,168,.19),rgba(255,255,255,.055))!important;border-color:rgba(217,170,168,.22)!important;box-shadow:0 10px 28px rgba(0,0,0,.13),inset 3px 0 0 #d9aaa8}
+.ws-icon{width:36px!important;height:36px!important;min-width:36px!important;display:grid!important;place-items:center!important;border-radius:11px!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.08)!important;color:#c9aaa0!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);transition:.22s ease!important}
+.writer-side-btn.active .ws-icon{color:#f5d9d5!important;background:rgba(217,170,168,.16)!important;border-color:rgba(217,170,168,.25)!important;box-shadow:0 7px 18px rgba(0,0,0,.12)}
+.writer-side-btn:hover .ws-icon{color:#fff!important;transform:translateY(-1px)}
+.ws-icon-svg svg{width:19px;height:19px;display:block;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.writer-side-note{position:relative;z-index:2;margin:28px 8px 0!important;padding:15px 14px!important;border:1px solid rgba(255,255,255,.075)!important;border-radius:15px!important;background:rgba(255,255,255,.035)!important;color:#ad9a91!important;font-size:9px!important;line-height:1.65!important}
+.writer-side-note strong{color:#ead8cf!important;font-size:8px!important;letter-spacing:.16em!important}
+.writer-main{min-width:0;padding:36px 38px 40px!important;background:linear-gradient(180deg,rgba(255,253,249,.82),rgba(248,241,234,.72))}
+.writer-topbar{padding:0 0 28px!important;margin:0 0 25px!important;border-bottom:1px solid rgba(74,48,37,.09)!important}
+.writer-title{color:#30211b!important;font:400 clamp(35px,4vw,56px)/.98 Georgia,serif!important;letter-spacing:-.045em!important;margin:9px 0 10px!important}
+.writer-subtitle{max-width:690px!important;color:#77665e!important;font:14px/1.7 Georgia,serif!important}
+.writer-actions{gap:8px!important;margin-top:20px!important}
+.writer-action{min-height:39px!important;padding:10px 14px!important;border:1px solid rgba(74,48,37,.11)!important;border-radius:10px!important;background:rgba(255,255,255,.72)!important;color:#4b352b!important;font-size:8px!important;font-weight:900!important;letter-spacing:.1em!important;box-shadow:0 5px 15px rgba(55,35,27,.04)!important}
+.writer-action.primary{background:linear-gradient(180deg,#4b342a,#33231d)!important;color:#fff!important;border-color:#33231d!important}
+.writer-stat-card,.writer-workspace,.writer-mini-card{border-radius:17px!important;box-shadow:0 12px 32px rgba(55,35,27,.055)!important}
+@media(max-width:920px){.writer-lounge{grid-template-columns:1fr!important}.writer-sidebar{min-height:auto!important;padding:24px 16px!important}.writer-side-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.writer-side-note{display:none}.writer-main{padding:28px 24px 30px!important}}
+@media(max-width:600px){.writer-side-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.writer-side-btn{min-height:58px!important}.writer-main{padding:23px 16px 26px!important}.writer-title{font-size:39px!important}.writer-account{display:none}.writer-actions .writer-action{flex:1}}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4041,12 +4069,12 @@ async function openAuthorHome(){
       <div class="writer-sidebar-brand">Avanitaxx <span>Stories</span></div>
       <div class="writer-sidebar-label">Author Center</div>
       <div class="writer-side-nav">
-        <button class="writer-side-btn active" id="wl-overview" type="button"><span class="ws-icon">⌂</span>Overview</button>
-        <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon">▤</span>My Stories</button>
-        <button class="writer-side-btn" id="wl-new" type="button"><span class="ws-icon">＋</span>New Story</button>
-        <button class="writer-side-btn" id="wl-lounge" type="button"><span class="ws-icon">✦</span>Author Lounge</button>
-        <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon">◎</span>My Profile</button>
-        <button class="writer-side-btn" id="wl-hub" type="button"><span class="ws-icon">◌</span>Author Hub</button>
+        <button class="writer-side-btn active" id="wl-overview" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>Overview</button>
+        <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4.5h12.5A1.5 1.5 0 0 1 19 6v13.5H6.5A2.5 2.5 0 0 1 4 17V6a1.5 1.5 0 0 1 1-1.5Z"/><path d="M7.5 8h8M7.5 11.5h8M7.5 15h5"/></svg></span>My Stories</button>
+        <button class="writer-side-btn" id="wl-new" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>New Story</button>
+        <button class="writer-side-btn" id="wl-lounge" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 13.9 9l5.6 1.2-5.6 1.9L12 18l-1.9-5.9-5.6-1.9L10.1 9 12 3.5Z"/><path d="m18.2 16.1.8 2.1 2.1.8-.2.1"/></svg></span>Author Lounge</button>
+        <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.2"/><path d="M5.5 20c.6-3.5 2.8-5.3 6.5-5.3s5.9 1.8 6.5 5.3"/><circle cx="12" cy="12" r="9.2"/></svg></span>My Profile</button>
+        <button class="writer-side-btn" id="wl-hub" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 8l4.9.7-3.5 3.5.8 4.9-4.6-2.3-4.6 2.3.8-4.9-3.5-3.5L9.6 8 12 3.5Z"/><circle cx="12" cy="11" r="1.5"/></svg></span>Author Hub</button>
       </div>
       <div class="writer-side-note"><strong>ONE AUTHOR SPACE</strong><br>Your stories, community posts, public author profile, and publishing tools now live under one clean Author Center. Every signed-in author can use these sections.</div>
     </aside>
