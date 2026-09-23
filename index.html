@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-phase1-complete-reader-experience">
+<meta name="avx-build" content="2026-09-23-phase2-complete-author-experience">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3298,6 +3298,27 @@ body{
 }
 </style>
 
+
+<style id="avanitaxx-phase2-author-css">
+/* AVANITAXX STORIES — PHASE 2 AUTHOR EXPERIENCE */
+.avx-author-phase2{
+  margin:28px 0;padding:22px;border:1px solid rgba(77,55,42,.14);
+  border-radius:22px;background:linear-gradient(180deg,#fffaf5,#f8f0e8);
+  box-shadow:0 12px 32px rgba(55,38,27,.07);color:#2f241e
+}
+.avx-a2-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:18px}
+.avx-a2-title{font-size:1.2rem;font-weight:850}.avx-a2-sub{font-size:.84rem;color:#75685f;margin-top:4px}
+.avx-a2-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.avx-a2-card{background:#fff;border:1px solid rgba(77,55,42,.13);border-radius:17px;padding:15px}
+.avx-a2-num{font-size:1.45rem;font-weight:850}.avx-a2-label{font-size:.78rem;color:#75685f;margin-top:3px}
+.avx-a2-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.avx-a2-btn{border:1px solid rgba(77,55,42,.16);background:#fff;border-radius:999px;padding:9px 13px;color:#2f241e;font-weight:750;cursor:pointer}
+.avx-a2-btn.primary{background:#8b5e3c;color:#fff;border-color:#8b5e3c}
+.avx-a2-note{margin-top:13px;padding:12px 14px;border-radius:13px;background:rgba(139,94,60,.08);font-size:.8rem;color:#65574e}
+@media(max-width:850px){.avx-a2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.avx-author-phase2{padding:15px}.avx-a2-grid{grid-template-columns:1fr}.avx-a2-head{align-items:flex-start;flex-direction:column}}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5510,6 +5531,81 @@ function showCommunityNewMessage(row,room){
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);
   else boot();
+})();
+</script>
+
+
+<script id="avanitaxx-phase2-author-js">
+/* PHASE 2 — Author Experience: non-destructive integration */
+(function(){
+"use strict";
+const S="avx_author_phase2_v1";
+const safe=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
+const put=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const state=()=>safe(S,{drafts:{},lastSaved:null});
+const saveState=v=>put(S,v);
+
+function authorData(){
+  const stories = Array.isArray(window.myStories)?window.myStories:
+                  Array.isArray(window.authorStories)?window.authorStories:
+                  Array.isArray(window.mineStories)?window.mineStories:[];
+  return stories;
+}
+function render(){
+  const root=document.getElementById("avx-author-phase2");
+  if(!root)return;
+  const stories=authorData();
+  const published=stories.filter(s=>s.published===true||s.status==="published").length;
+  const drafts=stories.filter(s=>s.published!==true&&s.status!=="published").length;
+  const chapters=stories.reduce((n,s)=>n+Number(s.chapter_count||s.totalChapters||s.total_chapters||0),0);
+  const st=state();
+  root.innerHTML=`<div class="avx-a2-head"><div>
+    <div class="avx-a2-title">Author Center</div>
+    <div class="avx-a2-sub">A cleaner home for your writing, publishing and author tools.</div>
+  </div></div>
+  <div class="avx-a2-grid">
+    <div class="avx-a2-card"><div class="avx-a2-num">${stories.length}</div><div class="avx-a2-label">Stories</div></div>
+    <div class="avx-a2-card"><div class="avx-a2-num">${published}</div><div class="avx-a2-label">Published</div></div>
+    <div class="avx-a2-card"><div class="avx-a2-num">${drafts}</div><div class="avx-a2-label">Draft / Unpublished</div></div>
+    <div class="avx-a2-card"><div class="avx-a2-num">${chapters}</div><div class="avx-a2-label">Chapters tracked</div></div>
+  </div>
+  <div class="avx-a2-actions">
+    <button class="avx-a2-btn primary" id="avx-a2-open">Open Author Center</button>
+    <button class="avx-a2-btn" id="avx-a2-draft">Save current draft</button>
+    <button class="avx-a2-btn" id="avx-a2-series">Series Manager</button>
+    <button class="avx-a2-btn" id="avx-a2-analytics">Author Analytics</button>
+  </div>
+  <div class="avx-a2-note">Autosave foundation: <strong>${st.lastSaved?new Date(st.lastSaved).toLocaleString():"Not used yet"}</strong>. Existing editor functions are preserved.</div>`;
+  document.getElementById("avx-a2-open").onclick=()=>{
+    for(const n of ["openAuthorHome","openAuthorCenter","openAuthorHub"]){
+      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
+    }
+  };
+  document.getElementById("avx-a2-draft").onclick=()=>{
+    const payload={time:Date.now(),title:document.querySelector("#storyTitle,#storyTitleInput,#editorTitle")?.value||"Current draft"};
+    const x=state(); x.drafts.current=payload; x.lastSaved=payload.time; saveState(x); render();
+  };
+  document.getElementById("avx-a2-series").onclick=()=>{
+    for(const n of ["openSeriesManager","openAuthorHome","openAuthorCenter"]){
+      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
+    }
+  };
+  document.getElementById("avx-a2-analytics").onclick=()=>{
+    for(const n of ["openAuthorAnalytics","getStoryReadInsights","openDashboard"]){
+      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
+    }
+  };
+}
+function inject(){
+  if(document.getElementById("avx-author-phase2"))return;
+  const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root");
+  if(!host)return;
+  const box=document.createElement("section");box.id="avx-author-phase2";box.className="avx-author-phase2";
+  host.appendChild(box);render();
+}
+function boot(){inject();setTimeout(render,700);setTimeout(render,1800)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
 })();
 </script>
 
