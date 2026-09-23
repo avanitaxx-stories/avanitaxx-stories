@@ -3460,7 +3460,7 @@ async function getStoryReadInsights(storyId){
 }
 window.avxStoryFilter=window.avxStoryFilter||'ALL';
 function normalizeStoryStatus(s){
-  const v=String(s?.story_status||'').toUpperCase().replace('_','-');
+  const v=String(s?.story_status||'').trim().toUpperCase().replace(/_/g,'-');
   if(v==='COMPLETED')return 'COMPLETED';
   if(v==='ON-GOING'||v==='ONGOING')return 'ON-GOING';
   return s?.published?'ON-GOING':'UNPUBLISHED';
@@ -3485,7 +3485,23 @@ async function deleteStory(id){if(!confirm('Permanently delete this story, chapt
 
 async function getStoryWithChapters(id){const s=await sb.from('stories').select('*').eq('id',id).eq('owner_id',session.user.id).single();if(s.error)return s;const c=await sb.from('chapters').select('*').eq('story_id',id).order('chapter_number',{ascending:true});s.data.chapters=c.data||[];return s}
 async function loadCompilationItems(compilationId){compilationItems=[];if(!compilationId||String(editorStory?.story_type||'standalone')!=='compilation')return;const r=await sb.from('story_compilation_items').select('story_id,position').eq('compilation_id',compilationId).order('position',{ascending:true});if(r.error){console.warn('Compilation items unavailable:',r.error.message);return}const ids=(r.data||[]).map(x=>x.story_id).filter(Boolean);if(!ids.length)return;const sr=await sb.from('stories').select('id,title,cover_url,description,tags,genre,story_status,published,story_type').in('id',ids).eq('owner_id',session.user.id);if(sr.error)return;const byId=new Map((sr.data||[]).map(x=>[String(x.id),x]));compilationItems=ids.map(id=>byId.get(String(id))).filter(Boolean)}
-async function loadCompilationCandidates(){const r=await sb.from('stories').select('id,title,cover_url,description,tags,genre,story_status,published,story_type').eq('owner_id',session.user.id).eq('story_status','COMPLETED').eq('published',true).neq('story_type','compilation').order('updated_at',{ascending:false});if(r.error)throw r.error;return r.data||[]}
+async function loadCompilationCandidates(){
+  /*
+   * COMPILATION FIX:
+   * Load published non-compilation stories first, then use the same
+   * normalizeStoryStatus() logic as the Author dashboard. This avoids
+   * rejecting completed stories because of legacy casing/formatting in
+   * story_status.
+   */
+  const r=await sb.from('stories')
+    .select('id,title,cover_url,description,tags,genre,story_status,published,story_type')
+    .eq('owner_id',session.user.id)
+    .eq('published',true)
+    .neq('story_type','compilation')
+    .order('updated_at',{ascending:false});
+  if(r.error)throw r.error;
+  return (r.data||[]).filter(s=>normalizeStoryStatus(s)==='COMPLETED');
+}
 function renderCompilationItems(){const box=document.getElementById('compilation-list');if(!box)return;box.innerHTML=compilationItems.length?compilationItems.map((s,i)=>`<div class="compilation-row"><div>${s.cover_url?`<img class="compilation-thumb" src="${esc(s.cover_url)}" alt="${esc(s.title)} cover">`:`<div class="compilation-thumb cover-fallback">${esc(s.title)}</div>`}</div><div><div class="compilation-row-title">${i+1}. ${esc(s.title)}</div><div class="compilation-row-meta">COMPLETED${s.genre?' · '+esc(s.genre):''}</div></div><button class="btn alt remove-compilation-item" data-id="${esc(s.id)}" type="button">REMOVE</button></div>`).join(''):'<div class="help">No stories added yet. Add completed published stories below.</div>';box.querySelectorAll('.remove-compilation-item').forEach(b=>b.onclick=()=>{compilationItems=compilationItems.filter(s=>String(s.id)!==String(b.dataset.id));renderCompilationItems()})}
 async function addCompilationStory(){const st=document.getElementById('editor-status');try{const candidates=await loadCompilationCandidates();const selected=new Set(compilationItems.map(s=>String(s.id)));const available=candidates.filter(s=>!selected.has(String(s.id)));if(!available.length){notice(st,'No additional completed published stories are available. Finish and publish another short story first.');return}open(`<div class="modal" style="width:min(720px,100%)"><button class="close" id="comp-picker-close">×</button><div class="kicker">ADD TO COMPILATION</div><h2>Choose a completed story</h2><p class="meta">The original story stays where it is. The compilation stores only a reference to it, so the chapter text is not duplicated.</p><div class="compilation-picker">${available.map(s=>`<button class="compilation-option" data-id="${esc(s.id)}" type="button">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} cover">`:`<div class="compilation-thumb cover-fallback">${esc(s.title)}</div>`}<div style="text-align:left"><div class="compilation-option-title">${esc(s.title)}</div><div class="compilation-option-meta">COMPLETED${s.genre?' · '+esc(s.genre):''}</div></div><span>ADD</span></button>`).join('')}</div></div>`);document.getElementById('comp-picker-close').onclick=close;document.querySelectorAll('.compilation-option').forEach(b=>b.onclick=()=>{const s=available.find(x=>String(x.id)===String(b.dataset.id));if(s){compilationItems.push(s);renderCompilationItems();close()}})}catch(e){notice(st,'Could not load completed stories: '+(e.message||e))}}
 async function openEditor(id){if(id){const r=await getStoryWithChapters(id);if(r.error){alert(r.error.message);return}editorStory=r.data;editorChapters=(r.data.chapters||[]).length?r.data.chapters.map(c=>({...c,published:!!c.published})):[{chapter_number:1,title:'Chapter 1',content:'',published:false}];await loadCompilationItems(id)}else{editorStory={id:null,title:'',description:'',cover_url:'',share_slug:'',published:false,story_status:'UNPUBLISHED',tags:[],genre:null,author_note:null,story_type:'standalone',series_name:null,series_book_number:null};editorChapters=[{chapter_number:1,title:'Chapter 1',content:'',published:false}];compilationItems=[]}editorChapterIndex=0;editorCoverFile=null;renderEditor()}
