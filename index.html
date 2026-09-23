@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-phase4-final-polish-performance-seo-accessibility">
+<meta name="avx-build" content="2026-09-23-phase4-final-polish-performance-seo-accessibility-fixed">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -3478,6 +3478,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     <div id="featured-author-card"></div>
   </div>
 </section>
+
+<section class="section avx-feature-shell" id="avx-reader-features" aria-label="Reader features">
+  <div class="container"><div id="avx-phase1-reader"></div></div>
+</section>
+<section class="section avx-feature-shell" id="avx-author-features" aria-label="Author Center">
+  <div class="container"><div id="avx-author-phase2"></div></div>
+</section>
+<section class="section avx-feature-shell" id="avx-community-features" aria-label="Community and Discovery">
+  <div class="container"><div id="avx-phase3"></div></div>
+</section>
 </main>
 
 <footer>
@@ -3539,6 +3549,16 @@ const SUPABASE_KEY='sb_publishable_KBiyjJQgrCkZfa_U6RP9ww_GgFbfvwC';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'avanitaxx-stories-auth'}});
 const overlay=document.getElementById('overlay');
 let session=null,currentStory=null,currentChapter=0,currentAuthorId=null;
+/* AVX integration bridge: exposes the reader/account state to enhancement modules without changing core reader logic. */
+window.__AVX_INTERNAL__={
+  getSession:()=>session,
+  getDB:()=>sb,
+  getCurrentStory:()=>currentStory,
+  getCurrentChapter:()=>currentChapter,
+  setCurrentChapter:(v)=>{currentChapter=Number(v)||0},
+  getReaderProgress:(id)=>getReaderProgress(id),
+  saveReaderProgress:()=>saveReaderProgress()
+};
 let editorStory=null,editorChapters=[],editorChapterIndex=0,editorCoverFile=null,compilationItems=[];
 const SITE_URL='https://avanitaxx-stories.github.io/avanitaxx-stories/';
 const DEFAULT_SEO={title:'Avanitaxx Stories — Read Stories Online',description:'Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.',image:SITE_URL+'og-image.jpg',url:SITE_URL};
@@ -4138,7 +4158,7 @@ function renderReader(restoreScroll=true){
   if(String(currentStory?.story_type||'standalone')==='compilation'){
     const settings=readerSettings();const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} reader-scroll-mode`;root.style.setProperty('--reader-font-size',settings.size+'px');
     const items=currentStory.compilation_stories||[];
-    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top"><div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · COMPILATION</div><div class="reader-book-title">${esc(currentStory.title)}</div><div class="compilation-badge">${items.length} ${items.length===1?'STORY':'STORIES'}</div></div><div class="reader-tools"><span class="reader-settings-note">COLLECTION · NO DUPLICATE TEXT</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div></div><main class="reader-scroll" id="reader-scroll"><article class="reader-scroll-page"><div class="compilation-reader-note">${esc(currentStory.description||'A collection of published stories. Each story remains its own original book; this compilation only links to the originals.')}</div><div class="compilation-reader-list">${items.length?items.map((story,i)=>`<article class="compilation-reader-item"><div>${story.cover_url?`<img class="compilation-reader-cover" src="${esc(story.cover_url)}" alt="${esc(story.title)} cover">`:`<div class="compilation-reader-cover cover-fallback">${esc(story.title)}</div>`}</div><div><div class="compilation-reader-title">${i+1}. ${esc(story.title)}</div><div class="compilation-reader-desc">${esc(String(story.description||'').replace(/<[^>]*>/g,'').slice(0,220))}</div>${Array.isArray(story.tags)&&story.tags.length?`<div class="meta" style="margin-top:6px">${esc(story.tags.slice(0,4).join(' · '))}</div>`:''}</div><button class="btn read-compilation-story" data-slug="${esc(story.share_slug||story.id)}" type="button">READ STORY →</button></article>`).join(''):'<div class="reader-page-empty">No published books have been added to this compilation yet.</div>'}</div></article></main></div>`;
+    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top"><div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · COMPILATION</div><div class="reader-book-title">${esc(currentStory.title)}</div><div class="compilation-badge">${items.length} ${items.length===1?'STORY':'STORIES'}</div></div><div class="reader-tools"><span class="reader-settings-note">COLLECTION · NO DUPLICATE TEXT</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div></div><main class="reader-scroll" id="reader-scroll"><article class="reader-scroll-page"><div class="compilation-reader-note">${esc(currentStory.description||'A collection of published stories. Each story remains its own original book; this compilation only links to the originals.')}</div><div class="compilation-reader-list">${items.length?items.map((story,i)=>`<article class="compilation-reader-item"><div>${story.cover_url?`<img class="compilation-reader-cover" src="${esc(story.cover_url)}" alt="${esc(story.title)} cover">`:`<div class="compilation-reader-cover cover-fallback">${esc(story.title)}</div>`}</div><div><div class="compilation-reader-title">${i+1}. ${esc(story.title)}</div><div class="compilation-reader-desc">${esc(String(story.description||'').replace(/<[^>]*>/g,'').slice(0,220))}</div>${Array.isArray(story.tags)&&story.tags.length?`<div class="meta" style="margin-top:6px">${esc(story.tags.slice(0,4).join(' · '))}</div>`:''}</div><button class="btn read-compilation-story" data-slug="${esc(story.share_slug||story.id)}" type="button">READ STORY →</button></article>`).join(''):'<div class="reader-page-empty">No published books have been added to this compilation yet.</div>'}</div></article></main></div>`;
     const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open reader-overlay';overlay.setAttribute('aria-hidden','false');
     document.getElementById('close-reader').onclick=()=>close();document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};root.querySelectorAll('.read-compilation-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));return;
   }
@@ -4151,7 +4171,7 @@ function renderReader(restoreScroll=true){
   root.innerHTML=`<div class="reader-book-shell">
     <div class="reader-book-top">
       <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · READING MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div>${currentStory.series_name?`<div class="story-series-badge" style="margin-top:8px"><b>SERIES</b><span class="series-sep">•</span><span>${Number(currentStory.series_book_number)>0?`BOOK ${Number(currentStory.series_book_number)}`:'SERIES STORY'}</span></div>`:''}</div>
-      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
+      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
       <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
     </div>
     <main class="reader-scroll" id="reader-scroll">
@@ -4180,6 +4200,12 @@ function renderReader(restoreScroll=true){
   }
 
   document.getElementById('close-reader').onclick=()=>{saveReaderProgress();close()};
+  document.getElementById('reader-bookmark')?.addEventListener('click',()=>{
+    const key='avx_bookmarks_v2'; let list=[]; try{list=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
+    const item={storyId:String(currentStory?.id||''),slug:String(currentStory?.share_slug||currentStory?.id||''),title:String(currentStory?.title||'Untitled Story'),chapterIndex:Number(currentChapter)||0,chapterTitle:String(currentStory?.chapters?.[currentChapter]?.title||('Chapter '+(Number(currentChapter)+1))),cover:String(currentStory?.cover_url||''),savedAt:Date.now()};
+    const k=item.storyId+'::'+item.chapterIndex; list=list.filter(x=>String(x.storyId)+'::'+String(x.chapterIndex)!==k); list.unshift(item); localStorage.setItem(key,JSON.stringify(list.slice(0,100)));
+    const b=document.getElementById('reader-bookmark'); if(b){b.textContent='✓ BOOKMARKED';setTimeout(()=>{b.textContent='☆ BOOKMARK'},1200)}
+  });
   document.getElementById('reader-light').onclick=()=>{saveReaderProgress();settings.theme='light';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-dark').onclick=()=>{saveReaderProgress();settings.theme='dark';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-size-down').onclick=()=>{saveReaderProgress();settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};
@@ -5437,457 +5463,64 @@ function showCommunityNewMessage(row,room){
 </script>
 
 <script id="avanitaxx-phase1-reader-js">
-/* =========================================================
-   PHASE 1 READER EXPERIENCE
-   Non-destructive integration layer
-   ========================================================= */
 (function(){
-  "use strict";
-  const K = {
-    history:"avx_reader_history_v1",
-    bookmarks:"avx_reader_bookmarks_v1"
-  };
-
-  const safeJSON=(key,fallback)=>{
-    try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}
-  };
-  const saveJSON=(key,val)=>{try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}};
-  const esc=(v)=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-  const getHistory=()=>safeJSON(K.history,[]);
-  const getBookmarks=()=>safeJSON(K.bookmarks,[]);
-  const currentUserKey=()=>window.currentUser?.uid||window.currentUser?.id||"guest";
-
-  function storyKey(story,chapter){
-    return String(story?.id||story?.story_id||story?.slug||story?.title||"story")+
-      "::"+String(chapter?.id||chapter?.chapter_id||chapter?.number||chapter?.chapter_number||chapter?.title||"chapter");
-  }
-
-  function upsertHistory(item){
-    const h=getHistory().filter(x=>x.key!==item.key);
-    h.unshift({...item,updatedAt:Date.now(),userKey:currentUserKey()});
-    saveJSON(K.history,h.slice(0,50));
-    renderPhase1();
-  }
-
-  function addBookmark(item){
-    const b=getBookmarks();
-    if(!b.some(x=>x.key===item.key)){b.unshift({...item,createdAt:Date.now(),userKey:currentUserKey()});saveJSON(K.bookmarks,b.slice(0,100))}
-    renderPhase1();
-  }
-
-  function removeBookmark(key){
-    saveJSON(K.bookmarks,getBookmarks().filter(x=>x.key!==key)); renderPhase1();
-  }
-
-  function phase1ProgressPercent(item){
-    const p=Number(item.progress);
-    if(Number.isFinite(p)) return Math.max(0,Math.min(100,p));
-    const cur=Number(item.chapterNumber||item.chapter||0), total=Number(item.totalChapters||0);
-    return total>0?Math.max(0,Math.min(100,cur/total*100)):0;
-  }
-
-  function getCurrentReaderItem(){
-    const s=window.currentStory||window.activeStory||window.readerStory||null;
-    const c=window.currentChapter||window.activeChapter||window.readerChapter||null;
-    if(!s&&!c)return null;
-    return {
-      key:storyKey(s||{},c||{}),
-      storyId:s?.id||s?.story_id||null,
-      chapterId:c?.id||c?.chapter_id||null,
-      title:s?.title||s?.name||"Story",
-      chapterTitle:c?.title||c?.name||("Chapter "+(c?.number||c?.chapter_number||"")),
-      chapterNumber:c?.number||c?.chapter_number||"",
-      totalChapters:s?.chapter_count||s?.totalChapters||s?.total_chapters||0,
-      cover:s?.cover_url||s?.cover||s?.image_url||s?.image||"",
-      progress:Number(window.readerProgress||c?.progress||0)
-    };
-  }
-
-  function recordFromGlobals(){
-    const item=getCurrentReaderItem();
-    if(item && item.title!=="Story") upsertHistory(item);
-  }
-
-  window.AvanitaxxReaderPhase1 = {
-    addBookmark,removeBookmark,upsertHistory,getHistory,getBookmarks,recordFromGlobals
-  };
-
-  function card(item,bookmark=false){
-    const pct=phase1ProgressPercent(item);
-    const cover=item.cover||"";
-    const safeCover=cover?`<img class="avx-phase1-cover" src="${esc(cover)}" alt="${esc(item.title)}" loading="lazy">`:`<div class="avx-phase1-cover"></div>`;
-    const action = bookmark
-      ? `<button class="avx-phase1-btn avx-phase1-bookmark-remove" data-key="${esc(item.key)}">Remove</button>`
-      : `<button class="avx-phase1-btn primary avx-phase1-continue" data-key="${esc(item.key)}">Continue →</button>`;
-    return `<article class="avx-phase1-card">
-      ${bookmark?"<span class='avx-phase1-badge'>BOOKMARKED</span>":""}
-      ${safeCover}<div class="avx-phase1-body">
-      <div class="avx-phase1-story">${esc(item.title)}</div>
-      <div class="avx-phase1-chapter">${esc(item.chapterTitle||("Chapter "+(item.chapterNumber||"")))}</div>
-      <div class="avx-phase1-progress"><span style="width:${pct}%"></span></div>
-      <div class="avx-phase1-chapter">${Math.round(pct)}% read</div>
-      <div class="avx-phase1-actions">${action}</div>
-      </div></article>`;
-  }
-
-  function section(id,title,sub,content){
-    return `<section id="${id}" class="avx-phase1-section"><div class="avx-phase1-head">
-      <div><div class="avx-phase1-title">${title}</div><div class="avx-phase1-sub">${sub}</div></div>
-    </div>${content}</section>`;
-  }
-
-  function renderPhase1(){
-    const root=document.getElementById("avx-phase1-reader");
-    if(!root)return;
-    const history=getHistory().filter(x=>x.userKey===currentUserKey()||!x.userKey);
-    const bookmarks=getBookmarks().filter(x=>x.userKey===currentUserKey()||!x.userKey);
-    const cont=history.filter(x=>phase1ProgressPercent(x)<100).slice(0,8);
-    const recent=history.slice(0,10);
-    root.innerHTML =
-      section("avx-continue-reading","Continue Reading","Pick up exactly where you left off.",
-        cont.length?`<div class="avx-phase1-grid">${cont.map(x=>card(x)).join("")}</div>`:
-        `<div class="avx-phase1-empty">Your started stories will appear here automatically as you read.</div>`) +
-      section("avx-reading-history","Reading History","Your most recently opened chapters.",
-        recent.length?`<div>${recent.map(x=>`<div class="avx-history-row"><div class="avx-history-meta"><strong>${esc(x.title)}</strong><small>${esc(x.chapterTitle||"Chapter")} · ${Math.round(phase1ProgressPercent(x))}% read</small></div><button class="avx-phase1-btn avx-phase1-continue" data-key="${esc(x.key)}">Open</button></div>`).join("")}</div>`:
-        `<div class="avx-phase1-empty">No reading history yet.</div>`) +
-      section("avx-bookmarks","Chapter Bookmarks","Save chapters you want to return to.",
-        bookmarks.length?`<div class="avx-phase1-grid">${bookmarks.map(x=>card(x,true)).join("")}</div>`:
-        `<div class="avx-phase1-empty">No bookmarked chapters yet.</div>`);
-    root.querySelectorAll(".avx-phase1-bookmark-remove").forEach(btn=>btn.onclick=()=>removeBookmark(btn.dataset.key));
-    root.querySelectorAll(".avx-phase1-continue").forEach(btn=>btn.onclick=()=>{
-      const item=[...history,...bookmarks].find(x=>x.key===btn.dataset.key);
-      if(item) openStoredItem(item);
-    });
-  }
-
-  function openStoredItem(item){
-    // Reuse existing site navigation functions when available.
-    const fns=["openPublicStory","openStory","openReader","readStory"];
-    for(const n of fns){
-      if(typeof window[n]==="function"){
-        try{
-          if(item.storyId && item.chapterId) return window[n](item.storyId,item.chapterId);
-          if(item.storyId) return window[n](item.storyId);
-          return window[n](item.title);
-        }catch(e){}
-      }
-    }
-    if(item.url) window.location.href=item.url;
-  }
-
-  function inject(){
-    if(document.getElementById("avx-phase1-reader"))return;
-    // Prefer an existing homepage/main content area without deleting existing UI.
-    const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root")||document.body;
-    if(!host)return;
-    const root=document.createElement("div");
-    root.id="avx-phase1-reader";
-    host.appendChild(root);
-    renderPhase1();
-  }
-
-  // Reader hooks: wrap known progress-saving functions if they exist.
-  function hook(name){
-    if(typeof window[name]!=="function"||window[name].__avxPhase1)return;
-    const original=window[name];
-    const wrapped=function(){
-      const result=original.apply(this,arguments);
-      setTimeout(recordFromGlobals,50);
-      return result;
-    };
-    wrapped.__avxPhase1=true; window[name]=wrapped;
-  }
-
-  function boot(){
-    inject();
-    ["saveReaderProgress","recordChapterView"].forEach(hook);
-    setTimeout(recordFromGlobals,700);
-  }
-
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);
-  else boot();
+"use strict";
+const KEY="avx_reader_history_v2", BM="avx_bookmarks_v2";
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
+const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":"&#39;"}[m]));
+const state=()=>window.__AVX_INTERNAL__||{};
+function userKey(){return state().getSession?.()?.user?.id||"guest"}
+function getHistory(){return read(KEY,[])}
+function getBookmarks(){return read(BM,[])}
+function progressPct(x){const p=state().getReaderProgress?.(x.storyId)||{}; const chapters=Number(x.totalChapters||x.chapterCount||0); const idx=Number(x.chapterIndex||0); return chapters>0?Math.max(0,Math.min(100,((idx+1)/chapters)*100)):Number(x.progress||0)}
+function upsertHistory(){
+  const st=state(), story=st.getCurrentStory?.(); if(!story?.id)return;
+  const idx=Number(st.getCurrentChapter?.()||0), ch=story.chapters?.[idx]; if(!ch)return;
+  const list=getHistory().filter(x=>String(x.storyId)!==String(story.id)||Number(x.chapterIndex)!==idx);
+  list.unshift({userKey:userKey(),storyId:String(story.id),slug:String(story.share_slug||story.id),title:String(story.title||"Untitled Story"),chapterIndex:idx,chapterNumber:Number(ch.chapter_number||idx+1),chapterTitle:String(ch.title||("Chapter "+(idx+1))),cover:String(story.cover_url||""),totalChapters:Number(story.chapters?.length||0),savedAt:Date.now()});
+  write(KEY,list.slice(0,100)); render();
+}
+function removeBookmark(storyId,idx){write(BM,getBookmarks().filter(x=>!(String(x.storyId)===String(storyId)&&Number(x.chapterIndex)===Number(idx))));render()}
+function openItem(x){
+  try{const p=state().getReaderProgress?.(x.storyId)||{};p.lastChapter=Number(x.chapterIndex)||0;localStorage.setItem('avx_reader_progress_'+x.storyId,JSON.stringify(p))}catch(e){}
+  if(typeof window.openPublicStory==='function') return window.openPublicStory(x.slug||x.storyId);
+}
+function card(x,bm){return `<article class="avx-phase1-card">${x.cover?`<img class="avx-phase1-cover" src="${esc(x.cover)}" alt="${esc(x.title)}" loading="lazy">`:`<div class="avx-phase1-cover"></div>`}<div class="avx-phase1-body"><div class="avx-phase1-story">${esc(x.title)}</div><div class="avx-phase1-chapter">${esc(x.chapterTitle)}</div><div class="avx-phase1-chapter">${new Date(x.savedAt).toLocaleString()}</div><div class="avx-phase1-actions"><button class="avx-phase1-btn primary" data-open="${esc(x.storyId)}::${x.chapterIndex}">Open</button>${bm?`<button class="avx-phase1-btn" data-remove="${esc(x.storyId)}::${x.chapterIndex}">Remove</button>`:''}</div></div></article>`}
+function render(){const root=document.getElementById('avx-phase1-reader');if(!root)return;const hk=userKey();const history=getHistory().filter(x=>x.userKey===hk||!x.userKey);const bm=getBookmarks().filter(x=>x.userKey===hk||!x.userKey);const cont=history.filter(x=>Number(x.chapterIndex)<Number(x.totalChapters||Infinity));const lookup=x=>[...history,...bm].find(y=>String(y.storyId)+'::'+y.chapterIndex===x);root.innerHTML=`<section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Continue Reading</div><div class="avx-phase1-sub">Pick up exactly where you left off.</div></div></div>${cont.length?`<div class="avx-phase1-grid">${cont.slice(0,8).map(x=>card(x,false)).join('')}</div>`:`<div class="avx-phase1-empty">Your started stories will appear here automatically as you read.</div>`}</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Reading History</div><div class="avx-phase1-sub">Your most recently opened chapters.</div></div></div>${history.length?history.slice(0,10).map(x=>card(x,false)).join(''):`<div class="avx-phase1-empty">No reading history yet.</div>`}</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Chapter Bookmarks</div><div class="avx-phase1-sub">Save chapters you want to return to.</div></div></div>${bm.length?`<div class="avx-phase1-grid">${bm.slice(0,20).map(x=>card(x,true)).join('')}</div>`:`<div class="avx-phase1-empty">No bookmarked chapters yet.</div>`}</section>`;
+root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const x=lookup(b.dataset.open);if(x)openItem(x)});root.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{const [id,idx]=b.dataset.remove.split('::');removeBookmark(id,idx)});}
+function boot(){render();setInterval(render,2500);['saveReaderProgress','recordChapterView'].forEach(n=>{if(typeof window[n]!=='function')return;const fn=window[n];if(fn.__avxHook)return;const w=function(){const r=fn.apply(this,arguments);setTimeout(upsertHistory,80);return r};w.__avxHook=true;window[n]=w});setTimeout(upsertHistory,800)}
+window.AvanitaxxReaderPhase1={getHistory,getBookmarks,upsertHistory};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
 
 
 <script id="avanitaxx-phase2-author-js">
-/* PHASE 2 — Author Experience: non-destructive integration */
 (function(){
 "use strict";
-const S="avx_author_phase2_v1";
-const safe=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
-const put=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const state=()=>safe(S,{drafts:{},lastSaved:null});
-const saveState=v=>put(S,v);
-
-function authorData(){
-  const stories = Array.isArray(window.myStories)?window.myStories:
-                  Array.isArray(window.authorStories)?window.authorStories:
-                  Array.isArray(window.mineStories)?window.mineStories:[];
-  return stories;
-}
-function render(){
-  const root=document.getElementById("avx-author-phase2");
-  if(!root)return;
-  const stories=authorData();
-  const published=stories.filter(s=>s.published===true||s.status==="published").length;
-  const drafts=stories.filter(s=>s.published!==true&&s.status!=="published").length;
-  const chapters=stories.reduce((n,s)=>n+Number(s.chapter_count||s.totalChapters||s.total_chapters||0),0);
-  const st=state();
-  root.innerHTML=`<div class="avx-a2-head"><div>
-    <div class="avx-a2-title">Author Center</div>
-    <div class="avx-a2-sub">A cleaner home for your writing, publishing and author tools.</div>
-  </div></div>
-  <div class="avx-a2-grid">
-    <div class="avx-a2-card"><div class="avx-a2-num">${stories.length}</div><div class="avx-a2-label">Stories</div></div>
-    <div class="avx-a2-card"><div class="avx-a2-num">${published}</div><div class="avx-a2-label">Published</div></div>
-    <div class="avx-a2-card"><div class="avx-a2-num">${drafts}</div><div class="avx-a2-label">Draft / Unpublished</div></div>
-    <div class="avx-a2-card"><div class="avx-a2-num">${chapters}</div><div class="avx-a2-label">Chapters tracked</div></div>
-  </div>
-  <div class="avx-a2-actions">
-    <button class="avx-a2-btn primary" id="avx-a2-open">Open Author Center</button>
-    <button class="avx-a2-btn" id="avx-a2-draft">Save current draft</button>
-    <button class="avx-a2-btn" id="avx-a2-series">Series Manager</button>
-    <button class="avx-a2-btn" id="avx-a2-analytics">Author Analytics</button>
-  </div>
-  <div class="avx-a2-note">Autosave foundation: <strong>${st.lastSaved?new Date(st.lastSaved).toLocaleString():"Not used yet"}</strong>. Existing editor functions are preserved.</div>`;
-  document.getElementById("avx-a2-open").onclick=()=>{
-    for(const n of ["openAuthorHome","openAuthorCenter","openAuthorHub"]){
-      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
-    }
-  };
-  document.getElementById("avx-a2-draft").onclick=()=>{
-    const payload={time:Date.now(),title:document.querySelector("#storyTitle,#storyTitleInput,#editorTitle")?.value||"Current draft"};
-    const x=state(); x.drafts.current=payload; x.lastSaved=payload.time; saveState(x); render();
-  };
-  document.getElementById("avx-a2-series").onclick=()=>{
-    for(const n of ["openSeriesManager","openAuthorHome","openAuthorCenter"]){
-      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
-    }
-  };
-  document.getElementById("avx-a2-analytics").onclick=()=>{
-    for(const n of ["openAuthorAnalytics","getStoryReadInsights","openDashboard"]){
-      if(typeof window[n]==="function"){try{return window[n]()}catch(e){}}
-    }
-  };
-}
-function inject(){
-  if(document.getElementById("avx-author-phase2"))return;
-  const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root");
-  if(!host)return;
-  const box=document.createElement("section");box.id="avx-author-phase2";box.className="avx-author-phase2";
-  host.appendChild(box);render();
-}
-function boot(){inject();setTimeout(render,700);setTimeout(render,1800)}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+const KEY='avx_author_phase2_v2';const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const state=()=>window.__AVX_INTERNAL__||{};
+async function authorStories(){const st=state().getSession?.();if(!st?.user?.id||!state().getDB?.())return [];const r=await state().getDB().from('stories').select('*').eq('owner_id',st.user.id).order('updated_at',{ascending:false});return r.error?[]:(r.data||[])}
+async function render(){const root=document.getElementById('avx-author-phase2');if(!root)return;const stories=await authorStories();let chapters=0;if(stories.length&&state().getDB?.()){const ids=stories.map(s=>s.id);const r=await state().getDB().from('chapters').select('id,story_id').in('story_id',ids);chapters=(r.data||[]).length}
+const pub=stories.filter(s=>s.published===true).length,draft=stories.length-pub,st=read(KEY,{lastSaved:null});root.innerHTML=`<div class="avx-a2-head"><div><div class="avx-a2-title">Author Center</div><div class="avx-a2-sub">A cleaner home for your writing, publishing and author tools.</div></div></div><div class="avx-a2-grid"><div class="avx-a2-card"><div class="avx-a2-num">${stories.length}</div><div class="avx-a2-label">Stories</div></div><div class="avx-a2-card"><div class="avx-a2-num">${pub}</div><div class="avx-a2-label">Published</div></div><div class="avx-a2-card"><div class="avx-a2-num">${draft}</div><div class="avx-a2-label">Draft / Unpublished</div></div><div class="avx-a2-card"><div class="avx-a2-num">${chapters}</div><div class="avx-a2-label">Chapters tracked</div></div></div><div class="avx-a2-actions"><button class="avx-a2-btn primary" id="avx-a2-open">Open Author Center</button><button class="avx-a2-btn" id="avx-a2-draft">Save current draft</button><button class="avx-a2-btn" id="avx-a2-series">Series Manager</button><button class="avx-a2-btn" id="avx-a2-analytics">Author Analytics</button></div><div class="avx-a2-note">Autosave foundation: <strong>${st.lastSaved?new Date(st.lastSaved).toLocaleString():'Not used yet'}</strong>.</div>`;
+document.getElementById('avx-a2-open').onclick=()=>typeof window.openAuthorHome==='function'&&window.openAuthorHome();document.getElementById('avx-a2-draft').onclick=()=>{const title=document.getElementById('ed-title')?.value||document.getElementById('storyTitle')?.value||'Current draft';const x=read(KEY,{});x.lastSaved=Date.now();x.draft={title};write(KEY,x);render()};document.getElementById('avx-a2-series').onclick=()=>typeof window.openAuthorHome==='function'&&window.openAuthorHome();document.getElementById('avx-a2-analytics').onclick=()=>typeof window.openAuthorHome==='function'&&window.openAuthorHome();}
+function boot(){render();setInterval(()=>render(),5000)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
 
 
 <script id="avanitaxx-phase3-community-js">
-/* =========================================================
-   PHASE 3 — COMMUNITY & DISCOVERY
-   Non-destructive integration layer
-   ========================================================= */
 (function(){
 "use strict";
-
-const KEYS={
-  follows:"avx_phase3_follows_v1",
-  notifications:"avx_phase3_notifications_v1",
-  collections:"avx_phase3_collections_v1",
-  shared:"avx_phase3_shared_v1"
-};
-const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
-const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const userKey=()=>window.currentUser?.uid||window.currentUser?.id||"guest";
-
-function getFollows(){return read(KEYS.follows,[])}
-function isFollowed(id){return getFollows().includes(String(id))}
-function toggleFollowLocal(id){
-  id=String(id);let a=getFollows();
-  a=a.includes(id)?a.filter(x=>x!==id):[...a,id];
-  write(KEYS.follows,a);render();
-  return a.includes(id);
-}
-function addNotification(n){
-  const a=read(KEYS.notifications,[]);
-  a.unshift({...n,id:n.id||("n_"+Date.now()+"_"+Math.random().toString(36).slice(2)),read:false,createdAt:Date.now()});
-  write(KEYS.notifications,a.slice(0,100));render();
-}
-function markNotificationsRead(){
-  const a=read(KEYS.notifications,[]).map(n=>({...n,read:true}));write(KEYS.notifications,a);render();
-}
-function getUnread(){return read(KEYS.notifications,[]).filter(n=>!n.read).length}
-
-function discoverData(){
-  const pools=[
-    window.publishedStories,window.allPublishedStories,window.homeStories,
-    window.stories,window.publicStories,window.cachedStories
-  ];
-  for(const p of pools) if(Array.isArray(p)&&p.length)return p;
-  return [];
-}
-function storyName(s){return s?.title||s?.name||"Untitled Story"}
-function storyAuthor(s){return s?.author_name||s?.authorName||s?.author?.name||s?.author||"Author"}
-function storyStatus(s){return String(s?.status||"").toLowerCase()||((s?.published===true)?"published":"")}
-function storyGenre(s){return s?.genre||s?.category||"Story"}
-function storyId(s){return s?.id||s?.story_id||s?.slug||storyName(s)}
-
-function section(title,sub,body){
- return `<section class="avx-p3-panel">${body}</section>`;
-}
-
-function render(){
- const root=document.getElementById("avx-phase3");
- if(!root)return;
- const notifications=read(KEYS.notifications,[]);
- const unread=getUnread();
- const follows=getFollows();
- const data=discoverData();
-
- root.innerHTML=`
- <div class="avx-p3-head"><div>
-   <div class="avx-p3-title">Community & Discovery</div>
-   <div class="avx-p3-sub">Follow authors, keep up with activity, and discover stories more easily.</div>
- </div></div>
-
- <div class="avx-p3-tabs">
-   <button class="avx-p3-tab active" data-panel="feed">Following Feed</button>
-   <button class="avx-p3-tab" data-panel="notifications">Notifications ${unread?`<span class="avx-p3-unread">${unread}</span>`:""}</button>
-   <button class="avx-p3-tab" data-panel="discover">Discover</button>
-   <button class="avx-p3-tab" data-panel="collections">Collections</button>
- </div>
-
- <div id="avx-p3-feed" class="avx-p3-panel active">
-   ${follows.length?`<div class="avx-p3-note">You are following <strong>${follows.length}</strong> author${follows.length>1?"s":""}. New activity can appear here when connected to your existing follow system.</div>`:""}
-   <div class="avx-p3-list" style="margin-top:10px">
-    ${follows.length?follows.map(id=>`<div class="avx-p3-item"><strong>Following author</strong><small>ID: ${esc(id)}</small><div class="avx-p3-actions"><button class="avx-p3-btn" data-unfollow="${esc(id)}">Unfollow</button></div></div>`).join(""):
-    `<div class="avx-p3-empty">Follow an author to build your personalized feed.</div>`}
-   </div>
- </div>
-
- <div id="avx-p3-notifications" class="avx-p3-panel">
-   <div class="avx-p3-actions" style="margin-bottom:10px"><button class="avx-p3-btn" id="avx-p3-readall">Mark all as read</button></div>
-   <div class="avx-p3-list">
-   ${notifications.length?notifications.slice(0,30).map(n=>`<div class="avx-p3-item" style="${n.read?"opacity:.72":""}">
-     <strong>${esc(n.title||n.type||"Activity")} ${n.read?"":"<span class='avx-p3-unread'>NEW</span>"}</strong>
-     <small>${esc(n.message||n.body||"New activity on Avanitaxx Stories.")}</small>
-   </div>`).join(""):`<div class="avx-p3-empty">You're all caught up.</div>`}
-   </div>
- </div>
-
- <div id="avx-p3-discover" class="avx-p3-panel">
-   <div class="avx-p3-filters">
-     <input id="avx-p3-search" class="avx-p3-search" placeholder="Search stories or authors…">
-     <select id="avx-p3-genre"><option value="">All genres</option></select>
-     <select id="avx-p3-status"><option value="">All status</option><option value="completed">Completed</option><option value="ongoing">Ongoing</option><option value="published">Published</option></select>
-   </div>
-   <div id="avx-p3-results" class="avx-p3-grid"></div>
- </div>
-
- <div id="avx-p3-collections" class="avx-p3-panel">
-   <div class="avx-p3-actions"><button class="avx-p3-btn primary" id="avx-p3-newcollection">New Collection</button></div>
-   <div id="avx-p3-collections-list" class="avx-p3-list" style="margin-top:10px"></div>
- </div>
- `;
-
- root.querySelectorAll(".avx-p3-tab").forEach(b=>b.onclick=()=>{
-   root.querySelectorAll(".avx-p3-tab").forEach(x=>x.classList.remove("active"));
-   root.querySelectorAll(".avx-p3-panel").forEach(x=>x.classList.remove("active"));
-   b.classList.add("active");
-   document.getElementById("avx-p3-"+b.dataset.panel)?.classList.add("active");
-   if(b.dataset.panel==="discover")renderDiscover();
-   if(b.dataset.panel==="collections")renderCollections();
- });
- root.querySelectorAll("[data-unfollow]").forEach(b=>b.onclick=()=>toggleFollowLocal(b.dataset.unfollow));
- document.getElementById("avx-p3-readall").onclick=markNotificationsRead;
- document.getElementById("avx-p3-search").oninput=renderDiscover;
- document.getElementById("avx-p3-genre").onchange=renderDiscover;
- document.getElementById("avx-p3-status").onchange=renderDiscover;
- document.getElementById("avx-p3-newcollection").onclick=()=>{
-   const name=prompt("Collection name:");
-   if(!name?.trim())return;
-   const c=read(KEYS.collections,[]);c.unshift({id:"c_"+Date.now(),name:name.trim(),items:[]});write(KEYS.collections,c);renderCollections();
- };
- renderDiscover();renderCollections();
-}
-
-function renderDiscover(){
- const r=document.getElementById("avx-p3-results"),g=document.getElementById("avx-p3-genre");
- if(!r||!g)return;
- const data=discoverData();
- const genres=[...new Set(data.map(storyGenre).filter(Boolean))];
- g.innerHTML='<option value="">All genres</option>'+genres.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
- const q=(document.getElementById("avx-p3-search")?.value||"").toLowerCase().trim();
- const genre=g.value||"",status=(document.getElementById("avx-p3-status")?.value||"").toLowerCase();
- const filtered=data.filter(s=>{
-   const hay=(storyName(s)+" "+storyAuthor(s)).toLowerCase();
-   return (!q||hay.includes(q))&&(!genre||storyGenre(s)===genre)&&(!status||storyStatus(s)===status);
- }).slice(0,24);
- r.innerHTML=filtered.length?filtered.map(s=>`
-  <div class="avx-p3-card">
-   <h4>${esc(storyName(s))}</h4><p>${esc(storyAuthor(s))} · ${esc(storyGenre(s))}</p>
-   <p style="margin-top:6px">${esc(storyStatus(s)||"Published")}</p>
-   <div class="avx-p3-actions"><button class="avx-p3-btn primary" data-follow="${esc(storyId(s))}">${isFollowed(storyId(s))?"Following":"Follow Author"}</button></div>
-  </div>`).join(""):`<div class="avx-p3-empty" style="grid-column:1/-1">No matching stories found in the data currently available to the page.</div>`;
- r.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>{const following=toggleFollowLocal(b.dataset.follow);b.textContent=following?"Following":"Follow Author"});
-}
-
-function renderCollections(){
- const r=document.getElementById("avx-p3-collections-list");if(!r)return;
- const c=read(KEYS.collections,[]);
- r.innerHTML=c.length?c.map(x=>`<div class="avx-p3-item"><strong>${esc(x.name)}</strong><small>${(x.items||[]).length} saved item${(x.items||[]).length===1?"":"s"}</small></div>`).join(""):`<div class="avx-p3-empty">Create a collection to organize stories you want to revisit.</div>`;
-}
-
-/* Public API for existing UI to call without needing to know storage details. */
-window.AvanitaxxCommunityPhase3={
- toggleFollow:(id)=>{
-   // Prefer the site's existing follow function, then mirror locally.
-   if(typeof window.toggleFollow==="function"&&window.toggleFollow!==window.AvanitaxxCommunityPhase3.toggleFollow){
-     try{window.toggleFollow(id)}catch(e){}
-   }
-   return toggleFollowLocal(id);
- },
- addNotification,markNotificationsRead,
- revealSpoiler:(el)=>el?.classList.toggle("revealed"),
- shareChapter:(item)=>{
-   const text=[item?.title,item?.chapterTitle].filter(Boolean).join(" — ");
-   const url=item?.url||location.href;
-   if(navigator.share) return navigator.share({title:item?.title||"Avanitaxx Stories",text,url}).catch(()=>{});
-   navigator.clipboard?.writeText(url).then(()=>alert("Chapter link copied."));
- }
-};
-
-/* Lightweight automatic notification hooks. */
-function hook(name,type){
- if(typeof window[name]!=="function"||window[name].__avxP3)return;
- const original=window[name];
- const wrapped=function(){
-   const result=original.apply(this,arguments);
-   setTimeout(()=>{
-     if(type==="follow") addNotification({type,title:"New follow activity",message:"Your author follow list was updated."});
-     if(type==="comment") addNotification({type,title:"Comment activity",message:"There is new activity on your story."});
-   },80);
-   return result;
- };
- wrapped.__avxP3=true;window[name]=wrapped;
-}
-
-function inject(){
- if(document.getElementById("avx-phase3"))return;
- const host=document.querySelector("main")||document.querySelector("#app")||document.querySelector("#root");
- if(!host)return;
- const box=document.createElement("section");box.id="avx-phase3";box.className="avx-phase3";host.appendChild(box);render();
-}
-function boot(){
- inject();
- setTimeout(()=>{hook("toggleFollow","follow");hook("postComment","comment");render()},800);
- setTimeout(render,1800);
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+const C='avx_phase3_collections_v2',N='avx_phase3_notifications_v2';const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+async function follows(){const s=window.__AVX_INTERNAL__?.getSession?.();if(!s?.user?.id||!window.__AVX_INTERNAL__?.getDB?.())return [];const r=await window.__AVX_INTERNAL__.getDB().from('follows').select('author_id').eq('follower_id',s.user.id);return r.error?[]:(r.data||[]).map(x=>String(x.author_id))}
+async function discover(){if(typeof window.getPublished==='function'){try{return await window.getPublished()}catch(e){}}return []}
+async function render(){const root=document.getElementById('avx-phase3');if(!root)return;const fs=await follows(), stories=await discover(), notes=read(N,[]);root.innerHTML=`<div class="avx-p3-head"><div><div class="avx-p3-title">Community & Discovery</div><div class="avx-p3-sub">Follow authors, keep up with activity, and discover stories more easily.</div></div></div><div class="avx-p3-tabs"><button class="avx-p3-tab active" data-panel="feed">Following Feed</button><button class="avx-p3-tab" data-panel="notifications">Notifications ${notes.length?`<span class="avx-p3-unread">${notes.filter(n=>!n.read).length}</span>`:''}</button><button class="avx-p3-tab" data-panel="discover">Discover</button><button class="avx-p3-tab" data-panel="collections">Collections</button></div><div id="avx-p3-feed" class="avx-p3-panel active">${fs.length?`<div class="avx-p3-note">You are following <strong>${fs.length}</strong> author${fs.length>1?'s':''}.</div><div class="avx-p3-list">${fs.map(id=>{const a=stories.find(s=>String(s.owner_id||s.author_id||s.author?.id)===id);return `<div class="avx-p3-item"><strong>${esc(a?.author_name||a?.pen_name||'Followed author')}</strong><small>${esc(a?.title||'New story activity will appear through published updates.')}</small></div>`}).join('')}</div>`:'<div class="avx-p3-empty">Follow an author to build your personalized feed.</div>'}</div><div id="avx-p3-notifications" class="avx-p3-panel"><div class="avx-p3-actions"><button class="avx-p3-btn" id="avx-p3-readall">Mark all as read</button></div><div class="avx-p3-list">${notes.length?notes.slice(0,30).map(n=>`<div class="avx-p3-item"><strong>${esc(n.title||'Activity')}</strong><small>${esc(n.message||'New activity on Avanitaxx Stories.')}</small></div>`).join(''):"<div class=\"avx-p3-empty\">You are all caught up.</div>"}</div></div><div id="avx-p3-discover" class="avx-p3-panel"><div class="avx-p3-filters"><input id="avx-p3-search" class="avx-p3-search" placeholder="Search stories or authors…"><select id="avx-p3-genre"><option value="">All genres</option></select><select id="avx-p3-status"><option value="">All status</option><option value="completed">Completed</option><option value="ongoing">Ongoing</option><option value="published">Published</option></select></div><div id="avx-p3-results" class="avx-p3-grid"></div></div><div id="avx-p3-collections" class="avx-p3-panel"><div class="avx-p3-actions"><button class="avx-p3-btn primary" id="avx-p3-newcollection">New Collection</button></div><div id="avx-p3-collections-list" class="avx-p3-list"></div></div>`;
+const panels=['feed','notifications','discover','collections'];root.querySelectorAll('.avx-p3-tab').forEach(b=>b.onclick=()=>{root.querySelectorAll('.avx-p3-tab').forEach(x=>x.classList.remove('active'));root.querySelectorAll('.avx-p3-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('avx-p3-'+b.dataset.panel)?.classList.add('active');if(b.dataset.panel==='discover')renderDiscover(stories);if(b.dataset.panel==='collections')renderCollections()});document.getElementById('avx-p3-readall').onclick=()=>{write(N,notes.map(n=>({...n,read:true})));render()};document.getElementById('avx-p3-newcollection').onclick=()=>{const name=prompt('Collection name:');if(!name?.trim())return;const a=read(C,[]);a.unshift({id:'c_'+Date.now(),name:name.trim(),items:[]});write(C,a);renderCollections()};renderDiscover(stories);renderCollections()}
+function renderDiscover(data){const r=document.getElementById('avx-p3-results'),g=document.getElementById('avx-p3-genre');if(!r)return;const genres=[...new Set(data.map(s=>s.genre||s.category).filter(Boolean))].sort();g.innerHTML='<option value="">All genres</option>'+genres.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');const draw=()=>{const q=(document.getElementById('avx-p3-search')?.value||'').toLowerCase(),gv=document.getElementById('avx-p3-genre')?.value||'',sv=document.getElementById('avx-p3-status')?.value||'';const a=data.filter(s=>(!q||String(s.title||'').toLowerCase().includes(q)||String(s.author_name||s.pen_name||'').toLowerCase().includes(q))&&(!gv||String(s.genre||s.category||'')===gv)&&(!sv||sv==='published'||String(s.story_status||s.status||'').toLowerCase().replace('-','')===sv.replace('-','')));r.innerHTML=a.length?a.slice(0,30).map(s=>`<article class="avx-p3-item"><strong>${esc(s.title||'Untitled')}</strong><small>${esc(s.author_name||s.pen_name||'Author')} · ${esc(s.genre||'Story')}</small><div class="avx-p3-actions"><button class="avx-p3-btn primary" data-story="${esc(s.share_slug||s.id)}">Open Story</button></div></article>`).join(''):'<div class="avx-p3-empty">No matching stories found in the data currently available to the page.</div>';r.querySelectorAll('[data-story]').forEach(b=>b.onclick=()=>typeof window.openPublicStory==='function'&&window.openPublicStory(b.dataset.story))};document.getElementById('avx-p3-search').oninput=draw;document.getElementById('avx-p3-genre').onchange=draw;document.getElementById('avx-p3-status').onchange=draw;draw()}
+function renderCollections(){const r=document.getElementById('avx-p3-collections-list');if(!r)return;const a=read(C,[]);r.innerHTML=a.length?a.map(x=>`<div class="avx-p3-item"><strong>${esc(x.name)}</strong><small>${x.items?.length||0} saved stories</small></div>`).join(''):'<div class="avx-p3-empty">Create a collection to organize stories you want to revisit.</div>'}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{render();setInterval(render,7000)});else{render();setInterval(render,7000)}
 })();
 </script>
 
@@ -5996,5 +5629,80 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 })();
 </script>
 
+
+<section class="section avx-feature-shell" id="avx-reader-features" aria-label="Reader features">
+  <div class="container"><div id="avx-phase1-reader"></div></div>
+</section>
+<section class="section avx-feature-shell" id="avx-author-features" aria-label="Author Center">
+  <div class="container"><div id="avx-author-phase2"></div></div>
+</section>
+<section class="section avx-feature-shell" id="avx-community-features" aria-label="Community and Discovery">
+  <div class="container"><div id="avx-phase3"></div></div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>AVANITAXX STORIES</h3>
+        <p>A home for stories, imagination, and the voices behind every page.</p>
+        <p style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9f8b81">Official Website • Est. 2026</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <a href="#home">Home</a><br>
+        <a href="#recent">Recent Books</a><br>
+        <a href="#recommended">Recommended</a><br>
+        <button id="footer-about" class="footer-link-btn" type="button">About Avanitaxx Stories</button>
+      </div>
+      <div>
+        <h3>Policies</h3>
+        <button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br>
+        <button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br>
+        <button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br>
+        <button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button>
+      </div>
+      <div>
+        <h3>Help &amp; Contact</h3>
+        <button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button><br>
+        <button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button>
+        <br><br>
+        <button id="footer-write" class="btn alt" type="button">Author Home</button>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>AVANITAXX STORIES — OFFICIAL WEBSITE</span>
+      <span>© 2026 Avanitaxx Stories. All Rights Reserved.</span>
+    </div>
+  </div>
+  <div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div>
+</footer>
+<script id="avanitaxx-final-functional-repair">
+(function(){
+'use strict';
+const I=()=>window.__AVX_INTERNAL__||{};
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const rd=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}};
+const wr=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const H='avx_reader_history_v2',B='avx_bookmarks_v2',C='avx_phase3_collections_v2',N='avx_phase3_notifications_v2';
+const uid=()=>I().getSession?.()?.user?.id||'guest';
+function ensure(){const home=document.getElementById('home');if(!home)return;[['avx-reader-features','avx-phase1-reader'],['avx-author-features','avx-author-phase2'],['avx-community-features','avx-phase3']].forEach(([sid,id])=>{if(!document.getElementById(id)){const s=document.createElement('section');s.id=sid;s.className='section avx-feature-shell';s.innerHTML='<div class="container"><div id="'+id+'"></div></div>';home.appendChild(s)}})}
+function history(){const st=I(),story=st.getCurrentStory?.();if(!story?.id)return;const i=Number(st.getCurrentChapter?.()||0),ch=story.chapters?.[i];if(!ch)return;const k=uid()+'::'+story.id+'::'+i;let a=rd(H,[]).filter(x=>x.key!==k);a.unshift({key:k,userKey:uid(),storyId:String(story.id),slug:String(story.share_slug||story.id),title:String(story.title||'Untitled Story'),chapterIndex:i,chapterNumber:Number(ch.chapter_number||i+1),chapterTitle:String(ch.title||('Chapter '+(i+1))),cover:String(story.cover_url||''),totalChapters:Number(story.chapters?.length||0),savedAt:Date.now()});wr(H,a.slice(0,100))}
+function renderReader(){const r=document.getElementById('avx-phase1-reader');if(!r)return;const h=rd(H,[]).filter(x=>x.userKey===uid()),b=rd(B,[]).filter(x=>!x.userKey||x.userKey===uid());const card=x=>'<article class="avx-phase1-card">'+(x.cover?'<img class="avx-phase1-cover" src="'+esc(x.cover)+'" alt="'+esc(x.title)+'" loading="lazy">':'<div class="avx-phase1-cover"></div>')+'<div class="avx-phase1-body"><div class="avx-phase1-story">'+esc(x.title)+'</div><div class="avx-phase1-chapter">'+esc(x.chapterTitle)+'</div><div class="avx-phase1-progress"><span style="width:'+Math.max(3,Math.min(100,((Number(x.chapterIndex)+1)/Math.max(1,Number(x.totalChapters)||1))*100))+'%"></span></div><div class="avx-phase1-actions"><button class="avx-phase1-btn primary" data-open="'+esc(x.slug||x.storyId)+'" data-chapter="'+Number(x.chapterIndex||0)+'">Open</button>'+(x.bookmark?'<button class="avx-phase1-btn" data-remove="'+esc(x.storyId)+'::'+Number(x.chapterIndex||0)+'">Remove</button>':'')+'</div></div></article>';
+r.innerHTML='<section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Continue Reading</div><div class="avx-phase1-sub">Pick up exactly where you left off.</div></div></div>'+(h.length?'<div class="avx-phase1-grid">'+h.slice(0,8).map(card).join('')+'</div>':'<div class="avx-phase1-empty">Your started stories will appear here automatically as you read.</div>')+'</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Reading History</div><div class="avx-phase1-sub">Your most recently opened chapters.</div></div></div>'+(h.length?'<div class="avx-phase1-grid">'+h.slice(0,12).map(card).join('')+'</div>':'<div class="avx-phase1-empty">No reading history yet.</div>')+'</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Chapter Bookmarks</div><div class="avx-phase1-sub">Save chapters you want to return to.</div></div></div>'+(b.length?'<div class="avx-phase1-grid">'+b.slice(0,20).map(x=>card({...x,bookmark:true})).join('')+'</div>':'<div class="avx-phase1-empty">No bookmarked chapters yet.</div>')+'</section>';
+r.querySelectorAll('[data-open]').forEach(x=>x.onclick=()=>{const id=x.dataset.open,i=Number(x.dataset.chapter||0);let p=rd('avx_reader_progress_'+id,{});p.lastChapter=i;wr('avx_reader_progress_'+id,p);if(typeof window.openPublicStory==='function')window.openPublicStory(id)});r.querySelectorAll('[data-remove]').forEach(x=>x.onclick=()=>{const [id,i]=x.dataset.remove.split('::');wr(B,rd(B,[]).filter(v=>!(String(v.storyId)===id&&Number(v.chapterIndex)===Number(i))));renderReader()})}
+async function author(){const r=document.getElementById('avx-author-phase2');if(!r)return;const s=I().getSession?.(),db=I().getDB?.();if(!s?.user?.id||!db){r.innerHTML='<div class="avx-a2-head"><div><div class="avx-a2-title">Author Center</div><div class="avx-a2-sub">Sign in to manage your writing, publishing and author tools.</div></div></div>';return}const q=await db.from('stories').select('*').eq('owner_id',s.user.id).order('updated_at',{ascending:false}),stories=q.data||[];let ch=0;if(stories.length){const c=await db.from('chapters').select('id').in('story_id',stories.map(x=>x.id));ch=(c.data||[]).length}const pub=stories.filter(x=>!!x.published).length;r.innerHTML='<div class="avx-a2-head"><div><div class="avx-a2-title">Author Center</div><div class="avx-a2-sub">A cleaner home for your writing, publishing and author tools.</div></div></div><div class="avx-a2-grid"><div class="avx-a2-card"><div class="avx-a2-num">'+stories.length+'</div><div class="avx-a2-label">Stories</div></div><div class="avx-a2-card"><div class="avx-a2-num">'+pub+'</div><div class="avx-a2-label">Published</div></div><div class="avx-a2-card"><div class="avx-a2-num">'+(stories.length-pub)+'</div><div class="avx-a2-label">Draft / Unpublished</div></div><div class="avx-a2-card"><div class="avx-a2-num">'+ch+'</div><div class="avx-a2-label">Chapters tracked</div></div></div><div class="avx-a2-actions"><button class="avx-a2-btn primary" id="avx-open-author-final">Open Author Center</button><button class="avx-a2-btn" id="avx-draft-final">Save current draft</button><button class="avx-a2-btn" id="avx-series-final">Series Manager</button><button class="avx-a2-btn" id="avx-analytics-final">Author Analytics</button></div><div class="avx-a2-note">Connected to your actual author stories and chapters.</div>';const open=()=>typeof window.openAuthorHome==='function'&&window.openAuthorHome();['avx-open-author-final','avx-series-final','avx-analytics-final'].forEach(id=>document.getElementById(id).onclick=open);document.getElementById('avx-draft-final').onclick=()=>{const x=rd('avx_author_draft_state',{});x.lastSaved=Date.now();x.title=document.getElementById('ed-title')?.value||document.getElementById('storyTitle')?.value||'Current draft';wr('avx_author_draft_state',x);author()}}
+async function community(){const r=document.getElementById('avx-phase3');if(!r)return;const s=I().getSession?.(),db=I().getDB?.();let ids=[];if(s?.user?.id&&db){const f=await db.from('follows').select('author_id').eq('follower_id',s.user.id);if(!f.error)ids=(f.data||[]).map(x=>String(x.author_id))}let stories=[];try{stories=await window.getPublished()}catch(e){}const notes=rd(N,[]);r.innerHTML='<div class="avx-p3-head"><div><div class="avx-p3-title">Community & Discovery</div><div class="avx-p3-sub">Follow authors, keep up with activity, and discover stories more easily.</div></div></div><div class="avx-p3-tabs"><button class="avx-p3-tab active" data-p="feed">Following Feed</button><button class="avx-p3-tab" data-p="notifications">Notifications</button><button class="avx-p3-tab" data-p="discover">Discover</button><button class="avx-p3-tab" data-p="collections">Collections</button></div><div id="avx-c-feed" class="avx-p3-panel active"></div><div id="avx-c-notifications" class="avx-p3-panel"></div><div id="avx-c-discover" class="avx-p3-panel"><div class="avx-p3-filters"><input id="avx-c-search" class="avx-p3-search" placeholder="Search stories or authors…"><select id="avx-c-genre"><option value="">All genres</option></select><select id="avx-c-status"><option value="">All status</option><option value="completed">Completed</option><option value="ongoing">Ongoing</option><option value="published">Published</option></select></div><div id="avx-c-results" class="avx-p3-grid"></div></div><div id="avx-c-collections" class="avx-p3-panel"><div class="avx-p3-actions"><button class="avx-p3-btn primary" id="avx-c-new">New Collection</button></div><div id="avx-c-list" class="avx-p3-list"></div></div>';
+const followed=stories.filter(x=>ids.includes(String(x.owner_id||x.author_id||'')));document.getElementById('avx-c-feed').innerHTML=ids.length?(followed.length?'<div class="avx-p3-grid">'+followed.map(x=>'<article class="avx-p3-item"><strong>'+esc(x.author_name||x.pen_name||'Followed author')+'</strong><small>'+esc(x.title||'Published update')+'</small></article>').join('')+'</div>':'<div class="avx-p3-empty">You are following '+ids.length+' author'+(ids.length>1?'s':'')+'. New published stories will appear here.</div>'):'<div class="avx-p3-empty">Follow an author to build your personalized feed.</div>';
+document.getElementById('avx-c-notifications').innerHTML=notes.length?'<div class="avx-p3-actions"><button class="avx-p3-btn" id="avx-c-read">Mark all as read</button></div><div class="avx-p3-list">'+notes.slice(0,30).map(n=>'<div class="avx-p3-item"><strong>'+esc(n.title||'Activity')+'</strong><small>'+esc(n.message||'New activity on Avanitaxx Stories.')+'</small></div>').join('')+'</div>':'<div class="avx-p3-empty">You are all caught up.</div>';document.getElementById('avx-c-read')?.addEventListener('click',()=>{wr(N,notes.map(n=>({...n,read:true})));community()});
+const g=[...new Set(stories.map(x=>x.genre||x.category).filter(Boolean))].sort();document.getElementById('avx-c-genre').innerHTML='<option value="">All genres</option>'+g.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');const draw=()=>{const q=document.getElementById('avx-c-search').value.toLowerCase().trim(),gv=document.getElementById('avx-c-genre').value,sv=document.getElementById('avx-c-status').value,a=stories.filter(x=>(!q||String(x.title||'').toLowerCase().includes(q)||String(x.author_name||x.pen_name||'').toLowerCase().includes(q))&&(!gv||String(x.genre||x.category||'')===gv)&&(!sv||sv==='published'||String(x.story_status||x.status||'').toLowerCase().replace(/[-_ ]/g,'')===sv));document.getElementById('avx-c-results').innerHTML=a.length?a.slice(0,40).map(x=>'<article class="avx-p3-item"><strong>'+esc(x.title||'Untitled')+'</strong><small>'+esc(x.author_name||x.pen_name||'Author')+' · '+esc(x.genre||'Story')+'</small><div class="avx-p3-actions"><button class="avx-p3-btn primary" data-story-final="'+esc(x.share_slug||x.id)+'">Open Story</button></div></article>').join(''):'<div class="avx-p3-empty">No matching stories found in the published stories available to the page.</div>';document.querySelectorAll('[data-story-final]').forEach(b=>b.onclick=()=>typeof window.openPublicStory==='function'&&window.openPublicStory(b.dataset.storyFinal))};['avx-c-search','avx-c-genre','avx-c-status'].forEach(id=>document.getElementById(id).addEventListener('input',draw));draw();document.getElementById('avx-c-genre').addEventListener('change',draw);document.getElementById('avx-c-status').addEventListener('change',draw);
+const cols=()=>{const a=rd(C,[]),x=document.getElementById('avx-c-list');x.innerHTML=a.length?a.map(v=>'<div class="avx-p3-item"><strong>'+esc(v.name)+'</strong><small>'+Number(v.items?.length||0)+' saved stories</small></div>').join(''):'<div class="avx-p3-empty">Create a collection to organize stories you want to revisit.</div>'};cols();document.getElementById('avx-c-new').onclick=()=>{const n=prompt('Collection name:');if(!n?.trim())return;const a=rd(C,[]);a.unshift({id:'c_'+Date.now(),name:n.trim(),items:[]});wr(C,a);cols()};r.querySelectorAll('.avx-p3-tab').forEach(b=>b.onclick=()=>{r.querySelectorAll('.avx-p3-tab').forEach(x=>x.classList.remove('active'));r.querySelectorAll('.avx-p3-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('avx-c-'+b.dataset.p).classList.add('active')})}
+let last='';async function tick(){ensure();const st=I(),story=st.getCurrentStory?.(),i=st.getCurrentChapter?.();if(story?.id){const sig=story.id+'::'+i;if(sig!==last){last=sig;history()}}renderReader();await author();await community()}
+function boot(){ensure();tick();setInterval(tick,3000)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+<style id="avx-final-functional-repair-css">.avx-feature-shell{display:block}.avx-feature-shell .container{max-width:1200px;margin:auto}.avx-p3-panel{display:none}.avx-p3-panel.active{display:block}.avx-p3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}@media(max-width:800px){.avx-p3-grid{grid-template-columns:1fr}}</style>
 </body>
 </html>
