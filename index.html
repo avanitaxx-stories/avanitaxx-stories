@@ -2917,6 +2917,69 @@ body{
 .notes-community::before,.community-link::before,a[href*="community"]::before{content:"👥"!important}
 .notes-soundroom::before,.soundroom-link::before,a[href*="soundroom"]::before{content:"♫"!important}
 </style>
+
+<style id="avx-readability-published-books-fix">
+/* Requested only: deeper readable text, clearer genre icons, and consistent published-book borders. */
+.writer-workspace-title,
+.writer-list-label,
+.story-manage-toggle,
+.story-manage-menu .btn,
+.story-item strong,
+.story-stats,
+.story-stat b,
+.story-meta{
+  color:#2b1a13!important;
+}
+.story-manage-toggle{
+  background:#F3E3D5!important;
+  border-color:#B8957A!important;
+  color:#2b1a13!important;
+}
+.story-manage[open] .story-manage-toggle{
+  background:#3B241A!important;
+  color:#FFF8F1!important;
+}
+.story-manage-menu{
+  background:#FFFCF8!important;
+  border-color:#B8957A!important;
+}
+.story-manage-menu .btn.alt{
+  background:#F0DED0!important;
+  color:#2b1a13!important;
+  border:1px solid #C7A890!important;
+}
+.story-manage-menu .btn.alt:hover{
+  background:#E6CDBA!important;
+}
+
+/* Homepage genre icons: darker, cleaner, and immediately visible. */
+.genre-icon{
+  background:#E8D2C2!important;
+  color:#3A2117!important;
+  border:1px solid #B88D70!important;
+  box-shadow:0 4px 10px rgba(73,45,31,.10);
+  font-weight:900!important;
+}
+.genre-title-row h3,
+.genre-shelf-head p,
+.genre-count,
+.genre-book-info h3,
+.genre-book-meta{
+  color:#3A2117!important;
+}
+
+/* Give every published-book card the same clearly defined border treatment. */
+.genre-book-card,
+#recommended .story-card{
+  border:1.5px solid #B8957A!important;
+  box-shadow:0 8px 24px rgba(55,35,27,.08)!important;
+}
+.genre-book-card:hover,
+#recommended .story-card:hover{
+  border-color:#8D624C!important;
+  box-shadow:0 18px 38px rgba(55,35,27,.13)!important;
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
