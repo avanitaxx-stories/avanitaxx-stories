@@ -3380,7 +3380,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
         Avanitaxx <span>Stories</span>
     </span>
 </a>
-  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button></nav>
+  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button><button id="nav-story-circle" class="nav-policy-link avx-story-circle-link" type="button" title="Story Circle"><span aria-hidden="true">✦</span> STORY CIRCLE</button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
@@ -5604,5 +5604,172 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 <style id="avx-final-functional-repair-css">.avx-feature-shell{display:block}.avx-feature-shell .container{max-width:1200px;margin:auto}</style>
+
+<style id="avx-story-circle-css">
+/* ===== STORY CIRCLE — original community layer inspired by social feeds ===== */
+.avx-circle-panel{width:min(1080px,100%);max-height:94vh;overflow:auto;background:#f7efe8;border-radius:28px;border:1px solid rgba(255,255,255,.55);box-shadow:0 35px 110px rgba(35,22,17,.42)}
+.avx-circle-head{position:sticky;top:0;z-index:8;padding:28px 34px 24px;background:rgba(255,253,249,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.avx-circle-head-row{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.avx-circle-kicker{font-size:9px;font-weight:900;letter-spacing:.22em;color:var(--toffee);text-transform:uppercase}
+.avx-circle-title{font:400 clamp(38px,5vw,58px)/.95 Georgia,serif;color:var(--ink);margin:8px 0 7px;letter-spacing:-.04em}
+.avx-circle-sub{font:14px/1.65 Georgia,serif;color:var(--muted);max-width:700px}
+.avx-circle-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px;flex:0 0 auto}
+.avx-circle-body{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;padding:24px}
+.avx-circle-main{min-width:0}
+.avx-circle-card{background:#fffdf9;border:1px solid var(--line);border-radius:19px;box-shadow:0 10px 30px rgba(55,35,27,.05)}
+.avx-circle-welcome{padding:18px;margin-bottom:14px;display:flex;align-items:center;gap:13px}
+.avx-circle-mark{width:45px;height:45px;border-radius:14px;background:linear-gradient(145deg,#b98968,#9b6c53);color:#fff8f0;display:grid;place-items:center;font-size:21px;box-shadow:0 8px 18px rgba(74,48,37,.14)}
+.avx-circle-welcome strong{font:400 20px Georgia,serif;color:#392820}
+.avx-circle-welcome span{display:block;font-size:10px;line-height:1.5;color:var(--muted);margin-top:3px}
+.avx-circle-feed{display:grid;gap:14px}
+.avx-circle-post{overflow:hidden}
+.avx-circle-post-head{display:flex;align-items:center;gap:11px;padding:16px 17px 10px}
+.avx-circle-avatar{width:43px;height:43px;border-radius:50%;overflow:hidden;background:var(--lightpink);display:grid;place-items:center;color:var(--brown);font:700 16px Georgia,serif;flex:0 0 auto}
+.avx-circle-avatar img{width:100%;height:100%;object-fit:cover}
+.avx-circle-author{font-size:12px;font-weight:900;color:#392820}
+.avx-circle-meta{font-size:8px;color:var(--muted);margin-top:3px}
+.avx-circle-type{margin-left:auto;padding:6px 8px;border-radius:999px;background:#f4e5df;color:#8a6354;font-size:7px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.avx-circle-content{padding:4px 17px 13px}
+.avx-circle-post-title{font:400 23px/1.15 Georgia,serif;color:#392820;margin:4px 0 7px}
+.avx-circle-caption{font:14px/1.7 Georgia,serif;color:#66564f;white-space:pre-wrap}
+.avx-circle-quote{margin:12px 0 0;padding:12px 14px;border-left:2px solid var(--pink);background:#fbf3f0;color:#654d41;font:italic 14px/1.65 Georgia,serif}
+.avx-circle-images{display:grid;gap:4px;margin:0 17px 13px;border-radius:12px;overflow:hidden}
+.avx-circle-images.one{grid-template-columns:1fr}.avx-circle-images.two{grid-template-columns:1fr 1fr}.avx-circle-images.three{grid-template-columns:repeat(3,1fr)}
+.avx-circle-images img{width:100%;height:180px;object-fit:cover;display:block;cursor:pointer;background:#eadbd4}
+.avx-circle-images.one img{height:330px}
+.avx-circle-stats{display:flex;justify-content:space-between;gap:10px;padding:9px 17px;border-top:1px solid var(--line);font-size:8px;color:var(--muted)}
+.avx-circle-actions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.avx-circle-action{border:0;background:#fffdf9;color:#725f57;padding:11px 8px;font-size:9px;font-weight:900;letter-spacing:.04em}.avx-circle-action:hover{background:#faf3ef;color:#392820}
+.avx-circle-reactions{padding:7px 17px 0;display:flex;gap:5px;flex-wrap:wrap}
+.avx-circle-reaction{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 8px;font-size:10px;cursor:pointer}.avx-circle-reaction.active{background:#f4e0dc;border-color:#d9aaa8}
+.avx-circle-comments{padding:4px 17px 13px}
+.avx-circle-comments .feature-comment-form{display:flex;gap:7px;align-items:flex-end}
+.avx-circle-comments textarea{min-height:42px}
+.avx-circle-side{display:grid;gap:14px;align-content:start}
+.avx-circle-side-card{padding:17px}
+.avx-circle-side-card h3{font:400 22px Georgia,serif;margin:5px 0 6px;color:#392820}
+.avx-circle-side-note{font-size:10px;line-height:1.6;color:var(--muted)}
+.avx-circle-topic{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:10px;color:#5e4d45}.avx-circle-topic:last-child{border-bottom:0}
+.avx-circle-topic i{font-style:normal;width:26px;height:26px;border-radius:9px;background:#f1ddda;display:grid;place-items:center}
+.avx-circle-empty{padding:38px 20px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:820px){.avx-circle-body{grid-template-columns:1fr}.avx-circle-side{display:none}}
+@media(max-width:700px){.avx-circle-head{padding:22px 18px 19px}.avx-circle-body{padding:14px}.avx-circle-title{font-size:42px}.avx-circle-post-title{font-size:20px}.avx-circle-images.one img{height:250px}}
+@media(max-width:560px){.avx-story-circle-link{display:none}.avx-circle-actions{grid-template-columns:repeat(3,1fr)}.avx-circle-action{font-size:8px;padding:10px 4px}}
+</style>
+
+
+<script id="avx-story-circle-js">
+(function(){
+  const escC=(v)=>typeof esc==='function'?esc(v):String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const dateC=(v)=>typeof formatDate==='function'?formatDate(v):new Date(v).toLocaleDateString();
+  function circleImageHtml(x){
+    if(typeof timelineAlbumHtml==='function') return timelineAlbumHtml(x)||'';
+    const imgs=Array.isArray(x.image_urls)?x.image_urls:(x.image_url?[x.image_url]:[]);
+    if(!imgs.length)return '';
+    const cls=imgs.length===1?'one':imgs.length===2?'two':'three';
+    return '<div class="avx-circle-images '+cls+'">'+imgs.slice(0,3).map(u=>`<img src="${escC(u)}" alt="" loading="lazy">`).join('')+'</div>';
+  }
+  async function circleReactions(id,boxId){
+    const box=document.getElementById(boxId);if(!box)return;
+    const q=await sb.from('author_timeline_reactions').select('user_id,reaction').eq('timeline_id',id);
+    if(q.error){box.innerHTML='';return}
+    const rows=q.data||[], mine=session?rows.find(r=>r.user_id===session.user.id):null;
+    const types=[['❤️','Love'],['👍','Like'],['😂','Haha'],['😮','Wow'],['😢','Sad']];
+    const counts={};rows.forEach(r=>counts[r.reaction]=(counts[r.reaction]||0)+1);
+    box.innerHTML=types.map(([e,l])=>`<button class="avx-circle-reaction ${mine?.reaction===e?'active':''}" data-circle-reaction="${e}" title="${l}">${e}${counts[e]?` <span>${counts[e]}</span>`:''}</button>`).join('');
+    box.querySelectorAll('[data-circle-reaction]').forEach(b=>b.onclick=async()=>{
+      if(!session){openAuth('reader');return}
+      const reaction=b.dataset.circleReaction;
+      if(mine?.reaction===reaction) await sb.from('author_timeline_reactions').delete().eq('timeline_id',id).eq('user_id',session.user.id);
+      else {
+        const w=await sb.from('author_timeline_reactions').upsert({timeline_id:id,user_id:session.user.id,reaction},{onConflict:'timeline_id,user_id'});
+        if(w.error){alert(w.error.message);return}
+      }
+      circleReactions(id,boxId);
+    });
+  }
+  async function openStoryCircle(){
+    await refreshSession();
+    const q=await sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(60);
+    if(q.error){open(`<div class="modal"><button class="close" id="circle-error-close">×</button><div class="kicker">STORY CIRCLE</div><h2>Community feed</h2><p>We couldn't load the community feed right now.</p></div>`);document.getElementById('circle-error-close').onclick=close;return}
+    const posts=q.data||[];
+    const profiles={};
+    for(const p of posts){if(!profiles[p.owner_id])profiles[p.owner_id]=await getAuthorTimelineProfile(p.owner_id)}
+    const cards=posts.map(p=>{
+      const prof=profiles[p.owner_id]||{},name=prof.pen_name||prof.display_name||'Author';
+      const av=prof.avatar_url?`<img src="${escC(prof.avatar_url)}" alt="">`:escC(name.slice(0,1).toUpperCase());
+      const type=p.post_type==='CHAPTER'?'CHAPTER UPDATE':p.post_type==='STORY'?'STORY LAUNCH':'AUTHOR NOTE';
+      const rid='circle-r-'+p.id,cid='circle-c-'+p.id;
+      return `<article class="avx-circle-card avx-circle-post">
+        <div class="avx-circle-post-head">
+          <div class="avx-circle-avatar">${av}</div>
+          <div><div class="avx-circle-author">${escC(name)}</div><div class="avx-circle-meta">${escC(dateC(p.created_at))}</div></div>
+          <span class="avx-circle-type">${type}</span>
+        </div>
+        <div class="avx-circle-content">
+          <h3 class="avx-circle-post-title">${escC(p.title||'Untitled update')}</h3>
+          ${p.caption?`<div class="avx-circle-caption">${escC(p.caption)}</div>`:''}
+          ${p.dialogue?`<div class="avx-circle-quote">“${escC(p.dialogue)}”</div>`:''}
+        </div>
+        ${circleImageHtml(p)}
+        <div class="avx-circle-stats"><span data-circle-stat="${escC(p.id)}">Community reactions</span><span>Open the conversation</span></div>
+        <div class="avx-circle-actions">
+          <button class="avx-circle-action" data-circle-react="${escC(rid)}">❤️ REACT</button>
+          <button class="avx-circle-action" data-circle-comment="${escC(cid)}">💬 COMMENT</button>
+          <button class="avx-circle-action" data-circle-share="${escC(p.id)}">↗ SHARE</button>
+        </div>
+        <div id="${rid}" class="avx-circle-reactions"></div>
+        <div id="${cid}" class="avx-circle-comments"></div>
+      </article>`;
+    }).join('');
+    open(`<div class="avx-circle-panel">
+      <div class="avx-circle-head">
+        <div class="avx-circle-head-row">
+          <div><div class="avx-circle-kicker">AVANITAXX STORIES</div><h2 class="avx-circle-title">Story Circle</h2><div class="avx-circle-sub">A calm social space for readers and authors to discover updates, react to stories, and join conversations — built in the Avanitaxx Stories style.</div></div>
+          <button class="avx-circle-close" id="avx-circle-close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="avx-circle-body">
+        <main class="avx-circle-main">
+          <section class="avx-circle-card avx-circle-welcome"><div class="avx-circle-mark">✦</div><div><strong>Welcome to Story Circle</strong><span>Follow the story world, not the noise. New chapter updates and author notes appear here.</span></div></section>
+          <div class="avx-circle-feed">${cards||'<div class="avx-circle-card avx-circle-empty">No community updates yet. Check back when authors share something new.</div>'}</div>
+        </main>
+        <aside class="avx-circle-side">
+          <section class="avx-circle-card avx-circle-side-card"><div class="avx-circle-kicker">HOW IT WORKS</div><h3>Made for stories</h3><div class="avx-circle-side-note">React to an update, leave a comment, or share a post link. It uses the existing Avanitaxx author timeline rather than copying another platform's layout.</div></section>
+          <section class="avx-circle-card avx-circle-side-card"><div class="avx-circle-kicker">QUICK GUIDE</div>
+            <div class="avx-circle-topic"><i>📖</i><span>Story launches and reading updates</span></div>
+            <div class="avx-circle-topic"><i>✍️</i><span>Author notes and behind-the-story posts</span></div>
+            <div class="avx-circle-topic"><i>💬</i><span>Reader conversations and reactions</span></div>
+            <div class="avx-circle-topic"><i>↗</i><span>Share interesting updates</span></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+    <div id="avx-circle-viewer" class="fb-note-image-viewer" role="dialog" aria-label="Story Circle image viewer"><button type="button" id="avx-circle-viewer-close">×</button><img id="avx-circle-viewer-img" alt=""></div>`);
+    document.getElementById('avx-circle-close').onclick=close;
+    const viewer=document.getElementById('avx-circle-viewer'),vi=document.getElementById('avx-circle-viewer-img');
+    viewer.onclick=e=>{if(e.target===viewer)viewer.classList.remove('open')};
+    document.getElementById('avx-circle-viewer-close').onclick=()=>viewer.classList.remove('open');
+    document.querySelectorAll('.avx-circle-images img').forEach(im=>im.onclick=()=>{vi.src=im.src;viewer.classList.add('open')});
+    document.querySelectorAll('[data-circle-react]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.circleReact)?.scrollIntoView({behavior:'smooth',block:'center'}));
+    document.querySelectorAll('[data-circle-comment]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.circleComment)?.scrollIntoView({behavior:'smooth',block:'center'}));
+    document.querySelectorAll('[data-circle-share]').forEach(b=>b.onclick=async()=>{
+      const url=publicShareUrl('timeline',b.dataset.circleShare);
+      await copyShareUrl(url,'Story Circle share link');
+    });
+    for(const p of posts){
+      await circleReactions(p.id,'circle-r-'+p.id);
+      if(typeof renderFeatureComments==='function') await renderFeatureComments('timeline',p.id,'circle-c-'+p.id,p.owner_id);
+    }
+  }
+  window.openStoryCircle=openStoryCircle;
+  function wireCircle(){
+    const b=document.getElementById('nav-story-circle');
+    if(b&&!b.dataset.bound){b.dataset.bound='1';b.onclick=openStoryCircle}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wireCircle);else wireCircle();
+})();
+</script>
+
 </body>
 </html>
