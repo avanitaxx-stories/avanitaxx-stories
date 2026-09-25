@@ -5064,55 +5064,25 @@ async function getFeatureComments(type,id){
 }
 async function renderFeatureComments(type,id,boxId,ownerId){
   const box=document.getElementById(boxId);if(!box)return;
-  const r=await getFeatureComments(type,id);if(r.error){box.innerHTML='<div class="meta">Comments are unavailable until the feature comments table is enabled.</div>';return}
-  const rows=r.data||[];let pmap={};const ids=[...new Set(rows.map(x=>x.user_id))];if(ids.length){const pr=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',ids);(pr.data||[]).forEach(p=>pmap[p.id]=p)}
+  const r=await getFeatureComments(type,id);
+  if(r.error){box.innerHTML='<div class="feature-comment-notice">Comments are temporarily unavailable.</div>';return}
+  const rows=r.data||[];let pmap={};const ids=[...new Set(rows.map(x=>x.user_id).filter(Boolean))];
+  if(ids.length){const pr=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',ids);(pr.data||[]).forEach(p=>pmap[p.id]=p)}
   const avatar=p=>p?.avatar_url?`<img class="feature-comment-avatar" src="${esc(p.avatar_url)}" alt="">`:`<div class="feature-comment-avatar">${esc((p?.pen_name||p?.display_name||'R').slice(0,1).toUpperCase())}</div>`;
   const reactionKey=c=>`avx_feature_comment_reactions_${type}_${id}_${c.id}`;
-  const readLocalReactions=c=>{try{return JSON.parse(localStorage.getItem(reactionKey(c))||'{}')}catch{return {}}};
-  const reactionMap={};
-  let reactionRemote=false;
-  try{
-    const rq=await sb.from('feature_comment_reactions').select('comment_id,user_id,reaction').in('comment_id',rows.map(x=>x.id));
-    if(!rq.error){reactionRemote=true;(rq.data||[]).forEach(x=>{(reactionMap[x.comment_id]||(reactionMap[x.comment_id]=[])).push(x)})}
-  }catch{}
-  const getReactionState=c=>{
-    if(reactionRemote){const rr=reactionMap[c.id]||[],counts={};rr.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);return {counts,mine:session?rr.find(x=>x.user_id===session.user.id)?.reaction:null,remote:true};}
-    const local=readLocalReactions(c);const counts={};Object.values(local).forEach(x=>counts[x]=(counts[x]||0)+1);return {counts,mine:session?local[session.user.id]:null,remote:false};
-  };
-  const reactionHtml=(c,st)=>{const types=[['❤️','Love'],['👍','Like'],['👏','Applause']];return `<div class="feature-comment-reactions">${types.map(([emoji,label])=>`<button type="button" class="fc-react ${st.mine===emoji?'active':''}" data-comment-id="${esc(c.id)}" data-reaction="${emoji}" title="${label}">${emoji}${st.counts[emoji]?` <span>${st.counts[emoji]}</span>`:''}</button>`).join('')}</div>`};
+  const readLocal=c=>{try{return JSON.parse(localStorage.getItem(reactionKey(c))||'{}')}catch{return {}}};
+  const reactionMap={};let remote=false;
+  try{const rq=await sb.from('feature_comment_reactions').select('comment_id,user_id,reaction').in('comment_id',rows.map(x=>x.id));if(!rq.error){remote=true;(rq.data||[]).forEach(x=>(reactionMap[x.comment_id]||(reactionMap[x.comment_id]=[])).push(x));}}catch{}
+  const state=c=>{if(remote){const rr=reactionMap[c.id]||[],counts={};rr.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);return{counts,mine:session?rr.find(x=>x.user_id===session.user.id)?.reaction:null}}const l=readLocal(c),counts={};Object.values(l).forEach(x=>counts[x]=(counts[x]||0)+1);return{counts,mine:session?l[session.user.id]:null}};
+  const reactionHtml=(c,st)=>`<div class="feature-comment-reactions">${[['❤️','Love'],['👍','Like'],['👏','Applause']].map(([e,l])=>`<button type="button" class="fc-react ${st.mine===e?'active':''}" data-comment-id="${esc(c.id)}" data-reaction="${e}" title="${l}">${e}${st.counts[e]?` <span>${st.counts[e]}</span>`:''}</button>`).join('')}</div>`;
   const children={};rows.forEach(x=>{if(x.parent_id)(children[x.parent_id]||(children[x.parent_id]=[])).push(x)});
-  const states={};for(const c of rows)states[c.id]=getReactionState(c);
-  const one=async(c,depth=0)=>{
-    const p=pmap[c.user_id]||{},can=session&&(session.user.id===c.user_id||session.user.id===ownerId),rid=`fc-reply-${c.id}`;
-    const kids=children[c.id]||[];
-    return `<div class="feature-comment ${depth?'reply':''}" data-comment-id="${esc(c.id)}">${avatar(p)}<div class="feature-comment-body"><div class="feature-comment-head"><span class="feature-comment-name">${esc(p.pen_name||p.display_name||'Reader')}</span><span class="feature-comment-time">${esc(formatDate(c.created_at))}</span>${can?`<button class="tool fc-delete" data-id="${esc(c.id)}" style="margin-left:auto;padding:2px 6px">Delete</button>`:''}</div><div class="feature-comment-text">${esc(c.body||'')}</div>${reactionHtml(c,states[c.id]||{counts:{},mine:null})}<div class="feature-comment-actions"><button class="fc-reply" data-target="${rid}">↩ REPLY</button></div><div id="${rid}" class="reply-box hidden"><div class="feature-comment-form"><textarea id="fc-text-${c.id}" class="field" placeholder="Write a reply…"></textarea><button class="btn fc-send-reply" data-parent="${esc(c.id)}" data-input="fc-text-${c.id}">REPLY</button></div></div>${kids.length?`<div class="reply-list">${kids.map(x=>`<!--FC_CHILD:${x.id}-->`).join('')}</div>`:''}</div></div>`;
-  };
-  let body='';
-  const top=rows.filter(x=>!x.parent_id).slice().reverse();
-  for(const c of top){
-    let html=await one(c,0);
-    const marker=`<!--FC_CHILD:${(children[c.id]||[])[0]?.id}-->`;
-    if((children[c.id]||[]).length){const childHtml=(await Promise.all(children[c.id].map(x=>one(x,1)))).join('');html=html.replace(`<div class="reply-list">${(children[c.id]||[]).map(x=>`<!--FC_CHILD:${x.id}-->`).join('')}</div>`, `<div class="reply-list">${childHtml}</div>`)}
-    body+=html;
-  }
-  box.innerHTML=`${body||'<div class="meta">No comments yet. Be the first to share your thoughts.</div>'}${session?`<div class="feature-comment-form"><textarea id="fc-new-${id}" class="field" placeholder="Write a comment…"></textarea><button class="btn fc-send" data-type="${type}" data-id="${id}" data-owner="${ownerId||''}">COMMENT</button></div>`:`<div class="help" style="margin-top:10px">Sign in to comment or reply.</div>`}`;
+  const renderTree=async(c,depth=0)=>{const p=pmap[c.user_id]||{},can=session&&(session.user.id===c.user_id||session.user.id===ownerId),rid=`fc-reply-${c.id}`,kids=children[c.id]||[];return `<div class="feature-comment ${depth?'reply':''}" data-comment-id="${esc(c.id)}">${avatar(p)}<div class="feature-comment-body"><div class="feature-comment-head"><span class="feature-comment-name">${esc(p.pen_name||p.display_name||'Reader')}</span><span class="feature-comment-time">${esc(formatDate(c.created_at))}</span>${can?`<button class="tool fc-delete" data-id="${esc(c.id)}" style="margin-left:auto;padding:2px 6px">Delete</button>`:''}</div><div class="feature-comment-text">${esc(c.body||'')}</div>${reactionHtml(c,state(c))}<div class="feature-comment-actions"><button class="fc-reply" data-target="${rid}">↩ REPLY</button></div><div id="${rid}" class="reply-box hidden"><div class="feature-comment-form"><textarea id="fc-text-${c.id}" class="field" placeholder="Reply to this comment…"></textarea><button class="btn fc-send-reply" data-parent="${esc(c.id)}" data-input="fc-text-${c.id}">REPLY</button></div></div>${kids.length?`<div class="reply-list">${(await Promise.all(kids.map(x=>renderTree(x,depth+1)))).join('')}</div>`:''}</div></div>`};
+  const top=rows.filter(x=>!x.parent_id).slice().reverse();const body=(await Promise.all(top.map(x=>renderTree(x)))).join('');
+  box.innerHTML=`<div class="feature-comment-title">COMMENTS & REPLIES</div>${body||'<div class="feature-comment-notice">No comments yet. Be the first to share your thoughts.</div>'}${session?`<div class="feature-comment-form feature-comment-main-form"><textarea id="fc-new-${id}" class="field" placeholder="Write a comment…"></textarea><button class="btn fc-send" data-type="${type}" data-id="${id}" data-owner="${ownerId||''}">COMMENT</button></div>`:`<div class="help feature-comment-signin">Sign in to comment, reply, or react.</div>`}`;
   box.querySelectorAll('.fc-reply').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.target)?.classList.toggle('hidden'));
-  box.querySelectorAll('.fc-send').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(`fc-new-${id}`),body=input.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:null});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
-  box.querySelectorAll('.fc-send-reply').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(b.dataset.input),body=input.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:b.dataset.parent});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
-  box.querySelectorAll('.fc-react').forEach(b=>b.onclick=async()=>{
-    if(!session){openAuth('reader');return}
-    const commentId=b.dataset.commentId,reaction=b.dataset.reaction;
-    try{
-      const existing=await sb.from('feature_comment_reactions').select('id,reaction').eq('comment_id',commentId).eq('user_id',session.user.id).maybeSingle();
-      if(!existing.error){
-        if(existing.data?.reaction===reaction)await sb.from('feature_comment_reactions').delete().eq('id',existing.data.id);
-        else await sb.from('feature_comment_reactions').upsert({comment_id:commentId,user_id:session.user.id,reaction},{onConflict:'comment_id,user_id'});
-        return renderFeatureComments(type,id,boxId,ownerId);
-      }
-    }catch{}
-    const c=rows.find(x=>String(x.id)===String(commentId));if(!c)return;
-    const local=readLocalReactions(c);if(local[session.user.id]===reaction)delete local[session.user.id];else local[session.user.id]=reaction;try{localStorage.setItem(reactionKey(c),JSON.stringify(local))}catch{};renderFeatureComments(type,id,boxId,ownerId);
-  });
+  box.querySelectorAll('.fc-send').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(`fc-new-${id}`),body=input?.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:null});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
+  box.querySelectorAll('.fc-send-reply').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(b.dataset.input),body=input?.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:b.dataset.parent});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
+  box.querySelectorAll('.fc-react').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const commentId=b.dataset.commentId,reaction=b.dataset.reaction;try{const ex=await sb.from('feature_comment_reactions').select('id,reaction').eq('comment_id',commentId).eq('user_id',session.user.id).maybeSingle();if(!ex.error){if(ex.data?.reaction===reaction)await sb.from('feature_comment_reactions').delete().eq('id',ex.data.id);else await sb.from('feature_comment_reactions').upsert({comment_id:commentId,user_id:session.user.id,reaction},{onConflict:'comment_id,user_id'});return renderFeatureComments(type,id,boxId,ownerId)}}catch{}const c=rows.find(x=>String(x.id)===String(commentId));if(!c)return;const l=readLocal(c);if(l[session.user.id]===reaction)delete l[session.user.id];else l[session.user.id]=reaction;try{localStorage.setItem(reactionKey(c),JSON.stringify(l))}catch{}renderFeatureComments(type,id,boxId,ownerId)});
   box.querySelectorAll('.fc-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this comment?'))return;const q=await sb.from('feature_comments').delete().eq('id',b.dataset.id);if(q.error)alert(q.error.message);else renderFeatureComments(type,id,boxId,ownerId)});
 }
 
@@ -5944,7 +5914,7 @@ function bindStatic(){
     byId('rank-close')?.addEventListener('click',close);
     try{
       const stories=await getPublished();
-      const ranked=stories.map(x=>({...x,__reads:Number(x.views)||0})).sort((a,b)=>b.__reads-a.__reads);
+      const ranked=stories.map(x=>({...x,__reads:Number(x.views)||0})).sort((a,b)=>b.__reads-a.__reads).slice(0,10);
       const el=byId('rank-list');
       if(!ranked.length){el.innerHTML='<div class="empty">No published stories yet.</div>';return}
       el.innerHTML=ranked.map((x,i)=>`<article class="rank-row"><div class="rank-no">${i+1}</div>${x.cover_url?`<img class="rank-cover" src="${esc(x.cover_url)}" alt="${esc(x.title)} book cover" loading="lazy">`:`<div class="rank-cover-fallback">${esc(x.title)}</div>`}<div class="rank-info"><div class="rank-story-title">${esc(x.title)}</div><div class="rank-author">${esc(x.author_name||x.author||'Avanitaxx Author')}</div><div class="rank-desc">${esc(x.description||'')}</div></div><div class="rank-reads">${x.__reads.toLocaleString()} READS</div></article>`).join('');
@@ -6315,6 +6285,40 @@ footer .footer-link-btn{background:transparent!important;border:0!important;colo
 .panel:has(.writer-lounge){width:min(1480px,calc(100vw - 18px))!important;max-width:none!important;max-height:96vh!important}
 .panel:has(.writer-lounge) .writer-lounge{min-height:calc(96vh - 20px)!important;grid-template-columns:250px minmax(0,1fr)!important}
 @media(max-width:760px){.panel:has(.writer-lounge){width:calc(100vw - 8px)!important}.panel:has(.writer-lounge) .writer-lounge{grid-template-columns:1fr!important;min-height:auto!important}}
+
+/* ===== REQUESTED POLISH — NOTES / STORY UPDATES / RANKING / FEATURED ===== */
+.fb-notes-panel,.fb-notes-panel *{color:#2b1b16!important}
+.fb-notes-panel{background:#f4eee8!important}
+.fb-notes-head{background:rgba(255,253,249,.98)!important}
+.fb-notes-kicker,.fb-note-type,.fb-notes-day-label{color:#704b3d!important}
+.fb-notes-title{color:#2b1b16!important}.fb-notes-sub,.fb-note-caption,.fb-note-meta,.fb-note-author-meta{color:#5f4b42!important}
+.fb-note-card{background:#fffdf9!important;border-color:#d8c7bb!important;box-shadow:0 12px 32px rgba(55,35,27,.07)!important}
+.fb-note-footer,.fb-note-comments{color:#2b1b16!important}
+.fb-note-action{color:#4b3026!important;font-weight:900!important}
+.fb-note-comments{border-top:1px solid #eaded2!important;margin-top:10px!important;padding-top:8px!important}
+.feature-comment-title{font-size:9px;font-weight:900;letter-spacing:.13em;color:#5b392e!important;margin:8px 0 7px}
+.feature-comment-notice,.feature-comment-signin{color:#5f4b42!important;background:#fbf5f0;padding:10px 12px;border-radius:10px}
+.feature-comment-main-form{padding-top:8px;border-top:1px solid #eaded2;margin-top:8px}
+.feature-comment,.feature-comment *{color:#2b1b16!important}.feature-comment-text{color:#2b1b16!important}.feature-comment-name{color:#2b1b16!important}.feature-comment-time{color:#705e55!important}
+.feature-comment.reply{margin-left:16px;padding-left:12px;border-left:2px solid #ead3ca}
+.feature-comment-actions button{color:#7a4f40!important;opacity:1!important;font-weight:900}
+.fc-react{color:#3b281f!important;background:#fffaf5!important}.fc-react.active{background:#ead2ca!important;color:#2b1b16!important}
+/* Chapter list stays collapsed until clicked and becomes scrollable. */
+.reader-chapter-list-wrap{margin-top:14px!important}.reader-chapter-list[hidden]{display:none!important}.reader-chapter-list{max-height:280px;overflow-y:auto;overscroll-behavior:contain}.reader-chapter-list-toggle{color:#2b1b16!important;background:#fffaf5!important;border-color:#d8c7bb!important}.reader-chapter-item{color:#2b1b16!important}.reader-chapter-item span:nth-child(2){color:#2b1b16!important}
+/* Ranking — top 10 only, editorial leaderboard treatment. */
+.rank-panel{background:#f7efe7!important;color:#2b1b16!important}.rank-head{background:linear-gradient(135deg,#fffaf5,#ead8d0)!important}.rank-title{color:#2b1b16!important}.rank-sub{color:#5f4b42!important}.rank-list{padding:18px 24px 28px!important;display:grid!important;gap:10px!important}
+.rank-row{position:relative!important;display:grid!important;grid-template-columns:48px 72px minmax(0,1fr) auto!important;gap:14px!important;align-items:center!important;padding:12px!important;border:1px solid #ddcabe!important;border-radius:18px!important;background:#fffdf9!important;box-shadow:0 7px 20px rgba(55,35,27,.06)!important;overflow:hidden!important}
+.rank-row:nth-child(1){background:linear-gradient(135deg,#fff8e9,#f4e1cf)!important;border-color:#c8a36e!important}.rank-row:nth-child(2){background:linear-gradient(135deg,#fffdf9,#eee7e2)!important}.rank-row:nth-child(3){background:linear-gradient(135deg,#fffaf6,#eadbd2)!important}
+.rank-row::after{content:'RANKING';position:absolute;right:-2px;top:7px;font-size:7px;font-weight:900;letter-spacing:.18em;color:#8c6a59!important;opacity:.22;transform:rotate(90deg)}
+.rank-no{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#3a281f;color:#fff!important;font:700 16px Georgia,serif;box-shadow:0 5px 12px rgba(55,35,27,.12)}
+.rank-row:nth-child(1) .rank-no{background:#b08a45!important}.rank-row:nth-child(2) .rank-no{background:#8d8a86!important}.rank-row:nth-child(3) .rank-no{background:#9a6e54!important}
+.rank-cover,.rank-cover-fallback{width:72px;height:96px!important;object-fit:cover;border-radius:8px!important;background:#e8d8cf!important}.rank-cover-fallback{display:grid;place-items:center;padding:8px;text-align:center;color:#fff!important;font:12px Georgia,serif}
+.rank-info,.rank-info *{color:#2b1b16!important}.rank-story-title{font:400 20px/1.12 Georgia,serif!important}.rank-author{font-size:9px!important;color:#755c50!important;margin-top:4px}.rank-desc{font-size:10px!important;line-height:1.45!important;color:#5f4b42!important;margin-top:5px}.rank-reads{font-size:9px!important;font-weight:900!important;color:#704b3d!important;white-space:nowrap}
+/* Featured Stories — polished editorial cards. */
+.toffee-featured-panel{position:relative;overflow:hidden;border-radius:24px!important;background:linear-gradient(135deg,#fffdf9,#f4e7e1)!important;border:1px solid #dfcec4!important;box-shadow:0 22px 55px rgba(55,35,27,.09)!important}
+.toffee-featured-panel::before{content:'FEATURED';position:absolute;right:20px;top:15px;font:900 8px Arial,sans-serif;letter-spacing:.24em;color:#8e6757!important;opacity:.55;pointer-events:none}
+.toffee-featured-panel .toffee-section-head{position:relative;z-index:2;padding-bottom:5px}.toffee-featured-panel .story-card{position:relative;border:1px solid #dfcec4!important;background:#fffdf9!important;box-shadow:0 12px 30px rgba(55,35,27,.08)!important}.toffee-featured-panel .story-card::before{content:'FEATURED';position:absolute;z-index:3;left:10px;top:10px;padding:5px 8px;border-radius:999px;background:#392820;color:#fff!important;font-size:7px;font-weight:900;letter-spacing:.12em}.toffee-featured-panel .story-cover-btn{border-radius:10px}.toffee-featured-panel .card-title{color:#2b1b16!important}.toffee-featured-panel .meta,.toffee-featured-panel .tag{color:#5f4b42!important}
+@media(max-width:700px){.rank-list{padding:12px!important}.rank-row{grid-template-columns:38px 58px minmax(0,1fr)!important;gap:9px!important}.rank-cover,.rank-cover-fallback{width:58px;height:78px!important}.rank-story-title{font-size:16px!important}.rank-reads{grid-column:3!important}.rank-desc{font-size:9px!important}.fb-notes-head{padding:22px 18px!important}.fb-note-card{border-radius:15px!important}.feature-comment.reply{margin-left:8px;padding-left:9px}.reader-chapter-list{max-height:300px}}
 </style>
 <script id="avx-user-final-precision-js">
 (function(){
