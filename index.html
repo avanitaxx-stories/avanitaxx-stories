@@ -3619,6 +3619,148 @@ footer a,footer button{color:#fff!important;opacity:1!important}
 @media(prefers-reduced-motion:reduce){#home *,#home *::before,#home *::after{animation:none!important;transition:none!important}}
 </style>
 
+
+<style id="avx-final-user-request-polish">
+/* ===== FINAL REQUEST: LEFT FEATURE BUBBLE + READABILITY + INTERACTION ===== */
+:root{--avx-deep:#2b1b16;--avx-deeper:#24130d}
+
+/* Carousel is removed from the page flow and opens only from the left bubble. */
+#home #chapter-promotion.avx-carousel-drawer{
+  position:fixed!important;left:0!important;top:50%!important;
+  width:min(900px,calc(100vw - 18px))!important;
+  height:min(680px,calc(100vh - 34px))!important;
+  max-height:none!important;margin:0!important;padding:0!important;
+  transform:translate(-104%, -50%)!important;
+  z-index:10050!important;display:block!important;
+  background:#24130d!important;border-radius:0 24px 24px 0!important;
+  box-shadow:24px 30px 90px rgba(30,18,12,.35)!important;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1)!important;
+  overflow:hidden!important;
+}
+#home #chapter-promotion.avx-carousel-drawer.is-open{transform:translate(0,-50%)!important}
+#home #chapter-promotion.avx-carousel-drawer .container{width:100%!important;max-width:none!important;height:100%!important;padding:0!important}
+#home #chapter-promotion.avx-carousel-drawer #latest-promo{
+  width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;
+  border-radius:0!important;
+}
+.avx-carousel-close{
+  position:absolute!important;right:14px!important;top:12px!important;z-index:20!important;
+  width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.25)!important;
+  border-radius:50%!important;background:rgba(36,19,13,.78)!important;color:#fff!important;
+  font-size:25px!important;line-height:1!important;cursor:pointer!important;
+  backdrop-filter:blur(8px)!important;
+}
+.avx-carousel-bubble{
+  position:fixed!important;left:0!important;top:50%!important;transform:translateY(-50%)!important;
+  z-index:10040!important;border:0!important;border-radius:0 18px 18px 0!important;
+  padding:14px 12px 14px 10px!important;background:#39231a!important;color:#fff!important;
+  box-shadow:8px 12px 28px rgba(40,24,17,.22)!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;gap:6px!important;
+  cursor:pointer!important;transition:.22s ease!important;
+}
+.avx-carousel-bubble:hover{padding-right:16px!important;background:#4b2d21!important}
+.avx-carousel-bubble-icon{font-size:20px!important;line-height:1!important}
+.avx-carousel-bubble-label{writing-mode:vertical-rl!important;transform:rotate(180deg)!important;font-size:8px!important;font-weight:900!important;letter-spacing:.14em!important;text-transform:uppercase!important}
+.avx-carousel-dim{
+  position:fixed!important;inset:0!important;background:rgba(36,19,13,.18)!important;z-index:10045!important;
+  opacity:0!important;pointer-events:none!important;transition:opacity .25s ease!important;
+}
+.avx-carousel-dim.is-open{opacity:1!important;pointer-events:auto!important}
+
+/* Restored reader/community tools. */
+#home .avx-restored-tools{display:block!important;padding:18px 0 4px!important}
+#home .avx-restored-tools .home-community-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+#home .avx-restored-tools .home-community-card{display:flex!important;min-height:76px!important;cursor:pointer!important;pointer-events:auto!important;color:var(--avx-deep)!important}
+#home .avx-restored-tools .home-community-card strong{color:var(--avx-deep)!important}
+#home .avx-restored-tools .home-community-card span span{color:#5b4439!important}
+@media(max-width:700px){
+  #home .avx-restored-tools .home-community-grid{grid-template-columns:1fr!important}
+  #home .avx-restored-tools .home-community-card{min-height:64px!important}
+  #home #chapter-promotion.avx-carousel-drawer{width:calc(100vw - 10px)!important;height:min(640px,calc(100vh - 20px))!important;border-radius:0 20px 20px 0!important}
+}
+
+/* Notification: deep readable text, no label/pill background. */
+#notify-btn .avx-notification-icon svg{width:20px;height:20px;display:block;fill:none;stroke:#2b1b16;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.notify-item,.notify-item b,.notify-copy,.notify-time,.notify-state{color:#2b1b16!important}
+.notify-state{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+.notify-item.read .notify-state{color:#5c463c!important}
+
+/* Accurate book covers: preserve the full cover, never crop it. */
+.story-cover,.mine-cover,.cover-preview,.reader-cover,.genre-book-cover,
+.premium-cinematic-cover,.timeline-image-v3,.library-card-v3 img{object-fit:contain!important;object-position:center!important;background:#eee3db!important}
+.story-cover-btn,.genre-cover-btn{background:#f3ebe5!important}
+
+/* Genre: books reveal on click; deep readable headings and accurate icon. */
+.genre-shelf-toggle{
+  width:100%!important;border:0!important;background:transparent!important;
+  display:flex!important;justify-content:space-between!important;align-items:center!important;
+  text-align:left!important;cursor:pointer!important;padding:4px 0 12px!important;color:#2b1b16!important;
+}
+.genre-shelf-toggle:hover{background:rgba(149,108,85,.05)!important;border-radius:12px!important}
+.genre-shelf-toggle .genre-shelf-note{display:block;color:#5b4439!important;font:600 12px/1.5 Georgia,serif!important;margin:6px 0 0 45px!important}
+.genre-toggle-mark{display:inline-grid!important;place-items:center!important;width:24px!important;height:24px!important;border-radius:50%!important;background:#f0dcd9!important;color:#2b1b16!important;font-size:15px!important}
+.genre-icon{background:#f0dcd9!important;color:#6f493d!important;font-size:17px!important}
+
+/* Ranking: deep text. */
+#ranking-modal,#ranking-modal *,.ranking-panel,.ranking-panel *,.ranking-nav,.ranking-nav *{color:#2b1b16!important}
+.ranking-item,.ranking-card{color:#2b1b16!important}
+
+/* Footer: readable deep text on light footer; remove label backgrounds. */
+footer{background:#f7efe7!important;color:#2b1b16!important;border-top:1px solid #e3d5ca!important}
+footer h3,footer p,footer a,footer button,footer .copyright,footer .copyright *{color:#2b1b16!important;opacity:1!important}
+footer .footer-link-btn{background:transparent!important;border:0!important;padding:0!important;color:#2b1b16!important}
+footer .btn.alt{background:#392820!important;color:#fff!important}
+footer .copyright{border-top-color:rgba(43,27,22,.14)!important}
+footer::before{color:rgba(43,27,22,.045)!important}
+
+/* Author Lounge only: comfortable, expanded, readable and clickable. */
+.author-social-shell{width:min(1380px,calc(100vw - 20px))!important;max-height:96vh!important}
+.author-social-head,.author-social-title,.author-social-sub,
+.author-social-shell .author-social-card,.author-social-shell .author-social-side-card{color:#2b1b16!important}
+.author-social-shell button,.author-social-shell a{pointer-events:auto!important;cursor:pointer!important}
+.author-social-shell .author-social-sub{color:#5b4439!important}
+.author-social-shell .author-social-card p,.author-social-shell .author-social-side-card p{color:#4f3a31!important}
+
+/* Open My Profile / Author Home should expand generously, without touching other author views. */
+.panel:has(.writer-lounge){width:min(1480px,calc(100vw - 18px))!important;max-width:none!important;max-height:96vh!important}
+.panel:has(.writer-lounge) .writer-lounge{min-height:calc(96vh - 20px)!important;grid-template-columns:250px minmax(0,1fr)!important}
+.panel:has(.writer-lounge) .writer-sidebar{min-height:calc(96vh - 64px)!important}
+@media(max-width:760px){
+  .panel:has(.writer-lounge){width:calc(100vw - 10px)!important}
+  .panel:has(.writer-lounge) .writer-lounge{grid-template-columns:1fr!important;min-height:auto!important}
+  .panel:has(.writer-lounge) .writer-sidebar{min-height:auto!important}
+}
+</style>
+<script>
+(function(){
+  function initAvxRequestedInteractions(){
+    const drawer=document.getElementById('chapter-promotion');
+    const bubble=document.getElementById('avx-carousel-bubble');
+    const close=document.getElementById('avx-carousel-close');
+    if(!drawer||!bubble)return;
+    let dim=document.getElementById('avx-carousel-dim');
+    if(!dim){
+      dim=document.createElement('div'); dim.id='avx-carousel-dim'; dim.className='avx-carousel-dim';
+      document.body.appendChild(dim);
+    }
+    const setOpen=(open)=>{
+      drawer.classList.toggle('is-open',open);
+      drawer.setAttribute('aria-hidden',String(!open));
+      bubble.setAttribute('aria-expanded',String(open));
+      dim.classList.toggle('is-open',open);
+      if(open) setTimeout(()=>close?.focus(),40);
+      else bubble.focus();
+    };
+    bubble.onclick=()=>setOpen(true);
+    close?.addEventListener('click',()=>setOpen(false));
+    dim.addEventListener('click',()=>setOpen(false));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('is-open'))setOpen(false)});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAvxRequestedInteractions);
+  else initAvxRequestedInteractions();
+})();
+</script>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -3640,14 +3782,14 @@ footer a,footer button{color:#fff!important;opacity:1!important}
 </nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors">
-    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>♧</span><i id="notify-badge" class="badge hidden">0</i></button>
+    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span class="avx-notification-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 9.5a6 6 0 0 0-12 0c0 7-3 7-3 8.5h18c0-1.5-3-1.5-3-8.5Z"></path><path d="M10 21h4"></path></svg></span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="Profile menu" aria-label="Profile menu" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
         <div id="author-menu-email" class="menu-email"></div>
         <button id="menu-author-center" class="menu-owner" type="button">✍️ AUTHOR CENTER</button>
         <button id="menu-library" type="button">🔖 MY LIBRARY</button>
-        <button id="menu-notifications" type="button">♧ NOTIFICATIONS</button>
+        <button id="menu-notifications" type="button"><span class="avx-menu-bell">♧</span> NOTIFICATIONS</button>
         <div class="menu-divider"></div>
         <button id="menu-logout" type="button">🚪 SIGN OUT</button>
       </div>
@@ -3684,8 +3826,14 @@ footer a,footer button{color:#fff!important;opacity:1!important}
   </div>
 </section>
 
-<!-- AVANITAXX STORIES — LIVE CINEMATIC CAROUSEL (DIRECTLY AFTER WELCOME) -->
-<section class="premium-cinematic-section toffee-restored-carousel" id="chapter-promotion" aria-label="Featured published stories">
+<!-- AVANITAXX STORIES — LEFT-SIDE EXPANDABLE FEATURE BUBBLE -->
+<button id="avx-carousel-bubble" class="avx-carousel-bubble" type="button" aria-expanded="false" aria-controls="chapter-promotion">
+  <span class="avx-carousel-bubble-icon" aria-hidden="true">▣</span>
+  <span class="avx-carousel-bubble-label">Featured Stories</span>
+</button>
+
+<section class="premium-cinematic-section toffee-restored-carousel avx-carousel-drawer" id="chapter-promotion" aria-label="Featured published stories" aria-hidden="true">
+  <button id="avx-carousel-close" class="avx-carousel-close" type="button" aria-label="Close featured stories">×</button>
   <div class="container">
     <div class="premium-cinematic-carousel" id="latest-promo" aria-live="polite">
       <div class="premium-cinematic-loading">
@@ -3730,9 +3878,20 @@ footer a,footer button{color:#fff!important;opacity:1!important}
       <section class="legacy-home-section section avx-feature-shell" id="avx-reader-features" aria-label="Reader features"><div class="container"><div id="avx-phase1-reader"></div></div></section>
       <section class="legacy-home-section section avx-feature-shell" id="avx-author-features" aria-label="Author Center"><div class="container"><div id="avx-author-phase2"></div></div></section>
 
-      <section class="hidden" aria-hidden="true">
-        <div class="home-community-strip">
-          <button id="home-notes-btn" type="button">Notes</button><button id="home-chat-btn" type="button">Community Chat</button><button id="home-sound-btn" type="button">Soundroom</button>
+      <section class="home-community-strip avx-restored-tools" aria-label="Community tools">
+        <div class="home-community-grid">
+          <button class="home-community-card" id="home-notes-btn" type="button">
+            <span class="home-community-icon" aria-hidden="true">✎</span>
+            <span><strong>Notes</strong><span>Updates and author notes</span></span>
+          </button>
+          <button class="home-community-card" id="home-chat-btn" type="button">
+            <span class="home-community-icon" aria-hidden="true">♧</span>
+            <span><strong>Community Chat</strong><span>Talk with readers and authors</span></span>
+          </button>
+          <button class="home-community-card" id="home-sound-btn" type="button">
+            <span class="home-community-icon" aria-hidden="true">♫</span>
+            <span><strong>Soundroom</strong><span>Listen while you read</span></span>
+          </button>
         </div>
       </section>
     </div>
@@ -4029,8 +4188,13 @@ async function loadLatestChapterPromotion(stories=[]){
   restart();
 }
 function storyHasGenre(story,genre){
-  const tags=Array.isArray(story?.tags)?story.tags:[];
-  const hay=tags.map(x=>String(x||'').toLowerCase().trim());
+  const raw=[];
+  if(Array.isArray(story?.tags)) raw.push(...story.tags);
+  else if(typeof story?.tags==='string') raw.push(...story.tags.split(/[,|]/));
+  if(Array.isArray(story?.genres)) raw.push(...story.genres);
+  else if(typeof story?.genres==='string') raw.push(...story.genres.split(/[,|]/));
+  if(story?.genre) raw.push(story.genre);
+  const hay=raw.map(x=>String(x||'').toLowerCase().trim()).filter(Boolean);
   const aliases={
     romance:['romance','romantic','love story','love'],
     mafia:['mafia','mafia romance','mob','gangster','crime romance'],
@@ -4064,11 +4228,25 @@ function renderGenreShelves(stories){
     const books=stories.filter(s=>storyHasGenre(s,g.key));
     if(!books.length)return '';
     return `<section class="genre-shelf" data-genre="${g.key}">
-      <div class="genre-shelf-head"><div><div class="genre-title-row"><span class="genre-icon">${g.icon}</span><h3>${g.name}</h3></div><p>${g.note}</p></div><span class="genre-count">${books.length} ${books.length===1?'BOOK':'BOOKS'}</span></div>
-      <div class="genre-track">${books.map(genreBookCard).join('')}</div>
+      <button class="genre-shelf-head genre-shelf-toggle" type="button" aria-expanded="false">
+        <span><span class="genre-title-row"><span class="genre-icon" aria-hidden="true">▤</span><h3>${g.name}</h3></span><span class="genre-shelf-note">${g.note}</span></span>
+        <span class="genre-count">${books.length} ${books.length===1?'BOOK':'BOOKS'} <b class="genre-toggle-mark">+</b></span>
+      </button>
+      <div class="genre-track" hidden>${books.map(genreBookCard).join('')}</div>
     </section>`;
   }).join('');
   box.innerHTML=html||'<div class="empty">Published books will appear here once their genre tags are added.</div>';
+  box.querySelectorAll('.genre-shelf-toggle').forEach(btn=>{
+    btn.onclick=()=>{
+      const track=btn.parentElement?.querySelector('.genre-track');
+      if(!track)return;
+      const open=!btn.getAttribute('aria-expanded') || btn.getAttribute('aria-expanded')==='false';
+      btn.setAttribute('aria-expanded',String(open));
+      track.hidden=!open;
+      const mark=btn.querySelector('.genre-toggle-mark');
+      if(mark)mark.textContent=open?'−':'+';
+    };
+  });
 }
 
 function renderHomeLatestUpdates(stories=[]){
@@ -5984,6 +6162,80 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 <style id="avx-final-functional-repair-css">.avx-feature-shell{display:block}.avx-feature-shell .container{max-width:1200px;margin:auto}</style>
+
+
+<style id="avx-user-final-precision-v2">
+/* ===== FINAL PRECISION PASS: requested areas only ===== */
+:root{--avx-deep:#2b1b16;--avx-deep-2:#4a342c;--avx-soft:#6a5147}
+
+/* Welcome / Featured Stories: hidden from normal page flow; opened only from the left bubble. */
+#home #chapter-promotion.avx-carousel-drawer{display:block!important;visibility:visible!important;width:min(900px,calc(100vw - 28px))!important;height:min(680px,calc(100vh - 36px))!important}
+#avx-carousel-bubble{width:48px!important;min-height:48px!important;padding:10px!important;justify-content:center!important;border-radius:0 16px 16px 0!important}
+#avx-carousel-bubble .avx-carousel-bubble-label{display:none!important}
+#avx-carousel-bubble .avx-carousel-bubble-icon{font-size:21px!important}
+@media(max-width:1024px){#home #chapter-promotion.avx-carousel-drawer{width:min(760px,calc(100vw - 22px))!important;height:min(650px,calc(100vh - 28px))!important}}
+@media(max-width:700px){#home #chapter-promotion.avx-carousel-drawer{width:calc(100vw - 12px)!important;height:min(620px,calc(100vh - 20px))!important;border-radius:0 18px 18px 0!important}.avx-carousel-close{width:36px!important;height:36px!important}}
+
+/* Restore Notes / Community Chat / Soundroom as compact right-side bubbles. */
+#home .avx-restored-tools{position:fixed!important;right:12px!important;top:50%!important;transform:translateY(-50%)!important;z-index:10020!important;padding:0!important;display:block!important;width:auto!important;pointer-events:none!important}
+#home .avx-restored-tools .home-community-grid{display:flex!important;flex-direction:column!important;gap:9px!important;width:auto!important}
+#home .avx-restored-tools .home-community-card{width:48px!important;height:48px!important;min-height:48px!important;padding:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;gap:0!important;background:#fffdf9!important;border:1px solid rgba(74,48,37,.16)!important;box-shadow:0 9px 24px rgba(55,35,27,.14)!important;pointer-events:auto!important;position:relative!important}
+#home .avx-restored-tools .home-community-card:hover{transform:translateY(-2px) scale(1.04)!important}
+#home .avx-restored-tools .home-community-icon{width:42px!important;height:42px!important;margin:0!important;border-radius:50%!important;background:#f0dcd9!important;color:#2b1b16!important;border:0!important;box-shadow:none!important;font-size:20px!important}
+#home .avx-restored-tools .home-community-card>span:last-child{display:none!important}
+#home .avx-restored-tools #home-notes-btn::after,#home .avx-restored-tools #home-chat-btn::after,#home .avx-restored-tools #home-sound-btn::after{position:absolute;right:58px;white-space:nowrap;background:#2b1b16;color:#fffaf6;padding:7px 9px;border-radius:7px;font:700 9px/1 Arial,sans-serif;letter-spacing:.05em;opacity:0;pointer-events:none;transition:.15s ease}
+#home .avx-restored-tools #home-notes-btn::after{content:'Notes'}
+#home .avx-restored-tools #home-chat-btn::after{content:'Community Chat'}
+#home .avx-restored-tools #home-sound-btn::after{content:'Soundroom'}
+#home .avx-restored-tools .home-community-card:hover::after{opacity:1}
+@media(max-width:700px){#home .avx-restored-tools{right:8px!important}.avx-restored-tools .home-community-grid{gap:7px!important}#home .avx-restored-tools .home-community-card{width:44px!important;height:44px!important;min-height:44px!important}#home .avx-restored-tools .home-community-icon{width:38px!important;height:38px!important;font-size:18px!important}#home .avx-restored-tools .home-community-card::after{display:none!important}}
+
+/* Notifications: deep readable copy; no pill/label background. */
+#notify-btn .avx-notification-icon svg{width:21px!important;height:21px!important;stroke:#2b1b16!important;stroke-width:1.8!important}
+.notify-item,.notify-item *,.notification-modal,.notification-modal *{color:#2b1b16!important}
+.notify-state,.notify-item .label,.notify-item .badge,.notification-modal .label{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+
+/* Ranking: deep readable text. */
+#ranking-modal,#ranking-modal *,.rank-panel,.rank-panel *,.rank-head,.rank-head *,.rank-list,.rank-list *{color:#2b1b16!important}
+
+/* Footer: readable size/deep text; no decorative label backgrounds. */
+footer{background:#f7efe7!important;color:#2b1b16!important}
+footer h3{font-size:16px!important;color:#2b1b16!important}
+footer p,footer a,footer button,footer .copyright,footer .copyright *{font-size:13px!important;line-height:1.65!important;color:#2b1b16!important;opacity:1!important}
+footer a,footer button{background:transparent!important}
+footer .footer-link-btn{background:transparent!important;border:0!important;color:#2b1b16!important}
+
+/* Book covers: fixed, uncropped display proportions. */
+.genre-book-card{flex:0 0 174px!important;overflow:visible!important}
+.genre-cover-btn{aspect-ratio:2/3!important;overflow:hidden!important;background:#eee3db!important}
+.genre-book-cover{width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#eee3db!important}
+.toffee-latest-cover,.toffee-latest-cover img,.story-cover,.mine-cover,.cover-preview,.reader-cover,.library-card-v3 img,.premium-cinematic-cover{object-fit:contain!important;object-position:center!important;background:#eee3db!important}
+@media(max-width:700px){.genre-book-card{flex-basis:154px!important}.genre-cover-btn{aspect-ratio:2/3!important}}
+
+/* Genre heading is a real expandable control and keeps books inside the same shelf. */
+.genre-shelf-toggle{pointer-events:auto!important;cursor:pointer!important;color:#2b1b16!important}
+.genre-shelf-toggle .genre-icon{background:#f0dcd9!important;color:#2b1b16!important}
+.genre-track[hidden]{display:none!important}
+.genre-track:not([hidden]){display:flex!important}
+
+/* Author Lounge only: clickable controls and generous expansion. */
+.author-social-shell button,.author-social-shell a{pointer-events:auto!important;cursor:pointer!important}
+.author-social-shell{width:min(1380px,calc(100vw - 20px))!important;max-height:96vh!important}
+.panel:has(.writer-lounge){width:min(1480px,calc(100vw - 18px))!important;max-width:none!important;max-height:96vh!important}
+.panel:has(.writer-lounge) .writer-lounge{min-height:calc(96vh - 20px)!important;grid-template-columns:250px minmax(0,1fr)!important}
+@media(max-width:760px){.panel:has(.writer-lounge){width:calc(100vw - 8px)!important}.panel:has(.writer-lounge) .writer-lounge{grid-template-columns:1fr!important;min-height:auto!important}}
+</style>
+<script id="avx-user-final-precision-js">
+(function(){
+  function setBubbleA11y(){
+    const map=[['home-notes-btn','Notes'],['home-chat-btn','Community Chat'],['home-sound-btn','Soundroom']];
+    map.forEach(([id,label])=>{const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label;}});
+  }
+  function init(){setBubbleA11y();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  new MutationObserver(()=>{setBubbleA11y();}).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 
 </body>
 </html>
