@@ -6588,19 +6588,78 @@ const avxTimelineCountObserver=new MutationObserver(()=>{
 avxTimelineCountObserver.observe(document.body,{childList:true,subtree:true});
 
 /* Chapter published success popup. */
-function avxShowChapterLive(story,chapterNumber){
+async function avxShowChapterLive(story,chapterNumber){
+  const num=Number(chapterNumber)||chapterNumber;
+  const title=story?.title||'Your Story';
   const cover=story?.cover_url
-    ? `<img class="avx-live-cover" src="${esc(story.cover_url)}" alt="${esc(story.title||'Book')} cover">`
-    : `<div class="avx-live-cover-fallback">${esc(story?.title||'Story')}</div>`;
-  open(`<div class="avx-live-modal" role="dialog" aria-modal="true">
-    <div class="avx-live-kicker">CHAPTER PUBLISHED</div>
+    ? `<img class="avx-live-cover" src="${esc(story.cover_url)}" alt="${esc(title)} cover">`
+    : `<div class="avx-live-cover-fallback">${esc(title)}</div>`;
+
+  /* Get the newest published soundtrack so the poster's PLAY button always has a real source. */
+  let track=null;
+  try{
+    if(Array.isArray(soundroomTracks)&&soundroomTracks.length) track=soundroomTracks[0];
+    if(!track){
+      const q=await sb.from('owner_timeline_media')
+        .select('id,title,caption,media_url,cover_url,created_at')
+        .eq('published',true).eq('media_type','audio')
+        .order('created_at',{ascending:false}).limit(1).maybeSingle();
+      if(!q.error) track=q.data||null;
+    }
+  }catch(e){ console.warn('Chapter poster music lookup:',e); }
+
+  const musicUrl=track?.media_url||'';
+  const musicTitle=track?.title||'Story soundtrack';
+  const safeMusicUrl=esc(musicUrl);
+
+  open(`<div class="avx-live-modal" role="dialog" aria-modal="true" aria-label="Chapter ${esc(num)} is live">
+    <div class="avx-live-paper-note avx-live-note-top">Good<br>Stories<br>Better<br>Days ♡</div>
+    <div class="avx-live-brand">
+      <span class="avx-live-feather" aria-hidden="true">❧</span>
+      <span>Avanitaxx <i>Stories</i></span>
+    </div>
+    <div class="avx-live-divider"><span>♥</span></div>
+    <div class="avx-live-heading-brush"><span>Chapter ${esc(num)}</span></div>
+    <div class="avx-live-is">is <b>Live</b><span aria-hidden="true">♡</span></div>
+    <div class="avx-live-sparkles" aria-hidden="true">⌁　⌁</div>
+    <div class="avx-live-side avx-live-side-left">New chapter,<br>same heart-<br>pounding story...<br><span>♡</span></div>
+    <div class="avx-live-side avx-live-side-right">Read the<br>newest chapter<br>now available.<br><span>♡</span></div>
     ${cover}
-    <div class="avx-live-title">${esc(story?.title||'Your Story')}</div>
-    <div class="avx-live-chapter">CHAPTER ${Number(chapterNumber)||chapterNumber}</div>
-    <p class="avx-live-message">The Chapter ${Number(chapterNumber)||chapterNumber} is Live</p>
+    <div class="avx-live-title">${esc(title)}</div>
+    <div class="avx-live-music" data-music-url="${safeMusicUrl}">
+      <audio id="avx-live-audio" preload="metadata" src="${safeMusicUrl}"></audio>
+      <button type="button" class="avx-live-play" id="avx-live-play" ${musicUrl?'':'disabled'} aria-label="Play story music">
+        <span class="avx-live-play-icon">▶</span><span class="avx-live-play-text">${musicUrl?'PLAY MUSIC':'NO MUSIC'}</span>
+      </button>
+      <span class="avx-live-track-name" id="avx-live-track-name">${esc(musicTitle)}</span>
+    </div>
     <button type="button" class="avx-live-done" id="avx-live-done">DONE</button>
   </div>`);
-  document.getElementById('avx-live-done')?.addEventListener('click',close);
+
+  const done=document.getElementById('avx-live-done');
+  const play=document.getElementById('avx-live-play');
+  const audio=document.getElementById('avx-live-audio');
+  const playText=play?.querySelector('.avx-live-play-text');
+  const playIcon=play?.querySelector('.avx-live-play-icon');
+  done?.addEventListener('click',()=>{audio?.pause();close()});
+
+  /* This is deliberately started only from the reader's click, so browser autoplay rules do not block it. */
+  play?.addEventListener('click',async()=>{
+    if(!audio?.src)return;
+    try{
+      if(audio.paused){
+        await audio.play();
+      }else{
+        audio.pause();
+      }
+    }catch(err){
+      console.warn('Chapter poster music could not play:',err);
+      if(playText)playText.textContent='TAP TO RETRY';
+    }
+  });
+  audio?.addEventListener('play',()=>{if(playText)playText.textContent='PAUSE MUSIC';if(playIcon)playIcon.textContent='Ⅱ';play?.classList.add('playing')});
+  audio?.addEventListener('pause',()=>{if(playText)playText.textContent='PLAY MUSIC';if(playIcon)playIcon.textContent='▶';play?.classList.remove('playing')});
+  audio?.addEventListener('ended',()=>{if(playText)playText.textContent='PLAY MUSIC';if(playIcon)playIcon.textContent='▶';play?.classList.remove('playing')});
 }
 
 /* Wrap the existing save flow. No other save/publish behavior is changed. */
@@ -6813,49 +6872,60 @@ const st=document.createElement('style');st.textContent=`
 .soundroom-edit-modal h2{font:400 32px Georgia,serif;color:#2b1b16}
 .soundroom-edit-modal .meta{line-height:1.6}
 
-/* Chapter Live poster — light, cute coffee editorial style */
+/* Chapter Live pop poster — warm toffee / coffee editorial design */
 .avx-live-modal{
-  position:relative;overflow:hidden;width:min(455px,100%);
-  background:linear-gradient(145deg,#fffaf4 0%,#f7eadf 100%);
-  border:1px solid rgba(120,82,60,.16);border-radius:28px;padding:30px 28px 25px;
-  box-shadow:0 30px 90px rgba(55,35,27,.28);text-align:center;color:#3a2922;
+  position:relative;overflow:hidden;width:min(680px,96vw);min-height:760px;
+  padding:42px 34px 30px;border:0;border-radius:8px;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(130,88,54,.10),transparent 16%),
+    radial-gradient(circle at 93% 76%,rgba(130,88,54,.09),transparent 17%),
+    linear-gradient(145deg,#f9ead7 0%,#f2dfc8 46%,#fbecd9 100%);
+  box-shadow:0 35px 100px rgba(48,29,20,.38);text-align:center;color:#4a2c1d;
+  font-family:Georgia,'Times New Roman',serif;
 }
 .avx-live-modal::before{
-  content:"☕";position:absolute;right:18px;top:8px;font-size:48px;opacity:.10;transform:rotate(8deg);
+  content:"";position:absolute;inset:10px;border:1px solid rgba(110,72,44,.15);pointer-events:none;
+  background:linear-gradient(90deg,transparent 0 49%,rgba(130,88,54,.035) 50%,transparent 51%);
 }
 .avx-live-modal::after{
-  content:"";position:absolute;left:-34px;bottom:-45px;width:130px;height:130px;border-radius:50%;
-  background:radial-gradient(circle,#e7cbb9 0 45%,transparent 46%);opacity:.32;
+  content:"☕";position:absolute;left:-10px;bottom:-22px;font-size:120px;line-height:1;opacity:.10;transform:rotate(-12deg);pointer-events:none;
 }
-.avx-live-kicker{font:900 8px/1 Arial,sans-serif;letter-spacing:.20em;color:#9b7058;text-transform:uppercase}
-.avx-live-cover{
-  width:108px;height:162px;object-fit:contain;object-position:center;background:#eadfd7;
-  border-radius:9px;margin:13px auto 14px;display:block;border:1px solid rgba(116,78,58,.16);
-  box-shadow:0 12px 25px rgba(75,48,35,.16);
-}
-.avx-live-cover-fallback{
-  width:108px;height:162px;border-radius:9px;margin:13px auto 14px;display:grid;place-items:center;padding:12px;
-  background:#eadfd7;color:#5c4032;font:18px Georgia,serif;box-shadow:0 12px 25px rgba(75,48,35,.12);
-}
-.avx-live-title{
-  font:400 27px/1.12 Georgia,serif;color:#38251e;margin:5px auto 3px;max-width:330px;
-}
-.avx-live-chapter{
-  display:inline-block;margin:7px 0 8px;padding:6px 10px;border-radius:999px;
-  background:#f1ddd2;color:#79533f;font:900 8px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase;
-}
-.avx-live-message{
-  margin:5px 0 18px;color:#5e463a;font:italic 22px/1.25 Georgia,serif;
-}
-.avx-live-message::first-letter{}
-.avx-live-done{
-  position:relative;z-index:2;min-width:118px;border:0;border-radius:999px;padding:11px 23px;
-  background:#4a3025;color:#fffaf5;font:900 9px Arial,sans-serif;letter-spacing:.12em;cursor:pointer;
-  box-shadow:0 8px 18px rgba(74,48,37,.16);transition:.18s transform,.18s box-shadow;
-}
-.avx-live-done:hover{transform:translateY(-1px);box-shadow:0 11px 23px rgba(74,48,37,.22)}
+.avx-live-brand{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;gap:10px;font-size:27px;font-weight:700;color:#4a2818;margin-top:2px}
+.avx-live-brand i{font-weight:400;color:#a66d31}
+.avx-live-feather{font-size:42px;transform:rotate(-25deg);display:inline-block}
+.avx-live-divider{position:relative;z-index:2;display:flex;align-items:center;gap:14px;justify-content:center;margin:7px auto 15px;color:#5a2d17;font-size:18px}
+.avx-live-divider::before,.avx-live-divider::after{content:"";width:115px;height:1px;background:#70452e;opacity:.65}
+.avx-live-heading-brush{position:relative;z-index:2;display:inline-block;padding:13px 46px 12px;margin-top:2px;background:#875126;color:#fff8ed;font-size:66px;font-weight:700;font-style:italic;line-height:.98;letter-spacing:-.025em;transform:rotate(-1.5deg);box-shadow:12px 9px 0 rgba(105,61,32,.14)}
+.avx-live-heading-brush::before,.avx-live-heading-brush::after{content:"";position:absolute;height:2px;background:#70452e;opacity:.45;left:-14px;right:-10px}
+.avx-live-heading-brush::before{top:-6px;transform:rotate(-1deg)}
+.avx-live-heading-brush::after{bottom:-7px;transform:rotate(1deg)}
+.avx-live-is{position:relative;z-index:2;margin:-2px 0 0;font-size:62px;font-style:italic;line-height:1;color:#5a2c17}
+.avx-live-is b{font-size:84px;font-weight:400;letter-spacing:-.05em}
+.avx-live-is span{font-size:45px;margin-left:5px;vertical-align:middle}
+.avx-live-sparkles{position:relative;z-index:2;font-size:30px;letter-spacing:.2em;color:#75452b;margin:0 0 3px}
+.avx-live-cover{position:relative;z-index:3;width:210px;height:300px;object-fit:cover;display:block;margin:4px auto 12px;border:3px solid #2a1a13;border-radius:3px;box-shadow:0 17px 30px rgba(52,31,21,.30)}
+.avx-live-cover-fallback{position:relative;z-index:3;width:210px;height:300px;margin:4px auto 12px;display:grid;place-items:center;padding:20px;background:#38251d;color:#f9e7d2;font-size:28px;box-shadow:0 17px 30px rgba(52,31,21,.30)}
+.avx-live-title{position:relative;z-index:3;display:inline-block;margin:0 auto 14px;padding:7px 30px;font-size:27px;font-weight:700;letter-spacing:.035em;color:#4b291a;background:rgba(237,211,183,.70);border-radius:2px}
+.avx-live-side{position:absolute;z-index:2;width:150px;font-size:22px;line-height:1.35;font-style:italic;color:#5a321f;text-align:left}
+.avx-live-side span{font-size:27px}
+.avx-live-side-left{left:28px;top:410px;transform:rotate(-4deg)}
+.avx-live-side-right{right:28px;top:455px;transform:rotate(3deg)}
+.avx-live-music{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:6px auto 10px}
+.avx-live-play{display:inline-flex;align-items:center;gap:10px;min-width:210px;justify-content:center;border:1px solid #c99558;border-radius:999px;padding:13px 24px;background:#7b431f;color:#fff8ed;box-shadow:0 8px 18px rgba(75,43,25,.20);font:900 11px Arial,sans-serif;letter-spacing:.10em;cursor:pointer;transition:transform .16s,box-shadow .16s}
+.avx-live-play:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 11px 22px rgba(75,43,25,.25)}
+.avx-live-play:disabled{opacity:.6;cursor:not-allowed}
+.avx-live-play.playing{background:#5b3018}
+.avx-live-play-icon{font-size:13px}
+.avx-live-track-name{max-width:240px;font:italic 13px Georgia,serif;color:#5d3a29;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avx-live-done{position:relative;z-index:5;min-width:180px;border:1px solid #c99558;border-radius:999px;padding:13px 30px;background:#9a5a28;color:#fff8ed;font:900 10px Arial,sans-serif;letter-spacing:.14em;cursor:pointer;box-shadow:0 8px 18px rgba(74,48,37,.18);margin-top:3px}
+.avx-live-note-top{position:absolute;z-index:1;right:22px;top:22px;font-size:18px;line-height:1.05;font-style:italic;color:#69422d;transform:rotate(8deg);text-align:left;opacity:.85}
 @media(max-width:620px){
- .soundroom-track-actions{grid-column:1/-1;justify-content:flex-start;margin-left:0;margin-top:4px}
+  .avx-live-modal{width:min(430px,94vw);min-height:680px;padding:26px 16px 22px}
+  .avx-live-brand{font-size:20px}.avx-live-feather{font-size:30px}.avx-live-divider::before,.avx-live-divider::after{width:70px}
+  .avx-live-heading-brush{font-size:45px;padding:10px 27px}.avx-live-is{font-size:43px}.avx-live-is b{font-size:62px}.avx-live-is span{font-size:32px}
+  .avx-live-cover,.avx-live-cover-fallback{width:155px;height:222px}.avx-live-title{font-size:19px;padding:6px 18px}
+  .avx-live-side{width:105px;font-size:14px}.avx-live-side-left{left:10px;top:330px}.avx-live-side-right{right:10px;top:360px}
+  .avx-live-note-top{right:10px;top:14px;font-size:12px}.avx-live-play{min-width:175px}
 }
 </style>
 <script id="avx-published-music-and-chapter-polish-js">
