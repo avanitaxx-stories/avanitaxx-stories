@@ -6332,5 +6332,279 @@ footer .footer-link-btn{background:transparent!important;border:0!important;colo
 })();
 </script>
 
+
+<!-- AVANITAXX REQUESTED FIXES — DEEP TEXT / COMMUNITY REQUESTS / REACTION COUNTS / CHAPTER LIVE -->
+<style id="avx-requested-final-fixes">
+/* 1) Deep readable text on white/light surfaces. Label/status backgrounds are intentionally untouched. */
+body,
+.toffee-home,
+.section,
+.section.altbg,
+.modal,
+.panel,
+.reader,
+.dash,
+.dash-card,
+.story-card,
+.empty,
+.story-item,
+.story-manage-menu,
+.toolbar,
+.rich-editor,
+.reader-content,
+.engagement,
+.notification-modal,
+.notify-list,
+.notify-item,
+.author-profile-v3,
+.author-section-v3,
+.timeline-card-v3,
+.library-card-v3,
+.owner-composer,
+.owner-card,
+.author-social-shell,
+.author-post,
+.author-post-body,
+.author-post-footer,
+.author-directory-card,
+.author-hub-panel,
+.featured-author-card,
+.rank-panel,
+.rank-list,
+.rank-row,
+.fb-notes-panel,
+.fb-note-card,
+.soundroom-public-card,
+.community-messenger,
+.cm-sidebar,
+.cm-main,
+.cm-message-scroll,
+.cm-composer{
+  color:#111!important;
+}
+.modal p,.help,.meta,.story-meta,.story-stats,.story-stat,.reader-desc,.notification-sub,
+.notify-time,.author-bio-v3,.author-directory-bio,.author-social-sub,.author-post-caption,
+.author-post-meta,.rank-sub,.rank-info,.rank-desc,.rank-author,.rank-reads,.fb-note-caption,
+.fb-note-meta,.fb-note-author-meta,.cm-sidebar-note,.cm-room-status,.cm-time{
+  color:#171717!important;
+}
+.rank-title,.rank-head h2,.rank-panel h2,.rank-panel .rank-title,
+.rank-panel .rank-kicker,.rank-panel .rank-list .rank-story-title{
+  color:#111!important;
+}
+.rank-panel .rank-kicker{font-weight:900!important}
+.rank-row .rank-info *,.rank-row .rank-story-title,.rank-row .rank-author,.rank-row .rank-reads{color:#111!important}
+/* Keep existing label/status/tag backgrounds exactly as they are. */
+.tag,.story-status-badge,.chapter-status-badge,.status-completed,.status-ongoing,
+.status-unpublished,.status-draft,.story-status-filter{ /* intentionally no background override */ }
+
+/* Reaction counts and comment counts are always visible and dark. */
+.author-post-stats,.author-post-stats span,.author-post-stats b,
+.author-post-action,.author-reaction-count,.fc-react span,
+.cm-reaction-pill,.cm-reactions,.cm-actions button{
+  color:#111!important;
+}
+.author-post-stats{font-weight:800!important}
+.author-reaction-count,.fc-react span{font-weight:900!important}
+
+/* Chapter-live confirmation modal */
+.avx-live-modal{width:min(430px,100%);background:#fffdf9;border:1px solid #e3d4ca;border-radius:24px;padding:28px;box-shadow:0 35px 110px rgba(30,18,14,.35);text-align:center;color:#111}
+.avx-live-cover{width:120px;height:170px;object-fit:cover;border-radius:10px;margin:8px auto 18px;display:block;border:1px solid #dfd0c5;box-shadow:0 12px 30px rgba(55,35,27,.15)}
+.avx-live-cover-fallback{width:120px;height:170px;border-radius:10px;margin:8px auto 18px;display:grid;place-items:center;padding:12px;background:#eadbd2;color:#111;font:18px Georgia,serif}
+.avx-live-kicker{font-size:9px;font-weight:900;letter-spacing:.18em;color:#6f493d;text-transform:uppercase}
+.avx-live-title{font:400 29px/1.1 Georgia,serif;color:#111;margin:8px 0 4px}
+.avx-live-chapter{font:900 11px Arial,sans-serif;letter-spacing:.14em;color:#111;text-transform:uppercase;margin:10px 0 8px}
+.avx-live-message{font:400 18px/1.45 Georgia,serif;color:#111;margin:0 0 20px}
+.avx-live-done{min-width:120px;background:#392820;color:#fff;border:0;border-radius:10px;padding:12px 22px;font-size:10px;font-weight:900;letter-spacing:.1em}
+@media(max-width:560px){.avx-live-modal{padding:22px}.avx-live-cover,.avx-live-cover-fallback{width:105px;height:150px}.avx-live-title{font-size:25px}}
+</style>
+
+<script id="avx-requested-final-fixes-js">
+(function(){
+"use strict";
+
+/* Community: every logged-in reader/author can request access.
+   Owner sees pending requests and can approve them. */
+async function avxRequestCommunityAccess(room){
+  if(!session?.user?.id){openAuth('reader');return}
+  const owner=await isOwnerAccount();
+  if(owner){alert('You are the community owner and already have access.');return}
+  try{
+    const existing=await sb.from('owner_chat_join_requests').select('id,status').eq('room_id',room.id).eq('user_id',session.user.id).maybeSingle();
+    if(!existing.error && existing.data){
+      if(existing.data.status==='approved'){alert('Your community access is already approved.');return}
+      if(existing.data.status==='pending'){alert('Your request is already waiting for the owner’s approval.');return}
+    }
+    const q=await sb.from('owner_chat_join_requests').upsert({
+      room_id:room.id,user_id:session.user.id,status:'pending',created_at:new Date().toISOString()
+    },{onConflict:'room_id,user_id'});
+    if(q.error)throw q.error;
+    alert('Request sent. The community owner will review and approve your request.');
+  }catch(e){
+    console.error(e);
+    alert('Community access request could not be submitted yet. Please make sure the Community Join Requests table is enabled in Supabase.');
+  }
+}
+
+async function avxLoadCommunityRequests(room){
+  if(!session?.user?.id || !(await isOwnerAccount())) return [];
+  try{
+    const q=await sb.from('owner_chat_join_requests').select('*').eq('room_id',room.id).eq('status','pending').order('created_at',{ascending:true});
+    return q.error?[]:(q.data||[]);
+  }catch(e){return []}
+}
+
+async function avxApproveCommunityRequest(req,room,approve){
+  if(!session?.user?.id || !(await isOwnerAccount()))return;
+  try{
+    if(approve){
+      const add=await sb.from('owner_chat_members').upsert({room_id:room.id,user_id:req.user_id},{onConflict:'room_id,user_id'});
+      if(add.error)throw add.error;
+    }
+    const q=await sb.from('owner_chat_join_requests').update({status:approve?'approved':'rejected',reviewed_at:new Date().toISOString(),reviewed_by:session.user.id}).eq('id',req.id);
+    if(q.error)throw q.error;
+    alert(approve?'Member approved.':'Request rejected.');
+  }catch(e){alert('Could not update this request: '+(e.message||e))}
+}
+
+async function avxRenderCommunityRequests(room){
+  const box=document.getElementById('cm-owner-requests');
+  if(!box || !(await isOwnerAccount()))return;
+  const rows=await avxLoadCommunityRequests(room);
+  if(!rows.length){box.innerHTML='';return}
+  const ids=[...new Set(rows.map(x=>x.user_id).filter(Boolean))],pmap={};
+  if(ids.length){
+    const p=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',ids);
+    (p.data||[]).forEach(x=>pmap[x.id]=x);
+  }
+  box.innerHTML=`<div class="cm-owner-requests-head">PENDING COMMUNITY REQUESTS <span>${rows.length}</span></div>`+
+    rows.map(r=>{
+      const p=pmap[r.user_id]||{},name=p.pen_name||p.display_name||'Reader';
+      return `<div class="cm-owner-request" data-request-id="${esc(r.id)}">
+        <div><b>${esc(name)}</b><small>${esc(formatDate(r.created_at))}</small></div>
+        <div class="cm-owner-request-actions"><button type="button" data-approve="1">APPROVE</button><button type="button" data-approve="0">REJECT</button></div>
+      </div>`;
+    }).join('');
+  box.querySelectorAll('[data-approve]').forEach(b=>b.onclick=async()=>{
+    const req=rows.find(x=>String(x.id)===String(b.closest('.cm-owner-request')?.dataset.requestId));
+    if(!req)return;
+    await avxApproveCommunityRequest(req,room,b.dataset.approve==='1');
+    await avxRenderCommunityRequests(room);
+  });
+}
+
+/* Patch the existing community room loader without changing its chat behavior. */
+const avxOriginalOpenHomeCommunity=window.openHomeCommunity;
+if(typeof avxOriginalOpenHomeCommunity==='function'){
+  /* Existing function is kept intact; request access is wired through delegated clicks. */
+}
+
+/* Delegated request button: the existing room already renders #cm-invite-request. */
+document.addEventListener('click',async e=>{
+  const b=e.target.closest?.('#cm-invite-request');
+  if(b){
+    e.preventDefault();
+    const name=document.getElementById('cm-room-name')?.textContent||'Avanitaxx Community';
+    try{
+      const q=await sb.from('owner_chat_rooms').select('*').eq('name',name).eq('published',true).limit(1).maybeSingle();
+      if(q.data)await avxRequestCommunityAccess(q.data);
+      else alert('Community room could not be found.');
+    }catch(err){alert('Unable to submit request.')}
+  }
+});
+
+/* Owner request panel is inserted into the Community Chat header when the room is opened. */
+const observeCommunity=new MutationObserver(async()=>{
+  const panel=document.querySelector('.community-messenger');
+  const roomName=document.getElementById('cm-room-name');
+  if(!panel||!roomName)return;
+  if(document.getElementById('cm-owner-requests'))return;
+  try{
+    if(!(await isOwnerAccount()))return;
+    const q=await sb.from('owner_chat_rooms').select('*').eq('name',roomName.textContent).eq('published',true).limit(1).maybeSingle();
+    if(!q.data)return;
+    const box=document.createElement('div');box.id='cm-owner-requests';box.className='cm-owner-requests';
+    panel.querySelector('.cm-main')?.prepend(box);
+    await avxRenderCommunityRequests(q.data);
+  }catch(e){}
+});
+observeCommunity.observe(document.body,{childList:true,subtree:true});
+
+
+/* Keep timeline reaction + comment totals visible together. */
+const avxTimelineCountObserver=new MutationObserver(()=>{
+  document.querySelectorAll('.author-post[data-timeline-id]').forEach(async card=>{
+    if(card.dataset.avxCountsLoaded==='1')return;
+    const id=card.dataset.timelineId;
+    const stats=card.querySelector('.author-post-stats');
+    if(!stats)return;
+    card.dataset.avxCountsLoaded='1';
+    try{
+      const [rq,cq]=await Promise.all([
+        sb.from('author_timeline_reactions').select('reaction').eq('timeline_id',id),
+        sb.from('feature_comments').select('id').eq('content_type','timeline').eq('content_id',id)
+      ]);
+      const reactions=(rq.data||[]).length,comments=(cq.data||[]).length;
+      const first=stats.querySelector('span');
+      if(first)first.textContent=`${reactions} reaction${reactions===1?'':'s'}`;
+      const existing=[...stats.querySelectorAll('span')].slice(1).find(x=>/comment/i.test(x.textContent||''));
+      if(!existing){
+        const c=document.createElement('span');c.textContent=`${comments} comment${comments===1?'':'s'}`;stats.insertBefore(c,stats.lastElementChild||null);
+      }
+    }catch(e){card.dataset.avxCountsLoaded='0'}
+  });
+});
+avxTimelineCountObserver.observe(document.body,{childList:true,subtree:true});
+
+/* Chapter published success popup. */
+function avxShowChapterLive(story,chapterNumber){
+  const cover=story?.cover_url
+    ? `<img class="avx-live-cover" src="${esc(story.cover_url)}" alt="${esc(story.title||'Book')} cover">`
+    : `<div class="avx-live-cover-fallback">${esc(story?.title||'Story')}</div>`;
+  open(`<div class="avx-live-modal" role="dialog" aria-modal="true">
+    <div class="avx-live-kicker">CHAPTER PUBLISHED</div>
+    ${cover}
+    <div class="avx-live-title">${esc(story?.title||'Your Story')}</div>
+    <div class="avx-live-chapter">CHAPTER ${Number(chapterNumber)||chapterNumber}</div>
+    <p class="avx-live-message">The Chapter ${Number(chapterNumber)||chapterNumber} is Live</p>
+    <button type="button" class="avx-live-done" id="avx-live-done">DONE</button>
+  </div>`);
+  document.getElementById('avx-live-done')?.addEventListener('click',close);
+}
+
+/* Wrap the existing save flow. No other save/publish behavior is changed. */
+setTimeout(()=>{
+  if(typeof saveStory!=='function' || window.__avxSaveStoryWrapped)return;
+  const originalSaveStory=saveStory;
+  window.__avxSaveStoryWrapped=true;
+  saveStory=async function(publishState,mode='save'){
+    const beforeStory=typeof editorStory!=='undefined'?editorStory:null;
+    const beforeChapters=typeof editorChapters!=='undefined'?[...editorChapters]:[];
+    const publishedBefore=new Set(beforeChapters.filter(c=>c.published).map(c=>Number(c.chapter_number)));
+    await originalSaveStory.apply(this,arguments);
+    if(!publishState)return;
+    try{
+      const story=typeof editorStory!=='undefined'?editorStory:beforeStory;
+      if(!story?.id)return;
+      const q=await sb.from('chapters').select('chapter_number,published').eq('story_id',story.id).order('chapter_number',{ascending:true});
+      const newlyLive=(q.data||[]).find(c=>c.published&&!publishedBefore.has(Number(c.chapter_number)));
+      if(newlyLive)avxShowChapterLive(story,newlyLive.chapter_number);
+    }catch(e){console.warn('Chapter live popup:',e)}
+  };
+},1200);
+
+/* Community request panel styles injected without changing existing label backgrounds. */
+const st=document.createElement('style');st.textContent=`
+.cm-owner-requests{margin:10px 12px;padding:12px;border:1px solid #ddd0c6;border-radius:14px;background:#fffdf9;color:#111}
+.cm-owner-requests-head{font-size:9px;font-weight:900;letter-spacing:.12em;color:#111;margin-bottom:8px}
+.cm-owner-requests-head span{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:5px;border-radius:999px;background:#392820;color:#fff}
+.cm-owner-request{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #eaded2}
+.cm-owner-request b{display:block;color:#111;font-size:11px}.cm-owner-request small{display:block;color:#555;font-size:8px;margin-top:3px}
+.cm-owner-request-actions{display:flex;gap:5px}.cm-owner-request-actions button{border:1px solid #cbb9ae;background:#fff;color:#111;border-radius:8px;padding:7px 8px;font-size:8px;font-weight:900}
+.cm-owner-request-actions button:first-child{background:#392820;color:#fff}
+`;document.head.appendChild(st);
+})();
+</script>
+
 </body>
 </html>
