@@ -6606,5 +6606,170 @@ const st=document.createElement('style');st.textContent=`
 })();
 </script>
 
+
+<style id="avx-deep-text-final-fix">
+/* ===== DEEP TEXT READABILITY — REQUESTED AREAS ONLY ===== */
+:root{--avx-deep:#111111;--avx-deep-2:#1b1512;--avx-deep-3:#2a211d}
+
+/* White/light surfaces: make informational text clearly readable */
+.modal,.panel,.dash-card,.story-card,.empty,.feature-modal,.feature-modal-scroll,
+.soundroom-upload-card,.feature-track-card,.author-hub-panel,.author-hub-head,
+.author-hub-body,.author-directory-card,.author-profile-v3,.author-section-v3,
+.timeline-card-v3,.library-card-v3,.library-card-copy-v3,.owner-composer,
+.owner-card,.owner-room,.writer-workspace,.writer-dashboard-card,
+.writer-lounge-footer,.profile-grid,.toffee-sidebar-card{
+  color:var(--avx-deep);
+}
+.modal p,.panel p,.dash-card p,.feature-modal p,.feature-modal-scroll p,
+.author-hub-sub,.author-hub-count,.author-directory-bio,.author-empty-v3,
+.author-bio-v3,.author-stat-v3 span,.author-section-v3 .section-note,
+.timeline-caption-v3,.timeline-meta-v3,.library-card-meta-v3,
+.owner-small,.writer-tip,.writer-lounge-footer,.meta,.help{
+  color:var(--avx-deep-2)!important;
+}
+
+/* ===== AVANITAXX SOUNDROOM ===== */
+.soundroom-upload-card h3,
+.soundroom-upload-card .meta,
+.soundroom-upload-card label,
+.soundroom-upload-card .kicker,
+.soundroom-upload-card p,
+.soundroom-upload-grid label{
+  color:var(--avx-deep)!important;
+}
+.soundroom-upload-card .field,
+.soundroom-upload-card input{
+  color:var(--avx-deep)!important;
+  -webkit-text-fill-color:var(--avx-deep);
+}
+.soundroom-upload-card .field::placeholder,
+.soundroom-upload-card input::placeholder{
+  color:#3b302a!important;
+  opacity:1;
+}
+.feature-modal-head .kicker,
+.feature-modal-head h2,
+.feature-modal-head p,
+.feature-track-card .track-title,
+.feature-track-card .track-caption,
+.feature-track-card .track-main,
+.feature-track-card strong,
+.soundroom-public-card strong{
+  color:var(--avx-deep)!important;
+}
+.feature-track-card .track-caption{
+  color:#211a16!important;
+}
+.soundroom-title{color:var(--avx-deep)!important}
+.soundroom-caption,.soundroom-eyebrow{color:#241b17!important}
+.soundroom-minimize{color:var(--avx-deep)!important}
+
+/* Explicitly protect artwork/status/label backgrounds — text only is changed */
+.soundroom-upload-card,
+.feature-track-card,
+.track-cover,
+.soundroom-panel{
+  /* existing backgrounds remain unchanged */
+}
+.story-status-badge,.chapter-status-badge,
+.status-completed,.status-ongoing,.status-unpublished,.status-draft,
+.story-status-filter,.tag{
+  /* DO NOT alter status/label backgrounds */
+}
+
+/* ===== AUTHOR HUB / AUTHORS & READERS CORNER ===== */
+.author-hub-kicker,
+.author-hub-title,
+.author-hub-sub,
+.author-hub-count,
+.author-directory-name,
+.author-directory-handle,
+.author-directory-bio,
+.author-directory-meta,
+.author-directory-meta b,
+.author-profile-backbar,
+.author-profile-backbar span,
+.author-profile-backbar button{
+  color:var(--avx-deep)!important;
+}
+.author-hub-title{color:#111!important}
+.author-hub-kicker,.author-directory-handle{color:#241a15!important}
+.author-hub-sub,.author-hub-count,.author-directory-bio,
+.author-directory-meta{color:#211a16!important}
+.author-directory-card{color:#111!important}
+.author-directory-name{color:#111!important}
+
+/* ===== AUTHOR PROFILE ===== */
+.author-name-v3,
+.author-handle-v3,
+.author-bio-v3,
+.author-stat-v3 b,
+.author-stat-v3 span,
+.author-section-v3 h3,
+.timeline-type-v3,
+.timeline-title-v3,
+.timeline-caption-v3,
+.timeline-meta-v3,
+.library-card-title-v3,
+.library-card-meta-v3{
+  color:var(--avx-deep)!important;
+}
+.author-handle-v3,.timeline-type-v3{color:#241a15!important}
+.author-bio-v3,.author-stat-v3 span,.timeline-caption-v3,
+.timeline-meta-v3,.library-card-meta-v3{color:#211a16!important}
+.author-social-v3 a{color:var(--avx-deep)!important}
+
+/* ===== AUTHOR TIMELINE ===== */
+.timeline-title-v3{color:#111!important}
+.timeline-caption-v3{color:#211a16!important}
+.timeline-quote-v3{color:#241b17!important}
+.timeline-meta-v3{color:#2a211d!important}
+
+/* ===== LIBRARY ===== */
+.library-card-title-v3{color:#111!important}
+.library-card-meta-v3{color:#211a16!important}
+.library-card-copy-v3{color:#111!important}
+.library-card-copy-v3 .btn{color:#fff!important}
+
+/* ===== AUTHOR CENTER / AUTHOR HOME ===== */
+.writer-lounge h1,.writer-lounge h2,.writer-lounge h3,.writer-lounge h4,
+.writer-workspace h1,.writer-workspace h2,.writer-workspace h3,
+.writer-workspace h4,.writer-workspace p,.writer-workspace span,
+.writer-workspace small,.writer-workspace strong,.writer-workspace div{
+  /* Only text color; no background changes */
+}
+.writer-workspace{color:var(--avx-deep)!important}
+.writer-workspace p,.writer-workspace small,.writer-workspace .meta,
+.writer-workspace .help{color:#211a16!important}
+.writer-dashboard-card,.writer-workspace-card{color:var(--avx-deep)!important}
+
+/* ===== AUTHOR & READERS CORNER / PROFILE EDITOR ===== */
+#profile-close ~ *,
+#profile-status ~ *{color:var(--avx-deep)}
+.profile-grid label{color:var(--avx-deep)!important}
+.profile-grid .field{color:var(--avx-deep)!important;-webkit-text-fill-color:var(--avx-deep)}
+.profile-grid .field::placeholder{color:#3b302a!important;opacity:1}
+
+/* ===== General white form controls in these areas ===== */
+.author-hub-panel input,
+.author-hub-panel textarea,
+.author-hub-panel select,
+.author-profile-v3 input,
+.author-profile-v3 textarea,
+.author-profile-v3 select,
+.feature-modal input,
+.feature-modal textarea,
+.feature-modal select{
+  color:var(--avx-deep)!important;
+  -webkit-text-fill-color:var(--avx-deep);
+}
+.author-hub-panel input::placeholder,
+.feature-modal input::placeholder{
+  color:#3b302a!important;opacity:1;
+}
+
+/* Keep action/status label backgrounds exactly as they are: no background declarations here. */
+</style>
+
 </body>
 </html>
