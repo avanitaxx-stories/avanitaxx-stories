@@ -6914,26 +6914,39 @@ async function avxShowChapterLive(story,chapterNumber){
   audio?.addEventListener('ended',()=>{if(playText)playText.textContent='PLAY MUSIC';if(playIcon)playIcon.textContent='▶';play?.classList.remove('playing')});
 }
 
-/* Wrap the existing save flow. No other save/publish behavior is changed. */
+/* Chapter publish popup — FINAL FIX.
+   The popup is opened only after Supabase confirms the chapter is published.
+   It is not followed by openAuthorHome(), so the Author Home modal cannot replace it. */
 setTimeout(()=>{
-  if(typeof saveStory!=='function' || window.__avxSaveStoryWrapped)return;
-  const originalSaveStory=saveStory;
-  window.__avxSaveStoryWrapped=true;
+  if(typeof saveStory!=='function' || window.__avxSaveStoryWrappedFinal)return;
+  const previousSaveStory=saveStory;
+  window.__avxSaveStoryWrappedFinal=true;
   saveStory=async function(publishState,mode='save'){
-    const beforeStory=typeof editorStory!=='undefined'?editorStory:null;
-    const beforeChapters=typeof editorChapters!=='undefined'?[...editorChapters]:[];
-    const publishedBefore=new Set(beforeChapters.filter(c=>c.published).map(c=>Number(c.chapter_number)));
-    await originalSaveStory.apply(this,arguments);
+    const storyBefore=typeof editorStory!=='undefined'?{...editorStory}:null;
+    const chapterBefore=typeof editorChapters!=='undefined'?[...editorChapters]:[];
+    const beforeSig=new Set(chapterBefore.filter(c=>c.published).map(c=>`${Number(c.chapter_number)}|${c.title||''}`));
+    await previousSaveStory.apply(this,arguments);
     if(!publishState)return;
     try{
-      const story=typeof editorStory!=='undefined'?editorStory:beforeStory;
+      const story=typeof editorStory!=='undefined'?editorStory:storyBefore;
       if(!story?.id)return;
-      const q=await sb.from('chapters').select('chapter_number,published').eq('story_id',story.id).order('chapter_number',{ascending:true});
-      const newlyLive=(q.data||[]).find(c=>c.published&&!publishedBefore.has(Number(c.chapter_number)));
-      if(newlyLive)avxShowChapterLive(story,newlyLive.chapter_number);
-    }catch(e){console.warn('Chapter live popup:',e)}
+      const q=await sb.from('chapters')
+        .select('id,chapter_number,title,published')
+        .eq('story_id',story.id)
+        .eq('published',true)
+        .order('chapter_number',{ascending:false})
+        .limit(20);
+      if(q.error)throw q.error;
+      const newlyPublished=(q.data||[]).find(c=>!beforeSig.has(`${Number(c.chapter_number)}|${c.title||''}`))||(q.data||[])[0];
+      if(!newlyPublished)return;
+      /* Give the original save flow time to finish its home refresh, then replace it with the poster. */
+      setTimeout(()=>{
+        try{ avxShowChapterLive(story,newlyPublished.chapter_number); }
+        catch(err){ console.warn('Chapter live poster:',err); }
+      },650);
+    }catch(e){console.warn('Chapter live confirmation:',e)}
   };
-},1200);
+},1500);
 
 /* Community request panel styles injected without changing existing label backgrounds. */
 const st=document.createElement('style');st.textContent=`
@@ -7212,6 +7225,97 @@ const st=document.createElement('style');st.textContent=`
     }
     if(done)done.onclick=close;
   };
+})();
+</script>
+<script id="avx-final-soundroom-upgrade">
+/* ===== AVANITAXX SOUNDROOM — FINAL POLISH =====
+   Keeps owner_timeline_media + existing story-media storage behavior.
+   Adds search, preview, publish state, compact management and mobile-safe controls. */
+(function(){
+  if(window.__avxFinalSoundroom)return;
+  window.__avxFinalSoundroom=true;
+
+  function srEsc(v){return typeof esc==='function'?esc(v??''):String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+  window.openSoundroomManager=async function(){
+    if(!session){openAuth('author');return}
+    if(!(await isOwnerAccount())){alert('Owner access only.');return}
+    const r=await sb.from('owner_timeline_media')
+      .select('id,title,caption,media_url,preview_url,cover_url,created_at,published,owner_id,media_type')
+      .eq('media_type','audio').eq('owner_id',session.user.id)
+      .order('created_at',{ascending:false});
+    if(r.error){alert(r.error.message||'Unable to load Soundroom.');return}
+    const tracks=r.data||[];
+    open(`<div class="feature-modal soundroom-modal-premium soundroom-manager-final">
+      <div class="feature-modal-head">
+        <div><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Soundroom Studio</h2><p>Upload, preview, publish and manage your story soundtracks.</p></div>
+        <button class="close" id="sr-manager-close-final" type="button">×</button>
+      </div>
+      <div class="soundroom-toolbar-premium">
+        <div class="soundroom-search-wrap"><span>⌕</span><input id="sr-manager-search-final" type="search" placeholder="Search songs, titles, captions…" autocomplete="off"></div>
+        <button class="btn" id="sr-upload-new-final" type="button">+ UPLOAD MUSIC</button>
+      </div>
+      <div class="feature-modal-scroll soundroom-scroll-premium">
+        <div id="sr-manager-grid-final" class="soundroom-track-grid">
+          ${tracks.length?tracks.map(t=>`<article class="soundtrack-card-premium sr-manager-card" data-search="${srEsc(`${t.title||''} ${t.caption||''}`).toLowerCase()}">
+            <div class="soundtrack-art-wrap"><div class="soundtrack-art">${t.cover_url?`<img src="${srEsc(t.cover_url)}" alt="${srEsc(t.title||'Soundtrack')} cover" loading="lazy">`:'♫'}</div></div>
+            <div class="soundtrack-copy"><div class="soundtrack-kicker">${t.published?'PUBLISHED':'UNPUBLISHED'}</div><h3>${srEsc(t.title||'Untitled soundtrack')}</h3><p>${srEsc(t.caption||'Songs behind the stories.')}</p><div class="soundtrack-meta">${srEsc(formatDate(t.created_at))}</div></div>
+            <div class="soundtrack-actions">
+              <button class="btn soundroom-manager-play" data-id="${srEsc(t.id)}" type="button">PLAY</button>
+              ${t.preview_url?`<button class="btn ghost soundroom-preview-btn" data-url="${srEsc(t.preview_url)}" data-title="${srEsc(t.title||'Preview')}" type="button">PREVIEW</button>`:''}
+              <button class="btn ghost soundroom-edit" data-id="${srEsc(t.id)}" type="button">EDIT</button>
+              <button class="btn danger soundroom-delete" data-id="${srEsc(t.id)}" type="button">DELETE</button>
+              <button class="btn ghost soundroom-toggle-published" data-id="${srEsc(t.id)}" data-published="${t.published?'1':'0'}" type="button">${t.published?'UNPUBLISH':'PUBLISH'}</button>
+            </div>
+          </article>`).join(''):'<div class="empty">No music uploaded yet.</div>'}
+        </div>
+      </div>
+    </div>`);
+    document.getElementById('sr-manager-close-final').onclick=close;
+    document.getElementById('sr-upload-new-final').onclick=()=>openSoundroomUpload();
+    const search=document.getElementById('sr-manager-search-final'),grid=document.getElementById('sr-manager-grid-final');
+    search.oninput=()=>{const q=search.value.toLowerCase().trim();grid.querySelectorAll('.sr-manager-card').forEach(c=>c.hidden=!!q&&!c.dataset.search.includes(q))};
+    document.querySelectorAll('.soundroom-manager-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);close()});
+    document.querySelectorAll('.soundroom-preview-btn').forEach(b=>b.onclick=()=>srPreview(b.dataset.url,b.dataset.title));
+    document.querySelectorAll('.soundroom-toggle-published').forEach(b=>b.onclick=()=>toggleSoundroomPublished(b.dataset.id,b.dataset.published!=='1'));
+    document.querySelectorAll('.soundroom-edit').forEach(b=>b.onclick=()=>editSoundroomTrack(b.dataset.id));
+    document.querySelectorAll('.soundroom-delete').forEach(b=>b.onclick=()=>deleteSoundroomTrack(b.dataset.id));
+  };
+
+  function srPreview(url,title){
+    if(!url)return;
+    document.getElementById('avx-sr-preview-player')?.remove();
+    const box=document.createElement('div');box.id='avx-sr-preview-player';box.style.cssText='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:99999;width:min(460px,calc(100vw - 24px));padding:14px 16px;border:1px solid #d9c7ba;border-radius:16px;background:#fffaf5;box-shadow:0 20px 60px rgba(40,25,18,.25);font-family:Arial,sans-serif';
+    box.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px"><strong style="font-size:12px;color:#2b1b16">PREVIEW · ${srEsc(title||'Soundtrack')}</strong><button id="avx-sr-preview-close" type="button" style="border:0;background:none;font-size:20px;cursor:pointer">×</button></div><audio controls autoplay style="width:100%" src="${srEsc(url)}"></audio>`;
+    document.body.appendChild(box);document.getElementById('avx-sr-preview-close').onclick=()=>box.remove();
+  }
+
+  /* Public Soundroom: search + preview-aware cards, while PLAY still uses the existing player. */
+  const originalOpenSoundroomModal=window.openSoundroomModal;
+  window.openSoundroomModal=async function(){
+    const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,preview_url,created_at,cover_url,owner_id,published').eq('media_type','audio').eq('published',true).order('created_at',{ascending:false});
+    const tracks=r.error?[]:(r.data||[]),ownerId=session?.user?.id||null;
+    open(`<div class="feature-modal soundroom-modal-premium"><div class="feature-modal-head"><div class="soundroom-head-copy"><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and revisit the soundtracks of Avanitaxx Stories.</p></div><button class="close" id="soundroom-close-final" type="button">×</button></div><div class="soundroom-toolbar-premium"><div class="soundroom-search-wrap"><span>⌕</span><input id="soundroom-search-final" type="search" placeholder="Search songs, titles, or captions…" autocomplete="off"></div><div class="soundroom-toolbar-note"><span id="soundroom-count-final">${tracks.length}</span> TRACKS</div></div><div class="feature-modal-scroll soundroom-scroll-premium"><div id="soundroom-track-grid-final" class="soundroom-track-grid">${tracks.length?tracks.map(t=>`<article class="soundtrack-card-premium" data-search="${srEsc(`${t.title||''} ${t.caption||''}`).toLowerCase()}"><div class="soundtrack-art-wrap"><div class="soundtrack-art">${t.cover_url?`<img src="${srEsc(t.cover_url)}" alt="${srEsc(t.title||'Soundtrack')} cover" loading="lazy">`:'♫'}</div><button class="soundtrack-play-fab soundroom-modal-play-final" data-id="${srEsc(t.id)}" type="button">▶</button></div><div class="soundtrack-copy"><div class="soundtrack-kicker">AVANITAXX SOUNDROOM</div><h3>${srEsc(t.title||'Untitled soundtrack')}</h3><p>${srEsc(t.caption||'Songs behind the stories.')}</p><div class="soundtrack-meta">${srEsc(formatDate(t.created_at))}</div></div><div class="soundtrack-actions"><button class="btn soundroom-modal-play-final" data-id="${srEsc(t.id)}" type="button">PLAY</button>${t.preview_url?`<button class="btn ghost soundroom-preview-public" data-url="${srEsc(t.preview_url)}" data-title="${srEsc(t.title||'Preview')}" type="button">PREVIEW</button>`:''}${ownerId&&String(t.owner_id)===String(ownerId)?`<button class="btn ghost soundroom-edit" data-id="${srEsc(t.id)}" type="button">EDIT</button><button class="btn danger soundroom-delete" data-id="${srEsc(t.id)}" type="button">DELETE</button><button class="btn ghost soundroom-toggle-published" data-id="${srEsc(t.id)}" data-published="1" type="button">UNPUBLISH</button>`:''}</div><div id="sound-comments-final-${srEsc(t.id)}" class="feature-comments"></div></article>`).join(''):'<div class="empty soundroom-empty">No published soundtrack yet.</div>'}</div></div></div>`);
+    document.getElementById('soundroom-close-final').onclick=close;
+    const search=document.getElementById('soundroom-search-final'),grid=document.getElementById('soundroom-track-grid-final'),count=document.getElementById('soundroom-count-final');
+    search.oninput=()=>{const q=search.value.toLowerCase().trim();let n=0;grid.querySelectorAll('.soundtrack-card-premium').forEach(c=>{const show=!q||c.dataset.search.includes(q);c.hidden=!show;if(show)n++});count.textContent=n};
+    tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-final-${t.id}`,t.owner_id));
+    document.querySelectorAll('.soundroom-modal-play-final').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true);close()});
+    document.querySelectorAll('.soundroom-preview-public').forEach(b=>b.onclick=()=>srPreview(b.dataset.url,b.dataset.title));
+    document.querySelectorAll('.soundroom-edit').forEach(b=>b.onclick=()=>editSoundroomTrack(b.dataset.id));
+    document.querySelectorAll('.soundroom-delete').forEach(b=>b.onclick=()=>deleteSoundroomTrack(b.dataset.id));
+    document.querySelectorAll('.soundroom-toggle-published').forEach(b=>b.onclick=()=>toggleSoundroomPublished(b.dataset.id,false));
+  };
+
+  /* Mobile-friendly final styling. */
+  const css=document.createElement('style');css.textContent=`
+    .soundroom-manager-final .soundroom-toolbar-premium{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:10px 0 14px}
+    .soundroom-manager-final .soundroom-search-wrap{flex:1;min-width:220px}
+    .soundroom-manager-final .soundtrack-actions{display:flex;gap:6px;flex-wrap:wrap}
+    .soundroom-manager-final .soundtrack-actions .btn{min-height:34px}
+    .soundroom-preview-btn,.soundroom-preview-public{border:1px solid #d9c7ba!important;background:#fffaf5!important;color:#392820!important}
+    @media(max-width:700px){.soundroom-manager-final .soundroom-toolbar-premium{align-items:stretch}.soundroom-manager-final .soundroom-search-wrap{min-width:100%}.soundroom-manager-final .soundroom-toolbar-premium>#sr-upload-new-final{width:100%}.soundroom-manager-final .soundtrack-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.soundroom-manager-final .soundtrack-actions .btn{width:100%}}
+  `;document.head.appendChild(css);
 })();
 </script>
 </body>
