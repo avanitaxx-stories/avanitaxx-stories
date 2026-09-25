@@ -5118,10 +5118,41 @@ function soundroomLoadTracks(tracks){soundroomTracks=(tracks||[]).filter(x=>x&&x
 function soundroomSelect(trackId){const i=soundroomTracks.findIndex(x=>x.id===trackId);if(i>=0){soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);const a=document.getElementById('soundroom-audio');a.play().catch(()=>{});}}
 function soundroomBind(){const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');if(!p||!a)return;disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));min.onclick=()=>soundroomSetExpanded(false);play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration}}
 async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
+
+async function editSoundroomTrack(trackId){
+  if(!session?.user?.id)return openAuth('author');
+  const q=await sb.from('owner_timeline_media').select('id,title,caption,cover_url,owner_id').eq('id',trackId).eq('owner_id',session.user.id).maybeSingle();
+  if(q.error||!q.data){alert(q.error?.message||'Music not found.');return}
+  const t=q.data;
+  open(`<div class="modal soundroom-edit-modal"><button class="close" id="sound-edit-close" type="button">×</button><div class="kicker">EDIT PUBLISHED MUSIC</div><h2>Edit your music</h2><p class="meta">Update the title or caption. Your existing audio stays unchanged.</p><label>TITLE</label><input id="sound-edit-title" class="field" value="${esc(t.title||'')}"><label>CAPTION</label><textarea id="sound-edit-caption" class="field">${esc(t.caption||'')}</textarea><div id="sound-edit-status" class="status"></div><button class="btn" id="sound-edit-save" type="button">SAVE CHANGES</button></div>`);
+  document.getElementById('sound-edit-close').onclick=close;
+  document.getElementById('sound-edit-save').onclick=async()=>{
+    const status=document.getElementById('sound-edit-status');
+    try{
+      notice(status,'Saving…',true);
+      const u=await sb.from('owner_timeline_media').update({
+        title:document.getElementById('sound-edit-title').value.trim()||'Untitled soundtrack',
+        caption:document.getElementById('sound-edit-caption').value.trim()||'Songs behind the stories.'
+      }).eq('id',trackId).eq('owner_id',session.user.id);
+      if(u.error)throw u.error;
+      close();await loadSoundroom();openSoundroomModal();
+    }catch(e){notice(status,e.message||String(e))}
+  };
+}
+async function deleteSoundroomTrack(trackId){
+  if(!session?.user?.id)return openAuth('author');
+  const q=await sb.from('owner_timeline_media').select('id,title').eq('id',trackId).eq('owner_id',session.user.id).maybeSingle();
+  if(q.error||!q.data){alert(q.error?.message||'Music not found.');return}
+  if(!confirm(`Delete "${q.data.title||'this music'}"? This will remove it from the published Soundroom.`))return;
+  const d=await sb.from('owner_timeline_media').delete().eq('id',trackId).eq('owner_id',session.user.id);
+  if(d.error){alert(d.error.message||'Unable to delete music.');return}
+  await loadSoundroom();
+  openSoundroomModal();
+}
 async function openSoundroomModal(){
   const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(20);const tracks=r.error?[]:(r.data||[]);
-  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music is optimized in your browser when supported. Add a square cover so the track keeps its correct artwork.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}">PLAY</button></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
-  document.getElementById('soundroom-close').onclick=close;document.getElementById('sound-upload-btn')?.addEventListener('click',uploadSoundroomTrack);tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});
+  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music is optimized in your browser when supported. Add a square cover so the track keeps its correct artwork.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><div class="soundroom-track-actions"><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}" type="button">PLAY</button>${session?.user?.id&&String(t.owner_id)===String(session.user.id)?`<button class="btn ghost soundroom-edit" data-id="${esc(t.id)}" type="button">EDIT</button><button class="btn danger soundroom-delete" data-id="${esc(t.id)}" type="button">DELETE</button>`:''}</div></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
+  document.getElementById('soundroom-close').onclick=close;document.getElementById('sound-upload-btn')?.addEventListener('click',uploadSoundroomTrack);tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});document.querySelectorAll('.soundroom-edit').forEach(b=>b.onclick=()=>editSoundroomTrack(b.dataset.id));document.querySelectorAll('.soundroom-delete').forEach(b=>b.onclick=()=>deleteSoundroomTrack(b.dataset.id));
 }
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
 async function getAuthorTimelineProfile(userId){
@@ -6771,5 +6802,86 @@ const st=document.createElement('style');st.textContent=`
 /* Keep action/status label backgrounds exactly as they are: no background declarations here. */
 </style>
 
+
+<style id="avx-published-music-and-chapter-polish">
+/* Published Music — Play / Edit / Delete */
+.soundroom-track-actions{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap;margin-left:auto}
+.soundroom-track-actions .btn{min-height:34px;padding:8px 12px;border-radius:10px;font-size:8px;letter-spacing:.08em}
+.soundroom-track-actions .soundroom-delete{background:#9b3d38;color:#fff}
+.soundroom-track-actions .soundroom-edit{background:#fffdf9;color:#392820;border:1px solid #dfd0c5}
+.soundroom-edit-modal{width:min(520px,100%)}
+.soundroom-edit-modal h2{font:400 32px Georgia,serif;color:#2b1b16}
+.soundroom-edit-modal .meta{line-height:1.6}
+
+/* Chapter Live poster — light, cute coffee editorial style */
+.avx-live-modal{
+  position:relative;overflow:hidden;width:min(455px,100%);
+  background:linear-gradient(145deg,#fffaf4 0%,#f7eadf 100%);
+  border:1px solid rgba(120,82,60,.16);border-radius:28px;padding:30px 28px 25px;
+  box-shadow:0 30px 90px rgba(55,35,27,.28);text-align:center;color:#3a2922;
+}
+.avx-live-modal::before{
+  content:"☕";position:absolute;right:18px;top:8px;font-size:48px;opacity:.10;transform:rotate(8deg);
+}
+.avx-live-modal::after{
+  content:"";position:absolute;left:-34px;bottom:-45px;width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,#e7cbb9 0 45%,transparent 46%);opacity:.32;
+}
+.avx-live-kicker{font:900 8px/1 Arial,sans-serif;letter-spacing:.20em;color:#9b7058;text-transform:uppercase}
+.avx-live-cover{
+  width:108px;height:162px;object-fit:contain;object-position:center;background:#eadfd7;
+  border-radius:9px;margin:13px auto 14px;display:block;border:1px solid rgba(116,78,58,.16);
+  box-shadow:0 12px 25px rgba(75,48,35,.16);
+}
+.avx-live-cover-fallback{
+  width:108px;height:162px;border-radius:9px;margin:13px auto 14px;display:grid;place-items:center;padding:12px;
+  background:#eadfd7;color:#5c4032;font:18px Georgia,serif;box-shadow:0 12px 25px rgba(75,48,35,.12);
+}
+.avx-live-title{
+  font:400 27px/1.12 Georgia,serif;color:#38251e;margin:5px auto 3px;max-width:330px;
+}
+.avx-live-chapter{
+  display:inline-block;margin:7px 0 8px;padding:6px 10px;border-radius:999px;
+  background:#f1ddd2;color:#79533f;font:900 8px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase;
+}
+.avx-live-message{
+  margin:5px 0 18px;color:#5e463a;font:italic 22px/1.25 Georgia,serif;
+}
+.avx-live-message::first-letter{}
+.avx-live-done{
+  position:relative;z-index:2;min-width:118px;border:0;border-radius:999px;padding:11px 23px;
+  background:#4a3025;color:#fffaf5;font:900 9px Arial,sans-serif;letter-spacing:.12em;cursor:pointer;
+  box-shadow:0 8px 18px rgba(74,48,37,.16);transition:.18s transform,.18s box-shadow;
+}
+.avx-live-done:hover{transform:translateY(-1px);box-shadow:0 11px 23px rgba(74,48,37,.22)}
+@media(max-width:620px){
+ .soundroom-track-actions{grid-column:1/-1;justify-content:flex-start;margin-left:0;margin-top:4px}
+}
+</style>
+<script id="avx-published-music-and-chapter-polish-js">
+/* Keep the chapter confirmation cover lightweight: use the already-optimized published cover URL,
+   never create another upload just for the popup. */
+(function(){
+  const originalLive=window.avxShowChapterLive;
+  if(typeof originalLive!=='function')return;
+  window.avxShowChapterLive=function(story,chapterNumber){
+    originalLive(story,chapterNumber);
+    const modal=document.querySelector('.avx-live-modal');
+    const done=document.getElementById('avx-live-done');
+    if(modal){
+      const old=modal.querySelector('.avx-coffee-mark');
+      if(!old){
+        const mark=document.createElement('div');
+        mark.className='avx-coffee-mark';
+        mark.setAttribute('aria-hidden','true');
+        mark.textContent='☕';
+        mark.style.cssText='position:absolute;left:20px;top:13px;font-size:27px;opacity:.28;transform:rotate(-8deg);pointer-events:none';
+        modal.appendChild(mark);
+      }
+    }
+    if(done)done.onclick=close;
+  };
+})();
+</script>
 </body>
 </html>
