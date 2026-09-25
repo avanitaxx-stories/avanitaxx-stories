@@ -785,7 +785,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .feature-modal .story-list{margin:0 auto;gap:16px;max-width:760px}.feature-note-card{display:block;padding:0!important;border-radius:20px!important;overflow:hidden;background:rgba(255,253,249,.98);border:1px solid rgba(74,48,37,.11);box-shadow:0 12px 34px rgba(55,35,27,.07)}.feature-note-card .owner-icon{display:none}.feature-note-card .owner-card-body{padding:18px 20px}.feature-note-card strong{display:block;font:400 23px/1.2 Georgia,serif;color:var(--brown);margin-bottom:10px}.feature-note-image{display:block;width:min(100%,430px);max-width:100%;height:auto;max-height:270px;object-fit:contain;margin:14px auto 8px;border-radius:13px;background:#f3e8e1;box-shadow:0 8px 22px rgba(55,35,27,.07);cursor:zoom-in}.feature-note-image:hover{filter:brightness(.98)}.feature-note-card .feature-comments{margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}.feature-note-card .owner-small{font-size:10px;letter-spacing:.03em}.feature-note-card .note-quote{margin-top:12px;padding:12px 14px;border-left:2px solid var(--pink);border-radius:0 10px 10px 0;background:#fbf4f1;color:#654d41;font:italic 15px/1.65 Georgia,serif}.feature-note-card .note-caption{margin-top:8px;white-space:pre-wrap;line-height:1.75;color:var(--muted);font-size:14px}.note-image-viewer{position:fixed;inset:0;z-index:10050;background:rgba(35,23,18,.86);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}.note-image-viewer.open{display:flex}.note-image-viewer img{max-width:min(900px,94vw);max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,.35)}.note-image-viewer button{position:absolute;right:22px;top:15px;border:0;background:rgba(255,253,249,.9);color:var(--brown);width:42px;height:42px;border-radius:50%;font-size:25px;cursor:pointer}
 .feature-cover-art{width:100%;aspect-ratio:1/1;max-height:none;object-fit:cover;border-radius:15px;display:block;background:#f3e8e1}
 .feature-track-card{display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px;border-radius:18px;background:#fffdf8;border:1px solid var(--line)}
-.feature-track-card .track-cover{width:86px;height:86px;border-radius:14px;object-fit:cover;background:#eadfd8;display:grid;place-items:center;font-size:24px}
+.feature-track-card .track-cover{width:86px;height:86px;border-radius:14px;object-fit:contain;background:#eadfd8;display:grid;place-items:center;font-size:24px;overflow:hidden}.feature-track-card .track-cover img{object-fit:contain!important;background:#eadfd8}
 .feature-track-card .track-main{min-width:0}.feature-track-card .track-title{font:400 18px/1.25 Georgia,serif;color:var(--brown)}.feature-track-card .track-caption{font-size:11px;color:var(--muted);line-height:1.5;margin-top:5px}
 .feature-modal .feature-comments{margin-top:14px;padding-top:14px}
 .feature-modal .owner-chat{max-height:none!important;overflow:visible!important;margin-top:0;padding:14px;border-radius:18px}
@@ -3761,6 +3761,17 @@ footer::before{color:rgba(43,27,22,.045)!important}
 })();
 </script>
 
+
+<style id="avx-final-requested-fixes">
+/* Final requested accessibility, interaction and mobile header pass. */
+.reader-page-content,.reader-page-content p,.reader-page-content div,.reader-page-content span,.reader-page-content strong,.reader-page-content em,.reader-page-content b,.reader-page-content i,.reader-page-content u,.reader-page-content h1,.reader-page-content h2,.reader-page-content h3,.reader-page-content h4,.reader-page-content h5,.reader-page-content h6,.reader-page-content blockquote,
+.chapter-content,.chapter-content p,.chapter-content div,.chapter-content span,.chapter-content strong,.chapter-content em,.chapter-content b,.reading-pane,.reading-pane p,.reading-pane div,.reading-pane span{color:#261915!important;text-shadow:none!important}
+.reader.dark-mode .reader-page-content,.reader.dark-mode .reader-page-content p,.reader.dark-mode .reader-page-content div,.reader.dark-mode .reader-page-content span,.reader.dark-mode .reader-page-content strong,.reader.dark-mode .reader-page-content em,.reader.dark-mode .reader-page-content b,.reader.dark-mode .reader-page-content i,.reader.dark-mode .reader-page-content h1,.reader.dark-mode .reader-page-content h2,.reader.dark-mode .reader-page-content h3,.reader.dark-mode .reader-page-content blockquote{color:#fff8f1!important}
+.home-community-card strong,.home-community-card>span:not(.home-community-icon)>span,.feature-comment,.feature-comment-text,.feature-comment-name,.feature-comment-time,.feature-comment-actions,.feature-comment-form,.author-social-shell,.owner-small,.rank-info,.rank-desc,.rank-author,.rank-story-title,.rank-reads{color:#2b1b16!important}
+.feature-comment-actions{display:flex;gap:10px;align-items:center;margin-top:7px}.feature-comment-reactions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.fc-react{border:1px solid #d9c5b6;background:#fffaf5;color:#3b281f;border-radius:999px;padding:5px 8px;font-size:10px;cursor:pointer}.fc-react.active{background:#ead2ca;border-color:#b98979}.fc-react span{font-weight:900}.feature-comment.reply{margin-top:8px}.feature-comment .reply-list{margin-top:10px}.feature-comment-form{margin-top:12px}.soundroom-upload-card{margin:0 0 18px;padding:16px;border:1px solid #d9c5b6;border-radius:16px;background:#fffaf5}.soundroom-upload-card h3{margin:5px 0;color:#2b1b16}.soundroom-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.soundroom-upload-card .btn{margin-top:12px}.all-stories-modal{width:min(1040px,100%);max-height:94vh;overflow:auto}.all-stories-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}.all-stories-grid .story-card{min-width:0}.toffee-view-all{position:relative;z-index:20!important;pointer-events:auto!important;cursor:pointer!important}.genre-library-actions{display:flex;align-items:center;gap:16px}.reader-chapter-list-wrap{margin-top:12px}.reader-chapter-list-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--reader-line,#eaded2);background:var(--reader-control,#fff);color:var(--reader-ink,#4a3025);border-radius:12px;padding:10px 13px;font-size:10px;font-weight:900;letter-spacing:.08em;cursor:pointer}.reader-chapter-list-toggle span{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:999px;background:#f0dcd9}.reader-chapter-list{display:grid;gap:6px;margin-top:8px;padding:8px;border:1px solid var(--reader-line,#eaded2);border-radius:14px;background:var(--reader-control,#fff)}.reader-chapter-item{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:9px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;color:var(--reader-ink,#4a3025);border-radius:9px;padding:9px;cursor:pointer}.reader-chapter-item:hover{background:#f5e7df}.reader-chapter-item.active{background:#efe0d1;border-color:#d9c0ad}.reader-chapter-item>span:first-child{font-weight:900;color:var(--toffee)}.reader-chapter-item b{font-size:7px;letter-spacing:.1em;color:#7a513b}.header-mobile-ranking{display:none;border:1px solid #d9c4b4;background:#fffaf6;color:#2b1b16;border-radius:9px;min-height:40px;padding:0 10px;align-items:center;justify-content:center;gap:4px;font-size:9px;font-weight:900;letter-spacing:.06em;cursor:pointer;white-space:nowrap}
+@media(max-width:700px){.header-mobile-ranking{display:inline-flex}.site-header .navlinks{display:none!important}.nav-actions{margin-left:auto}.soundroom-upload-grid{grid-template-columns:1fr}.all-stories-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.genre-library-actions{width:100%;justify-content:space-between;flex-wrap:wrap}.reader-chapter-item{grid-template-columns:24px minmax(0,1fr) auto}}
+@media(max-width:380px){.header-mobile-ranking{padding:0 7px;font-size:8px}.header-mobile-ranking span:last-child{display:none}.all-stories-grid{gap:9px}}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -3794,6 +3805,7 @@ footer::before{color:rgba(43,27,22,.045)!important}
         <button id="menu-logout" type="button">🚪 SIGN OUT</button>
       </div>
     </div>
+    <button id="mobile-ranking-btn" class="header-mobile-ranking" type="button" aria-label="Open Story Ranking"><span class="nav-glyph">♛</span><span>Ranking</span></button>
     <button id="reader-btn" class="btn alt" type="button">SIGN IN</button>
   </div>
 </div><div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div></header>
@@ -3850,20 +3862,20 @@ footer::before{color:rgba(43,27,22,.045)!important}
       <section class="toffee-panel toffee-featured-panel" id="featured-books">
         <div class="toffee-section-head">
           <div><h2>Featured Stories</h2><div class="toffee-heading-rule"></div></div>
-          <a class="toffee-view-all" href="#recent">View all <span>›</span></a>
+          <a class="toffee-view-all" href="#featured-books" data-view-all="featured">View all <span>›</span></a>
         </div>
         <div id="recommend-books" class="cards toffee-story-grid"><div class="empty">Loading published stories…</div></div>
       </section>
       <section class="legacy-home-section section genre-library" id="recent">
         <div class="container">
-          <div class="genre-library-head"><div><div class="kicker">Published Books</div><h2>Explore by Genre</h2><p>Find your next story by the world you want to enter.</p></div><div class="genre-hint">SWIPE TO EXPLORE <span>→</span></div></div>
+          <div class="genre-library-head"><div><div class="kicker">Published Books</div><h2>Explore by Genre</h2><p>Find your next story by the world you want to enter.</p></div><div class="genre-library-actions"><div class="genre-hint">SWIPE TO EXPLORE <span>→</span></div><a class="toffee-view-all" href="#recent" data-view-all="genres">View all <span>›</span></a></div></div>
           <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
         </div>
       </section>
       <section class="toffee-panel toffee-latest-panel" id="home-latest">
         <div class="toffee-section-head">
           <div><h2>Latest Updates</h2><div class="toffee-heading-rule"></div></div>
-          <a class="toffee-view-all" href="#recent">View all <span>›</span></a>
+          <a class="toffee-view-all" href="#home-latest" data-view-all="latest">View all <span>›</span></a>
         </div>
         <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
       </section>
@@ -3885,7 +3897,7 @@ footer::before{color:rgba(43,27,22,.045)!important}
             <span><strong>Notes</strong><span>Updates and author notes</span></span>
           </button>
           <button class="home-community-card" id="home-chat-btn" type="button">
-            <span class="home-community-icon" aria-hidden="true">♧</span>
+            <span class="home-community-icon" aria-hidden="true">💬</span>
             <span><strong>Community Chat</strong><span>Talk with readers and authors</span></span>
           </button>
           <button class="home-community-card" id="home-sound-btn" type="button">
@@ -4680,6 +4692,7 @@ function renderReader(restoreScroll=true){
       <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · READING MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div>${currentStory.series_name?`<div class="story-series-badge" style="margin-top:8px"><b>SERIES</b><span class="series-sep">•</span><span>${Number(currentStory.series_book_number)>0?`BOOK ${Number(currentStory.series_book_number)}`:'SERIES STORY'}</span></div>`:''}</div>
       <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
       <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
+      <div class="reader-chapter-list-wrap"><button type="button" class="reader-chapter-list-toggle" id="reader-chapter-list-toggle" aria-expanded="false">☰ CHAPTER LIST <span>${currentStory.chapters.length}</span></button><div id="reader-chapter-list" class="reader-chapter-list" hidden>${currentStory.chapters.map((ch,i)=>`<button type="button" class="reader-chapter-item ${i===currentChapter?'active':''}" data-chapter-index="${i}"><span>${i+1}</span><span>${esc(ch.title||('Chapter '+(i+1)))}</span>${i===currentChapter?'<b>READING</b>':''}</button>`).join('')}</div></div>
     </div>
     <main class="reader-scroll" id="reader-scroll">
       <article class="reader-scroll-page">
@@ -4720,6 +4733,7 @@ function renderReader(restoreScroll=true){
   document.getElementById('prev-ch').onclick=async()=>{saveReaderProgress();if(currentChapter>0){currentChapter--;await recordChapterView(currentStory.id,currentStory.chapters[currentChapter]?.id);renderReader(true)}};
   document.getElementById('next-ch').onclick=async()=>{saveReaderProgress();if(currentChapter<currentStory.chapters.length-1){currentChapter++;await recordChapterView(currentStory.id,currentStory.chapters[currentChapter]?.id);renderReader(true)}};
   document.getElementById('next-chapter-bottom')?.addEventListener('click',async()=>{saveReaderProgress();if(currentChapter<currentStory.chapters.length-1){currentChapter++;await recordChapterView(currentStory.id,currentStory.chapters[currentChapter]?.id);renderReader(false)}});
+  document.getElementById('reader-chapter-list-toggle')?.addEventListener('click',()=>{const list=document.getElementById('reader-chapter-list'),btn=document.getElementById('reader-chapter-list-toggle');if(!list||!btn)return;const open=list.hidden;list.hidden=!open;btn.setAttribute('aria-expanded',String(open));});root.querySelectorAll('.reader-chapter-item').forEach(b=>b.onclick=async()=>{const i=Number(b.dataset.chapterIndex);if(!Number.isFinite(i)||i===currentChapter)return;saveReaderProgress();currentChapter=i;await recordChapterView(currentStory.id,currentStory.chapters[currentChapter]?.id);renderReader(false)});
 
   const pc=root.querySelector('#reader-page-content');
   if(pc){
@@ -5053,14 +5067,78 @@ async function renderFeatureComments(type,id,boxId,ownerId){
   const r=await getFeatureComments(type,id);if(r.error){box.innerHTML='<div class="meta">Comments are unavailable until the feature comments table is enabled.</div>';return}
   const rows=r.data||[];let pmap={};const ids=[...new Set(rows.map(x=>x.user_id))];if(ids.length){const pr=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',ids);(pr.data||[]).forEach(p=>pmap[p.id]=p)}
   const avatar=p=>p?.avatar_url?`<img class="feature-comment-avatar" src="${esc(p.avatar_url)}" alt="">`:`<div class="feature-comment-avatar">${esc((p?.pen_name||p?.display_name||'R').slice(0,1).toUpperCase())}</div>`;
-  const one=(c,reply=false)=>{const p=pmap[c.user_id]||{},can=session&&(session.user.id===c.user_id||session.user.id===ownerId),rid=`fc-reply-${c.id}`;return `<div class="feature-comment ${reply?'reply':''}">${avatar(p)}<div class="feature-comment-body"><div class="feature-comment-head"><span class="feature-comment-name">${esc(p.pen_name||p.display_name||'Reader')}</span><span class="feature-comment-time">${esc(formatDate(c.created_at))}</span>${can?`<button class="tool fc-delete" data-id="${esc(c.id)}" style="margin-left:auto;padding:2px 6px">Delete</button>`:''}</div><div class="feature-comment-text">${esc(c.body||'')}</div>${!reply?`<div class="feature-comment-actions"><button class="fc-reply" data-target="${rid}">↩ REPLY</button></div><div id="${rid}" class="reply-box hidden"><div class="feature-comment-form"><textarea id="fc-text-${c.id}" class="field" placeholder="Write a reply…"></textarea><button class="btn fc-send-reply" data-parent="${c.id}" data-input="fc-text-${c.id}">REPLY</button></div></div>`:''}</div></div>`};
-  const top=rows.filter(x=>!x.parent_id),replies={};rows.filter(x=>x.parent_id).forEach(x=>(replies[x.parent_id]||(replies[x.parent_id]=[])).push(x));
-  const body=top.slice().reverse().map(c=>`${one(c)}${(replies[c.id]||[]).map(x=>one(x,true)).join('')?`<div class="reply-list">${(replies[c.id]||[]).map(x=>one(x,true)).join('')}</div>`:''}`).join('');
+  const reactionKey=c=>`avx_feature_comment_reactions_${type}_${id}_${c.id}`;
+  const readLocalReactions=c=>{try{return JSON.parse(localStorage.getItem(reactionKey(c))||'{}')}catch{return {}}};
+  const reactionMap={};
+  let reactionRemote=false;
+  try{
+    const rq=await sb.from('feature_comment_reactions').select('comment_id,user_id,reaction').in('comment_id',rows.map(x=>x.id));
+    if(!rq.error){reactionRemote=true;(rq.data||[]).forEach(x=>{(reactionMap[x.comment_id]||(reactionMap[x.comment_id]=[])).push(x)})}
+  }catch{}
+  const getReactionState=c=>{
+    if(reactionRemote){const rr=reactionMap[c.id]||[],counts={};rr.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);return {counts,mine:session?rr.find(x=>x.user_id===session.user.id)?.reaction:null,remote:true};}
+    const local=readLocalReactions(c);const counts={};Object.values(local).forEach(x=>counts[x]=(counts[x]||0)+1);return {counts,mine:session?local[session.user.id]:null,remote:false};
+  };
+  const reactionHtml=(c,st)=>{const types=[['❤️','Love'],['👍','Like'],['👏','Applause']];return `<div class="feature-comment-reactions">${types.map(([emoji,label])=>`<button type="button" class="fc-react ${st.mine===emoji?'active':''}" data-comment-id="${esc(c.id)}" data-reaction="${emoji}" title="${label}">${emoji}${st.counts[emoji]?` <span>${st.counts[emoji]}</span>`:''}</button>`).join('')}</div>`};
+  const children={};rows.forEach(x=>{if(x.parent_id)(children[x.parent_id]||(children[x.parent_id]=[])).push(x)});
+  const states={};for(const c of rows)states[c.id]=getReactionState(c);
+  const one=async(c,depth=0)=>{
+    const p=pmap[c.user_id]||{},can=session&&(session.user.id===c.user_id||session.user.id===ownerId),rid=`fc-reply-${c.id}`;
+    const kids=children[c.id]||[];
+    return `<div class="feature-comment ${depth?'reply':''}" data-comment-id="${esc(c.id)}">${avatar(p)}<div class="feature-comment-body"><div class="feature-comment-head"><span class="feature-comment-name">${esc(p.pen_name||p.display_name||'Reader')}</span><span class="feature-comment-time">${esc(formatDate(c.created_at))}</span>${can?`<button class="tool fc-delete" data-id="${esc(c.id)}" style="margin-left:auto;padding:2px 6px">Delete</button>`:''}</div><div class="feature-comment-text">${esc(c.body||'')}</div>${reactionHtml(c,states[c.id]||{counts:{},mine:null})}<div class="feature-comment-actions"><button class="fc-reply" data-target="${rid}">↩ REPLY</button></div><div id="${rid}" class="reply-box hidden"><div class="feature-comment-form"><textarea id="fc-text-${c.id}" class="field" placeholder="Write a reply…"></textarea><button class="btn fc-send-reply" data-parent="${esc(c.id)}" data-input="fc-text-${c.id}">REPLY</button></div></div>${kids.length?`<div class="reply-list">${kids.map(x=>`<!--FC_CHILD:${x.id}-->`).join('')}</div>`:''}</div></div>`;
+  };
+  let body='';
+  const top=rows.filter(x=>!x.parent_id).slice().reverse();
+  for(const c of top){
+    let html=await one(c,0);
+    const marker=`<!--FC_CHILD:${(children[c.id]||[])[0]?.id}-->`;
+    if((children[c.id]||[]).length){const childHtml=(await Promise.all(children[c.id].map(x=>one(x,1)))).join('');html=html.replace(`<div class="reply-list">${(children[c.id]||[]).map(x=>`<!--FC_CHILD:${x.id}-->`).join('')}</div>`, `<div class="reply-list">${childHtml}</div>`)}
+    body+=html;
+  }
   box.innerHTML=`${body||'<div class="meta">No comments yet. Be the first to share your thoughts.</div>'}${session?`<div class="feature-comment-form"><textarea id="fc-new-${id}" class="field" placeholder="Write a comment…"></textarea><button class="btn fc-send" data-type="${type}" data-id="${id}" data-owner="${ownerId||''}">COMMENT</button></div>`:`<div class="help" style="margin-top:10px">Sign in to comment or reply.</div>`}`;
   box.querySelectorAll('.fc-reply').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.target)?.classList.toggle('hidden'));
   box.querySelectorAll('.fc-send').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(`fc-new-${id}`),body=input.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:null});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
   box.querySelectorAll('.fc-send-reply').forEach(b=>b.onclick=async()=>{if(!session){openAuth('reader');return}const input=document.getElementById(b.dataset.input),body=input.value.trim();if(!body)return;const q=await sb.from('feature_comments').insert({content_type:type,content_id:id,user_id:session.user.id,body,parent_id:b.dataset.parent});if(q.error){alert(q.error.message);return}renderFeatureComments(type,id,boxId,ownerId)});
+  box.querySelectorAll('.fc-react').forEach(b=>b.onclick=async()=>{
+    if(!session){openAuth('reader');return}
+    const commentId=b.dataset.commentId,reaction=b.dataset.reaction;
+    try{
+      const existing=await sb.from('feature_comment_reactions').select('id,reaction').eq('comment_id',commentId).eq('user_id',session.user.id).maybeSingle();
+      if(!existing.error){
+        if(existing.data?.reaction===reaction)await sb.from('feature_comment_reactions').delete().eq('id',existing.data.id);
+        else await sb.from('feature_comment_reactions').upsert({comment_id:commentId,user_id:session.user.id,reaction},{onConflict:'comment_id,user_id'});
+        return renderFeatureComments(type,id,boxId,ownerId);
+      }
+    }catch{}
+    const c=rows.find(x=>String(x.id)===String(commentId));if(!c)return;
+    const local=readLocalReactions(c);if(local[session.user.id]===reaction)delete local[session.user.id];else local[session.user.id]=reaction;try{localStorage.setItem(reactionKey(c),JSON.stringify(local))}catch{};renderFeatureComments(type,id,boxId,ownerId);
+  });
   box.querySelectorAll('.fc-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this comment?'))return;const q=await sb.from('feature_comments').delete().eq('id',b.dataset.id);if(q.error)alert(q.error.message);else renderFeatureComments(type,id,boxId,ownerId)});
+}
+
+async function optimizeAudioFile(file){
+  if(!file||!file.type.startsWith('audio/'))return file;
+  // Re-encode in-browser to Opus when MediaRecorder supports it. This reduces storage
+  // while preserving a browser-playable track. If unsupported, safely keep the original.
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;if(!AC||!window.MediaRecorder)return file;
+    const ctx=new AC();const sourceBuffer=await ctx.decodeAudioData(await file.arrayBuffer());
+    const sampleRate=Math.min(44100,sourceBuffer.sampleRate||44100),offline=new OfflineAudioContext(1,Math.ceil(sourceBuffer.duration*sampleRate),sampleRate);
+    const src=offline.createBufferSource();src.buffer=sourceBuffer;const gain=offline.createGain();gain.gain.value=1;src.connect(gain).connect(offline.destination);src.start();const rendered=await offline.startRendering();
+    const streamDest=ctx.createMediaStreamDestination();const liveSrc=ctx.createBufferSource();liveSrc.buffer=rendered;liveSrc.connect(streamDest);const mime=['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/webm'].find(x=>MediaRecorder.isTypeSupported(x));if(!mime){ctx.close();return file;}
+    const chunks=[];const rec=new MediaRecorder(streamDest.stream,{mimeType:mime,audioBitsPerSecond:96000});const done=new Promise((resolve,reject)=>{rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onerror=()=>reject(rec.error||new Error('Audio encoding failed.'));rec.onstop=resolve});rec.start();liveSrc.start();liveSrc.onended=()=>rec.stop();await done;ctx.close();const blob=new Blob(chunks,{type:mime});if(!blob.size||blob.size>=file.size*.98)return file;const ext=mime.includes('ogg')?'ogg':'webm';return new File([blob],(file.name||'soundtrack').replace(/\.[^.]+$/,'')+'.'+ext,{type:mime});
+  }catch(e){console.warn('Audio optimization skipped:',e);return file}
+}
+async function uploadSoundroomTrack(){
+  if(!session){openAuth('author');return}
+  const input=document.getElementById('sound-upload-file'),coverInput=document.getElementById('sound-upload-cover'),status=document.getElementById('sound-upload-status');const file=input?.files?.[0];if(!file){notice(status,'Choose a music/audio file first.');return}
+  try{
+    notice(status,'Optimizing music and cover…',true);const audio=await optimizeAudioFile(file);const coverFile=coverInput?.files?.[0];const cover=coverFile?await optimizeImageFile(coverFile,900,.78):null;
+    const ext=(audio.name.split('.').pop()||'webm').toLowerCase();const audioPath=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const au=await sb.storage.from('owner-media').upload(audioPath,audio,{upsert:false,contentType:audio.type||'audio/webm',cacheControl:'31536000'});if(au.error)throw au.error;const mediaUrl=sb.storage.from('owner-media').getPublicUrl(audioPath).data.publicUrl;
+    let coverUrl=null;if(cover){const cp=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}-cover.webp`;const cu=await sb.storage.from('owner-media').upload(cp,cover,{upsert:false,contentType:'image/webp',cacheControl:'31536000'});if(cu.error)throw cu.error;coverUrl=sb.storage.from('owner-media').getPublicUrl(cp).data.publicUrl}
+    const q=await sb.from('owner_timeline_media').insert({owner_id:session.user.id,media_type:'audio',title:(document.getElementById('sound-upload-title')?.value||file.name.replace(/\.[^.]+$/,'')).trim()||'Untitled soundtrack',caption:(document.getElementById('sound-upload-caption')?.value||'Songs behind the stories.').trim(),media_url:mediaUrl,cover_url:coverUrl,published:true});if(q.error)throw q.error;
+    notice(status,'Music uploaded successfully.',true);await loadSoundroom();setTimeout(openSoundroomModal,450);
+  }catch(e){notice(status,'Upload failed: '+(e.message||String(e)))}
 }
 let soundroomTracks=[];let soundroomIndex=0;
 function soundroomTime(sec){if(!isFinite(sec)||sec<0)return '0:00';const m=Math.floor(sec/60),ss=Math.floor(sec%60).toString().padStart(2,'0');return `${m}:${ss}`}
@@ -5072,8 +5150,8 @@ function soundroomBind(){const p=document.getElementById('soundroom-player'),dis
 async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
 async function openSoundroomModal(){
   const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(20);const tracks=r.error?[]:(r.data||[]);
-  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}">PLAY</button></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
-  document.getElementById('soundroom-close').onclick=close;tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});
+  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music is optimized in your browser when supported. Add a square cover so the track keeps its correct artwork.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}">PLAY</button></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
+  document.getElementById('soundroom-close').onclick=close;document.getElementById('sound-upload-btn')?.addEventListener('click',uploadSoundroomTrack);tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});
 }
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
 async function getAuthorTimelineProfile(userId){
@@ -5804,6 +5882,18 @@ async function openGlobalSearch(rawQuery){
   }
 }
 
+async function openAllStories(type='featured'){
+  try{
+    const stories=await getPublished();
+    const sorted=(stories||[]).slice().sort((a,b)=>{
+      if(type==='latest')return Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0);
+      return Number(b.views||0)-Number(a.views||0);
+    });
+    const title=type==='latest'?'Latest Uploads':'Featured Stories';
+    open(`<div class="modal all-stories-modal"><button class="close" id="all-stories-close">×</button><div class="kicker">AVANITAXX STORIES</div><h2>${title}</h2><p class="meta">${type==='latest'?'Browse the newest published updates.':'Browse all published stories, with the most-read stories shown first.'}</p><div class="all-stories-grid">${sorted.length?sorted.map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`)).join(''):'<div class="empty">No published stories yet.</div>'}</div></div>`,'all-stories-overlay');
+    document.getElementById('all-stories-close')?.addEventListener('click',close);bindStoryCards();
+  }catch(e){alert('Could not load stories right now.');console.error(e)}
+}
 function bindToffeeHome(){
   document.getElementById('home-about-author')?.addEventListener('click',()=>{
     const featured=document.getElementById('featured-author-open');
@@ -5816,6 +5906,7 @@ function bindToffeeHome(){
   document.getElementById('quick-popular')?.addEventListener('click',()=>document.getElementById('featured-books')?.scrollIntoView({behavior:'smooth'}));
   document.getElementById('quick-latest')?.addEventListener('click',()=>document.getElementById('home-latest')?.scrollIntoView({behavior:'smooth'}));
   document.getElementById('quick-favorites')?.addEventListener('click',()=>session?showAccount():openAuth('reader'));
+  document.querySelectorAll('.toffee-view-all[data-view-all]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const type=a.dataset.viewAll;if(type==='genres'){document.getElementById('recent')?.scrollIntoView({behavior:'smooth',block:'start'});return}openAllStories(type)}));
 }
 function bindStatic(){
   const byId=id=>document.getElementById(id);
@@ -5845,7 +5936,7 @@ function bindStatic(){
   byId('menu-notifications')?.addEventListener('click',()=>{menu?.classList.add('hidden');openNotifications()});
   byId('menu-logout')?.addEventListener('click',()=>{menu?.classList.add('hidden');logout()});
   byId('nav-author-hub-btn')?.addEventListener('click',()=>{ if(session) openAuthorHome(); else openAuth('author'); });
-  byId('nav-ranking-btn')?.addEventListener('click',openRanking);
+  byId('nav-ranking-btn')?.addEventListener('click',openRanking);byId('mobile-ranking-btn')?.addEventListener('click',openRanking);
 
   async function openRanking(){
     const overlay=document.getElementById('overlay');
