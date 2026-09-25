@@ -3485,6 +3485,140 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
 }
 </style>
 
+
+<style id="avx-reference-layout-final">
+/* =========================================================
+   AVANITAXX STORIES — REFERENCE LAYOUT / FINAL PASS
+   No phone mockup. Fluid desktop/tablet/phone sizing.
+   ========================================================= */
+:root{--avx-deep:#2b1710;--avx-espresso:#4a281b;--avx-coffee:#8a5638;--avx-gold:#c99667;--avx-cream:#fffaf4;--avx-paper:#f7efe7;--avx-line:#e6d5c7}
+html{scroll-behavior:smooth}
+body{background:#f8f1ea!important;color:var(--avx-deep)!important}
+/* Header: readable, warm, compact and responsive */
+.site-header{background:rgba(255,252,248,.98)!important;border-bottom:1px solid #eadbce!important;box-shadow:0 6px 24px rgba(61,36,25,.07)!important;backdrop-filter:blur(14px)}
+.site-header .container.nav{min-height:78px!important;gap:24px!important}
+.site-header .logo-title{color:var(--avx-deep)!important;text-shadow:none!important}
+.site-header .logo-title span{color:var(--avx-deep)!important}
+.site-header .navlinks{gap:24px!important;align-items:center!important}
+.site-header .navlinks a,.site-header .navlinks button{color:var(--avx-deep)!important;text-shadow:none!important;font-weight:800!important;opacity:1!important}
+.site-header .navlinks a:hover,.site-header .navlinks button:hover,.site-header .navlinks .toffee-nav-active{color:#6e3e29!important}
+.site-header .nav-glyph{color:#6e3e29!important}
+#nav-ranking-btn,#nav-author-hub-btn{background:transparent!important;border:0!important;box-shadow:none!important;display:inline-flex!important;align-items:center!important;gap:5px!important}
+.nav-ranking-hidden{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+.site-header .search{color:var(--avx-deep)!important;background:#fff!important;border:1px solid #dcc9ba!important;box-shadow:none!important}
+.site-header .search::placeholder{color:#735d50!important;opacity:1!important}
+.header-icon-btn,.author-avatar-btn{color:var(--avx-deep)!important;background:#fffaf6!important;border-color:#d9c4b4!important}
+/* Hero reference proportions */
+#home .toffee-hero{padding:0!important;min-height:clamp(360px,40vw,540px)!important;background:linear-gradient(120deg,#fff6ee 0%,#f5e4d7 52%,#ead3c1 100%)!important;border-bottom:1px solid #ead8cb!important;overflow:hidden!important}
+#home .toffee-home-grid{width:min(1180px,100% - 48px)!important;min-height:clamp(360px,40vw,540px)!important;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr)!important;gap:clamp(18px,3vw,54px)!important}
+#home .toffee-hero-copy{padding:clamp(26px,5vw,64px) 0!important;animation:avxHeroCopyIn .9s ease both}
+#home .toffee-welcome{font-family:Arial,sans-serif!important;font-size:clamp(17px,2vw,26px)!important;letter-spacing:.22em!important;font-weight:800!important;color:var(--avx-deep)!important}
+#home .toffee-hero h1{font-size:clamp(48px,7vw,88px)!important;line-height:.9!important;color:var(--avx-deep)!important;margin:10px 0 18px!important}
+#home .toffee-hero h1 em{color:var(--avx-deep)!important}
+#home .toffee-lead{font-family:Arial,sans-serif!important;font-size:clamp(14px,1.45vw,18px)!important;line-height:1.55!important;color:#3f2b22!important;max-width:520px!important}
+#home .toffee-rule{width:min(320px,100%)!important}
+#home .toffee-primary{background:#4a281b!important;border-radius:999px!important;padding-inline:24px!important;color:#fff!important}
+#home .toffee-outline{display:none!important}
+#home .toffee-hero-art{height:100%!important;min-height:clamp(330px,38vw,520px)!important;animation:avxHeroArtIn 1.05s ease both}
+#home .coffee-glow{width:70%;height:55%;animation:avxGlow 5.5s ease-in-out infinite}
+#home .hero-book-espresso{animation:avxHeroFloat 4.8s ease-in-out infinite}
+#home .coffee-cup{animation:avxCupFloat 4.2s ease-in-out infinite}
+#home .steam{animation:avxSteam 3.8s ease-in-out infinite}
+#home .coffee-feather{animation:avxSpark 2.8s ease-in-out infinite}
+#home .toffee-hero::before{content:"";position:absolute;inset:auto -8% -42% auto;width:62%;height:95%;border-radius:50%;background:radial-gradient(circle,rgba(226,164,125,.28),transparent 68%);animation:avxHeroBlob 8s ease-in-out infinite}
+#home .toffee-hero::after{content:"";position:absolute;left:-12%;top:-40%;width:48%;height:78%;border-radius:50%;background:radial-gradient(circle,rgba(255,184,169,.38),transparent 68%);animation:avxHeroBlob2 9s ease-in-out infinite}
+@keyframes avxHeroCopyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes avxHeroArtIn{from{opacity:0;transform:translateX(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes avxHeroFloat{0%,100%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+@keyframes avxCupFloat{0%,100%{margin-top:0}50%{margin-top:-7px}}
+@keyframes avxGlow{0%,100%{opacity:.72;transform:scale(.98)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes avxSteam{0%,100%{opacity:.3;transform:translateY(0) rotate(15deg)}50%{opacity:.8;transform:translateY(-12px) rotate(5deg)}}
+@keyframes avxSpark{0%,100%{opacity:.55;transform:rotate(-25deg) scale(1)}50%{opacity:1;transform:rotate(-15deg) scale(1.08)}}
+@keyframes avxHeroBlob{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-2%,4%,0)}}
+@keyframes avxHeroBlob2{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(4%,3%,0)}}
+/* Welcome/cinematic carousel: directly attached, one fluid proportion at every viewport */
+#home #chapter-promotion{padding:0!important;margin:0!important;background:#2b1710!important}
+#home #chapter-promotion .container{width:100%!important;max-width:none!important;padding:0!important}
+#home #latest-promo{min-height:0!important;height:auto!important;aspect-ratio:16/7!important;border-radius:0!important;border:0!important;box-shadow:none!important;overflow:hidden!important}
+#home .premium-cinematic-carousel{min-height:0!important;height:100%!important;border-radius:0!important}
+#home .premium-cinematic-stage{min-height:0!important;height:100%!important}
+#home .premium-cinematic-slide{min-height:0!important;height:100%!important}
+#home .premium-cinematic-content{padding:clamp(24px,5vw,72px)!important}
+#home .premium-cinematic-title{font-size:clamp(34px,5vw,70px)!important}
+#home .premium-cinematic-controls{bottom:clamp(12px,2vw,28px)!important}
+#home .premium-cinematic-slide.is-active .premium-cinematic-backdrop{animation:premiumCinematicKenBurns 7s ease-out both!important}
+/* Featured stories = clean editorial cards */
+#home .toffee-content-wrap{padding:clamp(24px,3vw,44px) 0 56px!important;background:#fbf7f2!important}
+#home .toffee-main-grid{grid-template-columns:minmax(0,1fr) 300px!important;gap:28px!important}
+#home .toffee-panel,#home .toffee-sidebar-card{background:#fffdf9!important;border:1px solid #eadbcf!important;box-shadow:0 10px 28px rgba(69,43,30,.07)!important}
+#home .toffee-section-head h2,#home .toffee-sidebar-title{color:var(--avx-deep)!important}
+#home .toffee-view-all{color:#5f3624!important}
+#home .toffee-story-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important}
+#home .toffee-story-grid .story-card{border:1px solid #ead8ca!important;background:#fffaf5!important}
+#home .toffee-story-grid .card-title,#home .toffee-story-grid .meta{color:#2b1710!important}
+/* Explore by Genre comes before Latest Updates, matching the reference */
+#home #recent{margin-top:22px!important;padding:24px 0!important;background:transparent!important}
+#home #recent .container{padding:0!important}
+#home .genre-library-head h2,#home .genre-library-head p,#home .genre-title-row h3,#home .genre-shelf-head p,#home .genre-count,#home .genre-book-info h3,#home .genre-book-meta{color:#2b1710!important}
+#home .genre-icon{color:#3b2116!important;background:#f4e3d6!important;border-color:#c7a18a!important}
+/* Latest */
+#home .toffee-latest-panel{margin-top:22px!important}
+#home .toffee-latest-copy h3,#home .toffee-latest-copy p,#home .toffee-latest-date{color:#2b1710!important}
+/* Author profile is the signed-in user's profile only */
+#home .author-sidebar-card .toffee-sidebar-title{color:#2b1710!important}
+#home #home-author-name,#home #home-author-bio{color:#2b1710!important}
+#home #home-author-role{color:#6b4635!important}
+#home .author-sidebar-card .toffee-profile-btn{color:#fff!important;background:#4a281b!important;border-color:#4a281b!important}
+/* No Soundroom floating/header bubble */
+#header-soundroom-btn,#soundroom-player,#avx-floating-tools,#avx-float-sound{display:none!important}
+/* Footer: always visible, high contrast */
+footer,footer *{color:#fff!important}
+footer{background:#2b1710!important;border-top:1px solid rgba(255,255,255,.12)!important}
+footer a,footer button{color:#fff!important;opacity:1!important}
+/* Deep readable fallback for any washed-out text on homepage */
+#home .empty,#home .meta,#home .kicker,#home .section-head p,#home .toffee-panel p,#home .toffee-panel span,#home .toffee-panel small{color:#3f2a21!important;opacity:1!important}
+/* Fluid phone/tablet layout: no fixed desktop dimensions and no phone mockup */
+@media(max-width:900px){
+  .site-header .container.nav{min-height:68px!important;gap:12px!important}
+  .site-header .navlinks{gap:14px!important;overflow-x:auto!important;white-space:nowrap!important;scrollbar-width:none}
+  .site-header .navlinks::-webkit-scrollbar{display:none}
+  .site-header .search{width:min(220px,32vw)!important}
+  #home .toffee-home-grid{width:min(100% - 28px,760px)!important;grid-template-columns:1fr 1fr!important;min-height:clamp(320px,52vw,460px)!important}
+  #home .toffee-hero-art{min-height:100%!important}
+  #home .toffee-main-grid{grid-template-columns:1fr!important}
+  #home .toffee-sidebar{grid-template-columns:1fr 1fr!important}
+  #home .toffee-story-grid{grid-template-columns:repeat(4,minmax(150px,1fr))!important;overflow-x:auto!important;scroll-snap-type:x proximity!important;padding-bottom:6px!important}
+  #home .toffee-story-grid .story-card{scroll-snap-align:start!important}
+}
+@media(max-width:600px){
+  .site-header .navlinks{display:flex!important;flex:1;min-width:0;gap:12px!important}
+  .site-header .navlinks a:nth-child(2),.site-header .navlinks a:nth-child(3){display:none!important}
+  .site-header .search{display:none!important}
+  #home .toffee-hero{min-height:auto!important}
+  #home .toffee-home-grid{width:100%!important;grid-template-columns:1fr!important;min-height:0!important;padding:34px 20px 10px!important}
+  #home .toffee-hero-copy{text-align:left;padding:0!important}
+  #home .toffee-welcome{font-size:15px!important;letter-spacing:.18em!important}
+  #home .toffee-hero h1{font-size:clamp(45px,14vw,64px)!important}
+  #home .toffee-lead{font-size:14px!important;max-width:340px!important}
+  #home .toffee-hero-art{min-height:230px!important;height:230px!important}
+  #home .hero-book-espresso{transform:scale(.68) rotate(4deg)!important;bottom:5px!important}
+  #home .coffee-cup{transform:scale(.68) rotate(-4deg)!important;right:4%!important;top:35px!important}
+  #home .coffee-saucer{transform:scale(.68) rotate(-3deg)!important;right:-2%!important;top:125px!important}
+  #home #latest-promo{aspect-ratio:16/9.2!important}
+  #home .premium-cinematic-content{padding:20px!important}
+  #home .premium-cinematic-title{font-size:clamp(26px,8vw,42px)!important}
+  #home .premium-cinematic-author{font-size:9px!important}
+  #home .premium-cinematic-blurb{display:none!important}
+  #home .toffee-content-wrap{padding-top:18px!important}
+  #home .toffee-panel{padding:16px!important}
+  #home .toffee-sidebar{grid-template-columns:1fr!important}
+  #home .toffee-story-grid{grid-template-columns:repeat(2,minmax(150px,1fr))!important;overflow:visible!important}
+  #home .toffee-latest-item{grid-template-columns:62px minmax(0,1fr)!important}
+  #home .toffee-latest-date,#home .toffee-read-now{grid-column:2!important}
+}
+@media(prefers-reduced-motion:reduce){#home *,#home *::before,#home *::after{animation:none!important;transition:none!important}}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -3499,26 +3633,26 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
 </a>
   <nav class="navlinks" aria-label="Primary navigation">
   <a class="toffee-nav-active" href="#home"><span class="nav-glyph">⌂</span> Home</a>
-  <a href="#recent"><span class="nav-glyph">▣</span> Library</a>
-  <button id="nav-dashboard-btn" type="button"><span class="nav-glyph">✎</span> Edit Book</button>
-  <button id="nav-ranking-btn" class="nav-ranking-hidden" type="button">RANKING</button>
+  <a href="#recent"><span class="nav-glyph">▣</span> Browse</a>
+  <a href="#recent"><span class="nav-glyph">✦</span> Genres</a>
+  <button id="nav-ranking-btn" type="button"><span class="nav-glyph">♛</span> Ranking</button>
+  <button id="nav-author-hub-btn" type="button"><span class="nav-glyph">♙</span> Author Hub</button>
 </nav>
   <div class="nav-actions">
-    <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
-    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
+    <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors">
+    <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>♧</span><i id="notify-badge" class="badge hidden">0</i></button>
     <div id="author-menu-wrap" class="author-menu-wrap hidden">
-      <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="My Account" aria-label="My Account" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
+      <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="Profile menu" aria-label="Profile menu" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
         <div id="author-menu-email" class="menu-email"></div>
         <button id="menu-author-center" class="menu-owner" type="button">✍️ AUTHOR CENTER</button>
         <button id="menu-library" type="button">🔖 MY LIBRARY</button>
-        <button id="menu-notifications" type="button">🔔 NOTIFICATIONS</button>
+        <button id="menu-notifications" type="button">♧ NOTIFICATIONS</button>
         <div class="menu-divider"></div>
         <button id="menu-logout" type="button">🚪 SIGN OUT</button>
       </div>
     </div>
-    <button id="reader-btn" class="btn alt" type="button">READER SIGN IN</button>
-    <button id="author-btn" class="btn" type="button">START WRITING</button>
+    <button id="reader-btn" class="btn alt" type="button">SIGN IN</button>
   </div>
 </div><div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div></header>
 
@@ -3572,7 +3706,12 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
         </div>
         <div id="recommend-books" class="cards toffee-story-grid"><div class="empty">Loading published stories…</div></div>
       </section>
-
+      <section class="legacy-home-section section genre-library" id="recent">
+        <div class="container">
+          <div class="genre-library-head"><div><div class="kicker">Published Books</div><h2>Explore by Genre</h2><p>Find your next story by the world you want to enter.</p></div><div class="genre-hint">SWIPE TO EXPLORE <span>→</span></div></div>
+          <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
+        </div>
+      </section>
       <section class="toffee-panel toffee-latest-panel" id="home-latest">
         <div class="toffee-section-head">
           <div><h2>Latest Updates</h2><div class="toffee-heading-rule"></div></div>
@@ -3581,12 +3720,7 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
         <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
       </section>
 
-      <section class="legacy-home-section section genre-library" id="recent">
-        <div class="container">
-          <div class="genre-library-head"><div><div class="kicker">Published Books</div><h2>Explore by Genre</h2><p>Find your next story by the world you want to enter.</p></div><div class="genre-hint">SWIPE TO EXPLORE <span>→</span></div></div>
-          <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
-        </div>
-      </section>
+
       <section class="legacy-home-section section series-library hidden" id="series-stories">
         <div class="container"><div class="section-head"><div><div class="kicker">Series Stories</div><h2>Stories in a Series</h2><p>Read each book in order, from the first volume to the latest.</p></div></div><div id="series-shelves"></div></div>
       </section>
@@ -3605,14 +3739,14 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
 
     <aside class="toffee-sidebar">
       <section class="toffee-sidebar-card author-sidebar-card">
-        <div class="toffee-sidebar-title">Author's Profile</div>
+        <div class="toffee-sidebar-title">Your Author Profile</div>
         <div class="toffee-short-rule"></div>
         <div id="home-author-avatar" class="home-author-avatar"><span>A</span></div>
         <h3 id="home-author-name">Avanitaxx</h3>
         <div id="home-author-role" class="home-author-role">Author</div>
-        <p id="home-author-bio">I write Tagalog romantic stories that come from the heart. Thank you for being part of this journey!</p>
+        <p id="home-author-bio">Sign in to view your author profile.</p>
         <div class="toffee-heart-rule"><span></span><b>♥</b><span></span></div>
-        <button id="home-author-profile-btn" class="btn ghost toffee-profile-btn" type="button">✎ &nbsp; Edit Profile</button>
+        <button id="home-author-profile-btn" class="btn ghost toffee-profile-btn" type="button">Open My Profile</button>
       </section>
       <section class="toffee-sidebar-card quick-links-card">
         <div class="toffee-sidebar-title">Quick Links</div>
@@ -3643,15 +3777,8 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
 </footer>
 <div id="overlay" aria-hidden="true"></div>
 <div id="home-pop-anchor"></div>
-<div id="soundroom-player" class="soundroom-player hidden" aria-label="Avanitaxx Soundroom player">
-  <button id="soundroom-disc" class="soundroom-disc" type="button" title="Open Avanitaxx Soundroom" aria-label="Open Avanitaxx Soundroom"><span class="soundroom-disc-glyph">◉</span></button>
-  <div class="soundroom-panel">
-    <div class="soundroom-top"><div><div class="soundroom-eyebrow">AVANITAXX SOUNDROOM</div><div id="soundroom-title" class="soundroom-title">No soundtrack selected</div><div id="soundroom-caption" class="soundroom-caption">Songs behind the stories.</div></div><button id="soundroom-minimize" class="soundroom-minimize" type="button" title="Minimize">−</button></div>
-    <div class="soundroom-controls"><button id="soundroom-prev" type="button" title="Previous">‹</button><button id="soundroom-play" class="soundroom-play" type="button" title="Play/Pause">▶</button><button id="soundroom-next" type="button" title="Next">›</button></div>
-    <div class="soundroom-progress"><span id="soundroom-current">0:00</span><input id="soundroom-range" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress"><span id="soundroom-duration">0:00</span></div>
-    <audio id="soundroom-audio" preload="metadata"></audio>
-  </div>
-</div>
+<audio id="soundroom-audio" preload="metadata" aria-hidden="true" style="display:none"></audio>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 <script>
@@ -3699,9 +3826,25 @@ function isTestStory(s){return /^(test|test book|sample book|demo book|untitled 
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
 async function isOwnerAccount(){if(!session)return false;const r=await sb.from('app_owners').select('user_id').eq('user_id',session.user.id).maybeSingle();return !r.error&&!!r.data}
 async function loadAuthorAvatar(){const wrap=document.getElementById('author-menu-wrap'),content=document.getElementById('author-avatar-content'),email=document.getElementById('author-menu-email');if(!wrap||!content||!session){wrap?.classList.add('hidden');return}wrap.classList.remove('hidden');if(email)email.textContent=session.user.email||'';const r=await sb.from('profiles').select('pen_name,display_name,avatar_url').eq('id',session.user.id).maybeSingle();const p=r.data||{};const name=p.pen_name||p.display_name||session.user.email?.split('@')[0]||'Author';content.innerHTML=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="${esc(name)}">`:`<span class="author-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</span>`;document.getElementById('menu-owner-timeline')?.classList.remove('hidden');document.getElementById('menu-owner-divider')?.classList.remove('hidden')}
-function updateAuthUI(){const author=document.getElementById('author-btn'),reader=document.getElementById('reader-btn'),bell=document.getElementById('notify-btn');if(session){author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='MY ACCOUNT';bell.classList.remove('hidden');loadUnreadCount();loadAuthorAvatar();avxStartNotificationPolling().catch(()=>{})}else{avxStopNotificationPolling();author.textContent='START WRITING';author.classList.remove('hidden');reader.textContent='READER SIGN IN';bell.classList.add('hidden');document.getElementById('author-menu-wrap')?.classList.add('hidden');document.getElementById('author-menu')?.classList.add('hidden')}}
-
-async function openAuth(mode='reader'){
+function updateAuthUI(){
+  const reader=document.getElementById('reader-btn');
+  const bell=document.getElementById('notify-btn');
+  if(session){
+    reader?.classList.add('hidden');
+    bell?.classList.remove('hidden');
+    loadUnreadCount();
+    loadAuthorAvatar();
+    avxStartNotificationPolling().catch(()=>{});
+  }else{
+    avxStopNotificationPolling();
+    reader?.classList.remove('hidden');
+    if(reader)reader.textContent='SIGN IN';
+    bell?.classList.add('hidden');
+    document.getElementById('author-menu-wrap')?.classList.add('hidden');
+    document.getElementById('author-menu')?.classList.add('hidden');
+  }
+  if(typeof renderHomeAuthorSidebar==='function')renderHomeAuthorSidebar().catch(()=>{});
+}async function openAuth(mode='reader'){
  const remembered=localStorage.getItem('avx_login_email')||'';
  open(`<div class="modal"><button class="close" id="auth-close">×</button><div class="kicker">AVANITAXX STORIES</div><h2>${mode==='author'?'Writer Sign In':'Reader Sign In'}</h2><p>Sign in with Google for a faster, simpler account, or use your email and password.</p><button id="google-signin" class="google-btn" type="button"><span class="google-mark">G</span> CONTINUE WITH GOOGLE</button><div class="oauth-divider"><span>OR CONTINUE WITH EMAIL</span></div><form id="auth-form"><label>EMAIL</label><input class="field" id="auth-email" type="email" required autocomplete="email" value="${esc(remembered)}"><label>PASSWORD</label><input class="field" id="auth-pass" type="password" required autocomplete="current-password"><button id="forgot-password" class="btn alt" type="button" style="margin-top:8px;width:100%">FORGOT PASSWORD?</button><label style="display:flex;align-items:center;gap:8px;letter-spacing:0"><input id="remember-email" type="checkbox" ${remembered?'checked':''}> Remember my email</label><button class="btn" style="width:100%;margin-top:16px" type="submit">SIGN IN</button></form><div id="auth-status" class="status"></div><p style="font-size:11px;text-align:center">No account yet? <button id="signup" class="btn alt" type="button">CREATE ACCOUNT</button></p></div>`);
  document.getElementById('auth-close').onclick=close;
@@ -3948,17 +4091,36 @@ function renderHomeLatestUpdates(stories=[]){
   bindStoryCards();
 }
 async function renderHomeAuthorSidebar(stories=[]){
-  const nameEl=document.getElementById('home-author-name'),roleEl=document.getElementById('home-author-role'),bioEl=document.getElementById('home-author-bio'),avatarEl=document.getElementById('home-author-avatar');
-  if(!nameEl||!avatarEl)return;
+  const nameEl=document.getElementById('home-author-name');
+  const roleEl=document.getElementById('home-author-role');
+  const bioEl=document.getElementById('home-author-bio');
+  const avatarEl=document.getElementById('home-author-avatar');
+  const btn=document.getElementById('home-author-profile-btn');
+  if(!nameEl||!roleEl||!bioEl||!avatarEl)return;
+  if(!session?.user?.id){
+    nameEl.textContent='Author Profile';
+    roleEl.textContent='Not signed in';
+    bioEl.textContent='Sign in to view your author profile.';
+    avatarEl.innerHTML='<span>?</span>';
+    if(btn)btn.textContent='Sign In';
+    return;
+  }
   try{
-    const authors=await getAuthorDirectory(stories);
-    const candidates=authors.filter(a=>a.__published>0);
-    const featured=candidates.find(a=>a.featured||a.is_featured||a.promoted||a.is_promoted)||candidates[0];
-    const a=featured||{},name=a.pen_name||a.display_name||'Avanitaxx';
-    nameEl.textContent=name;roleEl.textContent=a.__role==='AUTHOR'?'Author':'Storyteller';
-    bioEl.textContent=a.bio||'I write Tagalog romantic stories that come from the heart. Thank you for being part of this journey.';
+    const r=await sb.from('profiles').select('pen_name,display_name,bio,avatar_url').eq('id',session.user.id).maybeSingle();
+    const a=r.data||{};
+    const name=a.pen_name||a.display_name||session.user.email?.split('@')[0]||'Author';
+    nameEl.textContent=name;
+    roleEl.textContent='Author';
+    bioEl.textContent=a.bio||'Your author profile is shown here because this is the account currently signed in.';
     avatarEl.innerHTML=a.avatar_url?`<img src="${esc(a.avatar_url)}" alt="${esc(name)}" loading="lazy">`:`<span>${esc(name.trim().slice(0,1).toUpperCase()||'A')}</span>`;
-  }catch(e){}
+    if(btn)btn.textContent='Open My Profile';
+  }catch(e){
+    const name=session.user.email?.split('@')[0]||'Author';
+    nameEl.textContent=name; roleEl.textContent='Author';
+    bioEl.textContent='Your author profile is shown here for the signed-in account.';
+    avatarEl.innerHTML=`<span>${esc(name.slice(0,1).toUpperCase()||'A')}</span>`;
+    if(btn)btn.textContent='Open My Profile';
+  }
 }
 async function loadHome(){
  try{
@@ -5504,7 +5666,7 @@ function bindStatic(){
   byId('menu-library')?.addEventListener('click',()=>{menu?.classList.add('hidden');openMyLibrary()});
   byId('menu-notifications')?.addEventListener('click',()=>{menu?.classList.add('hidden');openNotifications()});
   byId('menu-logout')?.addEventListener('click',()=>{menu?.classList.add('hidden');logout()});
-  byId('nav-dashboard-btn')?.addEventListener('click',()=>{ if(session) openAuthorHome(); else openAuth('author'); });
+  byId('nav-author-hub-btn')?.addEventListener('click',()=>{ if(session) openAuthorHome(); else openAuth('author'); });
   byId('nav-ranking-btn')?.addEventListener('click',openRanking);
 
   async function openRanking(){
@@ -5557,16 +5719,8 @@ async function ensureGoogleProfile(s){
   const name=meta.full_name||meta.name||s.user.email?.split('@')[0]||'Reader';
   await sb.from('profiles').upsert({id:s.user.id,display_name:name,pen_name:name,avatar_url:meta.avatar_url||meta.picture||null},{onConflict:'id'});
 }
-sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
-(async()=>{function ensureAvxFloatingTools(){
-  if(document.getElementById('avx-floating-tools'))return;
-  const wrap=document.createElement('div');wrap.id='avx-floating-tools';wrap.setAttribute('aria-label','Avanitaxx quick tools');
-  wrap.innerHTML='<button class="avx-floating-tool" id="avx-float-chat" type="button">👥 COMMUNITY</button><button class="avx-floating-tool" id="avx-float-sound" type="button">♫ SOUNDROOM</button><button class="avx-floating-tool" id="avx-float-ranking" type="button">★ RANKING</button>';
-  document.body.appendChild(wrap);
-  document.getElementById('avx-float-chat').onclick=()=>openHomeCommunity([]);
-  document.getElementById('avx-float-sound').onclick=()=>openSoundroomModal();
-  document.getElementById('avx-float-ranking').onclick=()=>document.getElementById('nav-ranking-btn')?.click();
-}
+sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();renderHomeAuthorSidebar().catch(()=>{});if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
+(async()=>{function ensureAvxFloatingTools(){}
 ensureAvxFloatingTools();
 bindStatic();bindToffeeHome();await refreshSession();await loadSoundroom();await loadHome();
 setTimeout(()=>maybeShowHomepageFeature(),1200);
