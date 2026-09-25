@@ -3368,6 +3368,28 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:500px){#avx-phase1-reader .avx-phase1-grid{grid-template-columns:1fr;gap:12px;}}
 </style>
 
+
+<style id="avx-story-circle-v1">
+/* ===== STORY CIRCLE — COMMUNITY / DISCOVERY LAYER ===== */
+.nav-story-circle{border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.16em;padding:30px 0;position:relative;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.nav-story-circle::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}.nav-story-circle:hover::after{right:0}
+.nav-story-circle-icon{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#8f6657}.nav-story-circle-icon svg{width:22px;height:22px}
+.story-circle-shell{width:min(1120px,100%);max-height:95vh;overflow:auto;background:#f4eee8;border-radius:24px;box-shadow:0 36px 110px rgba(30,18,14,.35)}
+.story-circle-head{position:sticky;top:0;z-index:12;padding:22px 25px 16px;background:rgba(255,253,249,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.story-circle-head-row{display:flex;justify-content:space-between;align-items:flex-start;gap:18px}.story-circle-kicker{font-size:9px;font-weight:900;letter-spacing:.23em;color:var(--toffee)}
+.story-circle-title{font:400 clamp(32px,5vw,48px)/.98 Georgia,serif;color:var(--ink);margin:7px 0}.story-circle-sub{font:12px/1.65 Georgia,serif;color:var(--muted);max-width:720px}
+.story-circle-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px;cursor:pointer}
+.story-circle-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-top:18px}.story-circle-search{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);outline:0}.story-circle-tabs{display:flex;gap:7px;flex-wrap:wrap}
+.story-circle-tab{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:10px 13px;font-size:10px;font-weight:900;letter-spacing:.08em;cursor:pointer}.story-circle-tab.active{background:var(--brown);color:#fff;border-color:var(--brown)}
+.story-circle-body{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:18px;padding:20px}.story-circle-main{min-width:0}.story-circle-feed{display:grid;gap:13px}
+.story-circle-card,.story-circle-side-card{background:#fffdf9;border:1px solid var(--line);border-radius:17px;box-shadow:0 8px 25px rgba(55,35,27,.055)}.story-circle-card{padding:16px}.story-circle-side-card{padding:15px}
+.story-circle-author{display:flex;align-items:center;gap:10px}.story-circle-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;background:#e5cdb6;color:var(--brown);display:grid;place-items:center;font-weight:900;flex:0 0 42px}.story-circle-avatar img{width:100%;height:100%;object-fit:cover}.story-circle-author-name{font-weight:900;color:var(--ink);font-size:14px}.story-circle-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.story-circle-type{display:inline-flex;margin:14px 0 7px;padding:5px 8px;border-radius:999px;background:#f1e4d8;color:var(--toffee-deep);font-size:8px;font-weight:900;letter-spacing:.12em}.story-circle-card h3{font:500 22px/1.15 Georgia,serif;color:var(--ink);margin:0 0 7px}.story-circle-caption{color:#4f3b32;font-size:13px;line-height:1.7}.story-circle-quote{margin-top:10px;padding:10px 12px;border-left:2px solid var(--caramel);background:#fbf4ed;color:#624b40;font:italic 14px/1.6 Georgia,serif}
+.story-circle-story{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;margin-top:13px;padding:10px;border:1px solid rgba(74,48,37,.09);border-radius:12px;background:#fcf8f3}.story-circle-cover{width:72px;height:96px;border-radius:7px;object-fit:cover;background:#ead8c8}.story-circle-story-title{font:600 16px Georgia,serif;color:var(--ink)}.story-circle-story-note{font-size:11px;line-height:1.55;color:var(--muted);margin-top:5px}.story-circle-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid rgba(74,48,37,.08)}.story-circle-action{border:0;background:transparent;color:var(--toffee-deep);font-size:10px;font-weight:900;letter-spacing:.05em;cursor:pointer;padding:7px 8px}.story-circle-action:hover{background:#f7ede3;border-radius:8px}.story-circle-comments{margin-top:9px}.story-circle-empty{padding:30px;text-align:center;color:var(--muted);background:#fffdf9;border:1px dashed var(--line);border-radius:16px}
+.story-circle-side-title{font:600 17px Georgia,serif;color:var(--ink);margin-bottom:9px}.story-circle-side-copy{font-size:11px;line-height:1.6;color:var(--muted)}.story-circle-stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(74,48,37,.08);font-size:11px}.story-circle-stat:last-child{border-bottom:0}.story-circle-stat b{color:var(--ink)}
+@media(max-width:820px){.story-circle-body{grid-template-columns:1fr}.story-circle-side{display:none}.story-circle-tools{grid-template-columns:1fr}.story-circle-tabs{overflow:auto;flex-wrap:nowrap}.story-circle-tab{white-space:nowrap}.story-circle-shell{border-radius:18px}.story-circle-head{padding:18px}.story-circle-body{padding:13px}.story-circle-card{padding:14px}}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -3380,7 +3402,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
         Avanitaxx <span>Stories</span>
     </span>
 </a>
-  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button><button id="nav-story-circle" class="nav-policy-link avx-story-circle-link" type="button" title="Story Circle"><span aria-hidden="true">✦</span> STORY CIRCLE</button></nav>
+  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button><button id="nav-story-circle-btn" class="nav-story-circle" type="button"><span class="nav-story-circle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 13.2c1.1 1.5 2.5 2.2 4.2 2.2 1.5 0 2.8-.5 3.8-1.6M9 9.5h.01M15 9.5h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>STORY CIRCLE</button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
@@ -5605,171 +5627,52 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </script>
 <style id="avx-final-functional-repair-css">.avx-feature-shell{display:block}.avx-feature-shell .container{max-width:1200px;margin:auto}</style>
 
-<style id="avx-story-circle-css">
-/* ===== STORY CIRCLE — original community layer inspired by social feeds ===== */
-.avx-circle-panel{width:min(1080px,100%);max-height:94vh;overflow:auto;background:#f7efe8;border-radius:28px;border:1px solid rgba(255,255,255,.55);box-shadow:0 35px 110px rgba(35,22,17,.42)}
-.avx-circle-head{position:sticky;top:0;z-index:8;padding:28px 34px 24px;background:rgba(255,253,249,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.avx-circle-head-row{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
-.avx-circle-kicker{font-size:9px;font-weight:900;letter-spacing:.22em;color:var(--toffee);text-transform:uppercase}
-.avx-circle-title{font:400 clamp(38px,5vw,58px)/.95 Georgia,serif;color:var(--ink);margin:8px 0 7px;letter-spacing:-.04em}
-.avx-circle-sub{font:14px/1.65 Georgia,serif;color:var(--muted);max-width:700px}
-.avx-circle-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--brown);font-size:23px;flex:0 0 auto}
-.avx-circle-body{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;padding:24px}
-.avx-circle-main{min-width:0}
-.avx-circle-card{background:#fffdf9;border:1px solid var(--line);border-radius:19px;box-shadow:0 10px 30px rgba(55,35,27,.05)}
-.avx-circle-welcome{padding:18px;margin-bottom:14px;display:flex;align-items:center;gap:13px}
-.avx-circle-mark{width:45px;height:45px;border-radius:14px;background:linear-gradient(145deg,#b98968,#9b6c53);color:#fff8f0;display:grid;place-items:center;font-size:21px;box-shadow:0 8px 18px rgba(74,48,37,.14)}
-.avx-circle-welcome strong{font:400 20px Georgia,serif;color:#392820}
-.avx-circle-welcome span{display:block;font-size:10px;line-height:1.5;color:var(--muted);margin-top:3px}
-.avx-circle-feed{display:grid;gap:14px}
-.avx-circle-post{overflow:hidden}
-.avx-circle-post-head{display:flex;align-items:center;gap:11px;padding:16px 17px 10px}
-.avx-circle-avatar{width:43px;height:43px;border-radius:50%;overflow:hidden;background:var(--lightpink);display:grid;place-items:center;color:var(--brown);font:700 16px Georgia,serif;flex:0 0 auto}
-.avx-circle-avatar img{width:100%;height:100%;object-fit:cover}
-.avx-circle-author{font-size:12px;font-weight:900;color:#392820}
-.avx-circle-meta{font-size:8px;color:var(--muted);margin-top:3px}
-.avx-circle-type{margin-left:auto;padding:6px 8px;border-radius:999px;background:#f4e5df;color:#8a6354;font-size:7px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-.avx-circle-content{padding:4px 17px 13px}
-.avx-circle-post-title{font:400 23px/1.15 Georgia,serif;color:#392820;margin:4px 0 7px}
-.avx-circle-caption{font:14px/1.7 Georgia,serif;color:#66564f;white-space:pre-wrap}
-.avx-circle-quote{margin:12px 0 0;padding:12px 14px;border-left:2px solid var(--pink);background:#fbf3f0;color:#654d41;font:italic 14px/1.65 Georgia,serif}
-.avx-circle-images{display:grid;gap:4px;margin:0 17px 13px;border-radius:12px;overflow:hidden}
-.avx-circle-images.one{grid-template-columns:1fr}.avx-circle-images.two{grid-template-columns:1fr 1fr}.avx-circle-images.three{grid-template-columns:repeat(3,1fr)}
-.avx-circle-images img{width:100%;height:180px;object-fit:cover;display:block;cursor:pointer;background:#eadbd4}
-.avx-circle-images.one img{height:330px}
-.avx-circle-stats{display:flex;justify-content:space-between;gap:10px;padding:9px 17px;border-top:1px solid var(--line);font-size:8px;color:var(--muted)}
-.avx-circle-actions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
-.avx-circle-action{border:0;background:#fffdf9;color:#725f57;padding:11px 8px;font-size:9px;font-weight:900;letter-spacing:.04em}.avx-circle-action:hover{background:#faf3ef;color:#392820}
-.avx-circle-reactions{padding:7px 17px 0;display:flex;gap:5px;flex-wrap:wrap}
-.avx-circle-reaction{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 8px;font-size:10px;cursor:pointer}.avx-circle-reaction.active{background:#f4e0dc;border-color:#d9aaa8}
-.avx-circle-comments{padding:4px 17px 13px}
-.avx-circle-comments .feature-comment-form{display:flex;gap:7px;align-items:flex-end}
-.avx-circle-comments textarea{min-height:42px}
-.avx-circle-side{display:grid;gap:14px;align-content:start}
-.avx-circle-side-card{padding:17px}
-.avx-circle-side-card h3{font:400 22px Georgia,serif;margin:5px 0 6px;color:#392820}
-.avx-circle-side-note{font-size:10px;line-height:1.6;color:var(--muted)}
-.avx-circle-topic{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:10px;color:#5e4d45}.avx-circle-topic:last-child{border-bottom:0}
-.avx-circle-topic i{font-style:normal;width:26px;height:26px;border-radius:9px;background:#f1ddda;display:grid;place-items:center}
-.avx-circle-empty{padding:38px 20px;text-align:center;color:var(--muted);font-size:12px}
-@media(max-width:820px){.avx-circle-body{grid-template-columns:1fr}.avx-circle-side{display:none}}
-@media(max-width:700px){.avx-circle-head{padding:22px 18px 19px}.avx-circle-body{padding:14px}.avx-circle-title{font-size:42px}.avx-circle-post-title{font-size:20px}.avx-circle-images.one img{height:250px}}
-@media(max-width:560px){.avx-story-circle-link{display:none}.avx-circle-actions{grid-template-columns:repeat(3,1fr)}.avx-circle-action{font-size:8px;padding:10px 4px}}
-</style>
-
-
-<script id="avx-story-circle-js">
-(function(){
-  const escC=(v)=>typeof esc==='function'?esc(v):String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const dateC=(v)=>typeof formatDate==='function'?formatDate(v):new Date(v).toLocaleDateString();
-  function circleImageHtml(x){
-    if(typeof timelineAlbumHtml==='function') return timelineAlbumHtml(x)||'';
-    const imgs=Array.isArray(x.image_urls)?x.image_urls:(x.image_url?[x.image_url]:[]);
-    if(!imgs.length)return '';
-    const cls=imgs.length===1?'one':imgs.length===2?'two':'three';
-    return '<div class="avx-circle-images '+cls+'">'+imgs.slice(0,3).map(u=>`<img src="${escC(u)}" alt="" loading="lazy">`).join('')+'</div>';
-  }
-  async function circleReactions(id,boxId){
-    const box=document.getElementById(boxId);if(!box)return;
-    const q=await sb.from('author_timeline_reactions').select('user_id,reaction').eq('timeline_id',id);
-    if(q.error){box.innerHTML='';return}
-    const rows=q.data||[], mine=session?rows.find(r=>r.user_id===session.user.id):null;
-    const types=[['❤️','Love'],['👍','Like'],['😂','Haha'],['😮','Wow'],['😢','Sad']];
-    const counts={};rows.forEach(r=>counts[r.reaction]=(counts[r.reaction]||0)+1);
-    box.innerHTML=types.map(([e,l])=>`<button class="avx-circle-reaction ${mine?.reaction===e?'active':''}" data-circle-reaction="${e}" title="${l}">${e}${counts[e]?` <span>${counts[e]}</span>`:''}</button>`).join('');
-    box.querySelectorAll('[data-circle-reaction]').forEach(b=>b.onclick=async()=>{
-      if(!session){openAuth('reader');return}
-      const reaction=b.dataset.circleReaction;
-      if(mine?.reaction===reaction) await sb.from('author_timeline_reactions').delete().eq('timeline_id',id).eq('user_id',session.user.id);
-      else {
-        const w=await sb.from('author_timeline_reactions').upsert({timeline_id:id,user_id:session.user.id,reaction},{onConflict:'timeline_id,user_id'});
-        if(w.error){alert(w.error.message);return}
-      }
-      circleReactions(id,boxId);
-    });
-  }
-  async function openStoryCircle(){
-    await refreshSession();
-    const q=await sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(60);
-    if(q.error){open(`<div class="modal"><button class="close" id="circle-error-close">×</button><div class="kicker">STORY CIRCLE</div><h2>Community feed</h2><p>We couldn't load the community feed right now.</p></div>`);document.getElementById('circle-error-close').onclick=close;return}
-    const posts=q.data||[];
-    const profiles={};
-    for(const p of posts){if(!profiles[p.owner_id])profiles[p.owner_id]=await getAuthorTimelineProfile(p.owner_id)}
-    const cards=posts.map(p=>{
-      const prof=profiles[p.owner_id]||{},name=prof.pen_name||prof.display_name||'Author';
-      const av=prof.avatar_url?`<img src="${escC(prof.avatar_url)}" alt="">`:escC(name.slice(0,1).toUpperCase());
-      const type=p.post_type==='CHAPTER'?'CHAPTER UPDATE':p.post_type==='STORY'?'STORY LAUNCH':'AUTHOR NOTE';
-      const rid='circle-r-'+p.id,cid='circle-c-'+p.id;
-      return `<article class="avx-circle-card avx-circle-post">
-        <div class="avx-circle-post-head">
-          <div class="avx-circle-avatar">${av}</div>
-          <div><div class="avx-circle-author">${escC(name)}</div><div class="avx-circle-meta">${escC(dateC(p.created_at))}</div></div>
-          <span class="avx-circle-type">${type}</span>
-        </div>
-        <div class="avx-circle-content">
-          <h3 class="avx-circle-post-title">${escC(p.title||'Untitled update')}</h3>
-          ${p.caption?`<div class="avx-circle-caption">${escC(p.caption)}</div>`:''}
-          ${p.dialogue?`<div class="avx-circle-quote">“${escC(p.dialogue)}”</div>`:''}
-        </div>
-        ${circleImageHtml(p)}
-        <div class="avx-circle-stats"><span data-circle-stat="${escC(p.id)}">Community reactions</span><span>Open the conversation</span></div>
-        <div class="avx-circle-actions">
-          <button class="avx-circle-action" data-circle-react="${escC(rid)}">❤️ REACT</button>
-          <button class="avx-circle-action" data-circle-comment="${escC(cid)}">💬 COMMENT</button>
-          <button class="avx-circle-action" data-circle-share="${escC(p.id)}">↗ SHARE</button>
-        </div>
-        <div id="${rid}" class="avx-circle-reactions"></div>
-        <div id="${cid}" class="avx-circle-comments"></div>
-      </article>`;
-    }).join('');
-    open(`<div class="avx-circle-panel">
-      <div class="avx-circle-head">
-        <div class="avx-circle-head-row">
-          <div><div class="avx-circle-kicker">AVANITAXX STORIES</div><h2 class="avx-circle-title">Story Circle</h2><div class="avx-circle-sub">A calm social space for readers and authors to discover updates, react to stories, and join conversations — built in the Avanitaxx Stories style.</div></div>
-          <button class="avx-circle-close" id="avx-circle-close" aria-label="Close">×</button>
-        </div>
-      </div>
-      <div class="avx-circle-body">
-        <main class="avx-circle-main">
-          <section class="avx-circle-card avx-circle-welcome"><div class="avx-circle-mark">✦</div><div><strong>Welcome to Story Circle</strong><span>Follow the story world, not the noise. New chapter updates and author notes appear here.</span></div></section>
-          <div class="avx-circle-feed">${cards||'<div class="avx-circle-card avx-circle-empty">No community updates yet. Check back when authors share something new.</div>'}</div>
-        </main>
-        <aside class="avx-circle-side">
-          <section class="avx-circle-card avx-circle-side-card"><div class="avx-circle-kicker">HOW IT WORKS</div><h3>Made for stories</h3><div class="avx-circle-side-note">React to an update, leave a comment, or share a post link. It uses the existing Avanitaxx author timeline rather than copying another platform's layout.</div></section>
-          <section class="avx-circle-card avx-circle-side-card"><div class="avx-circle-kicker">QUICK GUIDE</div>
-            <div class="avx-circle-topic"><i>📖</i><span>Story launches and reading updates</span></div>
-            <div class="avx-circle-topic"><i>✍️</i><span>Author notes and behind-the-story posts</span></div>
-            <div class="avx-circle-topic"><i>💬</i><span>Reader conversations and reactions</span></div>
-            <div class="avx-circle-topic"><i>↗</i><span>Share interesting updates</span></div>
-          </section>
-        </aside>
-      </div>
-    </div>
-    <div id="avx-circle-viewer" class="fb-note-image-viewer" role="dialog" aria-label="Story Circle image viewer"><button type="button" id="avx-circle-viewer-close">×</button><img id="avx-circle-viewer-img" alt=""></div>`);
-    document.getElementById('avx-circle-close').onclick=close;
-    const viewer=document.getElementById('avx-circle-viewer'),vi=document.getElementById('avx-circle-viewer-img');
-    viewer.onclick=e=>{if(e.target===viewer)viewer.classList.remove('open')};
-    document.getElementById('avx-circle-viewer-close').onclick=()=>viewer.classList.remove('open');
-    document.querySelectorAll('.avx-circle-images img').forEach(im=>im.onclick=()=>{vi.src=im.src;viewer.classList.add('open')});
-    document.querySelectorAll('[data-circle-react]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.circleReact)?.scrollIntoView({behavior:'smooth',block:'center'}));
-    document.querySelectorAll('[data-circle-comment]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.circleComment)?.scrollIntoView({behavior:'smooth',block:'center'}));
-    document.querySelectorAll('[data-circle-share]').forEach(b=>b.onclick=async()=>{
-      const url=publicShareUrl('timeline',b.dataset.circleShare);
-      await copyShareUrl(url,'Story Circle share link');
-    });
-    for(const p of posts){
-      await circleReactions(p.id,'circle-r-'+p.id);
-      if(typeof renderFeatureComments==='function') await renderFeatureComments('timeline',p.id,'circle-c-'+p.id,p.owner_id);
-    }
-  }
-  window.openStoryCircle=openStoryCircle;
-  function wireCircle(){
-    const b=document.getElementById('nav-story-circle');
-    if(b&&!b.dataset.bound){b.dataset.bound='1';b.onclick=openStoryCircle}
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wireCircle);else wireCircle();
-})();
+<script id="avx-story-circle-v1-js">
+/* STORY CIRCLE is intentionally a discovery/community surface. It does not duplicate author profiles or the author publishing composer. */
+async function openStoryCircle(){
+  const [postsQ, storiesQ]=await Promise.all([
+    sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(80),
+    sb.from('stories').select('id,title,cover_url,share_slug,published,updated_at,owner_id').eq('published',true).order('updated_at',{ascending:false}).limit(80)
+  ]);
+  const posts=postsQ.error?[]:(postsQ.data||[]), stories=storiesQ.error?[]:(storiesQ.data||[]);
+  const profiles={};
+  for(const p of posts){if(!profiles[p.owner_id]){const q=await sb.from('profiles').select('id,pen_name,display_name,avatar_url').eq('id',p.owner_id).maybeSingle();profiles[p.owner_id]=q.data||{}}}
+  const reactionMap=await getTimelineReactions(posts.map(x=>x.id));
+  let followingIds=[];
+  if(session){const fq=await sb.from('follows').select('author_id').eq('follower_id',session.user.id);followingIds=(fq.data||[]).map(x=>x.author_id)}
+  const storyById={};stories.forEach(s=>storyById[s.id]=s);
+  const totalReactions=posts.reduce((n,p)=>(n+(reactionMap[p.id]||[]).length),0);
+  const totalAuthors=new Set(posts.map(p=>p.owner_id)).size;
+  const storyCover=x=>{const st=storyById[x.story_id];return x.poster_url||st?.cover_url||''};
+  const typeLabel=x=>x.post_type==='CHAPTER'?'CHAPTER UPDATE':x.post_type==='STORY'?'NEW STORY':'COMMUNITY UPDATE';
+  const typeKey=x=>x.post_type==='CHAPTER'?'chapters':x.post_type==='STORY'?'stories':'updates';
+  const card=(x,i)=>{
+    const p=profiles[x.owner_id]||{}, name=p.pen_name||p.display_name||'Author', avatar=p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(name.slice(0,1).toUpperCase());
+    const st=storyById[x.story_id], rr=reactionMap[x.id]||[], total=rr.length, cover=storyCover(x), commentsId=`sc-comments-${x.id}`, reactionId=`sc-reactions-${x.id}`;
+    const storyBox=st?`<div class="story-circle-story"><img class="story-circle-cover" src="${esc(cover||'')}" alt="${esc(st.title||'Story')}" onerror="this.style.visibility='hidden'"><div><div class="story-circle-story-title">${esc(st.title||'Untitled Story')}</div><div class="story-circle-story-note">${x.post_type==='CHAPTER'?'A new chapter is available to read.':'Discover this story from the community activity feed.'}</div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:9px"><button class="btn alt sc-read" data-slug="${esc(st.share_slug||st.id)}" type="button">READ STORY</button><button class="btn alt sc-author" data-author-id="${esc(x.owner_id)}" type="button">VIEW AUTHOR</button></div></div></div>`:'';
+    return `<article class="story-circle-card" data-sc-type="${typeKey(x)}" data-sc-author="${esc(x.owner_id)}" data-sc-text="${esc([name,x.title,x.caption,x.dialogue,st?.title].filter(Boolean).join(' ')).toLowerCase()}">
+      <div class="story-circle-author"><div class="story-circle-avatar">${avatar}</div><div><div class="story-circle-author-name">${esc(name)}</div><div class="story-circle-meta">${esc(formatDate(x.created_at))}</div></div></div>
+      <div class="story-circle-type">${typeLabel(x)}</div><h3>${esc(x.title||st?.title||'Untitled update')}</h3>
+      ${x.caption?`<div class="story-circle-caption">${esc(x.caption)}</div>`:''}${x.dialogue?`<div class="story-circle-quote">“${esc(x.dialogue)}”</div>`:''}${storyBox}
+      <div class="story-circle-actions"><button class="story-circle-action sc-react-open" data-target="${reactionId}">❤️ ${total?total+' reactions':'React'}</button><button class="story-circle-action sc-comment-open" data-target="${commentsId}">💬 Discuss</button><button class="story-circle-action sc-share" data-id="${esc(x.id)}">↗ Share</button></div><div id="${reactionId}" class="author-reactions"></div><div id="${commentsId}" class="story-circle-comments"></div>
+    </article>`;
+  };
+  open(`<div class="story-circle-shell"><header class="story-circle-head"><div class="story-circle-head-row"><div><div class="story-circle-kicker">AVANITAXX STORIES</div><h2 class="story-circle-title">Story Circle</h2><div class="story-circle-sub">A community discovery space for new stories, chapter updates, reactions, and discussions. Author profiles remain the place to learn about the writer; Story Circle is where you discover what is happening now.</div></div><button class="story-circle-close" id="story-circle-close" type="button" aria-label="Close">×</button></div><div class="story-circle-tools"><input id="story-circle-search" class="story-circle-search" placeholder="Search updates, stories, or authors…" aria-label="Search Story Circle"><div class="story-circle-tabs"><button class="story-circle-tab active" data-filter="all">FOR YOU</button><button class="story-circle-tab" data-filter="following">FOLLOWING</button><button class="story-circle-tab" data-filter="stories">STORIES</button><button class="story-circle-tab" data-filter="chapters">CHAPTERS</button><button class="story-circle-tab" data-filter="updates">UPDATES</button><button class="story-circle-tab" data-filter="popular">POPULAR</button></div></div></header><div class="story-circle-body"><main class="story-circle-main"><div id="story-circle-feed" class="story-circle-feed">${posts.length?posts.map(card).join(''):'<div class="story-circle-empty">No community updates yet.</div>'}</div></main><aside class="story-circle-side"><section class="story-circle-side-card"><div class="story-circle-side-title">Community Pulse</div><div class="story-circle-stat"><span>Updates</span><b>${posts.length}</b></div><div class="story-circle-stat"><span>Authors active</span><b>${totalAuthors}</b></div><div class="story-circle-stat"><span>Reactions</span><b>${totalReactions}</b></div></section><section class="story-circle-side-card"><div class="story-circle-side-title">What belongs here?</div><div class="story-circle-side-copy">New releases, chapter activity, author updates, reactions, and reader discussions. No author bios, portfolio sections, or publishing controls here.</div></section><section class="story-circle-side-card"><div class="story-circle-side-title">Need the author?</div><div class="story-circle-side-copy">Choose <b>VIEW AUTHOR</b> on a post to open the dedicated Author Profile.</div></section></aside></div></div>`,'story-circle-overlay');
+  document.getElementById('story-circle-close').onclick=close;
+  const feed=document.getElementById('story-circle-feed');
+  const filter=(mode='all')=>{const q=(document.getElementById('story-circle-search')?.value||'').trim().toLowerCase();feed.querySelectorAll('.story-circle-card').forEach(el=>{const matchMode=mode==='all'||(mode==='following'?followingIds.includes(el.dataset.scAuthor):mode==='popular'?Number((reactionMap[el.dataset.timelineId]||[]).length)>0:el.dataset.scType===mode);const matchText=!q||el.dataset.scText.includes(q);el.style.display=matchMode&&matchText?'':'none'})};
+  document.querySelectorAll('.story-circle-tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.story-circle-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter(b.dataset.filter)});
+  document.getElementById('story-circle-search').oninput=()=>filter(document.querySelector('.story-circle-tab.active')?.dataset.filter||'all');
+  feed.querySelectorAll('.sc-read').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));
+  feed.querySelectorAll('.sc-author').forEach(b=>b.onclick=async()=>{const a=(window.__authorDirectory||[]).find(x=>x.id===b.dataset.authorId);if(a)openAuthorProfileInHub(a);else{const q=await sb.from('profiles').select('*').eq('id',b.dataset.authorId).maybeSingle();if(q.data)openAuthorProfileInHub({...q.data,__works:stories.filter(s=>s.owner_id===b.dataset.authorId)})}});
+  feed.querySelectorAll('.sc-react-open').forEach(b=>b.onclick=()=>{const box=document.getElementById(b.dataset.target);if(box){box.classList.toggle('open');if(box.classList.contains('open'))renderTimelineReactions(b.dataset.target.replace('sc-reactions-',''),b.dataset.target)}});
+  feed.querySelectorAll('.sc-comment-open').forEach(b=>b.onclick=()=>{const box=document.getElementById(b.dataset.target);if(box){box.classList.toggle('open');if(box.classList.contains('open')){const id=b.dataset.target.replace('sc-comments-','');renderFeatureComments('TIMELINE',id,b.dataset.target,'')}}});
+  feed.querySelectorAll('.sc-share').forEach(b=>b.onclick=()=>{const u=new URL(location.href);u.searchParams.set('storycircle',b.dataset.id);navigator.clipboard?.writeText(u.toString()).then(()=>notice('story-circle-share','Story Circle link copied.')).catch(()=>alert(u.toString()))});
+  feed.querySelectorAll('.story-circle-card').forEach((el,i)=>{el.dataset.timelineId=posts[i]?.id||''});
+  filter('all');
+}
 </script>
 
+<script>document.getElementById("nav-story-circle-btn")?.addEventListener("click",openStoryCircle);</script>
 </body>
 </html>
