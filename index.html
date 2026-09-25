@@ -3373,7 +3373,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 /* ===== STORY CIRCLE — COMMUNITY / DISCOVERY LAYER ===== */
 .nav-story-circle{border:0;background:transparent;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.16em;padding:30px 0;position:relative;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
 .nav-story-circle::after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:1px;background:var(--toffee);transition:.22s}.nav-story-circle:hover::after{right:0}
-.nav-story-circle-icon{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#8f6657}.nav-story-circle-icon svg{width:22px;height:22px}
+.nav-story-circle-icon{width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;color:#8b5f49;flex:0 0 25px}.nav-story-circle-icon svg{width:25px;height:25px;display:block;transition:transform .2s ease}.nav-story-circle:hover .nav-story-circle-icon svg{transform:translateY(-1px)}
 .story-circle-shell{width:min(1120px,100%);max-height:95vh;overflow:auto;background:#f4eee8;border-radius:24px;box-shadow:0 36px 110px rgba(30,18,14,.35)}
 .story-circle-head{position:sticky;top:0;z-index:12;padding:22px 25px 16px;background:rgba(255,253,249,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .story-circle-head-row{display:flex;justify-content:space-between;align-items:flex-start;gap:18px}.story-circle-kicker{font-size:9px;font-weight:900;letter-spacing:.23em;color:var(--toffee)}
@@ -3402,7 +3402,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
         Avanitaxx <span>Stories</span>
     </span>
 </a>
-  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button><button id="nav-story-circle-btn" class="nav-story-circle" type="button"><span class="nav-story-circle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 13.2c1.1 1.5 2.5 2.2 4.2 2.2 1.5 0 2.8-.5 3.8-1.6M9 9.5h.01M15 9.5h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>STORY CIRCLE</button></nav>
+  <nav class="navlinks" aria-label="Primary navigation"><button id="nav-ranking-btn" class="nav-policy-link" type="button">RANKING</button><button id="nav-dashboard-btn" class="nav-policy-link" type="button">DASHBOARD</button><button id="nav-story-circle-btn" class="nav-story-circle" type="button" aria-label="Open Story Circle"><span class="nav-story-circle-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M6.2 8.7c3.7-2.1 7.4-2 9.8.1v14.5c-2.5-2.1-6.2-2.2-9.8-.2V8.7Z" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/><path d="M25.8 8.7c-3.7-2.1-7.4-2-9.8.1v14.5c2.5-2.1 6.2-2.2 9.8-.2V8.7Z" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/><path d="M16 8.9v14.4" stroke="currentColor" stroke-width="1.35"/><path d="M4.5 16.1c-.2 4.9 2.2 8.6 6.5 10.7M27.5 16.1c.2 4.9-2.2 8.6-6.5 10.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".72"/></svg></span><span>STORY CIRCLE</span></button></nav>
   <div class="nav-actions">
     <input id="site-search" class="search" placeholder="Search stories or authors…" aria-label="Search stories or authors"><button id="header-soundroom-btn" class="header-soundroom-btn" type="button" title="Avanitaxx Soundroom" aria-label="Avanitaxx Soundroom"><span>◉</span></button>
     <button id="notify-btn" class="header-icon-btn hidden" type="button" title="Notifications" aria-label="Notifications"><span>🔔</span><i id="notify-badge" class="badge hidden">0</i></button>
@@ -5630,6 +5630,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <script id="avx-story-circle-v1-js">
 /* STORY CIRCLE is intentionally a discovery/community surface. It does not duplicate author profiles or the author publishing composer. */
 async function openStoryCircle(){
+  const loadingHtml='<div class="story-circle-shell"><header class="story-circle-head"><div class="story-circle-head-row"><div><div class="story-circle-kicker">AVANITAXX STORIES</div><h2 class="story-circle-title">Story Circle</h2><div class="story-circle-sub">Community discovery for story releases, chapter activity, reactions, and discussions.</div></div><button class="story-circle-close" id="story-circle-close" type="button" aria-label="Close">×</button></div></header><div class="story-circle-body"><main class="story-circle-main"><div class="story-circle-empty">Loading community updates…</div></main></div></div>';
+  open(loadingHtml,'story-circle-overlay');
+  document.getElementById('story-circle-close')?.addEventListener('click',close);
+  try{
   const [postsQ, storiesQ]=await Promise.all([
     sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(80),
     sb.from('stories').select('id,title,cover_url,share_slug,published,updated_at,owner_id').eq('published',true).order('updated_at',{ascending:false}).limit(80)
@@ -5670,9 +5674,30 @@ async function openStoryCircle(){
   feed.querySelectorAll('.sc-share').forEach(b=>b.onclick=()=>{const u=new URL(location.href);u.searchParams.set('storycircle',b.dataset.id);navigator.clipboard?.writeText(u.toString()).then(()=>notice('story-circle-share','Story Circle link copied.')).catch(()=>alert(u.toString()))});
   feed.querySelectorAll('.story-circle-card').forEach((el,i)=>{el.dataset.timelineId=posts[i]?.id||''});
   filter('all');
+  }catch(err){
+    console.error('Story Circle failed to open:',err);
+    open('<div class="story-circle-shell"><header class="story-circle-head"><div class="story-circle-head-row"><div><div class="story-circle-kicker">AVANITAXX STORIES</div><h2 class="story-circle-title">Story Circle</h2><div class="story-circle-sub">The community feed could not be loaded right now.</div></div><button class="story-circle-close" id="story-circle-close" type="button">×</button></div></header><div class="story-circle-body"><main class="story-circle-main"><div class="story-circle-empty">Please try opening Story Circle again.</div></main></div></div>','story-circle-overlay');
+    document.getElementById('story-circle-close')?.addEventListener('click',close);
+  }
 }
 </script>
 
-<script>document.getElementById("nav-story-circle-btn")?.addEventListener("click",openStoryCircle);</script>
+<script id="avx-story-circle-click-repair">
+(function(){
+  function bindStoryCircle(){
+    const b=document.getElementById("nav-story-circle-btn");
+    if(!b || b.dataset.storyCircleBound) return;
+    b.dataset.storyCircleBound="1";
+    b.addEventListener("click",function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(typeof window.openStoryCircle === "function") window.openStoryCircle();
+    });
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded",bindStoryCircle);
+  else bindStoryCircle();
+  window.addEventListener("load",bindStoryCircle);
+})();
+</script>
 </body>
 </html>
