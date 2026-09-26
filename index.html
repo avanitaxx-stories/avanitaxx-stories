@@ -3910,6 +3910,17 @@ body{padding-bottom:78px}
   .author-music-topbar{gap:12px}
 }
 </style>
+<style id="avx-home-only-tools-fix">
+/* Home-only floating tools: hide while reading or viewing Ranking. */
+body.avx-nonhome-tools-hidden #home .avx-restored-tools,
+body.avx-nonhome-tools-hidden #home #chapter-promotion,
+body.avx-nonhome-tools-hidden #home .premium-cinematic-section,
+body.avx-nonhome-tools-hidden #home .avx-carousel-drawer {
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4162,7 +4173,7 @@ function avxObserveWindow(){
   setTimeout(()=>obs.disconnect(),1200);
 }
 function open(html,cls=''){overlay.innerHTML=html;overlay.className='open '+cls;overlay.setAttribute('aria-hidden','false');avxObserveWindow()}
-function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');if(location.search.includes('story=')||location.search.includes('author=')){history.replaceState(null,'',location.pathname);resetSEO()}}
+function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');avxSetNonHomeToolsHidden(false);if(location.search.includes('story=')||location.search.includes('author=')){history.replaceState(null,'',location.pathname);resetSEO()}}
 function notice(id,text,ok=false){const e=typeof id==='string'?document.getElementById(id):id;if(!e)return;e.textContent=text;e.className='status show '+(ok?'ok':'err')}
 function isTestStory(s){return /^(test|test book|sample book|demo book|untitled story)(\s*\d+)?$/i.test(String(s?.title||'').trim())}
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
@@ -4765,7 +4776,11 @@ async function libraryButtonHtml(storyId){
   return `<button class="btn alt library-save ${saved?'saved':''}" data-story-id="${esc(storyId)}" type="button">${saved?'✓ IN LIBRARY':'＋ ADD LIBRARY'}</button>`;
 }
 
+function avxSetNonHomeToolsHidden(hidden){
+  document.body.classList.toggle('avx-nonhome-tools-hidden',!!hidden);
+}
 async function openPublicStory(slugValue){
+  avxSetNonHomeToolsHidden(true);
   await refreshSession();
   if(!session){openAuth('reader');return;}
   let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}
@@ -5995,7 +6010,25 @@ async function openHomeCommunity(rooms=[]){
   const closeCommunity=()=>{stopRealtime();close();};
   document.getElementById('cm-close').onclick=closeCommunity; document.getElementById('cm-back').onclick=closeCommunity;
   document.getElementById('cm-info').onclick=()=>alert(`${activeRoom.name||'Avanitaxx Community'}\n\n${activeRoom.description||'A reader community on Avanitaxx Stories.'}\n\nInvitation-only · Real-time chat`);
-  document.getElementById('cm-invite').onclick=async()=>{if(!(await isOwnerAccount())){alert('Only the community owner can invite members.');return;}const email=prompt('Enter the reader email to invite:');if(!email)return;alert('Invite prepared for '+email+'. Add the reader in Community Members to grant access.');};
+  document.getElementById('cm-invite').onclick=async()=>{
+  if(!(await isOwnerAccount())){alert('Only the community owner can invite members.');return;}
+  const email=prompt('Enter the reader email to invite:');
+  if(!email)return;
+  const cleanEmail=email.trim().toLowerCase();
+  try{
+    const prof=await sb.from('profiles').select('id,email,display_name,pen_name').ilike('email',cleanEmail).maybeSingle();
+    if(prof.error){alert('Unable to find that reader account. Please make sure the reader has a profile with the same email.');return;}
+    if(!prof.data?.id){alert('No registered reader account was found for '+cleanEmail+'. They must create/sign in to an Avanitaxx account first.');return;}
+    const targetId=prof.data.id;
+    const member=await sb.from('owner_chat_members').upsert({room_id:activeRoom.id,user_id:targetId},{onConflict:'room_id,user_id'});
+    if(member.error){alert('The invitation could not be applied: '+member.error.message);return;}
+    const ownerName=session?.user?.email||'Community Owner';
+    const note=await sb.from('notifications').insert({user_id:targetId,message:`${ownerName} invited you to join ${activeRoom.name||'Avanitaxx Community'}.`,read:false});
+    if(note.error){alert('Member access was granted, but the notification could not be created: '+note.error.message);return;}
+    alert('Invitation sent. The reader now has Community Chat access and a notification has been added to their bell.');
+    await renderCommunity(activeRoom);
+  }catch(err){alert('Unable to send invitation. '+(err?.message||''));}
+};
   document.getElementById('cm-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.cm-room-item').forEach(b=>b.classList.toggle('hidden',q&&!b.textContent.toLowerCase().includes(q)));};
   document.querySelectorAll('.cm-room-item').forEach(btn=>btn.onclick=async()=>{const r=rooms.find(x=>String(x.id)===String(btn.dataset.roomId));if(!r)return;document.querySelectorAll('.cm-room-item').forEach(x=>x.classList.toggle('active',x===btn));await loadRoom(r);});
   await loadRoom(activeRoom);
@@ -6292,6 +6325,7 @@ function bindStatic(){
   byId('nav-ranking-btn')?.addEventListener('click',openRanking);byId('mobile-ranking-btn')?.addEventListener('click',openRanking);
 
   async function openRanking(){
+    avxSetNonHomeToolsHidden(true);
     open(`<div class="rank-panel rank-panel-v2">
       <div class="rank-head rank-head-v2">
         <div class="rank-heading-copy">
