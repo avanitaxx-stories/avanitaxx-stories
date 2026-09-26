@@ -3921,6 +3921,102 @@ body.avx-nonhome-tools-hidden #home .avx-carousel-drawer {
   pointer-events:none!important;
 }
 </style>
+
+<style id="avx-user-requested-social-mobile-only">
+/* Requested changes only: deep readable author areas + compact phone hero/profile + social quick links. */
+.author-sidebar-card .toffee-sidebar-title,
+.author-sidebar-card h3,
+.author-sidebar-card p,
+.author-sidebar-card .home-author-role,
+.quick-links-card .toffee-sidebar-title,
+.quick-links-card .author-social-empty,
+.author-social-shell .author-social-title,
+.author-social-shell .author-social-sub,
+.author-social-shell .author-social-card,
+.author-social-shell .author-social-card *,
+.author-social-shell .author-social-side-card,
+.author-social-shell .author-social-side-card *,
+.author-hub-panel .author-hub-title,
+.author-hub-panel .author-hub-sub,
+.author-hub-panel .author-hub-count,
+.avx-profile-editor h2,
+.avx-profile-editor p,
+.avx-profile-editor label,
+.avx-profile-editor .help,
+.avx-profile-editor .meta,
+.avx-profile-editor .status,
+.avx-profile-editor .social-editor-head,
+.avx-profile-editor .social-editor-head *{
+  color:#2b1b16!important;
+  opacity:1!important;
+}
+.toffee-view-all,
+.toffee-section-head h2,
+.toffee-latest-panel *,
+.toffee-featured-panel *,
+.author-social-quick-link,
+.author-social-quick-link *{
+  color:#2b1b16!important;
+  opacity:1!important;
+}
+.author-social-quick-link{
+  display:grid!important;
+  grid-template-columns:27px 1fr 18px;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  padding:13px 0;
+  border:0;
+  border-top:1px solid #eee5dc;
+  background:transparent;
+  text-align:left;
+  font-size:13px;
+  font-weight:700;
+}
+.author-social-quick-link:first-child{border-top:0}
+.author-social-quick-link:hover{color:#6d422d!important}
+.author-social-quick-link .quick-icon{color:#2b1b16!important}
+.author-social-empty{font-size:12px;line-height:1.6;padding:4px 0 12px}
+.social-editor-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:16px;margin-bottom:8px}
+.social-editor-head label{margin:0!important}
+.social-edit-row{display:grid;grid-template-columns:145px minmax(0,1fr) 76px;gap:8px;align-items:center;margin:8px 0}
+.social-edit-row .field{margin:0!important}
+.social-delete{padding:10px 8px!important;min-height:42px!important}
+.avx-profile-editor .field{color:#2b1b16!important;background:#fffdf9!important}
+.avx-profile-editor .field::placeholder{color:#6b5146!important;opacity:1!important}
+
+/* Deep text for the requested Featured / Latest areas. */
+#home .toffee-section-head h2,
+#home .toffee-view-all,
+#home .toffee-latest-panel h2,
+#home .toffee-latest-copy h3,
+#home .toffee-latest-copy p,
+#home .toffee-latest-date{color:#2b1b16!important;opacity:1!important}
+
+/* Mobile: reduce welcome hero and Your Author Profile without changing desktop layout. */
+@media(max-width:560px){
+  #home .toffee-home-grid{padding:22px 16px 4px!important}
+  #home .toffee-welcome{font-size:12px!important;letter-spacing:.14em!important}
+  #home .toffee-hero h1{font-size:clamp(34px,11vw,48px)!important;line-height:.94!important;margin:7px 0 12px!important}
+  #home .toffee-lead{font-size:12px!important;line-height:1.45!important;max-width:310px!important}
+  #home .toffee-actions{margin-top:15px!important;gap:8px!important}
+  #home .toffee-actions .btn{min-height:40px!important;padding:9px 14px!important;font-size:10px!important}
+  #home .toffee-hero-art{min-height:145px!important;height:145px!important}
+  #home .hero-book-espresso{transform:scale(.48) rotate(4deg)!important;bottom:-8px!important}
+  #home .coffee-cup{transform:scale(.48) rotate(-4deg)!important;right:3%!important;top:22px!important}
+  #home .coffee-saucer{transform:scale(.48) rotate(-3deg)!important;right:-2%!important;top:83px!important}
+  #home .coffee-feather{transform:scale(.48) rotate(-25deg)!important;left:30px!important;top:20px!important}
+  #home .author-sidebar-card{padding:13px!important}
+  #home .author-sidebar-card .toffee-sidebar-title{font-size:16px!important}
+  #home .home-author-avatar{width:76px!important;height:76px!important}
+  #home .author-sidebar-card h3{font-size:18px!important}
+  #home .author-sidebar-card p{font-size:11px!important;line-height:1.45!important}
+  #home .toffee-profile-btn{min-height:36px!important;font-size:10px!important}
+  .social-edit-row{grid-template-columns:1fr;gap:6px}
+  .social-delete{width:100%}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4075,13 +4171,10 @@ body.avx-nonhome-tools-hidden #home .avx-carousel-drawer {
         <button id="home-author-profile-btn" class="btn ghost toffee-profile-btn" type="button">Open My Profile</button>
       </section>
       <section class="toffee-sidebar-card quick-links-card">
-        <div class="toffee-sidebar-title">Quick Links</div>
+        <div class="toffee-sidebar-title">Author Social Links</div>
         <div class="toffee-short-rule"></div>
-        <div class="toffee-quick-links">
-          <button id="quick-all-stories" type="button"><span class="quick-icon">▣</span><span>All Stories</span><b>›</b></button>
-          <button id="quick-popular" type="button"><span class="quick-icon">♨</span><span>Popular Stories</span><b>›</b></button>
-          <button id="quick-latest" type="button"><span class="quick-icon">◷</span><span>Latest Updates</span><b>›</b></button>
-          <button id="quick-favorites" type="button"><span class="quick-icon">♡</span><span>My Favorites</span><b>›</b></button>
+        <div id="author-social-quick-links" class="toffee-quick-links">
+          <div class="author-social-empty">Sign in to add your social media links.</div>
         </div>
       </section>
     </aside>
@@ -4475,10 +4568,11 @@ async function renderHomeAuthorSidebar(stories=[]){
     bioEl.textContent='Sign in to view your author profile.';
     avatarEl.innerHTML='<span>?</span>';
     if(btn)btn.textContent='Sign In';
+    avxRenderHomeSocialLinks(null);
     return;
   }
   try{
-    const r=await sb.from('profiles').select('pen_name,display_name,bio,avatar_url').eq('id',session.user.id).maybeSingle();
+    const r=await sb.from('profiles').select('pen_name,display_name,bio,avatar_url,social_url').eq('id',session.user.id).maybeSingle();
     const a=r.data||{};
     const name=a.pen_name||a.display_name||session.user.email?.split('@')[0]||'Author';
     nameEl.textContent=name;
@@ -4486,12 +4580,14 @@ async function renderHomeAuthorSidebar(stories=[]){
     bioEl.textContent=a.bio||'Your author profile is shown here because this is the account currently signed in.';
     avatarEl.innerHTML=a.avatar_url?`<img src="${esc(a.avatar_url)}" alt="${esc(name)}" loading="lazy">`:`<span>${esc(name.trim().slice(0,1).toUpperCase()||'A')}</span>`;
     if(btn)btn.textContent='Open My Profile';
+    avxRenderHomeSocialLinks(a);
   }catch(e){
     const name=session.user.email?.split('@')[0]||'Author';
     nameEl.textContent=name; roleEl.textContent='Author';
     bioEl.textContent='Your author profile is shown here for the signed-in account.';
     avatarEl.innerHTML=`<span>${esc(name.slice(0,1).toUpperCase()||'A')}</span>`;
     if(btn)btn.textContent='Open My Profile';
+    avxRenderHomeSocialLinks({social_url:null});
   }
 }
 async function loadHome(){
@@ -4650,8 +4746,9 @@ async function loadPublicAuthorProfile(stories=[],targetBox=null,forcedAuthorId=
   const displayName=profile.pen_name||profile.display_name||'AVANITAXX';
   const bio=profile.bio||'Author of stories about love, secrets, danger, and unforgettable characters.';
   const timeline=tr.error?[]:(tr.data||[]);
-  const social=profile.social_url
-    ? `<div class="author-social-v3"><a href="${esc(profile.social_url)}" target="_blank" rel="noopener noreferrer">SOCIAL MEDIA ↗</a></div>`
+  const socialLinks=avxParseSocialLinks(profile.social_url);
+  const social=socialLinks.length
+    ? `<div class="author-social-v3">${socialLinks.map(x=>`<a href="${esc(avxNormalizeSocialUrl(x.url))}" target="_blank" rel="noopener noreferrer"><span>${esc(avxSocialIcon(x.platform))}</span> ${esc(x.platform||'SOCIAL MEDIA')} ↗</a>`).join('')}</div>`
     : '';
 
   const timelineHtml=timeline.length
@@ -5268,15 +5365,80 @@ function openImageCropper(file,ratio=1,title='Crop image'){
     img.onerror=()=>reject(new Error('Could not read image.'));img.src=url;
   });
 }
+function avxParseSocialLinks(raw){
+  if(!raw)return [];
+  try{
+    const x=JSON.parse(raw);
+    if(Array.isArray(x))return x.filter(v=>v&&v.url);
+  }catch(e){}
+  return [{platform:'Social Media',url:String(raw)}];
+}
+function avxNormalizeSocialUrl(url){
+  let u=String(url||'').trim();
+  if(!u)return '';
+  if(!/^https?:\/\//i.test(u))u='https://'+u;
+  return u;
+}
+function avxSocialIcon(platform){
+  const p=String(platform||'').toLowerCase();
+  if(p.includes('facebook'))return 'f';
+  if(p.includes('instagram'))return '◎';
+  if(p.includes('tiktok'))return '♪';
+  if(p.includes('youtube'))return '▶';
+  if(p.includes('x')||p.includes('twitter'))return '𝕏';
+  if(p.includes('threads'))return '@';
+  return '↗';
+}
+function avxRenderHomeSocialLinks(profile){
+  const box=document.getElementById('author-social-quick-links');
+  if(!box)return;
+  const links=avxParseSocialLinks(profile?.social_url);
+  if(!links.length){
+    box.innerHTML='<div class="author-social-empty">No social media links added yet.</div>';
+    return;
+  }
+  box.innerHTML=links.map(x=>`<a class="author-social-quick-link" href="${esc(avxNormalizeSocialUrl(x.url))}" target="_blank" rel="noopener noreferrer"><span class="quick-icon">${esc(avxSocialIcon(x.platform))}</span><span>${esc(x.platform||'Social Media')}</span><b>↗</b></a>`).join('');
+}
+function avxSocialRowsHtml(links){
+  const rows=links.length?links:[{platform:'Facebook',url:''}];
+  return rows.map((x,i)=>`<div class="social-edit-row" data-social-row="${i}">
+    <select class="field social-platform"><option ${x.platform==='Facebook'?'selected':''}>Facebook</option><option ${x.platform==='Instagram'?'selected':''}>Instagram</option><option ${x.platform==='TikTok'?'selected':''}>TikTok</option><option ${x.platform==='YouTube'?'selected':''}>YouTube</option><option ${x.platform==='X / Twitter'?'selected':''}>X / Twitter</option><option ${x.platform==='Threads'?'selected':''}>Threads</option><option ${!['Facebook','Instagram','TikTok','YouTube','X / Twitter','Threads'].includes(x.platform)?'selected':''}>Other</option></select>
+    <input class="field social-url" type="url" placeholder="https://..." value="${esc(x.url||'')}">
+    <button class="btn alt social-delete" type="button" title="Delete social link">DELETE</button>
+  </div>`).join('');
+}
 async function openProfileEditor(){
   await refreshSession();if(!session){openAuth('reader');return}
   const r=await sb.from('profiles').select('*').eq('id',session.user.id).maybeSingle(),p=r.data||{};
   profileAvatarCropFile=null;profileCoverCropFile=null;
-  open(`<div class="modal" style="width:min(760px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta">Your profile photo and banner are visible in the Authors & Readers Corner. Crop either image before saving.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><label>SOCIAL MEDIA LINK</label><input id="pf-social" class="field" type="url" placeholder="https://..." value="${esc(p.social_url||'')}"></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button></div>`);
+  const socialLinks=avxParseSocialLinks(p.social_url);
+  open(`<div class="modal avx-profile-editor" style="width:min(800px,100%)"><button class="close" id="profile-close">×</button><div class="kicker">AUTHORS & READERS CORNER</div><h2>Edit your profile</h2><p class="meta avx-deep-copy">Your profile photo, banner, bio, and social media links are visible on your author profile. Add, edit, delete, then save your links.</p><div id="profile-status" class="status"></div><div class="profile-grid"><div><label>PEN NAME</label><input id="pf-pen" class="field" value="${esc(p.pen_name||'')}" placeholder="Your pen name"><label>DISPLAY NAME</label><input id="pf-name" class="field" value="${esc(p.display_name||'')}" placeholder="Your display name"><label>DESCRIPTION / BIO</label><textarea id="pf-bio" class="field">${esc(p.bio||'')}</textarea><div class="social-editor-head"><div><label>SOCIAL MEDIA LINKS</label><div class="help avx-deep-copy">Add the author's Facebook, Instagram, TikTok, YouTube, X, Threads, or another direct profile link.</div></div><button id="add-social-link" class="btn alt" type="button">＋ ADD</button></div><div id="social-links-editor">${avxSocialRowsHtml(socialLinks)}</div></div><div><label>PROFILE PHOTO</label><input id="pf-avatar" class="field" type="file" accept="image/*"><div id="pf-avatar-preview" style="margin-top:9px">${p.avatar_url?`<img class="upload-preview" src="${esc(p.avatar_url)}" alt="Profile photo preview">`:'<div class="help avx-deep-copy">No profile photo yet.</div>'}</div><label style="margin-top:14px">BANNER COVER</label><input id="pf-cover" class="field" type="file" accept="image/*"><div id="pf-cover-preview" style="margin-top:9px">${p.cover_url?`<img class="upload-preview banner" src="${esc(p.cover_url)}" alt="Banner preview">`:'<div class="help avx-deep-copy">No banner cover yet.</div>'}</div></div></div><button class="btn" id="save-profile" style="width:100%;margin-top:18px">SAVE PROFILE</button></div>`);
   document.getElementById('profile-close').onclick=close;
+  const socialBox=document.getElementById('social-links-editor');
+  document.getElementById('add-social-link').onclick=()=>{
+    const div=document.createElement('div');
+    div.innerHTML=avxSocialRowsHtml([{platform:'Facebook',url:''}]);
+    const row=div.firstElementChild;
+    socialBox.appendChild(row);
+    row.querySelector('.social-delete').onclick=()=>row.remove();
+  };
+  socialBox.querySelectorAll('.social-edit-row').forEach(row=>row.querySelector('.social-delete').onclick=()=>row.remove());
   document.getElementById('pf-avatar').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileAvatarCropFile=await openImageCropper(f,1,'Crop Profile Photo');if(profileAvatarCropFile){const u=URL.createObjectURL(profileAvatarCropFile);document.getElementById('pf-avatar-preview').innerHTML=`<img class="upload-preview" src="${u}" alt="Cropped profile photo">`}}catch(err){notice('profile-status',err.message||String(err))}};
   document.getElementById('pf-cover').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{profileCoverCropFile=await openImageCropper(f,16/6,'Crop Banner Cover');if(profileCoverCropFile){const u=URL.createObjectURL(profileCoverCropFile);document.getElementById('pf-cover-preview').innerHTML=`<img class="upload-preview banner" src="${u}" alt="Cropped banner preview">`}}catch(err){notice('profile-status',err.message||String(err))}};
-  document.getElementById('save-profile').onclick=async()=>{try{notice('profile-status','Saving…',true);let avatar=p.avatar_url||null,cover=p.cover_url||null;if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:document.getElementById('pf-social').value.trim()||null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});if(u.error)throw u.error;notice('profile-status','Profile saved successfully.',true);await loadHome();setTimeout(openAuthorHub,500)}catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}};
+  document.getElementById('save-profile').onclick=async()=>{
+    try{
+      notice('profile-status','Saving…',true);
+      let avatar=p.avatar_url||null,cover=p.cover_url||null;
+      if(profileAvatarCropFile)avatar=await uploadImage('author-media',profileAvatarCropFile,'avatar-');
+      if(profileCoverCropFile)cover=await uploadImage('author-media',profileCoverCropFile,'banner-');
+      const socialRows=[...document.querySelectorAll('#social-links-editor .social-edit-row')].map(row=>({platform:row.querySelector('.social-platform')?.value||'Social Media',url:avxNormalizeSocialUrl(row.querySelector('.social-url')?.value||'')})).filter(x=>x.url);
+      const payload={id:session.user.id,pen_name:document.getElementById('pf-pen').value.trim()||null,display_name:document.getElementById('pf-name').value.trim()||null,bio:document.getElementById('pf-bio').value.trim()||null,social_url:socialRows.length?JSON.stringify(socialRows):null,avatar_url:avatar,cover_url:cover,updated_at:new Date().toISOString()};
+      const u=await sb.from('profiles').upsert(payload,{onConflict:'id'});
+      if(u.error)throw u.error;
+      notice('profile-status','Profile saved successfully.',true);
+      await loadHome();setTimeout(openAuthorHub,500);
+    }catch(e){notice('profile-status','Could not save profile: '+(e.message||e))}
+  };
 }
 
 /* ===== FOLLOWER UPDATE NOTIFICATIONS ===== */
@@ -6288,10 +6450,6 @@ function bindToffeeHome(){
   document.getElementById('home-author-profile-btn')?.addEventListener('click',()=>{
     if(session&&typeof openAuthorHome==='function') openAuthorHome(); else if(typeof openAuthorHub==='function') openAuthorHub(); else openAuth('author');
   });
-  document.getElementById('quick-all-stories')?.addEventListener('click',()=>document.getElementById('recent')?.scrollIntoView({behavior:'smooth'}));
-  document.getElementById('quick-popular')?.addEventListener('click',()=>document.getElementById('featured-books')?.scrollIntoView({behavior:'smooth'}));
-  document.getElementById('quick-latest')?.addEventListener('click',()=>document.getElementById('home-latest')?.scrollIntoView({behavior:'smooth'}));
-  document.getElementById('quick-favorites')?.addEventListener('click',()=>session?showAccount():openAuth('reader'));
   document.querySelectorAll('.toffee-view-all[data-view-all]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const type=a.dataset.viewAll;if(type==='genres'){document.getElementById('recent')?.scrollIntoView({behavior:'smooth',block:'start'});return}openAllStories(type)}));
 }
 function bindStatic(){
