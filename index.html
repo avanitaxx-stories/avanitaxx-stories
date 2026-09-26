@@ -4154,6 +4154,124 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 #home .avx-restored-tools{z-index:10030!important}
 @media(max-width:760px){#home .avx-restored-tools #home-chat-btn{width:54px!important;height:54px!important}.community-messenger{max-width:100vw!important}}
 </style>
+
+<!-- FINAL USER REQUEST FIX: MUSIC UPLOAD + MOBILE COMMUNITY CHAT -->
+<style id="avx-final-music-community-fix">
+  /* 1) Community Chat: the bubble disappears completely while the chat is open. */
+  body.avx-tools-modal-open #home .avx-restored-tools{
+    display:none!important;
+  }
+  body.avx-tools-modal-open #home #home-chat-btn{
+    display:none!important;
+  }
+
+  /* 2) Desktop: keep a proper centered chat window. */
+  #overlay.open:has(.community-messenger){
+    padding:12px!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  #overlay.open:has(.community-messenger) .community-messenger{
+    width:min(1120px,calc(100vw - 24px))!important;
+    height:min(88dvh,820px)!important;
+    min-height:0!important;
+    max-height:none!important;
+    border-radius:24px!important;
+    overflow:hidden!important;
+  }
+
+  /* 3) Phone: make Community Chat a true app-like full-screen view.
+        No top clipping, no tiny desktop-style window. */
+  @media(max-width:760px){
+    #overlay.open:has(.community-messenger){
+      inset:0!important;
+      padding:0!important;
+      align-items:stretch!important;
+      justify-content:stretch!important;
+      overflow:hidden!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger{
+      width:100%!important;
+      max-width:none!important;
+      height:100dvh!important;
+      max-height:none!important;
+      min-height:0!important;
+      border-radius:0!important;
+      margin:0!important;
+      box-shadow:none!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger .cm-head{
+      height:calc(68px + env(safe-area-inset-top))!important;
+      min-height:calc(68px + env(safe-area-inset-top))!important;
+      padding-top:calc(8px + env(safe-area-inset-top))!important;
+      padding-left:10px!important;
+      padding-right:10px!important;
+      box-sizing:border-box!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger .cm-layout{
+      height:calc(100dvh - 68px - env(safe-area-inset-top))!important;
+      min-height:0!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger .cm-main{
+      min-height:0!important;
+      height:100%!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger .cm-message-scroll{
+      min-height:0!important;
+      height:0!important;
+      flex:1 1 auto!important;
+      overflow-y:auto!important;
+      -webkit-overflow-scrolling:touch!important;
+      padding-bottom:12px!important;
+    }
+    #overlay.open:has(.community-messenger) .community-messenger .cm-compose{
+      padding-bottom:calc(8px + env(safe-area-inset-bottom))!important;
+    }
+  }
+
+  /* 4) Upload status/button: clearly show real upload progress state,
+        instead of the old misleading "Optimizing…" state. */
+  #sound-upload-btn:disabled{
+    opacity:.62!important;
+    cursor:wait!important;
+    transform:none!important;
+  }
+  #sound-upload-status{
+    font-weight:700!important;
+  }
+</style>
+
+<script id="avx-final-music-community-fix-js">
+(function(){
+  function syncChatBubble(){
+    const overlay=document.getElementById('overlay');
+    const chat=overlay?.querySelector('.community-messenger');
+    const home=document.getElementById('home');
+    if(!home)return;
+    const open=!!chat && overlay?.classList.contains('open');
+    home.classList.toggle('avx-community-chat-open',open);
+    const tools=home.querySelector('.avx-restored-tools');
+    const bubble=document.getElementById('home-chat-btn');
+    if(open){
+      if(tools)tools.style.setProperty('display','none','important');
+      if(bubble)bubble.style.setProperty('display','none','important');
+    }
+  }
+
+  function init(){
+    syncChatBubble();
+    new MutationObserver(syncChatBubble).observe(document.body,{
+      childList:true,
+      subtree:true,
+      attributes:true,
+      attributeFilter:['class','style']
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5688,29 +5806,98 @@ async function renderFeatureComments(type,id,boxId,ownerId){
   box.querySelectorAll('.fc-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this comment?'))return;const q=await sb.from('feature_comments').delete().eq('id',b.dataset.id);if(q.error)alert(q.error.message);else renderFeatureComments(type,id,boxId,ownerId)});
 }
 
-async function optimizeAudioFile(file){
-  if(!file||!file.type.startsWith('audio/'))return file;
-  // Re-encode in-browser to Opus when MediaRecorder supports it. This reduces storage
-  // while preserving a browser-playable track. If unsupported, safely keep the original.
-  try{
-    const AC=window.AudioContext||window.webkitAudioContext;if(!AC||!window.MediaRecorder)return file;
-    const ctx=new AC();const sourceBuffer=await ctx.decodeAudioData(await file.arrayBuffer());
-    const sampleRate=Math.min(44100,sourceBuffer.sampleRate||44100),offline=new OfflineAudioContext(1,Math.ceil(sourceBuffer.duration*sampleRate),sampleRate);
-    const src=offline.createBufferSource();src.buffer=sourceBuffer;const gain=offline.createGain();gain.gain.value=1;src.connect(gain).connect(offline.destination);src.start();const rendered=await offline.startRendering();
-    const streamDest=ctx.createMediaStreamDestination();const liveSrc=ctx.createBufferSource();liveSrc.buffer=rendered;liveSrc.connect(streamDest);const mime=['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/webm'].find(x=>MediaRecorder.isTypeSupported(x));if(!mime){ctx.close();return file;}
-    const chunks=[];const rec=new MediaRecorder(streamDest.stream,{mimeType:mime,audioBitsPerSecond:96000});const done=new Promise((resolve,reject)=>{rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onerror=()=>reject(rec.error||new Error('Audio encoding failed.'));rec.onstop=resolve});rec.start();liveSrc.start();liveSrc.onended=()=>rec.stop();await done;ctx.close();const blob=new Blob(chunks,{type:mime});if(!blob.size||blob.size>=file.size*.98)return file;const ext=mime.includes('ogg')?'ogg':'webm';return new File([blob],(file.name||'soundtrack').replace(/\.[^.]+$/,'')+'.'+ext,{type:mime});
-  }catch(e){console.warn('Audio optimization skipped:',e);return file}
-}
+/* MUSIC UPLOAD FIX
+   Do not decode/re-encode the whole audio file in the browser before upload.
+   That old flow could appear frozen on "Optimizing music and cover…" for large
+   files or formats the browser handled poorly. Upload the original audio directly
+   and keep the cover upload direct as well; Supabase/storage remains responsible
+   for serving the uploaded asset efficiently.
+*/
 async function uploadSoundroomTrack(){
   if(!session){openAuth('author');return}
-  const input=document.getElementById('sound-upload-file'),coverInput=document.getElementById('sound-upload-cover'),status=document.getElementById('sound-upload-status');const file=input?.files?.[0];if(!file){notice(status,'Choose a music/audio file first.');return}
+  const input=document.getElementById('sound-upload-file'),
+        coverInput=document.getElementById('sound-upload-cover'),
+        status=document.getElementById('sound-upload-status'),
+        button=document.getElementById('sound-upload-btn');
+  const file=input?.files?.[0];
+  if(!file){notice(status,'Choose a music/audio file first.');return}
+
+  const coverFile=coverInput?.files?.[0]||null;
+  const title=(document.getElementById('sound-upload-title')?.value||file.name.replace(/\.[^.]+$/,'')).trim()||'Untitled soundtrack';
+  const caption=(document.getElementById('sound-upload-caption')?.value||'Songs behind the stories.').trim();
+
+  const oldText=button?.textContent||'UPLOAD TO SOUNDROOM';
   try{
-    notice(status,'Optimizing music and cover…',true);const audio=await optimizeAudioFile(file);const coverFile=coverInput?.files?.[0];const cover=coverFile?await optimizeImageFile(coverFile,900,.78):null;
-    const ext=(audio.name.split('.').pop()||'webm').toLowerCase();const audioPath=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const au=await sb.storage.from('owner-media').upload(audioPath,audio,{upsert:false,contentType:audio.type||'audio/webm',cacheControl:'31536000'});if(au.error)throw au.error;const mediaUrl=sb.storage.from('owner-media').getPublicUrl(audioPath).data.publicUrl;
-    let coverUrl=null;if(cover){const cp=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}-cover.webp`;const cu=await sb.storage.from('owner-media').upload(cp,cover,{upsert:false,contentType:'image/webp',cacheControl:'31536000'});if(cu.error)throw cu.error;coverUrl=sb.storage.from('owner-media').getPublicUrl(cp).data.publicUrl}
-    const q=await sb.from('owner_timeline_media').insert({owner_id:session.user.id,media_type:'audio',title:(document.getElementById('sound-upload-title')?.value||file.name.replace(/\.[^.]+$/,'')).trim()||'Untitled soundtrack',caption:(document.getElementById('sound-upload-caption')?.value||'Songs behind the stories.').trim(),media_url:mediaUrl,cover_url:coverUrl,published:true});if(q.error)throw q.error;
-    notice(status,'Music uploaded successfully.',true);await loadSoundroom();if(document.getElementById('author-music-tab')){setTimeout(renderAuthorMusicList,350)}else{setTimeout(openSoundroomModal,450)}
-  }catch(e){notice(status,'Upload failed: '+(e.message||String(e)))}
+    if(button){button.disabled=true;button.textContent='UPLOADING…'}
+    notice(status,'Uploading music…',true);
+
+    const base=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const audioExt=(file.name.split('.').pop()||'mp3').toLowerCase().replace(/[^a-z0-9]/g,'')||'mp3';
+    const audioPath=`${base}.${audioExt}`;
+
+    let coverPath=null;
+    if(coverFile){
+      const coverExt=(coverFile.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+      coverPath=`${base}-cover.${coverExt}`;
+    }
+
+    notice(status,coverFile?'Uploading music and cover…':'Uploading music…',true);
+
+    const jobs=[
+      sb.storage.from('owner-media').upload(audioPath,file,{
+        upsert:false,
+        contentType:file.type||'application/octet-stream',
+        cacheControl:'31536000'
+      })
+    ];
+    if(coverFile){
+      jobs.push(sb.storage.from('owner-media').upload(coverPath,coverFile,{
+        upsert:false,
+        contentType:coverFile.type||'image/jpeg',
+        cacheControl:'31536000'
+      }));
+    }
+
+    const results=await Promise.all(jobs);
+    const audioUpload=results[0];
+    if(audioUpload?.error)throw audioUpload.error;
+    const coverUpload=results[1];
+    if(coverUpload?.error)throw coverUpload.error;
+
+    const mediaUrl=sb.storage.from('owner-media').getPublicUrl(audioPath).data.publicUrl;
+    const coverUrl=coverPath?sb.storage.from('owner-media').getPublicUrl(coverPath).data.publicUrl:null;
+
+    notice(status,'Saving soundtrack…',true);
+    const q=await sb.from('owner_timeline_media').insert({
+      owner_id:session.user.id,
+      media_type:'audio',
+      title,
+      caption,
+      media_url:mediaUrl,
+      cover_url:coverUrl,
+      published:true
+    });
+    if(q.error)throw q.error;
+
+    notice(status,'Music uploaded successfully.',true);
+    if(input)input.value='';
+    if(coverInput)coverInput.value='';
+    const coverBox=document.getElementById('sound-cover-preview');
+    const audioName=document.getElementById('sound-audio-name');
+    if(coverBox)coverBox.innerHTML='<span>♫</span>';
+    if(audioName)audioName.textContent='No audio selected.';
+
+    await loadSoundroom();
+    if(document.getElementById('author-music-tab')){
+      setTimeout(renderAuthorMusicList,350);
+    }else{
+      setTimeout(openSoundroomModal,450);
+    }
+  }catch(e){
+    notice(status,'Upload failed: '+(e.message||String(e)));
+  }finally{
+    if(button){button.disabled=false;button.textContent=oldText}
+  }
 }
 let soundroomTracks=[];let soundroomIndex=0;
 function soundroomTime(sec){if(!isFinite(sec)||sec<0)return '0:00';const m=Math.floor(sec/60),ss=Math.floor(sec%60).toString().padStart(2,'0');return `${m}:${ss}`}
