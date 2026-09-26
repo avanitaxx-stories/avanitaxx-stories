@@ -305,7 +305,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 #author-btn.hidden{display:none!important}
 .music-vault-public{display:grid;gap:10px}.public-music-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.public-music-card audio{width:100%;margin-top:10px}
 /* ===== AVANITAXX SOUNDROOM ===== */
-.soundroom-player{position:fixed;right:24px;bottom:24px;z-index:500;display:flex;align-items:flex-end;gap:10px;filter:drop-shadow(0 18px 38px rgba(55,35,27,.16))}.soundroom-player.hidden{display:none!important}.soundroom-disc{width:58px;height:58px;border-radius:50%;border:1px solid rgba(74,48,37,.16);background:radial-gradient(circle at 50% 50%,#f6d9d5 0 13%,#4a3025 14% 20%,#8d5f4e 21% 56%,#2e211c 57% 67%,#a8795b 68% 70%,#fffdf8 71% 100%);display:grid;place-items:center;padding:0;position:relative;flex:none;box-shadow:0 10px 28px rgba(55,35,27,.15);transition:.25s transform}.soundroom-disc:hover{transform:scale(1.06)}.soundroom-disc::after{content:"";position:absolute;inset:-5px;border:1px solid rgba(168,121,91,.22);border-radius:50%;animation:soundroomSpin 7s linear infinite;animation-play-state:paused}.soundroom-disc-glyph{font-size:10px;color:#fffdf8;opacity:.95}.soundroom-player.playing .soundroom-disc,.soundroom-player.playing .soundroom-disc::after{animation-play-state:running}.soundroom-player.playing .soundroom-disc{animation:soundroomSpin 8s linear infinite}.soundroom-panel{width:min(330px,calc(100vw - 105px));background:rgba(255,253,248,.97);backdrop-filter:blur(16px);border:1px solid rgba(74,48,37,.12);border-radius:22px;padding:14px 15px;display:none}.soundroom-player.expanded .soundroom-panel{display:block}.soundroom-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee)}.soundroom-title{font:400 18px/1.15 Georgia,serif;margin-top:4px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-caption{font-size:10px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-minimize{border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;padding:0 4px}.soundroom-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin:13px 0 8px}.soundroom-controls button{width:30px;height:30px;border:0;border-radius:50%;background:#f0dcd9;color:var(--brown);font-weight:900}.soundroom-controls .soundroom-play{width:40px;height:40px;background:var(--brown);color:#fff}.soundroom-progress{display:grid;grid-template-columns:34px 1fr 34px;gap:7px;align-items:center;font-size:8px;color:var(--muted)}.soundroom-progress input{width:100%;accent-color:var(--toffee)}.soundroom-player audio{display:none}@keyframes soundroomSpin{to{transform:rotate(360deg)}}
+.soundroom-player{position:fixed;left:24px;bottom:24px;z-index:500;display:flex;align-items:flex-end;gap:10px;filter:drop-shadow(0 18px 38px rgba(55,35,27,.16))}.soundroom-player.hidden{display:none!important}.soundroom-disc{width:58px;height:58px;border-radius:50%;border:1px solid rgba(74,48,37,.16);background:radial-gradient(circle at 50% 50%,#f6d9d5 0 13%,#4a3025 14% 20%,#8d5f4e 21% 56%,#2e211c 57% 67%,#a8795b 68% 70%,#fffdf8 71% 100%);display:grid;place-items:center;padding:0;position:relative;flex:none;box-shadow:0 10px 28px rgba(55,35,27,.15);transition:.25s transform}.soundroom-disc:hover{transform:scale(1.06)}.soundroom-disc::after{content:"";position:absolute;inset:-5px;border:1px solid rgba(168,121,91,.22);border-radius:50%;animation:soundroomSpin 7s linear infinite;animation-play-state:paused}.soundroom-disc-glyph{font-size:10px;color:#fffdf8;opacity:.95}.soundroom-player.playing .soundroom-disc,.soundroom-player.playing .soundroom-disc::after{animation-play-state:running}.soundroom-player.playing .soundroom-disc{animation:soundroomSpin 8s linear infinite}.soundroom-panel{width:min(330px,calc(100vw - 105px));background:rgba(255,253,248,.97);backdrop-filter:blur(16px);border:1px solid rgba(74,48,37,.12);border-radius:22px;padding:14px 15px;display:none}.soundroom-player.expanded .soundroom-panel{display:block}.soundroom-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.soundroom-eyebrow{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee)}.soundroom-title{font:400 18px/1.15 Georgia,serif;margin-top:4px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-caption{font-size:10px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.soundroom-minimize{border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;padding:0 4px}.soundroom-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin:13px 0 8px}.soundroom-controls button{width:30px;height:30px;border:0;border-radius:50%;background:#f0dcd9;color:var(--brown);font-weight:900}.soundroom-controls .soundroom-play{width:40px;height:40px;background:var(--brown);color:#fff}.soundroom-progress{display:grid;grid-template-columns:34px 1fr 34px;gap:7px;align-items:center;font-size:8px;color:var(--muted)}.soundroom-progress input{width:100%;accent-color:var(--toffee)}.soundroom-player audio{display:block;width:100%;height:36px;margin-top:10px;opacity:1;pointer-events:auto}@keyframes soundroomSpin{to{transform:rotate(360deg)}}
 /* ===== AVANITAXX READER — BOOK MODE ===== */
 .reader.book-reader{width:min(1120px,100%);max-height:96vh;overflow:auto;background:transparent;padding:0;box-shadow:none}
 .reader-book-shell{background:var(--reader-paper,#fffdf8);border:1px solid rgba(74,48,37,.13);border-radius:28px;box-shadow:0 30px 90px rgba(35,23,18,.28);overflow:hidden}
@@ -340,7 +340,7 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 .home-pop{width:min(540px,100%);background:var(--white);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 35px 110px rgba(25,15,11,.38);position:relative}.home-pop-art{height:190px;background:linear-gradient(135deg,#6f4b3b,#d8aaa7);background-size:cover;background-position:center}.home-pop-copy{padding:24px}.home-pop-kicker{font-size:8px;font-weight:900;letter-spacing:.2em;color:var(--toffee);text-transform:uppercase}.home-pop h2{font:400 34px/1.02 Georgia,serif;margin:8px 0}.home-pop p{font:14px/1.7 Georgia,serif;color:var(--muted)}.home-pop-close{position:absolute;right:13px;top:11px;width:37px;height:37px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(40,28,23,.55);color:#fff;font-size:21px}.home-pop-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:700px){.home-community-grid{grid-template-columns:1fr}.reader-page-stage{padding:13px}.reader-page{padding:44px 25px;min-height:520px}.reader-page-content{font-size:17px}.reader-book-top{padding:18px}.reader-book-footer{padding:15px 18px}.reader-chapter-name{font-size:15px}.home-pop-art{height:150px}}
 .soundroom-public{display:grid;gap:10px}.soundroom-public-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fffdf8}.soundroom-public-card audio{width:100%;margin-top:10px}.soundroom-track-btn{margin-top:10px;border:1px solid var(--line);background:#f8eee9;border-radius:999px;padding:8px 12px;color:var(--brown);font-size:10px;font-weight:900;letter-spacing:.06em}.soundroom-track-btn:hover{background:#ead2cd}
-.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:none;display:block;line-height:1}.header-icon-btn .badge{right:-2px;top:-5px}@media(max-width:700px){.soundroom-player{right:14px;bottom:14px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
+.header-icon-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#fffdf9;color:var(--brown);display:inline-grid;place-items:center;position:relative;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-icon-btn>span{font-size:18px;transform:none;display:block;line-height:1}.header-icon-btn .badge{right:-2px;top:-5px}@media(max-width:700px){.soundroom-player{left:14px;right:auto;bottom:78px}.soundroom-player.expanded{left:14px;right:14px}.soundroom-player.expanded .soundroom-panel{width:auto;flex:1}.soundroom-disc{width:52px;height:52px}.header-icon-btn,.author-avatar-btn{width:40px;height:40px}}
 .header-soundroom-btn{width:43px;height:43px;border:1px solid rgba(74,48,37,.12);border-radius:50%;background:#4a3025;color:#fff;display:inline-grid;place-items:center;box-shadow:0 7px 20px rgba(55,35,27,.07);transition:.22s transform,.22s box-shadow}.header-soundroom-btn:hover{transform:translateY(-2px) rotate(8deg);box-shadow:0 12px 25px rgba(55,35,27,.12)}.header-soundroom-btn span{font-size:16px;display:block}.header-soundroom-btn.active span{animation:soundroomSpin 3.5s linear infinite}
 /* ===== AVANITAXX READER / RESPONSIVE READING FIX ===== */
 .reader.book-reader{width:min(1180px,calc(100vw - 28px));max-height:calc(100vh - 22px);overflow:auto}
@@ -3454,13 +3454,8 @@ footer .copyright{display:flex!important;flex-wrap:nowrap!important;gap:18px!imp
   body{overflow-x:hidden!important}
   .container{width:100%!important;max-width:none!important;padding-left:14px!important;padding-right:14px!important}
   .toffee-content-wrap{padding-top:14px!important}
-  .toffee-main-grid{display:block!important}
   .toffee-primary-column{min-width:0!important}
-  .toffee-sidebar{margin-top:16px!important}
-  .author-sidebar-card{padding:18px 16px!important;border-radius:18px!important}
-  #home-author-name{font-size:22px!important}
-  #home-author-bio{font-size:13px!important;line-height:1.65!important}
-  .toffee-profile-btn{font-size:11px!important}
+  /* Preserve the existing Author Profile/sidebar placement; this upgrade does not move it. */
   .toffee-author-mini-nav{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin-top:10px!important}
   .toffee-author-mini-nav button{min-height:40px!important;padding:7px 5px!important;font-size:9px!important;white-space:normal!important}
   .author-social-shell{width:100%!important;max-height:96vh!important;border-radius:18px!important}
@@ -3599,7 +3594,7 @@ body{background:#f8f1ea!important;color:var(--avx-deep)!important}
 #home #home-author-role{color:#6b4635!important}
 #home .author-sidebar-card .toffee-profile-btn{color:#fff!important;background:#4a281b!important;border-color:#4a281b!important}
 /* No Soundroom floating/header bubble */
-#header-soundroom-btn,#soundroom-player,#avx-floating-tools,#avx-float-sound{display:none!important}
+#avx-floating-tools,#avx-float-sound{display:none!important}
 /* Footer: always visible, high contrast */
 footer,footer *{color:#fff!important}
 footer{background:#2b1710!important;border-top:1px solid rgba(255,255,255,.12)!important}
@@ -3759,6 +3754,42 @@ footer::before{color:rgba(43,27,22,.045)!important}
   .panel:has(.writer-lounge) .writer-lounge{grid-template-columns:1fr!important;min-height:auto!important}
   .panel:has(.writer-lounge) .writer-sidebar{min-height:auto!important}
 }
+/* ===== FINAL MOBILE NAV / BOOK ICON POLISH ===== */
+.genre-icon{font-family:Georgia,serif!important;font-size:18px!important;font-weight:700!important;color:#6f493d!important;background:#f0dcd9!important}
+.home-pop-kicker,.home-pop h2,.home-pop p{color:#2b1b16!important}.home-pop-kicker{font-weight:900!important}
+@media(max-width:1080px){.site-header .navlinks{display:flex!important;position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}}
+.avx-mobile-nav{display:none}
+@media(max-width:700px){
+.site-header{overflow:visible!important}.site-header .nav{padding-bottom:6px!important}.site-header .logo-title{font-size:18px!important}.site-header .nav-actions{gap:4px!important}.site-header .search{display:none!important}.site-header .nav-actions .btn{display:inline-flex!important;min-width:70px!important;justify-content:center!important;font-size:8px!important}
+.avx-mobile-nav{position:fixed;left:10px;right:10px;bottom:10px;z-index:9000;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:7px;background:rgba(255,253,249,.96);backdrop-filter:blur(14px);border:1px solid rgba(74,48,37,.12);border-radius:16px;box-shadow:0 14px 40px rgba(45,28,21,.18)}
+.avx-mobile-nav button{border:0;background:transparent;color:#2b1b16;padding:8px 4px;border-radius:11px;font-size:9px;font-weight:900;letter-spacing:.03em;display:flex;flex-direction:column;align-items:center;gap:3px}.avx-mobile-nav button:active,.avx-mobile-nav button.active{background:#f1ddda}.avx-mobile-nav .micon{font-size:17px;line-height:1}
+/* ===== MOBILE BOOK NAV — PREMIUM ===== */
+@media(max-width:700px){
+  body{padding-bottom:78px!important}
+  .site-header{position:sticky!important;top:0!important;z-index:8500!important;background:rgba(255,253,249,.96)!important;backdrop-filter:blur(16px)!important}
+  .site-header .nav{min-height:58px!important;padding:7px 12px!important}
+  .site-header .logo{display:flex!important;min-width:0!important;flex:1 1 auto!important}
+  .site-header .logo-title{font-size:16px!important}
+  .site-header .nav-actions{gap:4px!important}
+  .site-header .nav-actions .btn.alt{font-size:8px!important;padding:8px 9px!important}
+  .site-header .header-mobile-ranking{display:none!important}
+  .avx-mobile-nav{bottom:8px!important;left:8px!important;right:8px!important;grid-template-columns:repeat(4,1fr)!important;padding:6px!important;border-radius:18px!important}
+  .avx-mobile-nav button{min-height:48px!important;font-size:8px!important;letter-spacing:.07em!important;text-transform:uppercase!important}
+  .avx-mobile-nav .micon{font-size:18px!important}
+  .avx-mobile-nav button.active{background:#ead4cf!important;color:#2b1b16!important;box-shadow:inset 0 0 0 1px rgba(74,48,37,.08)!important}
+}
+@media(max-width:380px){.site-header .logo-title{font-size:14px!important}.site-header .reader-btn{font-size:7px!important}.avx-mobile-nav button{font-size:7px!important}}
+.genre-icon{font-family:Georgia,serif!important;font-weight:700!important;line-height:1!important}
+.genre-icon[data-book-icon]{font-size:18px!important}
+.home-pop-kicker{color:#4b241c!important;font-size:11px!important;letter-spacing:.14em!important;font-weight:900!important}
+.home-pop h2{color:#24130d!important;text-shadow:none!important}
+.home-pop p{color:#392820!important;font-weight:600!important}
+.home-pop-actions .btn{font-weight:900!important}
+.soundroom-player audio{display:block!important;width:100%!important;height:38px!important;margin-top:10px!important;opacity:1!important;pointer-events:auto!important;position:static!important}
+.soundroom-player .soundroom-play{cursor:pointer!important}
+
+body{padding-bottom:78px}
+}
 </style>
 <script>
 (function(){
@@ -3894,7 +3925,7 @@ footer::before{color:rgba(43,27,22,.045)!important}
   <nav class="navlinks" aria-label="Primary navigation">
   <a class="toffee-nav-active" href="#home"><span class="nav-glyph">⌂</span> Home</a>
   <a href="#recent"><span class="nav-glyph">▣</span> Browse</a>
-  <a href="#recent"><span class="nav-glyph">✦</span> Genres</a>
+  <a href="#recent"><span class="nav-glyph">📚</span> Genres</a>
   <button id="nav-ranking-btn" type="button"><span class="nav-glyph">♛</span> Ranking</button>
   <button id="nav-author-hub-btn" type="button"><span class="nav-glyph">♙</span> Author Hub</button>
 </nav>
@@ -3916,6 +3947,12 @@ footer::before{color:rgba(43,27,22,.045)!important}
     <button id="reader-btn" class="btn alt" type="button">SIGN IN</button>
   </div>
 </div><div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div></header>
+<nav class="avx-mobile-nav" aria-label="Mobile navigation">
+  <button type="button" data-mobile-nav="home"><span class="micon">⌂</span>Home</button>
+  <button type="button" data-mobile-nav="browse"><span class="micon">▣</span>Browse</button>
+  <button type="button" data-mobile-nav="genres"><span class="micon">📚</span>Genres</button>
+  <button type="button" data-mobile-nav="ranking"><span class="micon">📖</span>Ranking</button>
+</nav>
 
 <main id="home" class="toffee-home">
 <section class="toffee-hero">
@@ -4055,7 +4092,7 @@ footer::before{color:rgba(43,27,22,.045)!important}
 </footer>
 <div id="overlay" aria-hidden="true"></div>
 <div id="home-pop-anchor"></div>
-<audio id="soundroom-audio" preload="metadata" aria-hidden="true" style="display:none"></audio>
+<audio id="soundroom-audio" preload="metadata" aria-label="Soundroom music player"></audio>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
@@ -4364,18 +4401,18 @@ function genreBookCard(s){
 function renderGenreShelves(stories){
   const box=document.getElementById('genre-shelves');if(!box)return;
   const genres=[
-    {key:'romance',icon:'🦢📖',name:'Romance',note:'Love stories, passion, and unforgettable hearts.'},
-    {key:'mafia',icon:'🦅',name:'Mafia',note:'Dangerous men, power, secrets, and obsession.'},
-    {key:'vampire',icon:'☾🦇',name:'Vampire',note:'Dark immortal worlds and forbidden desire.'},
-    {key:'fantasy',icon:'🌌',name:'Fantasy',note:'Magic, supernatural worlds, and extraordinary love.'},
-    {key:'erotic',icon:'18+',name:'Erotic',note:'Mature stories for adult readers.'}
+    {key:'romance',icon:'♡',name:'Romance',note:'Love stories, passion, and unforgettable hearts.'},
+    {key:'mafia',icon:'♜',name:'Mafia',note:'Dangerous men, power, secrets, and obsession.'},
+    {key:'vampire',icon:'☾',name:'Vampire',note:'Dark immortal worlds and forbidden desire.'},
+    {key:'fantasy',icon:'✦',name:'Fantasy',note:'Magic, supernatural worlds, and extraordinary love.'},
+    {key:'erotic',icon:'▣',name:'Erotic',note:'Mature stories for adult readers.'}
   ];
   const html=genres.map(g=>{
     const books=stories.filter(s=>storyHasGenre(s,g.key));
     if(!books.length)return '';
     return `<section class="genre-shelf" data-genre="${g.key}">
       <button class="genre-shelf-head genre-shelf-toggle" type="button" aria-expanded="false">
-        <span><span class="genre-title-row"><span class="genre-icon" aria-hidden="true">▤</span><h3>${g.name}</h3></span><span class="genre-shelf-note">${g.note}</span></span>
+        <span><span class="genre-title-row"><span class="genre-icon" data-book-icon="${g.key}" aria-hidden="true">${g.icon}</span><h3>${g.name}</h3></span><span class="genre-shelf-note">${g.note}</span></span>
         <span class="genre-count">${books.length} ${books.length===1?'BOOK':'BOOKS'} <b class="genre-toggle-mark">+</b></span>
       </button>
       <div class="genre-track" hidden>${books.map(genreBookCard).join('')}</div>
@@ -5360,12 +5397,79 @@ async function uploadSoundroomTrack(){
 }
 let soundroomTracks=[];let soundroomIndex=0;
 function soundroomTime(sec){if(!isFinite(sec)||sec<0)return '0:00';const m=Math.floor(sec/60),ss=Math.floor(sec%60).toString().padStart(2,'0');return `${m}:${ss}`}
+function ensureSoundroomPlayer(){
+  if(document.getElementById('soundroom-player')) return;
+  const wrap=document.createElement('div');
+  wrap.id='soundroom-player';
+  wrap.className='soundroom-player hidden';
+  wrap.innerHTML=`
+    <div class="soundroom-panel" aria-label="Soundroom player">
+      <div class="soundroom-top">
+        <div><div class="soundroom-eyebrow">AVANITAXX SOUNDROOM</div><div class="soundroom-title" id="soundroom-title">Music</div><div class="soundroom-caption" id="soundroom-caption">Songs behind the stories.</div></div>
+        <button class="soundroom-minimize" id="soundroom-minimize" type="button" aria-label="Minimize music player">×</button>
+      </div>
+      <div class="soundroom-controls">
+        <button id="soundroom-prev" type="button" aria-label="Previous track">‹</button>
+        <button id="soundroom-play" class="soundroom-play" type="button" aria-label="Play music">▶</button>
+        <button id="soundroom-next" type="button" aria-label="Next track">›</button>
+      </div>
+      <div class="soundroom-progress"><span id="soundroom-current">0:00</span><input id="soundroom-range" type="range" min="0" max="100" value="0" aria-label="Music progress"><span id="soundroom-duration">0:00</span></div>
+      <audio id="soundroom-audio" preload="metadata" controls playsinline></audio>
+      <div id="soundroom-status" class="soundroom-caption" role="status" aria-live="polite"></div>
+    </div>
+    <button class="soundroom-disc" id="soundroom-disc" type="button" aria-label="Open music player"><span class="soundroom-disc-glyph">♫</span></button>`;
+  document.body.appendChild(wrap);
+}
 function soundroomSetExpanded(v){const p=document.getElementById('soundroom-player');if(!p)return;p.classList.toggle('expanded',!!v)}
-function soundroomRender(){const p=document.getElementById('soundroom-player'),a=document.getElementById('soundroom-audio');if(!p||!a)return;if(!soundroomTracks.length){p.classList.add('hidden');return}p.classList.remove('hidden');const t=soundroomTracks[soundroomIndex]||{};document.getElementById('soundroom-title').textContent=t.title||'Untitled soundtrack';document.getElementById('soundroom-caption').textContent=t.caption||'Songs behind the stories.';if(a.src!==t.media_url)a.src=t.media_url;document.getElementById('soundroom-play').textContent=a.paused?'▶':'Ⅱ'}
+function soundroomStatus(msg){const el=document.getElementById('soundroom-status');if(el)el.textContent=msg||''}
+function soundroomRender(){
+  ensureSoundroomPlayer();
+  const p=document.getElementById('soundroom-player'),a=document.getElementById('soundroom-audio');
+  if(!p||!a)return;
+  if(!soundroomTracks.length){p.classList.add('hidden');return}
+  p.classList.remove('hidden');
+  const t=soundroomTracks[soundroomIndex]||{};
+  document.getElementById('soundroom-title').textContent=t.title||'Untitled soundtrack';
+  document.getElementById('soundroom-caption').textContent=t.caption||'Songs behind the stories.';
+  soundroomStatus('');
+  if(a.src!==t.media_url){a.pause();a.removeAttribute('src');a.src=t.media_url||'';a.load()}
+  document.getElementById('soundroom-play').textContent=a.paused?'▶':'Ⅱ';
+}
 function soundroomLoadTracks(tracks){soundroomTracks=(tracks||[]).filter(x=>x&&x.media_url);soundroomIndex=0;soundroomRender()}
-function soundroomSelect(trackId){const i=soundroomTracks.findIndex(x=>x.id===trackId);if(i>=0){soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);const a=document.getElementById('soundroom-audio');a.play().catch(()=>{});}}
-function soundroomBind(){const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');if(!p||!a)return;disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));min.onclick=()=>soundroomSetExpanded(false);play.onclick=()=>{if(!a.src)return;if(a.paused)a.play().catch(()=>{});else a.pause()};prev.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};next.onclick=()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})};a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});a.addEventListener('ended',()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();a.play().catch(()=>{})}});a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration}}
-async function loadSoundroom(){const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);if(!r.error)soundroomLoadTracks(r.data||[])}
+async function soundroomSelect(trackId){
+  const i=soundroomTracks.findIndex(x=>x.id===trackId);
+  if(i<0)return;
+  soundroomIndex=i;soundroomRender();soundroomSetExpanded(true);
+  const a=document.getElementById('soundroom-audio');
+  if(!a?.src)return;
+  try{await a.play();}
+  catch(err){console.warn('Soundroom track failed to play:',err);soundroomStatus('Music could not play. Check that the owner-media bucket is public and the audio file is accessible.');}
+}
+function soundroomBind(){
+  ensureSoundroomPlayer();
+  const p=document.getElementById('soundroom-player'),disc=document.getElementById('soundroom-disc'),min=document.getElementById('soundroom-minimize'),play=document.getElementById('soundroom-play'),prev=document.getElementById('soundroom-prev'),next=document.getElementById('soundroom-next'),a=document.getElementById('soundroom-audio'),range=document.getElementById('soundroom-range');
+  if(!p||!a)return;
+  a.preload='metadata';a.volume=1;
+  a.addEventListener('error',()=>{console.warn('Soundroom audio error',a.error,a.currentSrc);soundroomStatus('Audio failed to load. Supabase Storage must serve this file from a public bucket, or the file needs to be re-uploaded.');});
+  a.addEventListener('canplay',()=>soundroomStatus(''));
+  disc.onclick=()=>soundroomSetExpanded(!p.classList.contains('expanded'));
+  min.onclick=()=>soundroomSetExpanded(false);
+  play.onclick=async()=>{if(!a.src)return;soundroomSetExpanded(true);try{if(a.paused)await a.play();else a.pause()}catch(err){console.warn('Soundroom playback failed:',err);soundroomStatus('Music could not play. Check the Supabase Storage file access.')}};
+  prev.onclick=async()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex-1+soundroomTracks.length)%soundroomTracks.length;soundroomRender();try{await a.play()}catch(err){soundroomStatus('Previous track could not play.')}};
+  next.onclick=async()=>{if(!soundroomTracks.length)return;soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();try{await a.play()}catch(err){soundroomStatus('Next track could not play.')}};
+  a.addEventListener('play',()=>{p.classList.add('playing');play.textContent='Ⅱ';byId('header-soundroom-btn')?.classList.add('active')});
+  a.addEventListener('pause',()=>{p.classList.remove('playing');play.textContent='▶';byId('header-soundroom-btn')?.classList.remove('active')});
+  a.addEventListener('ended',async()=>{if(soundroomTracks.length>1){soundroomIndex=(soundroomIndex+1)%soundroomTracks.length;soundroomRender();try{await a.play()}catch(e){}}});
+  a.addEventListener('loadedmetadata',()=>{document.getElementById('soundroom-duration').textContent=soundroomTime(a.duration)});
+  a.addEventListener('timeupdate',()=>{document.getElementById('soundroom-current').textContent=soundroomTime(a.currentTime);range.value=a.duration?(a.currentTime/a.duration)*100:0});
+  range.oninput=()=>{if(a.duration)a.currentTime=(Number(range.value)/100)*a.duration};
+}
+async function loadSoundroom(){
+  ensureSoundroomPlayer();
+  const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(30);
+  if(r.error){console.warn('Soundroom load failed:',r.error);soundroomTracks=[];soundroomStatus('Soundroom could not load music from Supabase.');return}
+  soundroomLoadTracks(r.data||[]);
+}
 
 async function editSoundroomTrack(trackId){
   if(!session?.user?.id)return openAuth('author');
@@ -5901,7 +6005,7 @@ async function maybeShowHomepageFeature(){
   const stories=await getPublished();if(!stories.length)return;
   const latest=stories.slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0))[0];
   const cover=latest.cover_url||'';
-  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">Featured on Avanitaxx Stories</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
+  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">THE HOT DOCTOR IN MY ROOM</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
   document.getElementById('home-pop-read').onclick=()=>{localStorage.setItem(key,'1');close();openPublicStory(latest.share_slug||latest.id)};
   document.getElementById('home-pop-later').onclick=()=>{localStorage.setItem(key,'1');close()};
   document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
@@ -6771,14 +6875,17 @@ async function avxRequestCommunityAccess(room){
       if(existing.data.status==='approved'){alert('Your community access is already approved.');return}
       if(existing.data.status==='pending'){alert('Your request is already waiting for the owner’s approval.');return}
     }
-    const q=await sb.from('owner_chat_join_requests').upsert({
+    const q=await sb.from('owner_chat_join_requests').insert({
       room_id:room.id,user_id:session.user.id,status:'pending',created_at:new Date().toISOString()
-    },{onConflict:'room_id,user_id'});
+    }).select('id,status').maybeSingle();
     if(q.error)throw q.error;
     alert('Request sent. The community owner will review and approve your request.');
   }catch(e){
-    console.error(e);
-    alert('Community access request could not be submitted yet. Please make sure the Community Join Requests table is enabled in Supabase.');
+    console.error('Community request failed:',e);
+    const msg=String(e?.message||e||'Unknown error');
+    alert(msg.toLowerCase().includes('row-level security')
+      ? 'Your request was blocked by Supabase RLS. The owner_chat_join_requests table needs an INSERT policy allowing authenticated users to create a request for their own user_id.'
+      : 'Unable to submit request right now. Please try again.');
   }
 }
 
@@ -7258,5 +7365,6 @@ const st=document.createElement('style');st.textContent=`
   };
 })();
 </script>
+<script>document.addEventListener('click',e=>{const b=e.target.closest?.('[data-mobile-nav]');if(!b)return;const type=b.dataset.mobileNav;document.querySelectorAll('.avx-mobile-nav button').forEach(x=>x.classList.toggle('active',x===b));if(type==='home'){window.scrollTo({top:0,behavior:'smooth'});return}if(type==='browse'){document.getElementById('recent')?.scrollIntoView({behavior:'smooth',block:'start'});return}if(type==='genres'){document.querySelector('.genre-library')?.scrollIntoView({behavior:'smooth',block:'start'});return}if(type==='ranking'){document.getElementById('nav-ranking-btn')?.click();return}});</script>
 </body>
 </html>
