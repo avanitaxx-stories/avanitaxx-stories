@@ -4229,8 +4229,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
     }
   }
 
-  /* 4) Upload status/button: clearly show real upload progress state,
-        instead of the old misleading "Optimizing…" state. */
+  /* 4) Keep the music upload button and status readable while uploading. */
   #sound-upload-btn:disabled{
     opacity:.62!important;
     cursor:wait!important;
@@ -5450,7 +5449,7 @@ async function openAuthorMusicTab(){
           <div id="sound-upload-status" class="status"></div>
           <div class="author-music-upload-actions">
             <button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button>
-            <span class="soundroom-upload-note">Audio is optimized when the browser supports it.</span>
+            <span class="soundroom-upload-note">Music uploads directly without browser-side audio conversion.</span>
           </div>
         </section>
 
@@ -5806,13 +5805,6 @@ async function renderFeatureComments(type,id,boxId,ownerId){
   box.querySelectorAll('.fc-delete').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this comment?'))return;const q=await sb.from('feature_comments').delete().eq('id',b.dataset.id);if(q.error)alert(q.error.message);else renderFeatureComments(type,id,boxId,ownerId)});
 }
 
-/* MUSIC UPLOAD FIX
-   Do not decode/re-encode the whole audio file in the browser before upload.
-   That old flow could appear frozen on "Optimizing music and cover…" for large
-   files or formats the browser handled poorly. Upload the original audio directly
-   and keep the cover upload direct as well; Supabase/storage remains responsible
-   for serving the uploaded asset efficiently.
-*/
 async function uploadSoundroomTrack(){
   if(!session){openAuth('author');return}
   const input=document.getElementById('sound-upload-file'),
@@ -6008,7 +6000,7 @@ async function deleteSoundroomTrack(trackId){
 async function openSoundroomModal(){
   document.body.classList.add('avx-tools-modal-open');
   const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(20);const tracks=r.error?[]:(r.data||[]);
-  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music is optimized in your browser when supported. Add a square cover so the track keeps its correct artwork.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><div class="soundroom-track-actions"><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}" type="button">PLAY</button>${session?.user?.id&&String(t.owner_id)===String(session.user.id)?`<button class="btn ghost soundroom-edit" data-id="${esc(t.id)}" type="button">EDIT</button><button class="btn danger soundroom-delete" data-id="${esc(t.id)}" type="button">DELETE</button>`:''}</div></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
+  open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music uploads directly in its original format. Add cover art to keep the track’s artwork with it.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><div class="soundroom-track-actions"><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}" type="button">PLAY</button>${session?.user?.id&&String(t.owner_id)===String(session.user.id)?`<button class="btn ghost soundroom-edit" data-id="${esc(t.id)}" type="button">EDIT</button><button class="btn danger soundroom-delete" data-id="${esc(t.id)}" type="button">DELETE</button>`:''}</div></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
   document.getElementById('soundroom-close').onclick=close;document.getElementById('sound-upload-btn')?.addEventListener('click',uploadSoundroomTrack);tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});document.querySelectorAll('.soundroom-edit').forEach(b=>b.onclick=()=>editSoundroomTrack(b.dataset.id));document.querySelectorAll('.soundroom-delete').forEach(b=>b.onclick=()=>deleteSoundroomTrack(b.dataset.id));
 }
 function bindSoundroomTrackButtons(){document.querySelectorAll('.soundroom-track-btn').forEach(b=>b.onclick=()=>soundroomSelect(b.dataset.trackId))}
