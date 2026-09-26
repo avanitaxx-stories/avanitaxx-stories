@@ -4073,6 +4073,73 @@ body.avx-non-home-tools #home-sound-btn{
 }
 </style>
 
+
+<style id="avx-community-advanced-upgrade-css">
+.cm-history-bar{display:flex;justify-content:center;padding:8px 0 2px}
+.cm-history-btn{border:1px solid #dfd0c5;background:#fffaf6;color:#4a3025;border-radius:999px;padding:7px 12px;font-size:10px;font-weight:900;letter-spacing:.05em;cursor:pointer}
+.cm-history-btn:hover{background:#f3e2da}
+.cm-member-panel{position:absolute;right:14px;top:62px;width:min(360px,calc(100% - 28px));max-height:min(520px,70vh);overflow:auto;z-index:12;background:#fffdf9;border:1px solid rgba(74,48,37,.14);border-radius:18px;box-shadow:0 18px 45px rgba(55,35,27,.18);padding:14px;display:none}
+.cm-member-panel.open{display:block}
+.cm-member-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+.cm-member-head b{font-size:12px;letter-spacing:.06em}
+.cm-member-row{display:flex;align-items:center;gap:9px;padding:8px 4px;border-bottom:1px solid #eee4dd}
+.cm-member-row:last-child{border-bottom:0}
+.cm-member-avatar{width:38px;height:38px;border-radius:50%;overflow:hidden;background:#ead6ce;color:#4a3025;display:grid;place-items:center;font-weight:900;flex:none}
+.cm-member-avatar img{width:100%;height:100%;object-fit:cover}
+.cm-member-copy{min-width:0;flex:1}
+.cm-member-name{font-size:12px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-member-meta{font-size:9px;color:#8c746a;margin-top:2px}
+.cm-member-actions{display:flex;gap:5px;flex:none}
+.cm-member-actions button{border:1px solid #decfc5;background:#fff;color:#4a3025;border-radius:999px;padding:6px 8px;font-size:8px;font-weight:900;cursor:pointer}
+.cm-member-actions button.following{background:#4a3025;color:#fff}
+.cm-settings{position:absolute;right:14px;top:62px;width:min(330px,calc(100% - 28px));z-index:13;background:#fffdf9;border:1px solid rgba(74,48,37,.14);border-radius:18px;box-shadow:0 18px 45px rgba(55,35,27,.18);padding:15px;display:none}
+.cm-settings.open{display:block}
+.cm-settings h3{margin:0 0 10px;font:700 18px Georgia,serif;color:#33231d}
+.cm-settings label{display:block;font-size:9px;font-weight:900;letter-spacing:.1em;color:#72584c;margin:10px 0 5px}
+.cm-settings input,.cm-settings select{width:100%;box-sizing:border-box;border:1px solid #dfd0c5;background:#fff;color:#33231d;border-radius:10px;padding:9px 10px;font:inherit}
+.cm-settings-actions{display:flex;gap:7px;margin-top:12px}.cm-settings-actions button{flex:1}
+.cm-theme-preview{height:48px;border-radius:12px;border:1px solid #dfd0c5;margin-top:8px}
+.cm-main{position:relative}
+@media(max-width:760px){
+  .cm-member-panel,.cm-settings{right:8px;top:58px;width:calc(100% - 16px)}
+  .cm-history-btn{font-size:9px}
+}
+</style>
+
+
+<style id="avx-community-final-hard-fix">
+/* FINAL: Music / Notes / Community are Home-only. */
+body:not(.avx-tools-home-visible) .avx-restored-tools,
+body.avx-tools-modal-open .avx-restored-tools,
+body.avx-non-home-tools .avx-restored-tools{
+  display:none!important;
+}
+body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools{
+  display:block!important;
+}
+.community-messenger,
+.community-messenger .cm-layout,
+.community-messenger .cm-main{
+  min-height:0!important;
+}
+.community-messenger .cm-message-scroll{
+  flex:1 1 auto!important;
+  height:0!important;
+  min-height:0!important;
+  overflow-y:scroll!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+.community-messenger .cm-history-bar{
+  position:sticky!important;
+  top:0!important;
+  z-index:5!important;
+  background:transparent!important;
+}
+#cm-owner-settings-btn{display:none}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4325,7 +4392,7 @@ function avxObserveWindow(){
   setTimeout(()=>obs.disconnect(),1200);
 }
 function open(html,cls=''){overlay.innerHTML=html;overlay.className='open '+cls;overlay.setAttribute('aria-hidden','false');avxObserveWindow()}
-function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');avxSetNonHomeToolsHidden(false);if(location.search.includes('story=')||location.search.includes('author=')){history.replaceState(null,'',location.pathname);resetSEO()}}
+function close(){overlay.className='';overlay.innerHTML='';overlay.setAttribute('aria-hidden','true');document.body.classList.remove('avx-tools-modal-open');avxSetNonHomeToolsHidden(false);if(location.search.includes('story=')||location.search.includes('author=')){history.replaceState(null,'',location.pathname);resetSEO()}}
 function notice(id,text,ok=false){const e=typeof id==='string'?document.getElementById(id):id;if(!e)return;e.textContent=text;e.className='status show '+(ok?'ok':'err')}
 function isTestStory(s){return /^(test|test book|sample book|demo book|untitled story)(\s*\d+)?$/i.test(String(s?.title||'').trim())}
 async function refreshSession(){const {data}=await sb.auth.getSession();session=data.session||null;updateAuthUI();return session}
@@ -5738,6 +5805,7 @@ async function deleteSoundroomTrack(trackId){
   openSoundroomModal();
 }
 async function openSoundroomModal(){
+  document.body.classList.add('avx-tools-modal-open');
   const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id').eq('published',true).eq('media_type','audio').order('created_at',{ascending:false}).limit(20);const tracks=r.error?[]:(r.data||[]);
   open(`<div class="modal feature-modal"><div class="feature-modal-head"><button class="close" id="soundroom-close" aria-label="Close Soundroom">×</button><div class="kicker">AVANITAXX SOUNDROOM</div><h2>Music behind the stories.</h2><p>Listen, discover, and leave a thought for the songs that live here.</p></div><div class="feature-modal-scroll"><div class="soundroom-upload-card"><div class="kicker">${session?'UPLOAD YOUR MUSIC':'AUTHOR UPLOAD'}</div><h3>Add a soundtrack</h3><p class="meta">Music is optimized in your browser when supported. Add a square cover so the track keeps its correct artwork.</p><div class="soundroom-upload-grid"><div><label>MUSIC FILE</label><input id="sound-upload-file" class="field" type="file" accept="audio/*"><label>TITLE</label><input id="sound-upload-title" class="field" placeholder="Song title"></div><div><label>COVER ART</label><input id="sound-upload-cover" class="field" type="file" accept="image/*"><label>CAPTION</label><input id="sound-upload-caption" class="field" placeholder="Songs behind the stories."></div></div><div id="sound-upload-status" class="status"></div><button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button></div><div>${tracks.length?tracks.map(t=>`<article><div class="feature-track-card"><div class="track-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#eadfd8">`:'♫'}</div><div class="track-main"><div class="track-title">${esc(t.title||'Untitled soundtrack')}</div><div class="track-caption">${esc(t.caption||'Songs behind the stories.')} • ${esc(formatDate(t.created_at))}</div></div><div class="soundroom-track-actions"><button class="btn alt soundroom-modal-play" data-id="${esc(t.id)}" type="button">PLAY</button>${session?.user?.id&&String(t.owner_id)===String(session.user.id)?`<button class="btn ghost soundroom-edit" data-id="${esc(t.id)}" type="button">EDIT</button><button class="btn danger soundroom-delete" data-id="${esc(t.id)}" type="button">DELETE</button>`:''}</div></div><div id="sound-comments-${t.id}" class="feature-comments"></div></article>`).join(''):'<div class="empty">No published soundtrack yet.</div>'}</div></div></div>`);
   document.getElementById('soundroom-close').onclick=close;document.getElementById('sound-upload-btn')?.addEventListener('click',uploadSoundroomTrack);tracks.forEach(t=>renderFeatureComments('soundroom',t.id,`sound-comments-${t.id}`,t.owner_id));document.querySelectorAll('.soundroom-modal-play').forEach(b=>b.onclick=()=>{soundroomSelect(b.dataset.id);soundroomSetExpanded(true)});document.querySelectorAll('.soundroom-edit').forEach(b=>b.onclick=()=>editSoundroomTrack(b.dataset.id));document.querySelectorAll('.soundroom-delete').forEach(b=>b.onclick=()=>deleteSoundroomTrack(b.dataset.id));
@@ -5941,6 +6009,7 @@ async function loadHomepageFeatures(){
   return {notes,rooms};
 }
 async function openHomeNotes(notes=[]){
+  document.body.classList.add('avx-tools-modal-open');
   if(!notes.length){
     const q=await sb.from('owner_timeline').select('*').eq('published',true).order('created_at',{ascending:false}).limit(50);
     notes=q.error?[]:(q.data||[]);
@@ -6103,13 +6172,21 @@ async function openHomeCommunity(rooms=[]){
   if(!rooms.length){alert('The community lounge is not open yet.');return}
 
   let activeRoom=rooms[0], replyTo=null, currentRows=[], channel=null, typingTimer=null, selectedFile=null;
+  let oldestLoadedAt=null, hasPrevious=true, loadingPrevious=false;
   const me=session?.user?.id||null;
+
+  /* Hide the Home-only utility tabs immediately while Community Chat is open. */
+  document.body.classList.add('avx-tools-modal-open');
+  const restoreHomeTools=()=>{
+    document.body.classList.remove('avx-tools-modal-open');
+  };
 
   const initials=p=>((p?.pen_name||p?.display_name||'R').trim().slice(0,1)||'R').toUpperCase();
   const avatar=p=>p?.avatar_url?`<img src="${esc(p.avatar_url)}" alt="" loading="lazy">`:esc(initials(p));
   const roomAvatar=r=>((r?.name||'A').trim().slice(0,1)||'A').toUpperCase();
 
-  const stopRealtime=()=>{ if(channel){try{sb.removeChannel(channel)}catch(e){} channel=null} };
+  const stopRealtime=()=>{if(channel){try{sb.removeChannel(channel)}catch(e){}channel=null}};
+
   const markSeen=async()=>{
     if(!me||!currentRows.length)return;
     const unread=currentRows.filter(x=>x.sender_id!==me);
@@ -6117,6 +6194,26 @@ async function openHomeCommunity(rooms=[]){
     const rows=unread.map(x=>({message_id:x.id,user_id:me,seen_at:new Date().toISOString()}));
     try{await sb.from('owner_chat_message_reads').upsert(rows,{onConflict:'message_id,user_id'});}catch(e){}
     document.querySelectorAll('.cm-message').forEach(el=>el.classList.remove('unread'));
+  };
+
+  const applyRoomTheme=(theme)=>{
+    const scroll=document.getElementById('cm-message-scroll');
+    if(!scroll)return;
+    const map={
+      paper:'linear-gradient(180deg,#f7f0eb,#f3ece7)',
+      rose:'linear-gradient(180deg,#f7e8e6,#f2dddd)',
+      cocoa:'linear-gradient(180deg,#4a352d,#2f241f)',
+      night:'linear-gradient(180deg,#26232a,#17151a)'
+    };
+    scroll.style.background=map[theme]||map.paper;
+    scroll.dataset.communityTheme=theme||'paper';
+  };
+
+  const loadRoomSettings=async(room)=>{
+    try{
+      const q=await sb.from('owner_chat_room_settings').select('theme_background').eq('room_id',room.id).maybeSingle();
+      applyRoomTheme(q.data?.theme_background||'paper');
+    }catch(e){applyRoomTheme('paper')}
   };
 
   const renderRows=async()=>{
@@ -6129,131 +6226,231 @@ async function openHomeCommunity(rooms=[]){
     }
     let lastDay='';
     list.innerHTML=currentRows.length?currentRows.map(x=>{
-      const mine=!!me&&x.sender_id===me, p=pmap[x.sender_id]||{};
+      const mine=!!me&&x.sender_id===me,p=pmap[x.sender_id]||{};
       const day=new Date(x.created_at).toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
-      let divider=''; if(day!==lastDay){lastDay=day;divider=`<div class="cm-date-divider">${esc(day)}</div>`;}
+      let divider='';if(day!==lastDay){lastDay=day;divider=`<div class="cm-date-divider">${esc(day)}</div>`}
       const reply=currentRows.find(r=>String(r.id)===String(x.reply_to));
-      const replyText=reply?(reply.message||'Photo'):'', replyAuthor=reply?(reply.author_name||'Member'):'';
-      const canDelete=mine || (activeRoom.owner_id===me);
+      const replyText=reply?(reply.message||'Photo'):'',replyAuthor=reply?(reply.author_name||'Member'):'';
+      const canDelete=mine||(activeRoom.owner_id===me);
       return `${divider}<div class="cm-message ${mine?'mine':''}" data-message-id="${esc(x.id)}">
         <div class="cm-avatar">${avatar(p)}</div><div class="cm-message-body">
-        ${!mine?`<div class="cm-sender">${esc(x.author_name||p.pen_name||p.display_name||'Reader')}${x.sender_id===activeRoom.owner_id?' · AVANITAXX':''}<span class="cm-online-dot" title="Active"></span></div>`:''}
+        ${!mine?`<div class="cm-sender">${esc(x.author_name||p.pen_name||p.display_name||'Reader')}${x.sender_id===activeRoom.owner_id?' · AVANITAXX':''}</div>`:''}
         <div class="cm-bubble-wrap"><div class="cm-bubble">
           ${reply?`<div class="cm-reply-quote"><b>Replying to ${esc(replyAuthor)}</b><span>${esc(replyText.slice(0,120))}</span></div>`:''}
           ${x.message?`<div class="cm-message-text">${esc(x.message).replace(/\n/g,'<br>')}</div>`:''}
           ${x.image_url?`<img class="cm-image" src="${esc(x.image_url)}" alt="Attached image" loading="lazy">`:''}
         </div><div class="cm-time">${formatDate(x.created_at)} ${mine?'· Seen':''}</div>
-        <div class="cm-actions"><button type="button" data-action="reply" data-id="${esc(x.id)}">↩ Reply</button>
-          <button type="button" data-action="react" data-id="${esc(x.id)}">👍</button>${canDelete?`<button type="button" data-action="unsend" data-id="${esc(x.id)}">Unsend</button>`:''}</div>
+        <div class="cm-actions"><button type="button" data-action="reply" data-id="${esc(x.id)}">↩ Reply</button><button type="button" data-action="react" data-id="${esc(x.id)}">👍</button>${canDelete?`<button type="button" data-action="unsend" data-id="${esc(x.id)}">Unsend</button>`:''}</div>
         <div class="cm-reactions" data-reactions-for="${esc(x.id)}"></div></div></div></div>`;
     }).join(''):`<div class="cm-empty"><div class="cm-empty-icon">💬</div><b>Start the conversation</b><span>Share a thought, ask a question, or talk about the stories.</span></div>`;
     await loadReactions();
-    const scroll=document.getElementById('cm-message-scroll'); if(scroll)scroll.scrollTop=scroll.scrollHeight;
     await markSeen();
   };
 
   const loadReactions=async()=>{
-    const ids=currentRows.map(x=>x.id).filter(Boolean); if(!ids.length)return;
+    const ids=currentRows.map(x=>x.id).filter(Boolean);if(!ids.length)return;
     try{
       const r=await sb.from('owner_chat_message_reactions').select('message_id,user_id,reaction').in('message_id',ids);
-      const grouped={}; (r.data||[]).forEach(x=>{(grouped[x.message_id]??=[]).push(x)});
+      const grouped={};(r.data||[]).forEach(x=>{(grouped[x.message_id]??=[]).push(x)});
       Object.entries(grouped).forEach(([id,arr])=>{
-        const el=document.querySelector(`[data-reactions-for="${CSS.escape(id)}"]`); if(!el)return;
-        const counts={}; arr.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);
+        const el=document.querySelector(`[data-reactions-for="${CSS.escape(id)}"]`);if(!el)return;
+        const counts={};arr.forEach(x=>counts[x.reaction]=(counts[x.reaction]||0)+1);
         el.innerHTML=Object.entries(counts).map(([emo,n])=>`<button type="button" class="cm-reaction-pill" data-reaction="${emo}" data-id="${esc(id)}">${emo} ${n}</button>`).join('');
       });
     }catch(e){}
   };
 
-  const setReply=(row)=>{replyTo=row; const box=document.getElementById('cm-replying'); if(box){box.innerHTML=`<span>Replying to <b>${esc(row.author_name||'Member')}</b>: ${esc((row.message||'Photo').slice(0,100))}</span><button type="button" id="cm-cancel-reply">×</button>`;box.classList.remove('hidden');document.getElementById('cm-cancel-reply').onclick=()=>{replyTo=null;box.classList.add('hidden')}};document.getElementById('cm-input')?.focus()};
+  const setReply=(row)=>{
+    replyTo=row;
+    const box=document.getElementById('cm-replying');
+    if(box){box.innerHTML=`<span>Replying to <b>${esc(row.author_name||'Member')}</b>: ${esc((row.message||'Photo').slice(0,100))}</span><button type="button" id="cm-cancel-reply">×</button>`;box.classList.remove('hidden');document.getElementById('cm-cancel-reply').onclick=()=>{replyTo=null;box.classList.add('hidden')}}
+    document.getElementById('cm-input')?.focus();
+  };
+
+  const loadPrevious=async()=>{
+    if(loadingPrevious||!hasPrevious||!oldestLoadedAt)return;
+    loadingPrevious=true;
+    const scroll=document.getElementById('cm-message-scroll');
+    const beforeHeight=scroll?.scrollHeight||0;
+    try{
+      const q=await sb.from('owner_chat_messages').select('*').eq('room_id',activeRoom.id).lt('created_at',oldestLoadedAt).order('created_at',{ascending:false}).limit(100);
+      const older=(q.data||[]).reverse();
+      if(q.error)throw q.error;
+      if(!older.length){hasPrevious=false}
+      else{
+        currentRows=[...older,...currentRows];
+        oldestLoadedAt=currentRows[0]?.created_at||oldestLoadedAt;
+        hasPrevious=older.length===100;
+        await renderRows();
+        if(scroll)scroll.scrollTop=Math.max(0,scroll.scrollHeight-beforeHeight);
+      }
+    }catch(e){console.warn('Could not load previous community messages',e)}
+    loadingPrevious=false;
+    const b=document.getElementById('cm-load-previous');if(b)b.textContent=hasPrevious?'LOAD PREVIOUS CHAT':'NO MORE PREVIOUS CHAT';
+  };
+
+  const renderMembers=async()=>{
+    const panel=document.getElementById('cm-member-panel');if(!panel)return;
+    try{
+      const ids=new Set([activeRoom.owner_id]);
+      const mem=await sb.from('owner_chat_members').select('user_id').eq('room_id',activeRoom.id);
+      (mem.data||[]).forEach(x=>x.user_id&&ids.add(x.user_id));
+      currentRows.forEach(x=>x.sender_id&&ids.add(x.sender_id));
+      const list=[...ids].filter(Boolean);
+      const p=await sb.from('profiles').select('id,display_name,pen_name,avatar_url').in('id',list);
+      const profiles=p.data||[];
+      const f={};
+      if(me&&profiles.length){
+        const fq=await sb.from('follows').select('author_id').eq('follower_id',me).in('author_id',profiles.map(x=>x.id));
+        (fq.data||[]).forEach(x=>f[x.author_id]=true);
+      }
+      panel.innerHTML=`<div class="cm-member-head"><b>COMMUNITY MEMBERS · ${profiles.length}</b><button class="cm-head-btn" id="cm-members-close" type="button">×</button></div>`+
+        (profiles.length?profiles.map(p=>`<div class="cm-member-row">
+          <div class="cm-member-avatar">${avatar(p)}</div>
+          <div class="cm-member-copy"><div class="cm-member-name">${esc(p.pen_name||p.display_name||'Reader')}${p.id===activeRoom.owner_id?' · OWNER':''}</div><div class="cm-member-meta">@${esc((p.display_name||p.pen_name||'reader').replace(/\s+/g,'').toLowerCase())}</div></div>
+          <div class="cm-member-actions"><button type="button" data-visit-member="${esc(p.id)}">VISIT</button>${me&&p.id!==me?`<button type="button" class="${f[p.id]?'following':''}" data-follow-member="${esc(p.id)}">${f[p.id]?'FOLLOWING':'FOLLOW'}</button>`:''}</div>
+        </div>`).join(''):'<div class="cm-member-meta">No community members to display yet.</div>');
+      document.getElementById('cm-members-close').onclick=()=>panel.classList.remove('open');
+      panel.querySelectorAll('[data-visit-member]').forEach(b=>b.onclick=async()=>{
+        panel.classList.remove('open');stopRealtime();restoreHomeTools();close();
+        try{const stories=await getPublished();await loadPublicAuthorProfile(stories,b.dataset.visitMember);}catch(e){console.warn('Could not open member profile',e)}
+      });
+      panel.querySelectorAll('[data-follow-member]').forEach(b=>b.onclick=async()=>{
+        if(!me)return;
+        const authorId=b.dataset.followMember;
+        const q=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',me).maybeSingle();
+        if(q.data){const d=await sb.from('follows').delete().eq('id',q.data.id);if(!d.error)b.textContent='FOLLOW',b.classList.remove('following')}
+        else{const i=await sb.from('follows').insert({author_id:authorId,follower_id:me});if(!i.error)b.textContent='FOLLOWING',b.classList.add('following')}
+      });
+    }catch(e){panel.innerHTML='<div class="cm-member-meta">Unable to load community profiles.</div>'}
+  };
+
+  const openOwnerSettings=async()=>{
+    if(!(me && (me===activeRoom.owner_id || await isOwnerAccount()))){alert('Only the community owner can change the community name or theme.');return}
+    const settings=document.getElementById('cm-settings');
+    if(!settings)return;
+    settings.classList.toggle('open');
+    if(settings.classList.contains('open')){
+      try{
+        const q=await sb.from('owner_chat_room_settings').select('theme_background').eq('room_id',activeRoom.id).maybeSingle();
+        document.getElementById('cm-theme').value=q.data?.theme_background||'paper';
+      }catch(e){}
+    }
+  };
+
+  const saveOwnerSettings=async()=>{
+    if(!(me && (me===activeRoom.owner_id || await isOwnerAccount())))return;
+    const name=document.getElementById('cm-edit-name').value.trim();
+    const theme=document.getElementById('cm-theme').value;
+    if(!name){alert('Community name cannot be empty.');return}
+    const upd=await sb.from('owner_chat_rooms').update({name}).eq('id',activeRoom.id).eq('owner_id',me).select('id,name,owner_id').maybeSingle();
+    if(upd.error){alert('Could not change community name: '+upd.error.message);return}
+    if(!upd.data){alert('The community name was not changed because the current account is not the room owner.');return}
+    const st=await sb.from('owner_chat_room_settings').upsert({room_id:activeRoom.id,owner_id:me,theme_background:theme,updated_at:new Date().toISOString()},{onConflict:'room_id'});
+    if(st.error){alert('Community name saved, but theme could not be saved: '+st.error.message);return}
+    activeRoom.name=name;
+    document.getElementById('cm-room-name').textContent=name;
+    document.getElementById('cm-room-avatar').textContent=roomAvatar(activeRoom);
+    applyRoomTheme(theme);
+    document.getElementById('cm-settings').classList.remove('open');
+    await renderMembers();
+  };
 
   const loadRoom=async(room)=>{
-    stopRealtime(); activeRoom=room; replyTo=null; selectedFile=null;
-    const m=await sb.from('owner_chat_messages').select('*').eq('room_id',room.id).order('created_at',{ascending:true}).limit(200);
-    currentRows=m.error?[]:(m.data||[]);
-    let isMember=false,isOwner=false;
-    if(me){isOwner=await isOwnerAccount(); if(!isOwner){const mm=await sb.from('owner_chat_members').select('id').eq('room_id',room.id).eq('user_id',me).maybeSingle();isMember=!!mm.data;}}
-    const canChat=!!me;
+    stopRealtime();activeRoom=room;replyTo=null;selectedFile=null;oldestLoadedAt=null;hasPrevious=true;
+    const m=await sb.from('owner_chat_messages').select('*').eq('room_id',room.id).order('created_at',{ascending:false}).limit(200);
+    currentRows=(m.data||[]).reverse();
+    oldestLoadedAt=currentRows[0]?.created_at||null;
+    hasPrevious=currentRows.length===200;
+    const isOwner=!!me&&(me===room.owner_id || await isOwnerAccount());
     document.getElementById('cm-room-name').textContent=room.name||'Avanitaxx Community';
     document.getElementById('cm-room-avatar').textContent=roomAvatar(room);
     document.getElementById('cm-room-status').innerHTML=`Community chat · <span class="cm-live-dot"></span> Live · Open to all signed-in readers`;
+    document.getElementById('cm-edit-name').value=room.name||'Avanitaxx Community';
+    document.getElementById('cm-owner-settings-btn').style.display=isOwner?'inline-grid':'none';
+    await loadRoomSettings(room);
+
     const composer=document.getElementById('cm-composer');
-    composer.innerHTML=canChat?`<div class="cm-replying hidden" id="cm-replying"></div><div class="cm-preview hidden" id="cm-preview"><img id="cm-preview-img" alt="Preview"><div><b id="cm-preview-name"></b><button type="button" id="cm-remove-file">Remove</button></div></div><div class="cm-input-row"><label class="cm-compose-icon cm-attach-label" title="Photo"><input id="cm-file" type="file" accept="image/*" hidden>＋</label><button class="cm-compose-icon" id="cm-emoji" type="button" title="Emoji">☺</button><div class="cm-input-wrap"><textarea id="cm-input" class="cm-input" rows="1" placeholder="Type a message…"></textarea><div class="cm-typing" id="cm-typing"></div></div><button class="cm-send" id="cm-send" type="button">➤</button></div><div class="cm-compose-help">Enter to send · Shift+Enter for new line</div>`:`<div class="cm-locked">🔒 Sign in to participate in this community chat.</div>`;
+    const canChat=!!me;
+    composer.innerHTML=canChat?`<div class="cm-replying hidden" id="cm-replying"></div><div class="cm-preview hidden" id="cm-preview"><img id="cm-preview-img" alt="Preview"><div><b id="cm-preview-name"></b><button type="button" id="cm-remove-file">Remove</button></div></div><div class="cm-input-row"><label class="cm-compose-icon cm-attach-label" title="Photo"><input id="cm-file" type="file" accept="image/*" hidden>＋</label><button class="cm-compose-icon" id="cm-emoji" type="button" title="Emoji">☺</button><div class="cm-input-wrap"><textarea id="cm-input" class="cm-input" rows="1" placeholder="Type a message…"></textarea></div><button class="cm-send" id="cm-send" type="button">➤</button></div>`:`<div class="cm-locked">🔒 Sign in to participate in this community chat.</div>`;
+    const history=document.getElementById('cm-history-bar');
+    if(history)history.innerHTML=hasPrevious?'<button class="cm-history-btn" id="cm-load-previous" type="button">↑ LOAD PREVIOUS CHAT</button>':'';
     await renderRows();
+    const scroll=document.getElementById('cm-message-scroll');if(scroll)scroll.scrollTop=scroll.scrollHeight;
 
     if(canChat){
-      const input=document.getElementById('cm-input');
-      const send=async()=>{
-        const message=input.value.trim(); if(!message&&!selectedFile)return;
-        send.disabled=true;
-        let image_url=null;
-        try{if(selectedFile)image_url=await uploadCommunityImage(selectedFile);}catch(e){alert('Image upload failed: '+(e.message||e));send.disabled=false;return;}
+      const input=document.getElementById('cm-input'),send=document.getElementById('cm-send');
+      const sendNow=async()=>{
+        const message=input.value.trim();if(!message&&!selectedFile)return;send.disabled=true;
+        let image_url=null;try{if(selectedFile)image_url=await uploadCommunityImage(selectedFile)}catch(e){alert('Image upload failed: '+(e.message||e));send.disabled=false;return}
         const authorName=(await avxGetAuthorName(me))||'Reader';
         const ins=await sb.from('owner_chat_messages').insert({room_id:room.id,owner_id:room.owner_id,author_name:authorName,message:message||null,sender_id:me,image_url,reply_to:replyTo?.id||null}).select('*').single();
-        if(ins.error){alert('Could not send message: '+ins.error.message);send.disabled=false;return;}
-        input.value=''; selectedFile=null; document.getElementById('cm-preview')?.classList.add('hidden'); replyTo=null; document.getElementById('cm-replying')?.classList.add('hidden'); send.disabled=false; await renderRows();
+        if(ins.error){alert('Could not send message: '+ins.error.message);send.disabled=false;return}
+        input.value='';selectedFile=null;document.getElementById('cm-preview')?.classList.add('hidden');replyTo=null;document.getElementById('cm-replying')?.classList.add('hidden');send.disabled=false;await loadRoom(room);
       };
-      document.getElementById('cm-send').onclick=send;
-      input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()} if(e.key==='Enter'||e.key==='Backspace')sendTyping(true)};
-      input.oninput=()=>{sendTyping(true)};
-      document.getElementById('cm-emoji').onclick=()=>{input.value+=' ❤️';input.focus();sendTyping(true)};
-      document.getElementById('cm-file').onchange=e=>{const f=e.target.files?.[0];if(!f)return;selectedFile=f;const preview=document.getElementById('cm-preview');document.getElementById('cm-preview-img').src=URL.createObjectURL(f);document.getElementById('cm-preview-name').textContent=f.name;preview.classList.remove('hidden');};
+      send.onclick=sendNow;input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendNow()}};
+      document.getElementById('cm-emoji').onclick=()=>{input.value+=' ❤️';input.focus()};
+      document.getElementById('cm-file').onchange=e=>{const f=e.target.files?.[0];if(!f)return;selectedFile=f;document.getElementById('cm-preview-img').src=URL.createObjectURL(f);document.getElementById('cm-preview-name').textContent=f.name;document.getElementById('cm-preview').classList.remove('hidden')};
       document.getElementById('cm-remove-file').onclick=()=>{selectedFile=null;document.getElementById('cm-file').value='';document.getElementById('cm-preview').classList.add('hidden')};
     }
 
     document.querySelectorAll('.cm-actions button').forEach(btn=>btn.onclick=async()=>{
-      const row=currentRows.find(x=>String(x.id)===String(btn.dataset.id)); if(!row)return;
-      if(btn.dataset.action==='reply'){setReply(row);return;}
-      if(btn.dataset.action==='react'){if(!me){alert('Please log in to react.');return;}const options=['❤️','😂','👍'];const reaction=prompt('Choose a reaction: ❤️  😂  👍', '👍');if(!options.includes(reaction))return;try{await sb.from('owner_chat_message_reactions').upsert({message_id:row.id,user_id:me,reaction},{onConflict:'message_id,user_id'});await loadReactions()}catch(e){alert('Reactions need the Community Chat SQL setup.')}}
-      if(btn.dataset.action==='unsend'){if(!confirm('Unsend this message?'))return;const d=await sb.from('owner_chat_messages').delete().eq('id',row.id);if(d.error)alert('Could not unsend: '+d.error.message);else{currentRows=currentRows.filter(x=>x.id!==row.id);await renderRows();}}
+      const row=currentRows.find(x=>String(x.id)===String(btn.dataset.id));if(!row)return;
+      if(btn.dataset.action==='reply'){setReply(row);return}
+      if(btn.dataset.action==='react'){if(!me){alert('Please log in to react.');return}const reaction=prompt('Choose a reaction: ❤️  😂  👍','👍');if(!['❤️','😂','👍'].includes(reaction))return;await sb.from('owner_chat_message_reactions').upsert({message_id:row.id,user_id:me,reaction},{onConflict:'message_id,user_id'});await loadReactions()}
+      if(btn.dataset.action==='unsend'){if(!confirm('Unsend this message?'))return;const d=await sb.from('owner_chat_messages').delete().eq('id',row.id);if(d.error)alert('Could not unsend: '+d.error.message);else{currentRows=currentRows.filter(x=>x.id!==row.id);await renderRows()}}
     });
-    document.querySelectorAll('.cm-reaction-pill').forEach(btn=>btn.onclick=async()=>{if(!me)return;try{await sb.from('owner_chat_message_reactions').upsert({message_id:btn.dataset.id,user_id:me,reaction:btn.dataset.reaction},{onConflict:'message_id,user_id'});await loadReactions()}catch(e){}});
+    document.querySelectorAll('.cm-reaction-pill').forEach(btn=>btn.onclick=async()=>{if(!me)return;await sb.from('owner_chat_message_reactions').upsert({message_id:btn.dataset.id,user_id:me,reaction:btn.dataset.reaction},{onConflict:'message_id,user_id'});await loadReactions()});
 
     channel=sb.channel('avx-community-'+room.id)
       .on('postgres_changes',{event:'INSERT',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${room.id}`},async payload=>{
-        if(!currentRows.some(x=>x.id===payload.new.id)){currentRows.push(payload.new);await renderRows();if(payload.new.sender_id!==me)showCommunityNewMessage(payload.new,room);}
+        if(!currentRows.some(x=>x.id===payload.new.id)){currentRows.push(payload.new);await renderRows();const s=document.getElementById('cm-message-scroll');if(s)s.scrollTop=s.scrollHeight;if(payload.new.sender_id!==me)showCommunityNewMessage(payload.new,room)}
       })
-      .on('postgres_changes',{event:'DELETE',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${room.id}`},async payload=>{currentRows=currentRows.filter(x=>x.id!==payload.old.id);await renderRows();})
+      .on('postgres_changes',{event:'DELETE',schema:'public',table:'owner_chat_messages',filter:`room_id=eq.${room.id}`},async payload=>{currentRows=currentRows.filter(x=>x.id!==payload.old.id);await renderRows()})
       .on('postgres_changes',{event:'INSERT',schema:'public',table:'owner_chat_message_reactions'},async()=>{await loadReactions()})
-      .on('postgres_changes',{event:'UPDATE',schema:'public',table:'owner_chat_typing',filter:`room_id=eq.${room.id}`},payload=>{if(payload.new.user_id!==me){const t=document.getElementById('cm-typing');if(t)t.textContent='Someone is typing…';setTimeout(()=>{if(t)t.textContent=''},2500)}})
-       .subscribe(status=>{const s=document.getElementById('cm-room-status');if(!s)return;if(status==='SUBSCRIBED')s.innerHTML='Community chat · <span class="cm-live-dot"></span> Live · Invite-only';if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')s.textContent='Community chat · Reconnecting…';});
+      .subscribe(status=>{const s=document.getElementById('cm-room-status');if(!s)return;if(status==='SUBSCRIBED')s.innerHTML='Community chat · <span class="cm-live-dot"></span> Live · Open to all signed-in readers';if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')s.textContent='Community chat · Reconnecting…'});
   };
 
-  const sendTyping=async active=>{
-    if(!me||!active||!activeRoom)return;
-    clearTimeout(typingTimer); typingTimer=setTimeout(()=>{},900);
-    try{await sb.from('owner_chat_typing').upsert({room_id:activeRoom.id,user_id:me,is_typing:true,updated_at:new Date().toISOString()},{onConflict:'room_id,user_id'});}catch(e){}
-  };
-  window.__avxCommunitySendTyping=sendTyping;
+  const roomItems=rooms.map(r=>`<button type="button" class="cm-room-item ${r.id===activeRoom.id?'active':''}" data-room-id="${esc(r.id)}"><span class="cm-room-item-avatar">${esc(roomAvatar(r))}<i class="cm-online-dot"></i></span><span class="cm-room-item-copy"><span class="cm-room-item-name">${esc(r.name||'Avanitaxx Community')}</span><span class="cm-room-item-desc">${esc(r.description||'Reader community')}</span></span></button>`).join('');
 
-  const roomItems=rooms.map(r=>`<button type="button" class="cm-room-item ${r.id===activeRoom.id?'active':''}" data-room-id="${esc(r.id)}"><span class="cm-room-item-avatar">${esc(roomAvatar(r))}<i class="cm-online-dot"></i></span><span class="cm-room-item-copy"><span class="cm-room-item-name">${esc(r.name||'Avanitaxx Community')}</span><span class="cm-room-item-desc">${esc(r.description||'Reader community')}</span><span class="cm-unread-count hidden" data-unread-room="${esc(r.id)}">0</span></span></button>`).join('');
-  open(`<div class="community-messenger" role="dialog" aria-label="Community Chat"><div class="cm-head"><button class="cm-head-btn cm-mobile-back" id="cm-back" type="button">‹</button><div class="cm-room-avatar" id="cm-room-avatar">${esc(roomAvatar(activeRoom))}</div><div class="cm-room-info"><div class="cm-room-name" id="cm-room-name">${esc(activeRoom.name||'Avanitaxx Community')}</div><div class="cm-room-status" id="cm-room-status">Community chat · Live · Invite-only</div></div><div class="cm-head-actions"><button class="cm-head-btn" id="cm-invite" type="button" title="Invite">＋</button><button class="cm-head-btn" id="cm-info" type="button">ⓘ</button><button class="cm-head-btn cm-close" id="cm-close" type="button">×</button></div></div><div class="cm-layout"><aside class="cm-sidebar"><div class="cm-sidebar-title">Messages</div><div class="cm-search"><span>⌕</span><input id="cm-search" type="search" placeholder="Search communities…"></div><div class="cm-room-list" id="cm-room-list">${roomItems}</div><div class="cm-sidebar-note">Private reader communities · Real-time messaging · Invite-only</div></aside><main class="cm-main"><div class="cm-message-scroll" id="cm-message-scroll"><div id="cm-message-list"></div></div><div class="cm-compose" id="cm-composer"></div></main></div></div>`);
-  const closeCommunity=()=>{stopRealtime();close();};
-  document.getElementById('cm-close').onclick=closeCommunity; document.getElementById('cm-back').onclick=closeCommunity;
-  document.getElementById('cm-info').onclick=()=>alert(`${activeRoom.name||'Avanitaxx Community'}\n\n${activeRoom.description||'A reader community on Avanitaxx Stories.'}\n\nInvitation-only · Real-time chat`);
+  open(`<div class="community-messenger" role="dialog" aria-label="Community Chat">
+    <div class="cm-head"><button class="cm-head-btn cm-mobile-back" id="cm-back" type="button">‹</button><div class="cm-room-avatar" id="cm-room-avatar">${esc(roomAvatar(activeRoom))}</div>
+    <div class="cm-room-info"><div class="cm-room-name" id="cm-room-name">${esc(activeRoom.name||'Avanitaxx Community')}</div><div class="cm-room-status" id="cm-room-status">Community chat · Live · Open to all signed-in readers</div></div>
+    <div class="cm-head-actions"><button class="cm-head-btn" id="cm-owner-settings-btn" type="button" title="Owner settings" style="display:none">⚙</button><button class="cm-head-btn" id="cm-members" type="button" title="Members">👥</button><button class="cm-head-btn" id="cm-invite" type="button" title="Invite">＋</button><button class="cm-head-btn" id="cm-info" type="button">ⓘ</button><button class="cm-head-btn cm-close" id="cm-close" type="button">×</button></div></div>
+    <div class="cm-member-panel" id="cm-member-panel"></div>
+    <div class="cm-settings" id="cm-settings"><h3>Community Owner Settings</h3><label>COMMUNITY NAME</label><input id="cm-edit-name" type="text" maxlength="80"><label>THEME BACKGROUND</label><select id="cm-theme"><option value="paper">Paper</option><option value="rose">Rose</option><option value="cocoa">Cocoa</option><option value="night">Night</option></select><div id="cm-theme-preview" class="cm-theme-preview"></div><div class="cm-settings-actions"><button class="btn alt" id="cm-settings-cancel" type="button">CANCEL</button><button class="btn" id="cm-settings-save" type="button">SAVE</button></div></div>
+    <div class="cm-layout"><aside class="cm-sidebar"><div class="cm-sidebar-title">Messages</div><div class="cm-search"><span>⌕</span><input id="cm-search" type="search" placeholder="Search communities…"></div><div class="cm-room-list" id="cm-room-list">${roomItems}</div><div class="cm-sidebar-note">Confidential community chat · Real-time messaging · Open to signed-in readers</div></aside>
+    <main class="cm-main"><div class="cm-message-scroll" id="cm-message-scroll"><div class="cm-history-bar" id="cm-history-bar"></div><div id="cm-message-list"></div></div><div class="cm-compose" id="cm-composer"></div></main></div></div>`);
+
+  document.getElementById('cm-close').onclick=()=>{stopRealtime();restoreHomeTools();close()};
+  document.getElementById('cm-back').onclick=()=>{stopRealtime();restoreHomeTools();close()};
+  document.getElementById('cm-members').onclick=async()=>{document.getElementById('cm-settings')?.classList.remove('open');const p=document.getElementById('cm-member-panel');p.classList.toggle('open');if(p.classList.contains('open'))await renderMembers()};
+  document.getElementById('cm-owner-settings-btn').onclick=openOwnerSettings;
+  document.getElementById('cm-settings-cancel').onclick=()=>document.getElementById('cm-settings').classList.remove('open');
+  document.getElementById('cm-settings-save').onclick=saveOwnerSettings;
+  document.getElementById('cm-theme').onchange=e=>{const map={paper:'#f7f0eb',rose:'#f7e8e6',cocoa:'#4a352d',night:'#26232a'};document.getElementById('cm-theme-preview').style.background=map[e.target.value]};
+  document.getElementById('cm-info').onclick=()=>alert(`${activeRoom.name||'Avanitaxx Community'}\n\n${activeRoom.description||'A reader community on Avanitaxx Stories.'}\n\nOpen to signed-in readers · Real-time chat`);
   document.getElementById('cm-invite').onclick=async()=>{
-  if(!(await isOwnerAccount())){alert('Only the community owner can invite members.');return;}
-  const email=prompt('Enter the reader email to invite:');
-  if(!email)return;
-  const cleanEmail=email.trim().toLowerCase();
-  try{
+    if(!(await isOwnerAccount())){alert('Only the community owner can invite members.');return}
+    const email=prompt('Enter the reader email to invite:');if(!email)return;
+    const cleanEmail=email.trim().toLowerCase();
     const prof=await sb.from('profiles').select('id,email,display_name,pen_name').ilike('email',cleanEmail).maybeSingle();
-    if(prof.error){alert('Unable to find that reader account. Please make sure the reader has a profile with the same email.');return;}
-    if(!prof.data?.id){alert('No registered reader account was found for '+cleanEmail+'. They must create/sign in to an Avanitaxx account first.');return;}
-    const targetId=prof.data.id;
-    const member=await sb.from('owner_chat_members').upsert({room_id:activeRoom.id,user_id:targetId},{onConflict:'room_id,user_id'});
-    if(member.error){alert('The invitation could not be applied: '+member.error.message);return;}
+    if(prof.error||!prof.data?.id){alert('No registered reader account was found for '+cleanEmail+'.');return}
+    const member=await sb.from('owner_chat_members').upsert({room_id:activeRoom.id,user_id:prof.data.id},{onConflict:'room_id,user_id'});
+    if(member.error){alert('The invitation could not be applied: '+member.error.message);return}
     const ownerName=session?.user?.email||'Community Owner';
-    const note=await sb.from('notifications').insert({user_id:targetId,message:`${ownerName} invited you to join ${activeRoom.name||'Avanitaxx Community'}.`,read:false});
-    if(note.error){alert('Member access was granted, but the notification could not be created: '+note.error.message);return;}
-    alert('Invitation sent. The reader now has Community Chat access and a notification has been added to their bell.');
-    await renderCommunity(activeRoom);
-  }catch(err){alert('Unable to send invitation. '+(err?.message||''));}
-};
-  document.getElementById('cm-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.cm-room-item').forEach(b=>b.classList.toggle('hidden',q&&!b.textContent.toLowerCase().includes(q)));};
-  document.querySelectorAll('.cm-room-item').forEach(btn=>btn.onclick=async()=>{const r=rooms.find(x=>String(x.id)===String(btn.dataset.roomId));if(!r)return;document.querySelectorAll('.cm-room-item').forEach(x=>x.classList.toggle('active',x===btn));await loadRoom(r);});
+    const note=await sb.from('notifications').insert({user_id:prof.data.id,message:`${ownerName} invited you to join ${activeRoom.name||'Avanitaxx Community'}.`,read:false});
+    if(note.error){alert('Member access was granted, but the notification could not be created: '+note.error.message);return}
+    alert('Invitation sent.');await renderMembers();
+  };
+  document.getElementById('cm-search').oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('.cm-room-item').forEach(b=>b.classList.toggle('hidden',q&&!b.textContent.toLowerCase().includes(q)))};
+  document.querySelectorAll('.cm-room-item').forEach(btn=>btn.onclick=async()=>{const r=rooms.find(x=>String(x.id)===String(btn.dataset.roomId));if(!r)return;document.querySelectorAll('.cm-room-item').forEach(x=>x.classList.toggle('active',x===btn));await loadRoom(r)});
+  document.getElementById('cm-message-scroll').addEventListener('scroll',async e=>{
+    if(e.target.scrollTop<70)await loadPrevious();
+  });
   await loadRoom(activeRoom);
 }
+
 async function maybeShowHomepageFeature(){
   const key='avx_home_feature_seen_'+new Date().toISOString().slice(0,10);if(localStorage.getItem(key))return;
   const stories=await getPublished();if(!stories.length)return;
@@ -7689,6 +7886,21 @@ const st=document.createElement('style');st.textContent=`
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
   new MutationObserver(bind).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+
+<script id="avx-community-final-visibility-js">
+(function(){
+  function sync(){
+    const home=!!document.getElementById('home');
+    const modalOpen=!!document.querySelector('#overlay.open .community-messenger,#overlay.open .fb-notes-panel,#overlay.open .soundroom-public-card,#overlay.open .soundroom-player,#overlay.open .panel,#overlay.open .modal,#overlay.open .reader,#overlay.open .rank-panel,#overlay.open .author-hub-panel,#overlay.open .lounge-panel');
+    document.body.classList.toggle('avx-tools-home-visible',home);
+    document.body.classList.toggle('avx-tools-modal-open',home && modalOpen);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync);else sync();
+  new MutationObserver(sync).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});
+  window.addEventListener('hashchange',sync);
 })();
 </script>
 
