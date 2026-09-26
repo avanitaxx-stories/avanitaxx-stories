@@ -4017,6 +4017,21 @@ body.avx-nonhome-tools-hidden #home .avx-carousel-drawer {
 }
 </style>
 
+
+<style id="avx-home-tools-only-request">
+/* REQUESTED ONLY: Carousel, Music, Notes and Community are Home-only.
+   Any opened reader, ranking, author, stories, music, lounge, notes,
+   Soundroom or Community view hides these Home utilities. */
+body.avx-non-home-tools #avx-carousel-bubble,
+body.avx-non-home-tools #chapter-promotion,
+body.avx-non-home-tools .soundroom-player,
+body.avx-non-home-tools #home-notes-btn,
+body.avx-non-home-tools #home-chat-btn,
+body.avx-non-home-tools #home-sound-btn{
+  display:none!important;
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -7558,5 +7573,26 @@ const st=document.createElement('style');st.textContent=`
 })();
 </script>
 <script>document.addEventListener('click',e=>{const b=e.target.closest?.('[data-mobile-nav]');if(!b)return;const type=b.dataset.mobileNav;document.querySelectorAll('.avx-mobile-nav button').forEach(x=>x.classList.toggle('active',x===b));if(type==='home'){window.scrollTo({top:0,behavior:'smooth'});return}if(type==='browse'){document.getElementById('recent')?.scrollIntoView({behavior:'smooth',block:'start'});return}if(type==='genres'){document.querySelector('.genre-library')?.scrollIntoView({behavior:'smooth',block:'start'});return}if(type==='ranking'){document.getElementById('nav-ranking-btn')?.click();return}});</script>
+
+<script id="avx-home-tools-only-request-js">
+(function(){
+  function syncHomeOnlyTools(){
+    const overlay=document.getElementById('overlay');
+    const open=!!overlay && overlay.classList.contains('open');
+    document.body.classList.toggle('avx-non-home-tools',open);
+  }
+  function init(){
+    syncHomeOnlyTools();
+    const overlay=document.getElementById('overlay');
+    if(overlay){
+      new MutationObserver(syncHomeOnlyTools).observe(overlay,{attributes:true,attributeFilter:['class','aria-hidden']});
+    }
+    new MutationObserver(syncHomeOnlyTools).observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('hashchange',syncHomeOnlyTools);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 </body>
 </html>
