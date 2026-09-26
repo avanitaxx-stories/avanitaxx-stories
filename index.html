@@ -3830,6 +3830,55 @@ footer::before{color:rgba(43,27,22,.045)!important}
  .rank-list-v2{max-height:calc(100vh - 260px)!important;padding-right:9px!important}
 }
 </style>
+
+<style id="avx-author-music-tab-v1">
+/* ===== AUTHOR CENTER — DEDICATED MUSIC TAB ===== */
+.author-music-tab{width:100%;min-width:0}
+.author-music-topbar{margin-bottom:18px}
+.author-music-topbar .writer-subtitle{max-width:760px}
+.author-music-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1.35fr);gap:18px;align-items:start}
+.author-music-upload,.author-music-library{min-width:0}
+.author-music-help{font:13px/1.7 Georgia,serif;color:#6a5145;margin:0 0 18px;max-width:760px}
+.soundroom-author-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.soundroom-author-upload-grid>div{min-width:0}
+.soundroom-author-upload-grid label{margin-top:0}
+.soundroom-upload-main{grid-column:1/-1}
+.soundroom-upload-side{min-width:0}
+.soundroom-file-note{font-size:10px;color:#7a655b;margin-top:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.soundroom-cover-preview{width:150px;aspect-ratio:1;border:1px dashed #d5c1b3;border-radius:14px;background:#f4e7df;display:flex;align-items:center;justify-content:center;color:#8f6755;font-size:35px;overflow:hidden;margin-top:8px}
+.soundroom-cover-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.author-music-upload-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.soundroom-upload-note{font-size:10px;color:#8a756b}
+.author-music-list{display:grid;gap:12px}
+.author-music-card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;padding:13px;border:1px solid #e5d8cf;border-radius:16px;background:#fffdf9;box-shadow:0 8px 24px rgba(55,35,27,.05)}
+.author-music-cover{width:104px;height:104px;border-radius:12px;background:linear-gradient(145deg,#5c4032,#c49b84);display:flex;align-items:center;justify-content:center;color:#fff8f1;font:30px Georgia,serif;overflow:hidden}
+.author-music-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.author-music-card-main{min-width:0}
+.author-music-card-kicker{font-size:8px;font-weight:900;letter-spacing:.16em;color:#9b6f58;text-transform:uppercase}
+.author-music-card h3{font:400 21px/1.15 Georgia,serif;color:#34231c;margin:5px 0 6px}
+.author-music-card p{font:12px/1.55 Georgia,serif;color:#6b554b;margin:0 0 5px;white-space:pre-wrap;overflow-wrap:anywhere}
+.author-music-date{font-size:8px;color:#9a8479;letter-spacing:.04em;margin-bottom:7px}
+.author-music-card audio{width:100%;height:34px;margin:4px 0 9px}
+.author-music-actions{display:flex;gap:7px;flex-wrap:wrap}
+.author-music-actions .btn{min-height:32px;padding:8px 12px;font-size:8px}
+.author-music-loading,.author-music-empty{padding:38px 20px;text-align:center;border:1px dashed #d9c9be;border-radius:16px;background:#fffdf9;color:#7a665c}
+.author-music-empty-icon{font:35px Georgia,serif;color:#a8795b}
+.author-music-empty h3{font:400 25px Georgia,serif;color:#392820;margin:8px 0 5px}
+.author-music-empty p{font:12px/1.65 Georgia,serif;max-width:430px;margin:0 auto}
+@media(max-width:900px){
+  .author-music-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .soundroom-author-upload-grid{grid-template-columns:1fr}
+  .soundroom-upload-main{grid-column:auto}
+  .author-music-card{grid-template-columns:78px minmax(0,1fr);gap:11px;padding:10px}
+  .author-music-cover{width:78px;height:78px}
+  .author-music-card h3{font-size:17px}
+  .author-music-card p{font-size:11px}
+  .author-music-card audio{height:32px}
+  .author-music-topbar{gap:12px}
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4875,6 +4924,7 @@ async function openAuthorHome(){
         <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4.5h12.5A1.5 1.5 0 0 1 19 6v13.5H6.5A2.5 2.5 0 0 1 4 17V6a1.5 1.5 0 0 1 1-1.5Z"/><path d="M7.5 8h8M7.5 11.5h8M7.5 15h5"/></svg></span>My Stories</button>
         <button class="writer-side-btn" id="wl-new" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>New Story</button>
         <button class="writer-side-btn" id="wl-lounge" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 13.9 9l5.6 1.2-5.6 1.9L12 18l-1.9-5.9-5.6-1.9L10.1 9 12 3.5Z"/><path d="m18.2 16.1.8 2.1 2.1.8-.2.1"/></svg></span>Author Lounge</button>
+        <button class="writer-side-btn" id="wl-music" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V6.5L19 4v11.5"/><circle cx="6.5" cy="18" r="3"/><circle cx="16.5" cy="15.5" r="3"/></svg></span>Music</button>
         <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.2"/><path d="M5.5 20c.6-3.5 2.8-5.3 6.5-5.3s5.9 1.8 6.5 5.3"/><circle cx="12" cy="12" r="9.2"/></svg></span>My Profile</button>
         <button class="writer-side-btn" id="wl-hub" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 8l4.9.7-3.5 3.5.8 4.9-4.6-2.3-4.6 2.3.8-4.9-3.5-3.5L9.6 8 12 3.5Z"/><circle cx="12" cy="11" r="1.5"/></svg></span>Author Hub</button>
       </div>
@@ -4929,6 +4979,7 @@ async function openAuthorHome(){
   document.getElementById('wl-profile').onclick=openProfileEditor;
   document.getElementById('wl-profile-quick').onclick=openProfileEditor;
   document.getElementById('wl-lounge').onclick=openOwnerTimeline;
+  document.getElementById('wl-music').onclick=openAuthorMusicTab;
   document.getElementById('wl-hub').onclick=()=>openAuthorHub();
   document.getElementById('new-story').onclick=()=>openEditor(null);
   document.getElementById('wl-new').onclick=()=>openEditor(null);
@@ -4944,6 +4995,118 @@ async function openAuthorHome(){
   });
   loadMine();
 }
+
+async function openAuthorMusicTab(){
+  if(!session){openAuth('author');return}
+  const main=document.querySelector('.writer-main');
+  if(!main)return;
+  document.querySelectorAll('.writer-side-btn').forEach(x=>x.classList.remove('active'));
+  document.getElementById('wl-music')?.classList.add('active');
+  main.innerHTML=`
+    <div id="author-music-tab" class="author-music-tab">
+      <div class="writer-topbar author-music-topbar">
+        <div>
+          <div class="writer-kicker">AVANITAXX SOUNDROOM</div>
+          <div class="writer-title">Your Music</div>
+          <div class="writer-subtitle">Upload, organize, edit, and publish your soundtrack here. Music tools are kept separate from Author Lounge posts.</div>
+        </div>
+        <button class="writer-action" id="music-back-overview" type="button">← OVERVIEW</button>
+      </div>
+
+      <div class="author-music-grid">
+        <section class="author-music-upload writer-workspace">
+          <div class="writer-workspace-head">
+            <div><div class="writer-list-label">MUSIC UPLOAD</div><div class="writer-workspace-title">Add a soundtrack</div></div>
+            <div class="writer-list-label">Soundroom</div>
+          </div>
+          <p class="author-music-help">Everything related to a song stays here: audio file, cover art, title, description/caption, and publishing.</p>
+          <div class="soundroom-author-upload-grid">
+            <div class="soundroom-upload-main">
+              <label>MUSIC FILE</label>
+              <input id="sound-upload-file" class="field" type="file" accept="audio/*">
+              <div id="sound-audio-name" class="soundroom-file-note">No audio selected.</div>
+            </div>
+            <div class="soundroom-upload-side">
+              <label>COVER ART</label>
+              <input id="sound-upload-cover" class="field" type="file" accept="image/*">
+              <div id="sound-cover-preview" class="soundroom-cover-preview"><span>♫</span></div>
+            </div>
+            <div>
+              <label>TITLE</label>
+              <input id="sound-upload-title" class="field" placeholder="Song title">
+            </div>
+            <div>
+              <label>DESCRIPTION / CAPTION</label>
+              <textarea id="sound-upload-caption" class="field" rows="4" placeholder="Tell readers what this song means to the story…"></textarea>
+            </div>
+          </div>
+          <div id="sound-upload-status" class="status"></div>
+          <div class="author-music-upload-actions">
+            <button class="btn" id="sound-upload-btn" type="button">UPLOAD TO SOUNDROOM</button>
+            <span class="soundroom-upload-note">Audio is optimized when the browser supports it.</span>
+          </div>
+        </section>
+
+        <section class="author-music-library writer-workspace">
+          <div class="writer-workspace-head">
+            <div><div class="writer-list-label">YOUR MUSIC</div><div class="writer-workspace-title">Published Soundtracks</div></div>
+            <button class="writer-action" id="music-refresh" type="button">REFRESH</button>
+          </div>
+          <div id="author-music-list" class="author-music-list"><div class="author-music-loading">Loading your music…</div></div>
+        </section>
+      </div>
+    </div>`;
+
+  document.getElementById('music-back-overview').onclick=openAuthorHome;
+  document.getElementById('sound-upload-file').onchange=e=>{
+    const f=e.target.files?.[0];
+    document.getElementById('sound-audio-name').textContent=f?`${f.name} · ${(f.size/1024/1024).toFixed(2)} MB`:'No audio selected.';
+  };
+  document.getElementById('sound-upload-cover').onchange=e=>{
+    const f=e.target.files?.[0],box=document.getElementById('sound-cover-preview');
+    if(!f){box.innerHTML='<span>♫</span>';return}
+    const url=URL.createObjectURL(f);box.innerHTML=`<img src="${url}" alt="Cover preview">`;
+  };
+  document.getElementById('sound-upload-btn').onclick=async()=>{
+    await uploadSoundroomTrack();
+    await renderAuthorMusicList();
+  };
+  document.getElementById('music-refresh').onclick=renderAuthorMusicList;
+  await renderAuthorMusicList();
+}
+
+async function renderAuthorMusicList(){
+  const box=document.getElementById('author-music-list');
+  if(!box)return;
+  box.innerHTML='<div class="author-music-loading">Loading your music…</div>';
+  const r=await sb.from('owner_timeline_media').select('id,title,caption,media_url,created_at,cover_url,owner_id,published').eq('owner_id',session.user.id).eq('media_type','audio').order('created_at',{ascending:false}).limit(50);
+  if(r.error){box.innerHTML=`<div class="author-music-empty">Could not load your music.<br><small>${esc(r.error.message||'Unknown error')}</small></div>`;return}
+  const tracks=r.data||[];
+  if(!tracks.length){box.innerHTML='<div class="author-music-empty"><div class="author-music-empty-icon">♫</div><h3>No music yet</h3><p>Upload your first soundtrack above. Your audio, cover art, and description will stay organized in this Music tab.</p></div>';return}
+  box.innerHTML=tracks.map(t=>`<article class="author-music-card">
+    <div class="author-music-cover">${t.cover_url?`<img src="${esc(t.cover_url)}" alt="${esc(t.title||'Soundtrack')} cover" loading="lazy">`:'♫'}</div>
+    <div class="author-music-card-main">
+      <div class="author-music-card-kicker">${t.published?'PUBLISHED':'DRAFT'}</div>
+      <h3>${esc(t.title||'Untitled soundtrack')}</h3>
+      <p>${esc(t.caption||'No description/caption added.')}</p>
+      <div class="author-music-date">${esc(formatDate(t.created_at))}</div>
+      <audio controls preload="metadata" src="${esc(t.media_url||'')}"></audio>
+      <div class="author-music-actions">
+        <button class="btn alt author-music-edit" data-id="${esc(t.id)}" type="button">EDIT</button>
+        <button class="btn danger author-music-delete" data-id="${esc(t.id)}" type="button">DELETE</button>
+      </div>
+    </div>
+  </article>`).join('');
+  box.querySelectorAll('.author-music-edit').forEach(b=>b.onclick=async()=>{
+    await editSoundroomTrack(b.dataset.id);
+    if(document.getElementById('author-music-tab'))await renderAuthorMusicList();
+  });
+  box.querySelectorAll('.author-music-delete').forEach(b=>b.onclick=async()=>{
+    await deleteSoundroomTrack(b.dataset.id);
+    if(document.getElementById('author-music-tab'))await renderAuthorMusicList();
+  });
+}
+
 async function getStoryReadInsights(storyId){
   if(!session||!storyId)return null;
   const r=await sb.rpc('get_story_read_insights',{p_story_id:storyId});
@@ -5192,7 +5355,7 @@ async function uploadSoundroomTrack(){
     const ext=(audio.name.split('.').pop()||'webm').toLowerCase();const audioPath=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const au=await sb.storage.from('owner-media').upload(audioPath,audio,{upsert:false,contentType:audio.type||'audio/webm',cacheControl:'31536000'});if(au.error)throw au.error;const mediaUrl=sb.storage.from('owner-media').getPublicUrl(audioPath).data.publicUrl;
     let coverUrl=null;if(cover){const cp=`${session.user.id}/soundroom/${Date.now()}-${Math.random().toString(36).slice(2)}-cover.webp`;const cu=await sb.storage.from('owner-media').upload(cp,cover,{upsert:false,contentType:'image/webp',cacheControl:'31536000'});if(cu.error)throw cu.error;coverUrl=sb.storage.from('owner-media').getPublicUrl(cp).data.publicUrl}
     const q=await sb.from('owner_timeline_media').insert({owner_id:session.user.id,media_type:'audio',title:(document.getElementById('sound-upload-title')?.value||file.name.replace(/\.[^.]+$/,'')).trim()||'Untitled soundtrack',caption:(document.getElementById('sound-upload-caption')?.value||'Songs behind the stories.').trim(),media_url:mediaUrl,cover_url:coverUrl,published:true});if(q.error)throw q.error;
-    notice(status,'Music uploaded successfully.',true);await loadSoundroom();setTimeout(openSoundroomModal,450);
+    notice(status,'Music uploaded successfully.',true);await loadSoundroom();if(document.getElementById('author-music-tab')){setTimeout(renderAuthorMusicList,350)}else{setTimeout(openSoundroomModal,450)}
   }catch(e){notice(status,'Upload failed: '+(e.message||String(e)))}
 }
 let soundroomTracks=[];let soundroomIndex=0;
@@ -5220,7 +5383,7 @@ async function editSoundroomTrack(trackId){
         caption:document.getElementById('sound-edit-caption').value.trim()||'Songs behind the stories.'
       }).eq('id',trackId).eq('owner_id',session.user.id);
       if(u.error)throw u.error;
-      close();await loadSoundroom();openSoundroomModal();
+      close();await loadSoundroom();if(document.getElementById('author-music-tab')){await renderAuthorMusicList()}else{openSoundroomModal()}
     }catch(e){notice(status,e.message||String(e))}
   };
 }
