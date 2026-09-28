@@ -5136,7 +5136,24 @@ function avxSetNonHomeToolsHidden(hidden){
 async function openPublicStory(slugValue){
   avxSetNonHomeToolsHidden(true);
   await refreshSession();
-  if(!session){openAuth('reader');return;}
+  // Reading access: allow one first-time public reading visit per browser.
+  // Once the visitor has used the free reading visit, require sign-in on a later visit.
+  // sessionStorage keeps navigation between stories/chapters in the same tab visit uninterrupted.
+  if(!session){
+    let freeReadUsed=false, currentVisitAllowed=false;
+    try{
+      freeReadUsed=localStorage.getItem('avx_free_read_visit_used')==='1';
+      currentVisitAllowed=sessionStorage.getItem('avx_free_read_visit_active')==='1';
+    }catch(e){}
+    if(freeReadUsed&&!currentVisitAllowed){
+      openAuth('reader');
+      return;
+    }
+    try{
+      localStorage.setItem('avx_free_read_visit_used','1');
+      sessionStorage.setItem('avx_free_read_visit_active','1');
+    }catch(e){}
+  }
   let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}
   currentStory=r.data;
   avxGAEvent('story_open',{story_id:String(currentStory.id||''),story_title:String(currentStory.title||'').slice(0,100),author_name:String(currentStory.author_name||currentStory.pen_name||'').slice(0,100)});
@@ -7105,8 +7122,15 @@ sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();renderHomeAuthorS
 (async()=>{function ensureAvxFloatingTools(){}
 ensureAvxFloatingTools();
 bindStatic();bindToffeeHome();await refreshSession();await loadSoundroom();await loadHome();
-setTimeout(()=>maybeShowHomepageFeature(),1200);
-  setInterval(loadLatestChapterPromotion,60000);const params=new URLSearchParams(location.search);if(params.get('story'))openPublicStory(params.get('story'));else if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}})();
+  const params=new URLSearchParams(location.search);
+  if(params.get('story')){
+    // Prioritize shared story links so the reader route is handled before homepage promos.
+    await openPublicStory(params.get('story'));
+  }else{
+    setTimeout(()=>maybeShowHomepageFeature(),1200);
+    if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}
+  }
+  setInterval(loadLatestChapterPromotion,60000)} )();
 })();
 </script>
   <script>
