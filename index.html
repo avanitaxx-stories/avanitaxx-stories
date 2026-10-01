@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-09-23-phase4-final-polish-performance-seo-accessibility-fixed">
+<meta name="avx-build" content="2026-10-01-mobile-carousel-chat-ranking-signin-fixed">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -5430,7 +5430,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
   <nav class="navlinks" aria-label="Primary navigation">
   <a class="toffee-nav-active" href="#home"><span class="nav-glyph">⌂</span> Home</a>
   <button id="nav-browse-btn" type="button"><span class="nav-glyph">▣</span> Browse</button>
-  <button id="nav-ranking-btn" type="button"><span class="nav-glyph">♛</span> Ranking</button>
+  <button id="nav-ranking-btn" type="button"><span class="avx-ranking-book-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3.5 5.5c2.8-.7 5.6-.2 8.5 1.5v12c-2.9-1.7-5.7-2.2-8.5-1.5z"></path><path d="M20.5 5.5c-2.8-.7-5.6-.2-8.5 1.5v12c2.9-1.7 5.7-2.2 8.5-1.5z"></path><path d="M12 7v12"></path></svg></span> Ranking</button>
 </nav>
   <div class="nav-actions">
     <input id="site-search" class="search search-soon" placeholder="Search… SOON" aria-label="Search stories or authors — coming soon" disabled title="Search is coming soon">
@@ -5454,14 +5454,14 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
         <div class="avx-account-divider"></div>
         <button id="menu-logout" class="avx-account-logout" type="button"><span class="avx-account-icon">↪</span><span><b>Sign Out</b><small>Leave this account</small></span></button>
       </div>
-<button id="mobile-ranking-btn" class="header-mobile-ranking" type="button" aria-label="Open Story Ranking"><span class="nav-glyph">♛</span><span>Ranking</span></button>
+<button id="mobile-ranking-btn" class="header-mobile-ranking" type="button" aria-label="Open Story Ranking"><span class="avx-ranking-book-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3.5 5.5c2.8-.7 5.6-.2 8.5 1.5v12c-2.9-1.7-5.7-2.2-8.5-1.5z"></path><path d="M20.5 5.5c-2.8-.7-5.6-.2-8.5 1.5v12c2.9-1.7 5.7-2.2 8.5-1.5z"></path><path d="M12 7v12"></path></svg></span><span>Ranking</span></button>
     <button id="reader-btn" class="btn alt" type="button">SIGN IN</button>
   </div>
 </div><div class="adsense-container"><div class="adsense-label">Sponsored</div><!-- Paste Google AdSense code here --></div></header>
 <nav class="avx-mobile-nav" aria-label="Mobile navigation">
   <button type="button" data-mobile-nav="home"><span class="micon">⌂</span>Home</button>
   <button type="button" data-mobile-nav="browse"><span class="micon">▣</span>Browse</button>
-  <button type="button" data-mobile-nav="ranking"><span class="micon">♛</span>Ranking</button>
+  <button type="button" data-mobile-nav="ranking"><span class="micon"><span class="avx-ranking-book-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3.5 5.5c2.8-.7 5.6-.2 8.5 1.5v12c-2.9-1.7-5.7-2.2-8.5-1.5z"></path><path d="M20.5 5.5c-2.8-.7-5.6-.2-8.5 1.5v12c2.9-1.7 5.7-2.2 8.5-1.5z"></path><path d="M12 7v12"></path></svg></span></span>Ranking</button>
   <button type="button" data-mobile-nav="chat" aria-label="Open Community Chat"><span class="micon">💬</span>Chat</button>
 </nav>
 
@@ -9907,6 +9907,95 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   ready(boot);
 })();
 </script>
+
+
+
+<!-- AVX FINAL USER REQUEST FIX — 2026-10-01 -->
+<style id="avx-user-request-mobile-carousel-chat-ranking-signin-final">
+/* Ranking now uses a clear book icon on desktop + mobile. */
+.avx-ranking-book-icon{
+  display:inline-flex!important;
+  width:18px!important;
+  height:18px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 18px!important;
+  vertical-align:-3px!important;
+  margin-right:6px!important;
+  color:#6e3e29!important;
+}
+.avx-ranking-book-icon svg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  overflow:visible!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.75!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.header-mobile-ranking .avx-ranking-book-icon{margin-right:2px!important;width:17px!important;height:17px!important;flex-basis:17px!important}
+.avx-mobile-nav [data-mobile-nav="ranking"] .micon{display:grid!important;place-items:center!important}
+.avx-mobile-nav [data-mobile-nav="ranking"] .avx-ranking-book-icon{margin:0!important;width:19px!important;height:19px!important;flex-basis:19px!important}
+
+/* Desktop: always expose SIGN IN while signed out. Logged-in state still wins via .hidden. */
+@media(min-width:701px){
+  .site-header #reader-btn:not(.hidden){
+    display:inline-flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+  }
+  .site-header #reader-btn.hidden{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+}
+
+/* Mobile: carousel is removed completely. The main book sections remain untouched. */
+@media(max-width:700px){
+  #avx-carousel-bubble,
+  #home #avx-carousel-bubble,
+  #home #chapter-promotion.avx-carousel-drawer,
+  #home .toffee-restored-carousel.avx-carousel-drawer,
+  #chapter-promotion{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+    width:0!important;
+    height:0!important;
+    min-height:0!important;
+    max-height:0!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+
+  /* Mobile already has Chat in the bottom navigation, so remove the duplicate floating chat bubble. */
+  #home .avx-restored-tools,
+  #home .avx-restored-tools #home-chat-btn,
+  #home #home-chat-btn{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+
+  /* Keep the single mobile Chat entry usable in the bottom navigation. */
+  .avx-mobile-nav [data-mobile-nav="chat"]{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+}
+</style>
 
 </body>
 </html>
