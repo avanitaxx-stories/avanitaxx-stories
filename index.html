@@ -5741,21 +5741,43 @@ let profileAvatarCropFile=null,profileCoverCropFile=null;
 function openImageCropper(file,ratio=1,title='Crop image'){
   return new Promise((resolve,reject)=>{
     const url=URL.createObjectURL(file),img=new Image();
+    let finished=false;
+    const finish=value=>{
+      if(finished)return;finished=true;
+      URL.revokeObjectURL(url);
+      cropLayer.remove();
+      document.body.classList.remove('avx-crop-open');
+      resolve(value);
+    };
+    const cropLayer=document.createElement('div');
+    cropLayer.className='avx-crop-overlay';
+    cropLayer.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;overflow:auto;padding:14px;background:rgba(20,13,10,.78);backdrop-filter:blur(5px);';
+    document.body.appendChild(cropLayer);
+    document.body.classList.add('avx-crop-open');
     img.onload=()=>{
       const W=900,H=Math.round(W/ratio),canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
       let scale=Math.max(W/img.width,H/img.height),zoom=1,ox=W/2-img.width*scale/2,oy=H/2-img.height*scale/2,drag=false,sx=0,sy=0,startX=0,startY=0;
-      open(`<div class="crop-modal"><button class="close" id="crop-close">×</button><div class="kicker">IMAGE CROP</div><h2>${esc(title)}</h2><div class="crop-canvas-wrap"><canvas id="crop-canvas" class="crop-canvas" width="${W}" height="${H}"></canvas></div><div class="crop-controls"><span class="meta">ZOOM</span><input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1"></div><div class="crop-note">Drag the image to reposition it. Use the zoom slider to frame the exact part you want.</div><div class="crop-actions"><button class="btn alt" id="crop-cancel">CANCEL</button><button class="btn" id="crop-use">CROP & USE</button></div></div>`);
-      const c=document.getElementById('crop-canvas'),g=c.getContext('2d'),range=document.getElementById('crop-zoom');
+      cropLayer.innerHTML=`<div class="crop-modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><button class="close" id="crop-close" type="button" aria-label="Close cropper">×</button><div class="kicker">IMAGE CROP</div><h2>${esc(title)}</h2><div class="crop-canvas-wrap"><canvas id="crop-canvas" class="crop-canvas" width="${W}" height="${H}"></canvas></div><div class="crop-controls"><span class="meta">ZOOM</span><input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1" aria-label="Zoom image"></div><div class="crop-note">Drag the image to reposition it. Use the zoom slider to frame the exact part you want.</div><div class="crop-actions"><button class="btn alt" id="crop-cancel" type="button">CANCEL</button><button class="btn" id="crop-use" type="button">CROP &amp; USE</button></div></div>`;
+      const c=cropLayer.querySelector('#crop-canvas'),g=c.getContext('2d'),range=cropLayer.querySelector('#crop-zoom');
       const draw=()=>{g.clearRect(0,0,W,H);g.fillStyle='#1d1714';g.fillRect(0,0,W,H);const sc=scale*zoom;g.drawImage(img,ox,oy,img.width*sc,img.height*sc)};draw();
       range.oninput=()=>{zoom=Number(range.value);draw()};
       c.onpointerdown=e=>{drag=true;c.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;startX=ox;startY=oy};
       c.onpointermove=e=>{if(!drag)return;ox=startX+(e.clientX-sx)*W/c.clientWidth;oy=startY+(e.clientY-sy)*H/c.clientHeight;draw()};
       c.onpointerup=()=>drag=false;c.onpointercancel=()=>drag=false;
-      const done=v=>{URL.revokeObjectURL(url);close();resolve(v)};
-      document.getElementById('crop-cancel').onclick=()=>done(null);document.getElementById('crop-close').onclick=()=>done(null);
-      document.getElementById('crop-use').onclick=()=>c.toBlob(blob=>{if(!blob){reject(new Error('Could not crop image.'));return}done(new File([blob],file.name.replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'}))},'image/jpeg',.92);
+      cropLayer.querySelector('#crop-cancel').onclick=()=>finish(null);
+      cropLayer.querySelector('#crop-close').onclick=()=>finish(null);
+      cropLayer.onclick=e=>{if(e.target===cropLayer)finish(null)};
+      cropLayer.querySelector('#crop-use').onclick=()=>{
+        const useButton=cropLayer.querySelector('#crop-use');useButton.disabled=true;useButton.textContent='PROCESSING…';
+        canvas.toBlob(blob=>{
+          if(!blob){useButton.disabled=false;useButton.textContent='CROP & USE';notice('profile-status','Could not crop image. Please try another image.');return}
+          const cropped=new File([blob],file.name.replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'});
+          finish(cropped);
+        },'image/jpeg',.92);
+      };
     };
-    img.onerror=()=>reject(new Error('Could not read image.'));img.src=url;
+    img.onerror=()=>{URL.revokeObjectURL(url);cropLayer.remove();document.body.classList.remove('avx-crop-open');reject(new Error('Could not read image. Please choose another image.'))};
+    img.src=url;
   });
 }
 function avxParseSocialLinks(raw){
