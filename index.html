@@ -118,6 +118,15 @@ footer{position:relative;background:#241814;padding:64px 0 28px}footer::before{c
 /* ===== PREMIUM AUTHOR PROFILE / PUBLIC TIMELINE V3 ===== */
 .author-profile-v3{background:var(--white);border:1px solid rgba(74,48,37,.1);border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(55,35,27,.1)}
 .author-cover-v3{position:relative;min-height:330px;background:linear-gradient(135deg,#3b2921,#a8795b 55%,#d9a6a6);background-size:cover;background-position:center;display:flex;align-items:flex-end}
+/* Reliable author banner rendering: use an actual image element rather than a CSS URL. */
+.author-cover-v3{isolation:isolate;background-color:#6f4b3b}
+.author-cover-image-v3{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block}
+.author-cover-v3::after{z-index:1}
+.author-cover-inner{z-index:2}
+.author-directory-cover{background-color:#6f4b3b}
+.author-directory-cover-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;display:block}
+.author-directory-cover::after{z-index:1}
+
 .author-cover-v3::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,23,18,.05) 25%,rgba(35,23,18,.72) 100%)}
 .author-cover-inner{position:relative;z-index:2;width:100%;padding:38px 42px;color:#fff}
 .author-cover-kicker{font-size:9px;letter-spacing:.22em;font-weight:900;text-transform:uppercase;opacity:.86}
@@ -5003,7 +5012,7 @@ async function loadAuthorHubData(stories=[]){
 
 function authorCardHtml(a){
   const name=a.pen_name||a.display_name||'Avanitaxx Member',bio=a.bio||'A reader and member of the Avanitaxx Stories community.',cover=a.cover_url||a.__works[0]?.cover_url||'',avatar=a.avatar_url||'';
-  return `<button class="author-directory-card" type="button" data-author-id="${esc(a.id)}"><div class="author-directory-cover" ${cover?`style="background-image:url('${esc(cover)}')"`:''}>${avatar?`<img class="author-directory-avatar" src="${esc(avatar)}" alt="${esc(name)}">`:`<div class="author-directory-avatar author-directory-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</div>`}</div><div class="author-directory-copy"><div class="author-directory-name">${esc(name)}</div>${a.display_name&&a.display_name!==name?`<div class="author-directory-handle">${esc(a.display_name)}</div>`:''}<div class="author-directory-bio">${esc(bio)}</div><div class="author-directory-meta"><span><b>${a.__published}</b> ${a.__published===1?'work':'works'}</span><span class="corner-role ${a.__role==='READER'?'reader':''}">${a.__role}</span></div></div></button>`;
+  return `<button class="author-directory-card" type="button" data-author-id="${esc(a.id)}"><div class="author-directory-cover">${cover?`<img class="author-directory-cover-image" src="${esc(cover)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">`:''}${avatar?`<img class="author-directory-avatar" src="${esc(avatar)}" alt="${esc(name)}">`:`<div class="author-directory-avatar author-directory-avatar-fallback">${esc(name.charAt(0).toUpperCase())}</div>`}</div><div class="author-directory-copy"><div class="author-directory-name">${esc(name)}</div>${a.display_name&&a.display_name!==name?`<div class="author-directory-handle">${esc(a.display_name)}</div>`:''}<div class="author-directory-bio">${esc(bio)}</div><div class="author-directory-meta"><span><b>${a.__published}</b> ${a.__published===1?'work':'works'}</span><span class="corner-role ${a.__role==='READER'?'reader':''}">${a.__role}</span></div></div></button>`;
 }
 
 async function openAuthorHub(authorId=null){
@@ -5127,7 +5136,8 @@ async function loadPublicAuthorProfile(stories=[],targetBox=null,forcedAuthorId=
   box.innerHTML=`
     ${targetBox?`<div class="author-profile-backbar"><button id="author-profile-back-v3" type="button">← BACK TO AUTHORS & READERS CORNER</button><span>AVANITAXX STORIES · PREMIUM AUTHOR PROFILE</span></div>`:``}
     <div class="author-profile author-profile-v3">
-      <div class="author-cover-v3" ${profile.cover_url?`style="background-image:url('${esc(profile.cover_url)}')"`:''}>
+      <div class="author-cover-v3">
+        ${profile.cover_url?`<img class="author-cover-image-v3" src="${esc(profile.cover_url)}" alt="${esc(displayName)} author banner" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">`:''}
         <div class="author-cover-inner">
           <div class="author-cover-kicker">Official Author Profile</div>
           <div class="author-cover-title">${esc(displayName)}</div>
