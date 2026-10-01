@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-10-01-mobile-carousel-chat-ranking-signin-fixed">
+<meta name="avx-build" content="2026-10-02-deep-text-mobile-2col-cover-fit-fixed">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -5887,6 +5887,592 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-deep-mobile-2col-final-fix">
+/* =========================================================
+   AVANITAXX — DEEP TEXT + MOBILE 2-COLUMN / COVER FIT FIX
+   Visual/layout-only overrides. Existing JS/live features untouched.
+   ========================================================= */
+
+/* Deep, readable homepage/showcase headings and copy */
+#home .avx-showcase-head h2,
+#home .avx-showcase-head a,
+#home .avx-featured-story-title,
+#home .avx-featured-story-author,
+#home .avx-featured-author-name,
+#home .avx-featured-author-count,
+#home .toffee-section-head h2,
+#home .toffee-section-head .kicker,
+#home .toffee-view-all,
+#home .toffee-view-all span {
+  color:#2b1b16 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+
+#home .avx-showcase-head h2,
+#home .avx-showcase-head a,
+#home .toffee-section-head h2 {
+  font-weight:800 !important;
+}
+
+#home .avx-featured-story-author,
+#home .avx-featured-author-count {
+  color:#4b372d !important;
+  font-weight:700 !important;
+}
+
+/* Keep every book cover complete — never crop the actual cover artwork. */
+#home .avx-featured-story-cover,
+#home .story-cover,
+#home .cover-fallback {
+  width:100% !important;
+  aspect-ratio:2 / 3 !important;
+  height:auto !important;
+  object-fit:cover !important;
+  object-position:center !important;
+}
+
+/* Story titles may wrap; do not force a single-line crop. */
+#home .avx-featured-story-title,
+#home .card-title {
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  hyphens:auto !important;
+}
+
+#home .avx-featured-story-title {
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+  line-height:1.25 !important;
+}
+
+#home .avx-featured-story-author {
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  line-height:1.25 !important;
+}
+
+/* Featured Authors: clean deep text and stable cards. */
+#home .avx-featured-author {
+  color:#2b1b16 !important;
+  background:transparent !important;
+  min-width:0 !important;
+}
+
+#home .avx-featured-author-avatar,
+#home .avx-featured-author-fallback {
+  width:78px !important;
+  height:78px !important;
+  object-fit:cover !important;
+}
+
+/* ---------------------------------------------------------
+   MOBILE — exact 2-column layout
+   --------------------------------------------------------- */
+@media (max-width:700px){
+
+  /* Home welcome hero: keep the intended 16:9 ratio and use 2 columns. */
+  #home .avx-romantic-hero {
+    width:100% !important;
+    aspect-ratio:16 / 9 !important;
+    min-height:0 !important;
+    height:auto !important;
+    overflow:hidden !important;
+  }
+
+  #home .avx-hero-slide {
+    min-height:100% !important;
+    height:100% !important;
+  }
+
+  #home .avx-hero-inner {
+    width:100% !important;
+    min-height:100% !important;
+    height:100% !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:8px !important;
+    padding:10px 14px !important;
+    align-items:center !important;
+  }
+
+  /* Welcome text: dark/deep and contained inside left column. */
+  #home .avx-hero-copy {
+    min-width:0 !important;
+    width:100% !important;
+    padding:0 !important;
+    text-align:left !important;
+    z-index:5 !important;
+  }
+
+  #home .avx-hero-kicker {
+    color:#4a2b1e !important;
+    font-size:clamp(8px,2.6vw,13px) !important;
+    line-height:1.15 !important;
+    letter-spacing:.12em !important;
+    font-weight:900 !important;
+  }
+
+  #home .avx-hero-copy h1 {
+    color:#21150f !important;
+    font-size:clamp(25px,7.8vw,42px) !important;
+    line-height:.94 !important;
+    letter-spacing:-.045em !important;
+    margin:5px 0 6px !important;
+    max-width:100% !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #home .avx-hero-copy h1 span {
+    color:#6b3f2b !important;
+  }
+
+  #home .avx-hero-script {
+    color:#4d3024 !important;
+    font-size:clamp(12px,3.2vw,18px) !important;
+    line-height:1.12 !important;
+    margin:3px 0 6px !important;
+    max-width:100% !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #home .avx-hero-motto {
+    color:#4a3328 !important;
+    font-size:clamp(7px,2.1vw,11px) !important;
+    line-height:1.2 !important;
+    margin:0 0 7px !important;
+    gap:5px !important;
+    flex-wrap:wrap !important;
+  }
+
+  #home .avx-hero-search {
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+  }
+
+  #home .avx-hero-search input {
+    width:100% !important;
+    min-width:0 !important;
+    padding:8px 9px !important;
+    font-size:10px !important;
+    line-height:1.2 !important;
+  }
+
+  #home .avx-hero-search button {
+    width:38px !important;
+    height:35px !important;
+    font-size:18px !important;
+    flex:0 0 38px !important;
+  }
+
+  /* Right hero artwork column: no spill/cutoff. */
+  #home .avx-hero-cup-art {
+    position:relative !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  #home .avx-cup {
+    right:8% !important;
+    top:17% !important;
+    transform:scale(.62) rotate(-4deg) !important;
+    transform-origin:center center !important;
+  }
+
+  #home .avx-cup-saucer {
+    right:0 !important;
+    top:57% !important;
+    transform:scale(.62) rotate(-3deg) !important;
+    transform-origin:center center !important;
+  }
+
+  #home .avx-cup-glow {
+    width:120% !important;
+    height:85% !important;
+    left:50% !important;
+    top:52% !important;
+    transform:translate(-50%,-50%) !important;
+  }
+
+  #home .avx-cup-flower.f1 { left:8% !important; top:17% !important; }
+  #home .avx-cup-flower.f2 { left:18% !important; top:35% !important; }
+  #home .avx-cup-flower.f3 { left:7% !important; top:54% !important; }
+
+  /* Romantic couple slide: image fills the 16:9 mobile hero without distortion. */
+  #home .avx-couple-image {
+    background-size:cover !important;
+    background-position:center center !important;
+  }
+
+  #home .avx-couple-inner {
+    min-height:100% !important;
+    height:100% !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    align-items:end !important;
+    padding:10px 14px !important;
+  }
+
+  #home .avx-couple-copy {
+    grid-column:1 / 2 !important;
+    min-width:0 !important;
+    padding:0 0 9px !important;
+  }
+
+  #home .avx-couple-copy .avx-hero-kicker.light {
+    color:#fffaf5 !important;
+    font-size:clamp(7px,2.1vw,11px) !important;
+    line-height:1.15 !important;
+    text-shadow:0 2px 8px rgba(34,20,14,.75) !important;
+  }
+
+  #home .avx-couple-copy h2 {
+    color:#fffaf5 !important;
+    font-size:clamp(21px,6.7vw,36px) !important;
+    line-height:.98 !important;
+    margin:5px 0 !important;
+    overflow-wrap:anywhere !important;
+    text-shadow:0 2px 10px rgba(34,20,14,.72) !important;
+  }
+
+  #home .avx-couple-copy p {
+    color:#fffaf5 !important;
+    font-size:clamp(8px,2.3vw,12px) !important;
+    line-height:1.3 !important;
+    margin:4px 0 7px !important;
+    max-width:100% !important;
+    text-shadow:0 2px 8px rgba(34,20,14,.72) !important;
+  }
+
+  #home .avx-couple-button {
+    font-size:8px !important;
+    padding:7px 9px !important;
+    white-space:nowrap !important;
+  }
+
+  /* Featured Stories: exactly 2 columns, complete cover, no clipped titles. */
+  #home .avx-featured-story-grid {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:12px !important;
+    width:100% !important;
+    overflow:visible !important;
+    padding:0 !important;
+  }
+
+  #home .avx-featured-story-card {
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  #home .avx-featured-story-cover,
+  #home .avx-featured-story-fallback {
+    width:100% !important;
+    aspect-ratio:2 / 3 !important;
+    height:auto !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    border-radius:8px !important;
+  }
+
+  #home .avx-featured-story-title {
+    margin-top:7px !important;
+    font-size:12px !important;
+    line-height:1.25 !important;
+    min-height:30px !important;
+  }
+
+  #home .avx-featured-story-author {
+    margin-top:4px !important;
+    font-size:9px !important;
+    line-height:1.25 !important;
+  }
+
+  /* Featured Authors: 2 columns on phones too, no horizontal strip. */
+  #home .avx-featured-author-grid {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+    width:100% !important;
+    overflow:visible !important;
+    padding:0 !important;
+  }
+
+  #home .avx-featured-author {
+    width:100% !important;
+    min-width:0 !important;
+    padding:10px 6px !important;
+    border:1px solid #eadfd7 !important;
+    border-radius:12px !important;
+    background:#fffdf9 !important;
+  }
+
+  #home .avx-featured-author-avatar,
+  #home .avx-featured-author-fallback {
+    width:64px !important;
+    height:64px !important;
+    margin:0 auto 7px !important;
+  }
+
+  #home .avx-featured-author-name {
+    font-size:12px !important;
+    line-height:1.2 !important;
+    white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #home .avx-featured-author-count {
+    font-size:9px !important;
+    line-height:1.2 !important;
+    margin-top:4px !important;
+  }
+
+  /* Published Books / Top Picks / Your Next Read: exactly 2 columns. */
+  #home .toffee-story-grid,
+  #home #recommend-books,
+  #home #top-picks-books,
+  #home #next-read-books {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:11px !important;
+    width:100% !important;
+    overflow:visible !important;
+    padding:0 !important;
+  }
+
+  #home .toffee-story-grid .story-card {
+    min-width:0 !important;
+    width:100% !important;
+    overflow:hidden !important;
+    padding:5px !important;
+  }
+
+  #home .toffee-story-grid .story-cover-btn {
+    width:100% !important;
+    aspect-ratio:2 / 3 !important;
+    height:auto !important;
+    overflow:hidden !important;
+  }
+
+  #home .toffee-story-grid .story-cover,
+  #home .toffee-story-grid .cover-fallback {
+    width:100% !important;
+    height:100% !important;
+    aspect-ratio:2 / 3 !important;
+    object-fit:cover !important;
+    object-position:center !important;
+  }
+
+  #home .toffee-story-grid .card-body {
+    padding:8px 5px 5px !important;
+    min-width:0 !important;
+  }
+
+  #home .toffee-story-grid .card-title {
+    font-size:13px !important;
+    line-height:1.25 !important;
+    display:-webkit-box !important;
+    -webkit-box-orient:vertical !important;
+    -webkit-line-clamp:3 !important;
+    overflow:hidden !important;
+    min-height:0 !important;
+  }
+
+  #home .toffee-story-grid .meta {
+    font-size:9px !important;
+    line-height:1.3 !important;
+    white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #home .toffee-story-grid .tag-row {
+    gap:4px !important;
+    margin-top:5px !important;
+  }
+
+  #home .toffee-story-grid .tag {
+    font-size:8px !important;
+    padding:4px 6px !important;
+    line-height:1.1 !important;
+  }
+
+  /* Section headings themselves must not be squeezed/cut. */
+  #home .toffee-section-head {
+    align-items:flex-start !important;
+    gap:9px !important;
+    flex-wrap:wrap !important;
+  }
+
+  #home .toffee-section-head > div:first-child {
+    min-width:0 !important;
+    flex:1 1 auto !important;
+  }
+
+  #home .toffee-section-head h2 {
+    font-size:24px !important;
+    line-height:1.05 !important;
+    white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #home .toffee-view-all {
+    flex:0 0 auto !important;
+    font-size:10px !important;
+    white-space:nowrap !important;
+  }
+}
+
+/* Extra-small phones: preserve the same 2-column structure without clipping. */
+@media (max-width:380px){
+  #home .avx-hero-inner {
+    grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr) !important;
+    gap:5px !important;
+    padding:8px 10px !important;
+  }
+
+  #home .avx-hero-copy h1 {
+    font-size:clamp(22px,8vw,30px) !important;
+  }
+
+  #home .avx-hero-script {
+    font-size:clamp(10px,3vw,14px) !important;
+  }
+
+  #home .avx-hero-search input {
+    font-size:9px !important;
+    padding:7px !important;
+  }
+
+  #home .avx-cup {
+    transform:scale(.54) rotate(-4deg) !important;
+    right:1% !important;
+  }
+
+  #home .avx-cup-saucer {
+    transform:scale(.54) rotate(-3deg) !important;
+    right:-4% !important;
+  }
+
+  #home .avx-featured-story-grid,
+  #home .avx-featured-author-grid,
+  #home .toffee-story-grid,
+  #home #recommend-books,
+  #home #top-picks-books,
+  #home #next-read-books {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+
+  #home .avx-featured-story-title {
+    font-size:11px !important;
+  }
+
+  #home .avx-featured-story-author {
+    font-size:8px !important;
+  }
+
+  #home .toffee-story-grid .card-title {
+    font-size:11px !important;
+  }
+}
+</style>
+
+
+<style id="avx-deep-home-welcome-final">
+/* FINAL READABILITY FIX — Home Welcome: never use washed-out/white copy. */
+#home .avx-romantic-hero .avx-hero-copy,
+#home .avx-romantic-hero .avx-hero-copy *{
+  color:#321a12!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#home .avx-romantic-hero .avx-hero-kicker,
+#home .avx-romantic-hero .avx-hero-script,
+#home .avx-romantic-hero .avx-hero-motto,
+#home .avx-romantic-hero .avx-hero-motto span,
+#home .avx-romantic-hero .avx-hero-motto b{
+  color:#321a12!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+#home .avx-romantic-hero .avx-hero-copy h1,
+#home .avx-romantic-hero .avx-hero-copy h1 span{
+  color:#4a2417!important;
+  opacity:1!important;
+}
+#home .avx-romantic-hero .avx-hero-search input{
+  color:#321a12!important;
+  background:#fffdf9!important;
+}
+#home .avx-romantic-hero .avx-hero-search input::placeholder{
+  color:#684638!important;
+  opacity:1!important;
+}
+#home .avx-romantic-hero .avx-hero-search button{
+  color:#fff!important;
+  background:#6d3f2b!important;
+  opacity:1!important;
+}
+
+/* Featured Stories / Featured Authors: deep, readable labels. */
+#home .avx-showcase-head h2,
+#home .avx-showcase-head a,
+#home .avx-featured-story-title,
+#home .avx-featured-story-author,
+#home .avx-featured-author-name,
+#home .avx-featured-author-count{
+  color:#321a12!important;
+  opacity:1!important;
+}
+
+/* Do not manufacture an author name when the book has no author identity. */
+#home .avx-featured-story-author:empty{
+  display:none!important;
+}
+
+/* Prevent cover/text clipping on phone cards. */
+@media (max-width:700px){
+  #home .avx-romantic-hero{
+    aspect-ratio:16/9!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  #home .avx-hero-inner{
+    min-height:0!important;
+  }
+  #home .avx-hero-copy{
+    min-width:0!important;
+    overflow:visible!important;
+  }
+  #home .avx-hero-script,
+  #home .avx-hero-motto{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    word-break:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+  #home .avx-featured-story-title,
+  #home .avx-featured-story-author,
+  #home .avx-featured-author-name,
+  #home .avx-featured-author-count{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    line-height:1.25!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -6542,7 +7128,7 @@ function initAvxRomanticHero(){
   },8000);
 }
 
-function renderAvxHomeShowcase(stories=[]){
+async function renderAvxHomeShowcase(stories=[]){
   const storyBox=document.getElementById('avx-featured-story-grid');
   const authorBox=document.getElementById('avx-featured-author-grid');
   if(!storyBox||!authorBox)return;
@@ -6551,15 +7137,30 @@ function renderAvxHomeShowcase(stories=[]){
   if(!featuredStories.length){
     storyBox.innerHTML='<div class="avx-showcase-loading">Published stories will appear here once books are live.</div>';
   }else{
+    /* Resolve the real author from profiles using the book owner_id. */
+    let authorMap=new Map();
+    try{
+      const ownerIds=[...new Set(featuredStories.map(s=>s.owner_id).filter(Boolean))];
+      if(ownerIds.length){
+        const pr=await sb.from('profiles')
+          .select('id,pen_name,display_name')
+          .in('id',ownerIds);
+        (pr.data||[]).forEach(p=>authorMap.set(String(p.id),p));
+      }
+    }catch(e){
+      console.warn('Featured story author lookup unavailable:',e);
+    }
+
     storyBox.innerHTML=featuredStories.map(s=>{
-      const author=s.author_name||s.pen_name||'Avanitaxx Author';
+      const profile=authorMap.get(String(s.owner_id||''));
+      const author=profile?.pen_name||profile?.display_name||s.author_name||s.pen_name||'';
       const cover=s.cover_url
         ? `<img class="avx-featured-story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`
         : `<div class="avx-featured-story-fallback">${esc(s.title||'Story')}</div>`;
       return `<article class="avx-featured-story-card" data-avx-story="${esc(s.share_slug||s.id)}">
         ${cover}
         <div class="avx-featured-story-title">${esc(s.title||'Untitled Story')}</div>
-        <div class="avx-featured-story-author">${esc(author)}</div>
+        ${author?`<div class="avx-featured-story-author">${esc(author)}</div>`:''}
       </article>`;
     }).join('');
     storyBox.querySelectorAll('[data-avx-story]').forEach(card=>{
@@ -6574,10 +7175,10 @@ function renderAvxHomeShowcase(stories=[]){
       return;
     }
     authorBox.innerHTML=liveAuthors.map(a=>{
-      const name=a.pen_name||a.display_name||'Avanitaxx Author';
+      const name=a.pen_name||a.display_name||'';
       const avatar=a.avatar_url
         ? `<img class="avx-featured-author-avatar" src="${esc(a.avatar_url)}" alt="${esc(name)}" loading="lazy">`
-        : `<div class="avx-featured-author-fallback">${esc(name.charAt(0).toUpperCase()||'A')}</div>`;
+        : `<div class="avx-featured-author-fallback">${esc((name||'A').charAt(0).toUpperCase())}</div>`;
       return `<button class="avx-featured-author" type="button" data-avx-author="${esc(a.id)}">
         ${avatar}
         <div class="avx-featured-author-name">${esc(name)}</div>
@@ -6591,31 +7192,6 @@ function renderAvxHomeShowcase(stories=[]){
     authorBox.innerHTML='<div class="avx-showcase-loading">Featured authors are temporarily unavailable.</div>';
   });
 }
-
-async function loadHome(){
- try{
-   const stories=await getPublished();
-   initAvxRomanticHero();
-   renderAvxHomeShowcase(stories);
-   await loadLatestChapterPromotion(stories);
-   await loadHomepageFeatures();
-   renderGenreShelves(stories);
-   renderSeriesShelves(stories);
-   renderHomeLatestUpdates(stories);
-   const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
-   const signals=getReaderSignals(stories);
-   const scored=enriched.slice().sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));
-   renderDiscoveryCards('recommend-books',enriched.slice().sort((a,b)=>(Number(b.views)||0)-(Number(a.views)||0)), 'Published books will appear here once they are published.');
-   renderDiscoveryCards('top-picks-books',scored,'Top picks will appear after published books have enough reader signals.');
-   renderNextRead(enriched,signals);
-   await loadAuthorHubData(stories);
-   // Author identity stays in the header/profile menu instead of occupying homepage space.
- }catch(e){
-   console.error(e);
-   ['genre-shelves','recommend-books','top-picks-books','next-read-books','home-latest-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
- }
-}
-
 function bindStoryCards(){document.querySelectorAll('.read-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug))}
 
 async function getAuthorDirectory(stories=[]){
@@ -6848,6 +7424,29 @@ async function loadPublicAuthorProfile(stories=[],targetBox=null,forcedAuthorId=
   const ep=document.getElementById('edit-profile-public');
   if(ep)ep.onclick=openProfileEditor;
 }
+async function loadHome(){
+ try{
+   const stories=await getPublished();
+   initAvxRomanticHero();
+   await renderAvxHomeShowcase(stories);
+   await loadLatestChapterPromotion(stories);
+   await loadHomepageFeatures();
+   renderGenreShelves(stories);
+   renderSeriesShelves(stories);
+   renderHomeLatestUpdates(stories);
+   const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
+   const signals=getReaderSignals(stories);
+   const scored=enriched.slice().sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));
+   renderDiscoveryCards('recommend-books',enriched.slice().sort((a,b)=>(Number(b.views)||0)-(Number(a.views)||0)), 'Published books will appear here once they are published.');
+   renderDiscoveryCards('top-picks-books',scored,'Top picks will appear after published books have enough reader signals.');
+   renderNextRead(enriched,signals);
+   await loadAuthorHubData(stories);
+ }catch(e){
+   console.error(e);
+   ['genre-shelves','recommend-books','top-picks-books','next-read-books','home-latest-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
+ }
+}
+
 async function toggleFollow(authorId,button){if(!session){openAuth('reader');return}if(session.user.id===authorId)return;const q=await sb.from('follows').select('id').eq('author_id',authorId).eq('follower_id',session.user.id).maybeSingle();if(q.data){const d=await sb.from('follows').delete().eq('id',q.data.id);if(!d.error)button.textContent='FOLLOW'}else{const i=await sb.from('follows').insert({author_id:authorId,follower_id:session.user.id});if(!i.error)button.textContent='FOLLOWING'}const stories=await getPublished();loadPublicAuthorProfile(stories)}
 
 async function getLibraryState(storyId){
@@ -8940,7 +9539,7 @@ function bindStatic(){
           <div class="podium-title">${esc(x.title)}</div>
           <div class="podium-reads">${x.__reads.toLocaleString()} reads</div>
         </article>`).join('');
-        const rows=rest.map((x,i)=>{const n=i+4;return `<article class="rank-row rank-row-v2" data-ranking-open="${esc(x.share_slug||x.id)}"><div class="rank-no">${n}</div>${x.cover_url?`<img class="rank-cover" src="${esc(x.cover_url)}" alt="${esc(x.title)} book cover" loading="lazy">`:`<div class="rank-cover-fallback">${esc(x.title)}</div>`}<div class="rank-info"><div class="rank-story-title">${esc(x.title)}</div><div class="rank-author">${esc(x.author_name||x.author||'Avanitaxx Author')}</div><div class="rank-desc">${esc(x.description||'')}</div></div><div class="rank-reads">${x.__reads.toLocaleString()} READS</div></article>`}).join('');
+        const rows=rest.map((x,i)=>{const n=i+4;return `<article class="rank-row rank-row-v2" data-ranking-open="${esc(x.share_slug||x.id)}"><div class="rank-no">${n}</div>${x.cover_url?`<img class="rank-cover" src="${esc(x.cover_url)}" alt="${esc(x.title)} book cover" loading="lazy">`:`<div class="rank-cover-fallback">${esc(x.title)}</div>`}<div class="rank-info"><div class="rank-story-title">${esc(x.title)}</div><div class="rank-author">${esc(x.author_name||x.author||'')}</div><div class="rank-desc">${esc(x.description||'')}</div></div><div class="rank-reads">${x.__reads.toLocaleString()} READS</div></article>`}).join('');
         list.innerHTML=`${podium?`<div class="ranking-podium">${podium}</div>`:''}${rows?`<div class="ranking-rest">${rows}</div>`:''}`;
         list.querySelectorAll('[data-ranking-open]').forEach(card=>card.addEventListener('click',()=>openPublicStory(card.dataset.rankingOpen)));
       };
