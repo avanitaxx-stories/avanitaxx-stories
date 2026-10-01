@@ -5174,6 +5174,247 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-final-mobile-home-auth-chat-fix">
+/*
+  AVANITAXX STORIES — FINAL MOBILE HOME / AUTH / CHAT FIX
+  Scope:
+  1) Restore coffee-cup floating motion without fighting responsive scale/rotate transforms.
+  2) Restore visible animated coffee steam/smoke.
+  3) Make ONLY the mobile Home Welcome banner 16:9.
+  4) Show header SIGN IN only while signed out.
+  5) Put Community Chat beside Ranking in the mobile bottom navigation.
+  No Supabase data, reader, ranking, author, music, notes or notification logic is changed.
+*/
+
+/* ---------- 1. HOME COFFEE CUP ---------- */
+#home .coffee-cup{
+  animation:avxCupFloatSafe 4.2s ease-in-out infinite !important;
+  translate:0 0;
+  will-change:translate;
+}
+
+@keyframes avxCupFloatSafe{
+  0%,100%{translate:0 0}
+  50%{translate:0 -9px}
+}
+
+/* ---------- 2. COFFEE STEAM / SMOKE ---------- */
+#home .steam{
+  display:block !important;
+  visibility:visible !important;
+  pointer-events:none !important;
+  will-change:translate,opacity;
+  animation:avxSteamRise 3.2s ease-in-out infinite !important;
+}
+
+#home .steam-two{
+  animation-delay:1.35s !important;
+}
+
+@keyframes avxSteamRise{
+  0%{
+    translate:0 8px;
+    opacity:.18;
+  }
+  35%{
+    opacity:.58;
+  }
+  70%{
+    translate:4px -7px;
+    opacity:.36;
+  }
+  100%{
+    translate:-2px -16px;
+    opacity:.08;
+  }
+}
+
+/* ---------- 3. MOBILE HOME WELCOME = EXACT 16:9 ---------- */
+@media(max-width:700px){
+  #home .toffee-hero{
+    width:100% !important;
+    aspect-ratio:16 / 9 !important;
+    min-height:0 !important;
+    height:auto !important;
+    overflow:hidden !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  #home .toffee-home-grid{
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    padding:10px 16px !important;
+    box-sizing:border-box !important;
+    grid-template-columns:minmax(0,1fr) minmax(112px,.72fr) !important;
+    gap:5px !important;
+    align-items:center !important;
+  }
+
+  #home .toffee-hero-copy{
+    min-width:0 !important;
+    padding:0 !important;
+    text-align:left !important;
+  }
+
+  #home .toffee-hero-art{
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    margin:0 !important;
+    position:relative !important;
+  }
+
+  #home .toffee-welcome{
+    font-size:clamp(10px,3.1vw,16px) !important;
+    line-height:1 !important;
+  }
+
+  #home .toffee-hero h1{
+    font-size:clamp(24px,8vw,40px) !important;
+    line-height:.98 !important;
+    margin:5px 0 7px !important;
+  }
+
+  #home .toffee-rule{
+    margin:0 0 7px !important;
+  }
+
+  #home .toffee-lead{
+    font-size:clamp(8px,2.7vw,12px) !important;
+    line-height:1.3 !important;
+    max-width:100% !important;
+    margin:0 !important;
+  }
+
+  #home .toffee-actions{
+    margin-top:7px !important;
+    gap:5px !important;
+  }
+
+  #home .toffee-actions .btn{
+    min-height:30px !important;
+    padding:6px 8px !important;
+    font-size:7px !important;
+  }
+
+  #home .hero-book-espresso{
+    width:230px !important;
+    height:120px !important;
+    bottom:8% !important;
+    transform:scale(.55) rotate(4deg) !important;
+  }
+
+  /* Keep scale/rotation in transform; floating motion comes from `translate`. */
+  #home .coffee-cup{
+    width:88px !important;
+    height:74px !important;
+    right:2% !important;
+    top:13% !important;
+    transform:scale(.60) rotate(-4deg) !important;
+    transform-origin:center bottom !important;
+  }
+
+  #home .coffee-saucer{
+    width:120px !important;
+    height:18px !important;
+    right:-2% !important;
+    top:54% !important;
+    transform:scale(.60) rotate(-3deg) !important;
+  }
+
+  #home .coffee-feather{
+    left:8% !important;
+    top:10% !important;
+    font-size:27px !important;
+    transform:scale(.60) rotate(-25deg) !important;
+  }
+
+  #home .coffee-glow{
+    width:100% !important;
+    height:72% !important;
+  }
+
+  /* Steam stays directly above the mug on narrow screens. */
+  #home .steam-one{
+    right:calc(18% + 39px) !important;
+    top:2% !important;
+    width:20px !important;
+    height:46px !important;
+    transform:rotate(12deg) !important;
+  }
+
+  #home .steam-two{
+    right:calc(18% + 16px) !important;
+    top:5% !important;
+    width:20px !important;
+    height:42px !important;
+    transform:rotate(-12deg) !important;
+  }
+
+  /* The floating desktop/mobile Home chat bubble is replaced by the bottom-nav Chat item. */
+  #home .avx-restored-tools{
+    display:none !important;
+  }
+
+  .avx-mobile-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+
+  .avx-mobile-nav [data-mobile-nav="chat"]{
+    display:flex !important;
+  }
+}
+
+@media(max-width:380px){
+  #home .toffee-home-grid{
+    padding-left:12px !important;
+    padding-right:12px !important;
+    grid-template-columns:minmax(0,1fr) minmax(100px,.68fr) !important;
+  }
+
+  #home .coffee-cup{
+    transform:scale(.52) rotate(-4deg) !important;
+    right:0 !important;
+  }
+
+  #home .coffee-saucer{
+    transform:scale(.52) rotate(-3deg) !important;
+  }
+
+  #home .steam-one{
+    right:calc(17% + 34px) !important;
+  }
+
+  #home .steam-two{
+    right:calc(17% + 13px) !important;
+  }
+}
+
+/* ---------- 4. AUTH VISIBILITY SAFETY NET ----------
+   JS is the source of truth. These rules only prevent older CSS from
+   forcing #reader-btn back onto the screen after JS adds .hidden. */
+#reader-btn.hidden{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #home .coffee-cup,
+  #home .steam,
+  #home .steam-one,
+  #home .steam-two{
+    animation:none !important;
+    translate:0 0 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -5220,7 +5461,8 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 <nav class="avx-mobile-nav" aria-label="Mobile navigation">
   <button type="button" data-mobile-nav="home"><span class="micon">⌂</span>Home</button>
   <button type="button" data-mobile-nav="browse"><span class="micon">▣</span>Browse</button>
-  <button type="button" data-mobile-nav="ranking"><span class="micon">📖</span>Ranking</button>
+  <button type="button" data-mobile-nav="ranking"><span class="micon">♛</span>Ranking</button>
+  <button type="button" data-mobile-nav="chat" aria-label="Open Community Chat"><span class="micon">💬</span>Chat</button>
 </nav>
 
 <main id="home" class="toffee-home">
@@ -5444,14 +5686,16 @@ async function loadAuthorAvatar(){const wrap=document.getElementById('author-men
 function updateAuthUI(){
   const reader=document.getElementById('reader-btn');
   const bell=document.getElementById('notify-btn');
+
   if(session){
-    reader?.classList.remove('hidden');
-    if(reader)reader.textContent='SIGN IN';
+    /* Logged in: hide the header SIGN IN control. Keep account + notifications available. */
+    reader?.classList.add('hidden');
     bell?.classList.remove('hidden');
     loadUnreadCount();
     loadAuthorAvatar();
     avxStartNotificationPolling().catch(()=>{});
   }else{
+    /* Logged out: show SIGN IN. The CREATE ACCOUNT option remains inside the auth dialog. */
     avxStopNotificationPolling();
     reader?.classList.remove('hidden');
     if(reader)reader.textContent='SIGN IN';
@@ -9169,7 +9413,8 @@ const st=document.createElement('style');st.textContent=`
   };
 })();
 </script>
-<script>document.addEventListener('click',e=>{const b=e.target.closest?.('[data-mobile-nav]');if(!b)return;const type=b.dataset.mobileNav;document.querySelectorAll('.avx-mobile-nav button').forEach(x=>x.classList.toggle('active',x===b));if(type==='home'){window.scrollTo({top:0,behavior:'smooth'});return}if(type==='browse'){window.openBrowsePanel?.();return}if(type==='ranking'){document.getElementById('nav-ranking-btn')?.click();return}});</script>
+<script>document.addEventListener('click',e=>{const b=e.target.closest?.('[data-mobile-nav]');if(!b)return;const type=b.dataset.mobileNav;document.querySelectorAll('.avx-mobile-nav button').forEach(x=>x.classList.toggle('active',x===b));if(type==='home'){window.scrollTo({top:0,behavior:'smooth'});return}if(type==='browse'){window.openBrowsePanel?.();return}if(type==='ranking'){document.getElementById('nav-ranking-btn')?.click();return}
+if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</script>
 
 <script id="avx-home-tools-only-request-js">
 (function(){
