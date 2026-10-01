@@ -4458,6 +4458,210 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-requested-responsive-fixes">
+/* ===== AVANITAXX — REQUESTED RESPONSIVE LAYOUT FIX =====
+   Only layout/presentation changes requested by the owner.
+*/
+
+/* 1) HOME BANNER — exact 16:9 on desktop and mobile */
+#home .toffee-hero{
+  width:100%;
+  aspect-ratio:16 / 9 !important;
+  min-height:0 !important;
+  height:auto !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  padding:0 !important;
+}
+#home .toffee-home-grid{
+  height:100% !important;
+  min-height:0 !important;
+}
+#home .toffee-hero-art{
+  min-height:0 !important;
+  height:100% !important;
+}
+
+/* 2) Desktop/Windows — use the available content width better.
+   Top Picks gets 6 books per row on wide screens. */
+@media (min-width:1200px){
+  #home .toffee-main-grid{
+    grid-template-columns:minmax(0,1fr) 315px !important;
+    gap:24px !important;
+  }
+  #home #top-picks-books.toffee-story-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    gap:13px !important;
+  }
+  #home #top-picks-books .card-body{
+    padding:9px 7px !important;
+  }
+  #home #top-picks-books .card-title{
+    font-size:12px !important;
+  }
+}
+
+/* 3) Mobile — keep the home banner itself at exactly 16:9.
+   The artwork and copy scale down instead of changing the banner ratio. */
+@media (max-width:700px){
+  #home .toffee-hero{
+    aspect-ratio:16 / 9 !important;
+  }
+  #home .toffee-home-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+    width:100% !important;
+    padding:10px 16px !important;
+  }
+  #home .toffee-hero-copy{
+    padding:0 !important;
+    text-align:left !important;
+  }
+  #home .toffee-welcome{
+    font-size:clamp(11px,3.4vw,17px) !important;
+    line-height:1 !important;
+  }
+  #home .toffee-hero h1{
+    font-size:clamp(25px,8.5vw,42px) !important;
+    margin:5px 0 8px !important;
+  }
+  #home .toffee-rule{
+    width:100% !important;
+    margin:0 0 8px !important;
+  }
+  #home .toffee-lead{
+    font-size:clamp(9px,2.9vw,13px) !important;
+    line-height:1.35 !important;
+    max-width:100% !important;
+  }
+  #home .toffee-actions{
+    margin-top:8px !important;
+    gap:5px !important;
+  }
+  #home .toffee-actions .btn{
+    min-height:32px !important;
+    padding:7px 9px !important;
+    font-size:8px !important;
+  }
+  #home .toffee-hero-art{
+    height:100% !important;
+    min-height:0 !important;
+  }
+  #home .hero-book-espresso{
+    width:230px !important;
+    height:120px !important;
+    bottom:14% !important;
+    transform:scale(.62) rotate(4deg) !important;
+    transform-origin:center !important;
+  }
+  #home .coffee-cup{
+    width:88px !important;
+    height:74px !important;
+    right:2% !important;
+    top:15% !important;
+    transform:scale(.65) rotate(-4deg) !important;
+  }
+  #home .coffee-saucer{
+    width:120px !important;
+    height:18px !important;
+    right:-2% !important;
+    top:55% !important;
+    transform:scale(.65) rotate(-3deg) !important;
+  }
+  #home .coffee-feather{
+    left:12% !important;
+    top:12% !important;
+    font-size:28px !important;
+    transform:scale(.65) rotate(-25deg) !important;
+  }
+  #home .coffee-glow{
+    width:100% !important;
+    height:70% !important;
+  }
+
+  /* SIGN IN is hidden on phones only. */
+  #reader-btn{
+    display:none !important;
+  }
+
+  /* View All: vertical/list layout on phones too. */
+  .all-stories-grid{
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  .all-stories-grid .story-card{
+    display:grid !important;
+    grid-template-columns:82px minmax(0,1fr) !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:0 !important;
+    min-width:0 !important;
+  }
+  .all-stories-grid .story-cover-btn{
+    width:82px !important;
+    height:123px !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
+  }
+  .all-stories-grid .story-cover,
+  .all-stories-grid .cover-fallback{
+    width:100% !important;
+    height:100% !important;
+    aspect-ratio:auto !important;
+    object-fit:cover !important;
+  }
+  .all-stories-grid .card-body{
+    min-width:0 !important;
+    padding:10px 12px !important;
+  }
+}
+
+/* 4) Desktop View All — vertical book list, not a 4-column grid. */
+@media (min-width:701px){
+  .all-stories-grid{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+  .all-stories-grid .story-card{
+    display:grid !important;
+    grid-template-columns:140px minmax(0,1fr) !important;
+    min-width:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+  }
+  .all-stories-grid .story-cover-btn{
+    width:140px !important;
+    height:210px !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
+  }
+  .all-stories-grid .story-cover,
+  .all-stories-grid .cover-fallback{
+    width:100% !important;
+    height:100% !important;
+    aspect-ratio:auto !important;
+    object-fit:cover !important;
+  }
+  .all-stories-grid .card-body{
+    min-width:0 !important;
+    padding:18px 20px !important;
+    align-self:center !important;
+  }
+  .all-stories-grid .card-title{
+    font-size:22px !important;
+  }
+}
+
+/* 5) Tablet remains a comfortable 2-column book shelf. */
+@media (min-width:701px) and (max-width:1199px){
+  #home #top-picks-books.toffee-story-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4624,17 +4828,6 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
       </section>
     </div>
 
-    <aside class="toffee-sidebar avx-home-sidebar-reader">
-      <section class="toffee-sidebar-card">
-        <div class="toffee-sidebar-title">Reader Shortcuts</div>
-        <div class="toffee-short-rule"></div>
-        <p class="avx-sidebar-copy">Your profile, library, notifications, and author tools are available from the account menu above.</p>
-        <div class="avx-sidebar-actions">
-          <button class="btn ghost" id="home-sidebar-browse" type="button">Browse Stories</button>
-          <button class="btn alt" id="home-sidebar-ranking" type="button">Story Ranking</button>
-        </div>
-      </section>
-    </aside>
   </div>
 </section>
 </main>
@@ -7269,7 +7462,11 @@ function scoreForReader(s,signals){
   return score;
 }
 function renderDiscoveryCards(id,stories,empty='No published stories yet.'){
-  const box=document.getElementById(id);if(!box)return;box.innerHTML=stories.length?stories.slice(0,4).map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`)).join(''):`<div class="empty">${empty}</div>`;bindStoryCards();
+  const box=document.getElementById(id);
+  if(!box)return;
+  const limit=id==='top-picks-books'?6:4;
+  box.innerHTML=stories.length?stories.slice(0,limit).map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`)).join(''):`<div class="empty">${empty}</div>`;
+  bindStoryCards();
 }
 function renderNextRead(stories,signals){
   const seen=new Set(signals.map(s=>String(s.id)));
