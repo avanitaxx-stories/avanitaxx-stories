@@ -5281,13 +5281,38 @@ function saveReaderProgress(){
   data.lastChapter=currentChapter;
   try{localStorage.setItem('avx_reader_progress_'+currentStory.id,JSON.stringify(data))}catch{}
 }
+function getReaderBookmarkList(){
+  try{const x=JSON.parse(localStorage.getItem('avx_bookmarks_v2')||'[]');return Array.isArray(x)?x:[]}catch{return []}
+}
+function currentReaderBookmark(){
+  if(!currentStory?.id)return null;
+  const idx=Number(currentChapter)||0, chapters=Array.isArray(currentStory.chapters)?currentStory.chapters:[], ch=chapters[idx]||{};
+  const userKey=window.__AVX_INTERNAL__?.getSession?.()?.user?.id||'guest';
+  return {userKey,storyId:String(currentStory.id),slug:String(currentStory.share_slug||currentStory.id),title:String(currentStory.title||'Untitled Story'),chapterIndex:idx,chapterNumber:Number(ch.chapter_number||idx+1),chapterTitle:String(ch.title||('Chapter '+(idx+1))),cover:String(currentStory.cover_url||''),savedAt:Date.now()};
+}
+function isCurrentReaderBookmarked(){
+  const item=currentReaderBookmark();if(!item)return false;
+  return getReaderBookmarkList().some(x=>String(x.storyId)===item.storyId&&Number(x.chapterIndex)===item.chapterIndex&&(!x.userKey||x.userKey===item.userKey));
+}
+function updateReaderBookmarkButton(){
+  const b=document.getElementById('reader-bookmark');if(!b)return;
+  const saved=isCurrentReaderBookmarked();b.textContent=saved?'✓ SAVED · REMOVE':'☆ BOOKMARK';
+  b.setAttribute('aria-pressed',saved?'true':'false');b.classList.toggle('active',saved);
+}
+function toggleCurrentReaderBookmark(){
+  const item=currentReaderBookmark();if(!item)return;
+  const list=getReaderBookmarkList(),saved=list.some(x=>String(x.storyId)===item.storyId&&Number(x.chapterIndex)===item.chapterIndex&&(!x.userKey||x.userKey===item.userKey));
+  const next=saved?list.filter(x=>!(String(x.storyId)===item.storyId&&Number(x.chapterIndex)===item.chapterIndex&&(!x.userKey||x.userKey===item.userKey))):[{...item,savedAt:Date.now()},...list];
+  try{localStorage.setItem('avx_bookmarks_v2',JSON.stringify(next.slice(0,100)))}catch(e){alert('Unable to save bookmark in this browser. Please check available site storage.');return}
+  updateReaderBookmarkButton();window.dispatchEvent(new CustomEvent('avx:bookmarks-updated'));
+}
 function renderReader(restoreScroll=true){
   if(String(currentStory?.story_type||'standalone')==='compilation'){
     const settings=readerSettings();const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':settings.theme==='sepia'?'sepia-mode':''} reader-scroll-mode`;root.style.setProperty('--reader-font-size',settings.size+'px');root.style.setProperty('--reader-line-height',({compact:1.65,comfortable:1.95,relaxed:2.2})[settings.lineSpacing]||1.95);
     const items=currentStory.compilation_stories||[];
     root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top"><div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · COMPILATION</div><div class="reader-book-title">${esc(currentStory.title)}</div><div class="compilation-badge">${items.length} ${items.length===1?'STORY':'STORIES'}</div></div><div class="reader-tools"><span class="reader-settings-note">COLLECTION · NO DUPLICATE TEXT</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light" type="button">☼ LIGHT</button><button class="reader-tool ${settings.theme==='sepia'?'active':''}" id="reader-sepia" type="button">☕ SEPIA</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark" type="button">☾ DARK</button><label class="reader-settings-note" for="reader-line-spacing" style="margin:0">LINE</label><select class="reader-line-spacing" id="reader-line-spacing" aria-label="Line spacing"><option value="compact" ${settings.lineSpacing==='compact'?'selected':''}>Compact</option><option value="comfortable" ${settings.lineSpacing==='comfortable'?'selected':''}>Comfortable</option><option value="relaxed" ${settings.lineSpacing==='relaxed'?'selected':''}>Relaxed</option></select><button class="reader-tool" id="reader-size-down" type="button">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div></div><main class="reader-scroll" id="reader-scroll"><article class="reader-scroll-page"><div class="compilation-reader-note">${esc(currentStory.description||'A collection of published stories. Each story remains its own original book; this compilation only links to the originals.')}</div><div class="compilation-reader-list">${items.length?items.map((story,i)=>`<article class="compilation-reader-item"><div>${story.cover_url?`<img class="compilation-reader-cover" src="${esc(story.cover_url)}" alt="${esc(story.title)} cover">`:`<div class="compilation-reader-cover cover-fallback">${esc(story.title)}</div>`}</div><div><div class="compilation-reader-title">${i+1}. ${esc(story.title)}</div><div class="compilation-reader-desc">${esc(String(story.description||'').replace(/<[^>]*>/g,'').slice(0,220))}</div>${Array.isArray(story.tags)&&story.tags.length?`<div class="meta" style="margin-top:6px">${esc(story.tags.slice(0,4).join(' · '))}</div>`:''}</div><button class="btn read-compilation-story" data-slug="${esc(story.share_slug||story.id)}" type="button">READ STORY →</button></article>`).join(''):'<div class="reader-page-empty">No published books have been added to this compilation yet.</div>'}</div></article></main></div>`;
     const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open reader-overlay';overlay.setAttribute('aria-hidden','false');avxObserveWindow();
-    document.getElementById('close-reader').onclick=()=>close();document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-sepia').onclick=()=>{settings.theme='sepia';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-line-spacing').onchange=e=>{settings.lineSpacing=e.target.value;saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};root.querySelectorAll('.read-compilation-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));return;
+    document.getElementById('close-reader').onclick=()=>close();document.getElementById('reader-bookmark')?.addEventListener('click',toggleCurrentReaderBookmark);updateReaderBookmarkButton();document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-sepia').onclick=()=>{settings.theme='sepia';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-line-spacing').onchange=e=>{settings.lineSpacing=e.target.value;saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};root.querySelectorAll('.read-compilation-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));return;
   }
   const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};
   const settings=readerSettings();
@@ -5329,12 +5354,8 @@ function renderReader(restoreScroll=true){
   }
 
   document.getElementById('close-reader').onclick=()=>{saveReaderProgress();close()};
-  document.getElementById('reader-bookmark')?.addEventListener('click',()=>{
-    const key='avx_bookmarks_v2'; let list=[]; try{list=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
-    const item={storyId:String(currentStory?.id||''),slug:String(currentStory?.share_slug||currentStory?.id||''),title:String(currentStory?.title||'Untitled Story'),chapterIndex:Number(currentChapter)||0,chapterTitle:String(currentStory?.chapters?.[currentChapter]?.title||('Chapter '+(Number(currentChapter)+1))),cover:String(currentStory?.cover_url||''),savedAt:Date.now()};
-    const k=item.storyId+'::'+item.chapterIndex; list=list.filter(x=>String(x.storyId)+'::'+String(x.chapterIndex)!==k); list.unshift(item); localStorage.setItem(key,JSON.stringify(list.slice(0,100)));
-    const b=document.getElementById('reader-bookmark'); if(b){b.textContent='✓ BOOKMARKED';setTimeout(()=>{b.textContent='☆ BOOKMARK'},1200)}
-  });
+  document.getElementById('reader-bookmark')?.addEventListener('click',toggleCurrentReaderBookmark);
+  updateReaderBookmarkButton();
   document.getElementById('reader-light').onclick=()=>{saveReaderProgress();settings.theme='light';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-sepia').onclick=()=>{saveReaderProgress();settings.theme='sepia';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-dark').onclick=()=>{saveReaderProgress();settings.theme='dark';saveReaderSettings(settings);renderReader(true)};
@@ -7300,7 +7321,7 @@ function upsertHistory(){
   list.unshift({userKey:userKey(),storyId:String(story.id),slug:String(story.share_slug||story.id),title:String(story.title||"Untitled Story"),chapterIndex:idx,chapterNumber:Number(ch.chapter_number||idx+1),chapterTitle:String(ch.title||("Chapter "+(idx+1))),cover:String(story.cover_url||""),totalChapters:Number(story.chapters?.length||0),savedAt:Date.now()});
   write(KEY,list.slice(0,100)); render();
 }
-function removeBookmark(storyId,idx){write(BM,getBookmarks().filter(x=>!(String(x.storyId)===String(storyId)&&Number(x.chapterIndex)===Number(idx))));render()}
+function removeBookmark(storyId,idx){const hk=userKey();write(BM,getBookmarks().filter(x=>!(String(x.storyId)===String(storyId)&&Number(x.chapterIndex)===Number(idx)&&(!x.userKey||x.userKey===hk))));render()}
 function openItem(x){
   try{const p=state().getReaderProgress?.(x.storyId)||{};p.lastChapter=Number(x.chapterIndex)||0;localStorage.setItem('avx_reader_progress_'+x.storyId,JSON.stringify(p))}catch(e){}
   if(typeof window.openPublicStory==='function') return window.openPublicStory(x.slug||x.storyId);
@@ -7310,7 +7331,8 @@ function continueCard(x){const chapters=Number(x.totalChapters||x.chapterCount||
 function render(){const root=document.getElementById('avx-phase1-reader');if(!root)return;const hk=userKey();const history=getHistory().filter(x=>x.userKey===hk||!x.userKey).sort((a,b)=>(Number(b.savedAt)||0)-(Number(a.savedAt)||0));const bm=getBookmarks().filter(x=>x.userKey===hk||!x.userKey);const latestByStory=new Map();history.forEach(x=>{if(!latestByStory.has(String(x.storyId)))latestByStory.set(String(x.storyId),x)});const continuing=[...latestByStory.values()].slice(0,8);const lookup=x=>[...history,...bm].find(y=>String(y.storyId)+'::'+y.chapterIndex===x);root.innerHTML=`<section class="avx-phase1-section avx-continue-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Continue Reading</div><div class="avx-phase1-sub">Pick up where you left off. Your latest chapter for each book is saved here.</div></div></div>${continuing.length?`<div class="avx-phase1-grid avx-phase1-continue-grid">${continuing.map(continueCard).join('')}</div>`:`<div class="avx-phase1-empty">Your reading list will appear here after you open a story. Start reading a published book, and you can quickly return to it from here.</div>`}</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Recent Reading History</div><div class="avx-phase1-sub">Your most recently opened chapters.</div></div></div>${history.length?history.slice(0,10).map(x=>card(x,false)).join(''):`<div class="avx-phase1-empty">No reading history yet.</div>`}</section><section class="avx-phase1-section"><div class="avx-phase1-head"><div><div class="avx-phase1-title">Chapter Bookmarks</div><div class="avx-phase1-sub">Save chapters you want to return to.</div></div></div>${bm.length?`<div class="avx-phase1-grid">${bm.slice(0,20).map(x=>card(x,true)).join('')}</div>`:`<div class="avx-phase1-empty">No bookmarked chapters yet.</div>`}</section>`;
 root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const x=lookup(b.dataset.open)||continuing.find(y=>String(y.storyId)+'::'+y.chapterIndex===b.dataset.open);if(x)openItem(x)});root.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{const [id,idx]=b.dataset.remove.split('::');removeBookmark(id,idx)});}
 function boot(){render();['saveReaderProgress','recordChapterView'].forEach(n=>{if(typeof window[n]!=='function')return;const fn=window[n];if(fn.__avxHook)return;const w=function(){const r=fn.apply(this,arguments);setTimeout(upsertHistory,80);return r};w.__avxHook=true;window[n]=w});setTimeout(upsertHistory,800)}
-window.AvanitaxxReaderPhase1={getHistory,getBookmarks,upsertHistory};
+window.AvanitaxxReaderPhase1={getHistory,getBookmarks,upsertHistory,refresh:render};
+window.addEventListener('avx:bookmarks-updated',render);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
@@ -8570,6 +8592,39 @@ const st=document.createElement('style');st.textContent=`
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',watchCommunity);
   else watchCommunity();
+})();
+</script>
+
+
+<style id="avx-reader-bookmark-close-repair">
+#overlay.reader-overlay .reader-book-shell{position:relative}
+#overlay.reader-overlay #close-reader{
+  position:sticky!important;top:8px!important;float:right!important;z-index:30!important;
+  min-height:38px!important;padding:9px 13px!important;border-radius:999px!important;
+  background:#392820!important;color:#fff!important;border:1px solid rgba(255,255,255,.35)!important;
+  box-shadow:0 4px 14px rgba(35,23,18,.18)!important;visibility:visible!important;opacity:1!important;
+}
+#overlay.reader-overlay .reader-tools{padding-right:4px}
+#overlay.reader-overlay #reader-bookmark[aria-pressed="true"]{background:#e7f0e5!important;color:#315c38!important;border-color:#c9ddc5!important}
+@media(max-width:700px){
+  #overlay.reader-overlay .reader-book-top{padding-top:54px!important}
+  #overlay.reader-overlay #close-reader{
+    position:fixed!important;top:9px!important;right:10px!important;float:none!important;
+    min-height:38px!important;z-index:10020!important;font-size:11px!important;
+  }
+  #overlay.reader-overlay .reader-tools{gap:6px!important;max-width:100%}
+}
+</style>
+<script id="avx-reader-close-escape-repair">
+(function(){
+  if(window.__avxReaderCloseRepair)return;window.__avxReaderCloseRepair=true;
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    const overlay=document.getElementById('overlay');
+    if(!overlay||!overlay.classList.contains('reader-overlay'))return;
+    const closeBtn=overlay.querySelector('#close-reader');
+    if(closeBtn)closeBtn.click();
+  });
 })();
 </script>
 
