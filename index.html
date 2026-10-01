@@ -5415,6 +5415,164 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-homepage-layout-final-v10">
+/* =========================================================
+   AVX HOMEPAGE FINAL LAYOUT v10
+   Presentation-only overrides. No Supabase/auth/reader logic changed.
+   ========================================================= */
+
+/* ---------- DESKTOP / WINDOW: compact welcome hero ---------- */
+@media (min-width:821px){
+  #home .toffee-hero{
+    width:100%!important;
+    height:clamp(320px,28vw,430px)!important;
+    min-height:320px!important;
+    max-height:430px!important;
+    aspect-ratio:auto!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+  #home .toffee-home-grid{
+    width:min(1240px,92%)!important;
+    height:100%!important;
+    min-height:0!important;
+    grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr)!important;
+    gap:18px!important;
+    align-items:center!important;
+  }
+  #home .toffee-hero-copy{min-width:0!important;max-width:620px!important}
+  #home .toffee-hero-art{
+    width:100%!important;height:100%!important;min-height:0!important;
+    overflow:visible!important;position:relative!important;
+  }
+  #home .hero-book-espresso{
+    width:270px!important;height:142px!important;
+    left:50%!important;bottom:7%!important;
+    transform:translateX(-50%) rotate(4deg)!important;
+  }
+  #home .coffee-cup{
+    width:125px!important;height:105px!important;
+    right:12%!important;top:15%!important;
+    transform:rotate(-4deg)!important;
+    animation:avxCupFloatFinal 4.2s ease-in-out infinite!important;
+  }
+  #home .coffee-saucer{right:4%!important;top:57%!important}
+  #home .coffee-glow{width:min(430px,90%)!important;height:min(280px,82%)!important}
+
+  /* 8 story covers across on wide screens. */
+  #home .toffee-story-grid{
+    grid-template-columns:repeat(8,minmax(0,1fr))!important;
+    gap:12px!important;
+    width:100%!important;
+  }
+  #home .toffee-story-grid .story-card{min-width:0!important;width:100%!important}
+  #home .toffee-story-grid .story-cover{width:100%!important;aspect-ratio:2/3!important;height:auto!important}
+  #home .toffee-story-grid .card-body{padding:8px 4px 3px!important}
+  #home .toffee-story-grid .card-title{font-size:11px!important;line-height:1.22!important}
+  #home .toffee-story-grid .meta{font-size:9px!important;line-height:1.2!important;margin-top:4px!important}
+}
+
+/* ---------- LAPTOP / SMALL DESKTOP: 6 covers ---------- */
+@media (min-width:821px) and (max-width:1199px){
+  #home .toffee-story-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:10px!important}
+  #home .toffee-hero{height:clamp(320px,31vw,390px)!important;max-height:390px!important}
+  #home .toffee-home-grid{grid-template-columns:minmax(0,1fr) minmax(300px,.85fr)!important;gap:12px!important}
+  #home .hero-book-espresso{width:235px!important;height:124px!important}
+  #home .coffee-cup{right:8%!important;top:14%!important;transform:scale(.9) rotate(-4deg)!important}
+}
+
+/* ---------- TABLET: 4 covers, compact two-column welcome ---------- */
+@media (min-width:701px) and (max-width:820px){
+  #home .toffee-hero{
+    width:100%!important;height:clamp(300px,42vw,350px)!important;
+    min-height:300px!important;max-height:350px!important;
+    aspect-ratio:auto!important;padding:0!important;overflow:hidden!important;
+  }
+  #home .toffee-home-grid{
+    width:100%!important;height:100%!important;min-height:0!important;
+    grid-template-columns:minmax(0,1.08fr) minmax(220px,.92fr)!important;
+    gap:10px!important;padding:0 22px!important;
+  }
+  #home .toffee-hero-art{height:100%!important;min-height:0!important}
+  #home .hero-book-espresso{width:220px!important;height:116px!important;bottom:5%!important}
+  #home .coffee-cup{width:100px!important;height:84px!important;right:7%!important;top:12%!important}
+  #home .coffee-saucer{right:0!important;top:56%!important}
+  #home .toffee-story-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+  #home .toffee-story-grid .story-cover{aspect-ratio:2/3!important;height:auto!important}
+}
+
+/* ---------- PHONE: WELCOME IS EXACTLY 16:9 ---------- */
+@media (max-width:700px){
+  #home .toffee-hero{
+    width:100%!important;
+    aspect-ratio:16/9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    padding:0!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+  }
+  #home .toffee-home-grid{
+    width:100%!important;height:100%!important;min-height:0!important;
+    padding:8px 13px!important;box-sizing:border-box!important;
+    grid-template-columns:minmax(0,1.06fr) minmax(105px,.74fr)!important;
+    gap:5px!important;align-items:center!important;
+  }
+  #home .toffee-hero-copy{padding:0!important;text-align:left!important;min-width:0!important}
+  #home .toffee-welcome{font-size:clamp(10px,3vw,15px)!important;line-height:1!important;letter-spacing:.16em!important}
+  #home .toffee-hero h1{font-size:clamp(24px,8vw,38px)!important;line-height:.98!important;margin:4px 0 6px!important}
+  #home .toffee-rule{margin:0 0 6px!important}
+  #home .toffee-lead{font-size:clamp(8px,2.65vw,11px)!important;line-height:1.28!important;margin:0!important;max-width:100%!important}
+  #home .toffee-actions{margin-top:6px!important;gap:4px!important}
+  #home .toffee-actions .btn{min-height:30px!important;padding:7px 9px!important;font-size:8px!important;border-radius:8px!important}
+  #home .toffee-hero-art{width:100%!important;height:100%!important;min-height:0!important;overflow:visible!important;position:relative!important}
+  #home .hero-book-espresso{width:185px!important;height:97px!important;left:50%!important;bottom:2%!important;transform:translateX(-50%) scale(.72) rotate(4deg)!important}
+  #home .coffee-cup{width:72px!important;height:60px!important;right:10%!important;top:7%!important;transform:rotate(-4deg)!important;animation:avxCupFloatFinal 4.2s ease-in-out infinite!important}
+  #home .coffee-cup::before{right:-24px!important;top:16px!important;width:38px!important;height:40px!important;border-width:8px!important}
+  #home .coffee-cup::after{display:none!important}
+  #home .coffee-saucer{width:96px!important;height:14px!important;right:0!important;top:52%!important}
+  #home .coffee-glow{width:125%!important;height:82%!important}
+  #home .coffee-feather{font-size:20px!important;left:2%!important;top:5%!important}
+
+  /* 2-up on phones keeps covers readable and minimizes vertical scrolling. */
+  #home .toffee-story-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+  }
+  #home .toffee-story-grid .story-card{min-width:0!important;width:100%!important}
+  #home .toffee-story-grid .story-cover{width:100%!important;aspect-ratio:2/3!important;height:auto!important}
+  #home .toffee-story-grid .card-body{padding:7px 4px 2px!important}
+  #home .toffee-story-grid .card-title{font-size:11px!important;line-height:1.22!important}
+  #home .toffee-story-grid .meta{font-size:9px!important;line-height:1.2!important;margin-top:4px!important}
+
+  /* Signed out = show Sign In. Signed in code can hide it with .hidden. */
+  #reader-btn:not(.hidden){display:inline-flex!important;visibility:visible!important;opacity:1!important}
+}
+
+/* Very narrow phones: keep the exact 16:9 hero while protecting the copy. */
+@media (max-width:380px){
+  #home .toffee-home-grid{grid-template-columns:minmax(0,1.08fr) minmax(92px,.68fr)!important;padding:7px 10px!important}
+  #home .toffee-hero h1{font-size:clamp(22px,8.2vw,32px)!important}
+  #home .toffee-lead{font-size:8px!important}
+  #home .toffee-actions .btn{font-size:7px!important;padding:6px 7px!important}
+  #home .coffee-cup{right:6%!important;transform:scale(.9) rotate(-4deg)!important}
+  #home .hero-book-espresso{transform:translateX(-50%) scale(.62) rotate(4deg)!important}
+}
+
+/* Keep the animated coffee treatment alive unless the user explicitly requests reduced motion. */
+@media (prefers-reduced-motion:reduce){
+  #home .coffee-cup,
+  #home .steam,
+  #home #featured-books .toffee-section-head h2::after,
+  #home #top-picks-section .toffee-section-head h2::after,
+  #home #next-read-section .toffee-section-head h2::after,
+  #home #home-latest .toffee-section-head h2::after{animation:none!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -9997,5 +10155,93 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 }
 </style>
 
+
+<style id="avx-desktop-window-home-space-fix">
+/* AVANITAXX — DESKTOP/WINDOW ONLY
+   Use the full browser width for the homepage shelves.
+   This does not change the mobile 16:9 hero or live/Supabase logic.
+*/
+@media (min-width:901px){
+  /* There is no rendered homepage sidebar in the current markup,
+     so do not reserve a phantom 300–315px column on the right. */
+  #home .toffee-main-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    width:min(1280px,92vw)!important;
+    max-width:none!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    gap:0!important;
+  }
+
+  #home .toffee-primary-column{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  /* Desktop/window: show the available books immediately instead of
+     leaving a large empty right side. */
+  #home .toffee-story-grid{
+    display:grid!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    gap:14px!important;
+    width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+  }
+
+  #home .toffee-story-grid .story-card{
+    min-width:0!important;
+    width:100%!important;
+  }
+
+  #home .toffee-story-grid .story-cover-btn,
+  #home .toffee-story-grid .story-cover{
+    width:100%!important;
+  }
+
+  /* Compact desktop Welcome: enough impact without consuming the page. */
+  #home .toffee-hero{
+    aspect-ratio:auto!important;
+    width:100%!important;
+    height:clamp(330px,27vw,420px)!important;
+    min-height:330px!important;
+    max-height:420px!important;
+    overflow:hidden!important;
+  }
+
+  #home .toffee-home-grid{
+    width:min(1180px,88vw)!important;
+    height:100%!important;
+    min-height:0!important;
+  }
+}
+
+@media (min-width:1200px){
+  #home .toffee-story-grid{
+    grid-template-columns:repeat(8,minmax(0,1fr))!important;
+    gap:12px!important;
+  }
+
+  #home .toffee-story-grid .card-body{
+    padding:9px 7px!important;
+  }
+
+  #home .toffee-story-grid .card-title{
+    font-size:12px!important;
+    line-height:1.25!important;
+  }
+
+  #home .toffee-story-grid .meta{
+    font-size:10px!important;
+  }
+}
+
+/* Keep medium desktop/window usable without forcing tiny eight-column cards. */
+@media (min-width:901px) and (max-width:1199px){
+  #home .toffee-story-grid .card-title{
+    font-size:12px!important;
+  }
+}
+</style>
 </body>
 </html>
