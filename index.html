@@ -4271,6 +4271,59 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 })();
 </script>
 
+
+<style id="avx-targeted-responsive-reader-author-fixes">
+/* Compact, responsive 16:9 Welcome hero; keep the coffee illustration and copy visible. */
+#home .toffee-hero{
+  aspect-ratio:16/9;
+  min-height:0!important;
+  max-height:min(56.25vw,760px);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  padding:clamp(12px,2.2vw,30px) 0!important;
+}
+#home .toffee-home-grid{width:100%;min-height:0;align-items:center;}
+#home .toffee-hero-copy{min-width:0;padding:clamp(8px,1.5vw,22px) 0!important;}
+#home .toffee-hero-art{min-width:0;height:auto;min-height:0;aspect-ratio:1/1;max-height:100%;}
+.avx-quill-icon{width:17px;height:17px;display:inline-block;vertical-align:-4px;margin-right:5px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#menu-author-center{display:flex;align-items:center;gap:5px}
+.reader.sepia-mode{--reader-paper:#f2e4c9;--reader-stage:#e8d6b7;--reader-line:#d8c29e;--reader-control:#fbf1dd;--reader-ink:#493629;--reader-muted:#7c6653;}
+.reader.sepia-mode .reader-book-shell,.reader.sepia-mode .reader-book-top,.reader.sepia-mode .reader-book-footer,.reader.sepia-mode .reader-engagement-book{background:var(--reader-paper)!important;color:var(--reader-ink)!important}
+.reader.sepia-mode .reader-scroll{background:var(--reader-stage)!important}
+.reader.sepia-mode .reader-scroll-page{background:var(--reader-paper)!important;color:var(--reader-ink)!important}
+.reader.sepia-mode .reader-page-content,.reader.sepia-mode .reader-page-content h1,.reader.sepia-mode .reader-page-content h2,.reader.sepia-mode .reader-page-content h3,.reader.sepia-mode .reader-page-content p,.reader.sepia-mode .reader-page-content blockquote{color:var(--reader-ink)!important}
+.reader.sepia-mode .reader-tool.active{background:#7a5438!important;color:#fff!important}
+.reader-tools{min-width:0;max-width:100%;}
+@media(max-width:700px){
+  #home .toffee-hero{aspect-ratio:16/9;max-height:none;height:auto;padding:8px 0!important;}
+  #home .toffee-home-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important;gap:6px!important;}
+  #home .toffee-hero-copy{padding:4px 0!important;}
+  #home .toffee-welcome{font-size:clamp(9px,2.6vw,14px)!important;letter-spacing:.1em!important;}
+  #home .toffee-hero h1{font-size:clamp(19px,5.8vw,34px)!important;line-height:.98!important;margin:5px 0 7px!important;}
+  #home .toffee-rule{margin:5px 0!important;}
+  #home .toffee-lead{font-size:clamp(9px,2.4vw,12px)!important;line-height:1.35!important;margin:5px 0 8px!important;}
+  #home .toffee-actions{display:flex!important;flex-wrap:wrap!important;gap:5px!important;margin-top:7px!important;}
+  #home .toffee-actions .btn{font-size:clamp(7px,1.9vw,10px)!important;line-height:1.2!important;padding:7px 8px!important;min-height:0!important;white-space:normal!important;}
+  #home .toffee-hero-art{width:100%;height:auto!important;aspect-ratio:1/1;transform:scale(.94);transform-origin:center;}
+  .reader-book-top{position:sticky;top:0;}
+  .reader-book-bar{display:flex;flex-direction:column;align-items:stretch!important;gap:9px!important;}
+  .reader-book-bar>div:first-child{min-width:0;}
+  .reader-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%!important;gap:6px!important;}
+  .reader-settings-note{grid-column:1/-1;font-size:8px!important;line-height:1.35;}
+  .reader-tool{display:flex;align-items:center;justify-content:center;min-width:0;min-height:34px;padding:8px 5px!important;font-size:9px!important;white-space:nowrap;}
+  #reader-size-label{grid-column:auto;display:flex;align-items:center;justify-content:center;}
+  .reader-book-nav{gap:6px!important;flex-wrap:wrap;}
+  .reader-book-nav .btn{flex:1 1 30%;min-width:0;white-space:normal;}
+}
+@media(max-width:380px){
+  #home .toffee-lead{font-size:9px!important;}
+  #home .toffee-actions .btn{padding:6px!important;}
+  .reader-tools{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .reader-settings-note{grid-column:1/-1;}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -4297,7 +4350,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
       <button id="author-avatar-btn" class="author-avatar-btn" type="button" title="Profile menu" aria-label="Profile menu" aria-expanded="false"><span id="author-avatar-content" class="author-avatar-fallback">A</span></button>
       <div id="author-menu" class="author-menu hidden" role="menu">
         <div id="author-menu-email" class="menu-email"></div>
-        <button id="menu-author-center" class="menu-owner" type="button">✍️ AUTHOR CENTER</button>
+        <button id="menu-author-center" class="menu-owner" type="button"><svg class="avx-quill-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 3.3C15.6 2.8 10.5 5.2 7.5 9.3c-1.4 1.9-2 4-1.9 6.1l-2.7 3.3 1.4 1.1 3-3.1c2.1.2 4.2-.4 6.1-1.8 4.1-3 6.5-8.1 6.3-11.6Z"/><path d="m4.1 19.1 8.2-8.2M9.2 13.9l-2.7-.1M12.4 10.7l-.1-2.6"/></svg> AUTHOR LOUNGE</button>
         <button id="menu-library" type="button">🔖 MY LIBRARY</button>
         <button id="menu-notifications" type="button"><span class="avx-menu-bell">♧</span> NOTIFICATIONS</button>
         <div class="menu-divider"></div>
@@ -5239,22 +5292,22 @@ function saveReaderProgress(){
 }
 function renderReader(restoreScroll=true){
   if(String(currentStory?.story_type||'standalone')==='compilation'){
-    const settings=readerSettings();const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} reader-scroll-mode`;root.style.setProperty('--reader-font-size',settings.size+'px');
+    const settings=readerSettings();const root=document.createElement('div');root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} ${settings.theme==='sepia'?'sepia-mode':''} reader-scroll-mode`;root.style.setProperty('--reader-font-size',settings.size+'px');
     const items=currentStory.compilation_stories||[];
-    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top"><div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · COMPILATION</div><div class="reader-book-title">${esc(currentStory.title)}</div><div class="compilation-badge">${items.length} ${items.length===1?'STORY':'STORIES'}</div></div><div class="reader-tools"><span class="reader-settings-note">COLLECTION · NO DUPLICATE TEXT</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div></div><main class="reader-scroll" id="reader-scroll"><article class="reader-scroll-page"><div class="compilation-reader-note">${esc(currentStory.description||'A collection of published stories. Each story remains its own original book; this compilation only links to the originals.')}</div><div class="compilation-reader-list">${items.length?items.map((story,i)=>`<article class="compilation-reader-item"><div>${story.cover_url?`<img class="compilation-reader-cover" src="${esc(story.cover_url)}" alt="${esc(story.title)} cover">`:`<div class="compilation-reader-cover cover-fallback">${esc(story.title)}</div>`}</div><div><div class="compilation-reader-title">${i+1}. ${esc(story.title)}</div><div class="compilation-reader-desc">${esc(String(story.description||'').replace(/<[^>]*>/g,'').slice(0,220))}</div>${Array.isArray(story.tags)&&story.tags.length?`<div class="meta" style="margin-top:6px">${esc(story.tags.slice(0,4).join(' · '))}</div>`:''}</div><button class="btn read-compilation-story" data-slug="${esc(story.share_slug||story.id)}" type="button">READ STORY →</button></article>`).join(''):'<div class="reader-page-empty">No published books have been added to this compilation yet.</div>'}</div></article></main></div>`;
+    root.innerHTML=`<div class="reader-book-shell"><div class="reader-book-top"><div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · COMPILATION</div><div class="reader-book-title">${esc(currentStory.title)}</div><div class="compilation-badge">${items.length} ${items.length===1?'STORY':'STORIES'}</div></div><div class="reader-tools"><span class="reader-settings-note">COLLECTION · NO DUPLICATE TEXT</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light" type="button">☼ LIGHT</button><button class="reader-tool ${settings.theme==='sepia'?'active':''}" id="reader-sepia" type="button">▤ SEPIA</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark" type="button">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div></div><main class="reader-scroll" id="reader-scroll"><article class="reader-scroll-page"><div class="compilation-reader-note">${esc(currentStory.description||'A collection of published stories. Each story remains its own original book; this compilation only links to the originals.')}</div><div class="compilation-reader-list">${items.length?items.map((story,i)=>`<article class="compilation-reader-item"><div>${story.cover_url?`<img class="compilation-reader-cover" src="${esc(story.cover_url)}" alt="${esc(story.title)} cover">`:`<div class="compilation-reader-cover cover-fallback">${esc(story.title)}</div>`}</div><div><div class="compilation-reader-title">${i+1}. ${esc(story.title)}</div><div class="compilation-reader-desc">${esc(String(story.description||'').replace(/<[^>]*>/g,'').slice(0,220))}</div>${Array.isArray(story.tags)&&story.tags.length?`<div class="meta" style="margin-top:6px">${esc(story.tags.slice(0,4).join(' · '))}</div>`:''}</div><button class="btn read-compilation-story" data-slug="${esc(story.share_slug||story.id)}" type="button">READ STORY →</button></article>`).join(''):'<div class="reader-page-empty">No published books have been added to this compilation yet.</div>'}</div></article></main></div>`;
     const overlay=document.getElementById('overlay');overlay.innerHTML='';overlay.appendChild(root);overlay.className='open reader-overlay';overlay.setAttribute('aria-hidden','false');avxObserveWindow();
-    document.getElementById('close-reader').onclick=()=>close();document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};root.querySelectorAll('.read-compilation-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));return;
+    document.getElementById('close-reader').onclick=()=>close();document.getElementById('reader-light').onclick=()=>{settings.theme='light';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-sepia').onclick=()=>{settings.theme='sepia';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-dark').onclick=()=>{settings.theme='dark';saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-down').onclick=()=>{settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};document.getElementById('reader-size-up').onclick=()=>{settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};root.querySelectorAll('.read-compilation-story').forEach(b=>b.onclick=()=>openPublicStory(b.dataset.slug));return;
   }
   const c=currentStory.chapters[currentChapter]||{title:'Chapter 1',content:''};
   const settings=readerSettings();
   const root=document.createElement('div');
-  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} reader-scroll-mode`;
+  root.className=`reader book-reader ${settings.theme==='dark'?'dark-mode':''} ${settings.theme==='sepia'?'sepia-mode':''} reader-scroll-mode`;
   root.style.setProperty('--reader-font-size',settings.size+'px');
 
   root.innerHTML=`<div class="reader-book-shell">
     <div class="reader-book-top">
       <div class="reader-book-bar"><div><div class="reader-book-kicker">AVANITAXX STORIES · READING MODE</div><div class="reader-book-title">${esc(currentStory.title)}</div>${currentStory.series_name?`<div class="story-series-badge" style="margin-top:8px"><b>SERIES</b><span class="series-sep">•</span><span>${Number(currentStory.series_book_number)>0?`BOOK ${Number(currentStory.series_book_number)}`:'SERIES STORY'}</span></div>`:''}</div>
-      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light">☼ LIGHT</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
+      <div class="reader-tools"><span class="reader-settings-note">READ ONLINE · NO DOWNLOAD</span><button class="reader-tool ${settings.theme==='light'?'active':''}" id="reader-light" type="button">☼ LIGHT</button><button class="reader-tool ${settings.theme==='sepia'?'active':''}" id="reader-sepia" type="button">▤ SEPIA</button><button class="reader-tool ${settings.theme==='dark'?'active':''} theme-dark" id="reader-dark" type="button">☾ DARK</button><button class="reader-tool" id="reader-size-down">A−</button><span class="reader-settings-note" id="reader-size-label">${settings.size}px</span><button class="reader-tool" id="reader-size-up">A+</button><button class="reader-tool" id="reader-bookmark">☆ BOOKMARK</button><button class="reader-tool" id="close-reader">× CLOSE</button></div></div>
       <div class="reader-book-nav"><button class="btn alt" id="prev-ch" ${currentChapter<=0?'disabled':''}>← PREVIOUS CHAPTER</button><div class="reader-chapter-name">${esc(c.title||('Chapter '+(currentChapter+1)))}</div><button class="btn alt" id="next-ch" ${currentChapter>=currentStory.chapters.length-1?'disabled':''}>NEXT CHAPTER →</button></div>
       <div class="reader-chapter-list-wrap"><button type="button" class="reader-chapter-list-toggle" id="reader-chapter-list-toggle" aria-expanded="false">☰ CHAPTER LIST <span>${currentStory.chapters.length}</span></button><div id="reader-chapter-list" class="reader-chapter-list" hidden>${currentStory.chapters.map((ch,i)=>`<button type="button" class="reader-chapter-item ${i===currentChapter?'active':''}" data-chapter-index="${i}"><span>${i+1}</span><span>${esc(ch.title||('Chapter '+(i+1)))}</span>${i===currentChapter?'<b>READING</b>':''}</button>`).join('')}</div></div>
     </div>
@@ -5291,6 +5344,7 @@ function renderReader(restoreScroll=true){
     const b=document.getElementById('reader-bookmark'); if(b){b.textContent='✓ BOOKMARKED';setTimeout(()=>{b.textContent='☆ BOOKMARK'},1200)}
   });
   document.getElementById('reader-light').onclick=()=>{saveReaderProgress();settings.theme='light';saveReaderSettings(settings);renderReader(true)};
+  document.getElementById('reader-sepia').onclick=()=>{saveReaderProgress();settings.theme='sepia';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-dark').onclick=()=>{saveReaderProgress();settings.theme='dark';saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-size-down').onclick=()=>{saveReaderProgress();settings.size=Math.max(16,settings.size-1);saveReaderSettings(settings);renderReader(true)};
   document.getElementById('reader-size-up').onclick=()=>{saveReaderProgress();settings.size=Math.min(30,settings.size+1);saveReaderSettings(settings);renderReader(true)};
@@ -5363,10 +5417,13 @@ async function openMyLibrary(){
 
 async function openAuthorHome(){
   await refreshSession();if(!session){openAuth('author');return}
+  const signedInUser=session.user;
+  const signedInProfile=await getAuthorTimelineProfile(signedInUser.id);
+  const authorDisplayName=(signedInProfile?.pen_name||signedInProfile?.display_name||signedInUser.user_metadata?.full_name||signedInUser.user_metadata?.name||signedInUser.email?.split('@')[0]||'Author').trim();
   open(`<div class="panel"><div class="writer-lounge">
     <aside class="writer-sidebar">
       <div class="writer-sidebar-brand">Avanitaxx <span>Stories</span></div>
-      <div class="writer-sidebar-label">Author Center</div>
+      <div class="writer-sidebar-label">Author Lounge</div>
       <div class="writer-side-nav">
         <button class="writer-side-btn active" id="wl-overview" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>Overview</button>
         <button class="writer-side-btn" id="wl-stories" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4.5h12.5A1.5 1.5 0 0 1 19 6v13.5H6.5A2.5 2.5 0 0 1 4 17V6a1.5 1.5 0 0 1 1-1.5Z"/><path d="M7.5 8h8M7.5 11.5h8M7.5 15h5"/></svg></span>My Stories</button>
@@ -5376,13 +5433,13 @@ async function openAuthorHome(){
         <button class="writer-side-btn" id="wl-profile" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.2"/><path d="M5.5 20c.6-3.5 2.8-5.3 6.5-5.3s5.9 1.8 6.5 5.3"/><circle cx="12" cy="12" r="9.2"/></svg></span>My Profile</button>
         <button class="writer-side-btn" id="wl-hub" type="button"><span class="ws-icon ws-icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 8l4.9.7-3.5 3.5.8 4.9-4.6-2.3-4.6 2.3.8-4.9-3.5-3.5L9.6 8 12 3.5Z"/><circle cx="12" cy="11" r="1.5"/></svg></span>Author Hub</button>
       </div>
-      <div class="writer-side-note"><strong>ONE AUTHOR SPACE</strong><br>Your stories, community posts, public author profile, and publishing tools now live under one clean Author Center. Every signed-in author can use these sections.</div>
+      <div class="writer-side-note"><strong>ONE AUTHOR SPACE</strong><br>Your stories, community posts, public author profile, and publishing tools now live under one organized Author Lounge. Every signed-in author can use these sections.</div>
     </aside>
     <main class="writer-main">
       <div class="writer-topbar">
         <div>
-          <div class="writer-kicker">AVANITAXX AUTHOR CENTER</div>
-          <div class="writer-title">Your author space, together.</div>
+          <div class="writer-kicker">AVANITAXX AUTHOR LOUNGE</div>
+          <div class="writer-title" id="writer-author-greeting">Welcome, ${esc(authorDisplayName)}</div>
           <div class="writer-subtitle">Write, publish, connect with other authors, and manage your public profile from one organized workspace.</div>
           <div class="writer-actions">
             <button class="writer-action primary" id="new-story" type="button">＋ NEW STORY</button>
@@ -5416,7 +5473,7 @@ async function openAuthorHome(){
           <div class="writer-mini-card"><div class="writer-kicker">Quick Start</div><h3>Keep writing.</h3><p>Create a story, upload its cover, add chapters, then publish when you're ready.</p><div class="mini-rule"></div><button class="writer-action primary" id="wl-new-quick" type="button" style="width:100%">＋ CREATE STORY</button></div>
           <div class="writer-mini-card"><div class="writer-kicker">Writer's Note</div><div class="writer-tip">“Every chapter is a small door. Give your readers a reason to open the next one.”</div></div>
           <div class="writer-mini-card"><div class="writer-kicker">Author Space</div><h3>Your Profile</h3><p>Update your author identity, photo, banner, and public presence from Author Profile.</p><div class="mini-rule"></div><button class="writer-action" id="wl-profile-quick" type="button" style="width:100%">OPEN PROFILE</button></div>
-          <div class="writer-mini-card"><div class="writer-kicker">Maintenance</div><p>Remove obvious test/sample books from your account when you are ready to clean your publishing desk.</p><button class="btn danger" id="cleanup-test" type="button" style="width:100%;margin-top:12px">REMOVE TEST BOOKS</button></div>
+          
         </aside>
       </div>
     </main>
@@ -5434,7 +5491,6 @@ async function openAuthorHome(){
   document.getElementById('wl-new-quick').onclick=()=>openEditor(null);
   document.getElementById('wl-overview').onclick=()=>document.getElementById('dash-list')?.scrollIntoView({behavior:'smooth',block:'start'});
   document.getElementById('wl-stories').onclick=()=>document.getElementById('dash-list')?.scrollIntoView({behavior:'smooth',block:'start'});
-  document.getElementById('cleanup-test').onclick=cleanupTestBooks;
   document.querySelectorAll('[data-story-filter]').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('[data-story-filter]').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
