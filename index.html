@@ -5156,7 +5156,17 @@ async function openPublicStory(slugValue){
       sessionStorage.setItem('avx_free_read_visit_active','1');
     }catch(e){}
   }
-  let r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',slugValue).maybeSingle();if(!r.data)r=await sb.from('stories').select('*').eq('published',true).eq('id',slugValue).maybeSingle();if(r.error||!r.data){alert('Story not found.');return}
+  const storyKey=String(slugValue||'').trim();
+  const isStoryUuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(storyKey);
+  let r;
+  if(isStoryUuid){
+    r=await sb.from('stories').select('*').eq('published',true).eq('id',storyKey).maybeSingle();
+    if(!r.data&&!r.error)r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',storyKey).maybeSingle();
+  }else{
+    r=await sb.from('stories').select('*').eq('published',true).eq('share_slug',storyKey).maybeSingle();
+    if(!r.data&&!r.error)r=await sb.from('stories').select('*').eq('published',true).eq('id',storyKey).maybeSingle();
+  }
+  if(r.error||!r.data){alert('Story not found.');return}
   currentStory=r.data;
   avxGAEvent('story_open',{story_id:String(currentStory.id||''),story_title:String(currentStory.title||'').slice(0,100),author_name:String(currentStory.author_name||currentStory.pen_name||'').slice(0,100)});
   if(String(currentStory.story_type||'standalone')==='compilation'){
@@ -7123,16 +7133,21 @@ async function ensureGoogleProfile(s){
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();renderHomeAuthorSidebar().catch(()=>{});if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
 (async()=>{function ensureAvxFloatingTools(){}
 ensureAvxFloatingTools();
-bindStatic();bindToffeeHome();await refreshSession();await loadSoundroom();await loadHome();
+bindStatic();bindToffeeHome();
   const params=new URLSearchParams(location.search);
   if(params.get('story')){
-    // Prioritize shared story links so the reader route is handled before homepage promos.
+    // Direct shared links should load the reader without waiting for homepage widgets.
+    // openPublicStory refreshes the session itself.
     await openPublicStory(params.get('story'));
   }else{
+    await refreshSession();
+    await loadSoundroom();
+    await loadHome();
     setTimeout(()=>maybeShowHomepageFeature(),1200);
     if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}
+    setInterval(()=>{if(latestPromotionStories.length)loadLatestChapterPromotion(latestPromotionStories)},60000);
   }
-  setInterval(()=>{if(latestPromotionStories.length)loadLatestChapterPromotion(latestPromotionStories)},60000)} )();
+} )();
 })();
 </script>
   <script>
