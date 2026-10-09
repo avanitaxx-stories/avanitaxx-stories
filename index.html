@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-10-02-deep-text-mobile-2col-cover-fit-fixed">
+<meta name="avx-build" content="2026-10-09-au-shelf-persistence-safe-1">
 <meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -65,6 +65,7 @@ footer{background:#3b2921;color:#f6e9df;padding:50px 0 25px}.footer-grid{display
 .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.upload-preview{width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}.upload-preview.banner{width:100%;height:150px}
 @media(max-width:920px){.navlinks{display:none}.hero-grid,.dash-grid,.editor-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.search{display:none}.story-item{grid-template-columns:60px 1fr}.item-actions{grid-column:1/-1;justify-content:flex-start}.reader-head{grid-template-columns:110px 1fr}.reader-cover{width:110px;height:165px}}
 @media(max-width:560px){.cards{grid-template-columns:repeat(2,1fr);gap:11px}.card-body{padding:11px}.card-title{font-size:15px}.hero{padding-top:42px}.hero-art{min-height:335px}.blob{width:295px;height:295px}.book{width:215px;height:300px}.dash{padding:15px}.dash-top{align-items:flex-start;flex-direction:column}.profile-grid{grid-template-columns:1fr}.reader{padding:20px}.reader-head{display:block}.reader-cover{width:120px;height:180px;margin-bottom:14px}.reader h1{font-size:34px}.reader-content{font-size:17px}.copyright{display:block}.nav{gap:7px}.nav-actions .btn{padding:10px 12px}.bell{min-width:38px}}
+.au-story-badge{display:inline-flex;margin:0 0 8px;padding:6px 8px;border-radius:999px;background:#f1ddda;color:#57372d;border:1px solid #e4c7c1;font-size:8px;font-weight:900;letter-spacing:.08em}.au-story-card .card-title{margin-top:2px}
 .author-menu-wrap{position:relative}.author-avatar-btn{width:43px;height:43px;padding:0;border:2px solid var(--line);border-radius:50%;background:var(--lightpink);overflow:hidden;display:flex;align-items:center;justify-content:center}.author-avatar-btn img{width:100%;height:100%;object-fit:cover}.author-avatar-fallback{font:700 17px Georgia,serif;color:var(--brown)}.author-menu{position:absolute;right:0;top:52px;width:230px;background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px;z-index:120}.author-menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:var(--brown);font-size:11px;font-weight:800;letter-spacing:.04em}.author-menu button:hover{background:var(--lightpink)}.author-menu .menu-email{padding:10px 12px 8px;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.author-menu .menu-divider{height:1px;background:var(--line);margin:5px 0}.author-menu .menu-owner{color:var(--toffee)}
 /* STEP 7 — SIGNATURE AUTOMATIC CHAPTER PROMOTION */
 .chapter-feature{padding:34px 0 8px}
@@ -6662,6 +6663,9 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
       <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
         <div class="container"><div class="section-head"><div><div class="kicker">SERIES NOVELS</div><h2>Series Novels</h2><p>Read connected books in order, from Book 1 to the latest volume.</p></div><a class="toffee-view-all" href="#series-stories" data-view-all="series">View all <span>›</span></a></div><div id="series-shelves"></div></div>
       </section>
+      <section class="legacy-home-section section series-library hidden avx-discovery-section" id="au-stories">
+        <div class="container"><div class="section-head"><div><div class="kicker">ALTERNATE UNIVERSE</div><h2>AU Stories</h2><p>Step into different worlds — College AU, Mafia AU, Chatfic, and more.</p></div><a class="toffee-view-all" href="#au-stories" data-view-all="au">View all <span>›</span></a></div><div id="au-shelves" class="cards"></div></div>
+      </section>
       <section class="legacy-home-section section featured-author-section hidden" id="featured-author-section">
         <div class="container"><div class="section-head"><div><div class="kicker">Featured Creator</div><h2>In the spotlight</h2><p>Only selected authors appear here. Everyone else stays in the Author Hub.</p></div></div><div id="featured-author-card"></div></div>
       </section>
@@ -6849,8 +6853,31 @@ async function logout(){await sb.auth.signOut();session=null;updateAuthUI();clos
 async function getPublished(){const r=await sb.from('stories').select('*').eq('published',true).order('updated_at',{ascending:false});if(r.error)throw r.error;return (r.data||[]).filter(s=>!isTestStory(s))}
 async function getCounts(storyId){const [l,c]=await Promise.all([sb.from('story_likes').select('*',{count:'exact',head:true}).eq('story_id',storyId),sb.from('comments').select('*',{count:'exact',head:true}).eq('story_id',storyId)]);return{likes:l.count||0,comments:c.count||0}}
 function seriesBadge(s){if(!s||!s.series_name)return '';const no=Number(s.series_book_number);return `<div class="story-series-badge"><b>SERIES</b><span class="series-sep">•</span><span>${no>0?`BOOK ${no}`:'SERIES STORY'}</span></div>`;}
-function coverOnlyCard(s,extra=''){const reads=Number(s.views)||0;const meta=extra||`${reads.toLocaleString()} reads`;return `<article class="story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+((s.tags||[]).join(' '))+' '+(s.series_name||'')).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><h3 class="card-title">${esc(s.title)}</h3>${seriesBadge(s)}<div class="meta story-read-count">${meta}</div>${Array.isArray(s.tags)&&s.tags.length?`<div class="tag-row">${s.tags.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`}
+function coverOnlyCard(s,extra=''){const reads=Number(s.views)||0;const meta=extra||`${reads.toLocaleString()} reads`;return `<article class="story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+((s.tags||[]).join(' '))+' '+(s.series_name||'')).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><h3 class="card-title">${esc(s.title)}</h3>${seriesBadge(s)}<div class="meta story-read-count">${meta}</div>${Array.isArray(s.tags)&&s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).length?`<div class="tag-row">${s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`}
 function renderSeriesShelves(stories){const section=document.getElementById('series-stories'),box=document.getElementById('series-shelves');if(!section||!box)return;const groups=new Map();(stories||[]).filter(s=>String(s.series_name||'').trim()).forEach(s=>{const key=String(s.series_name).trim();if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s)});if(!groups.size){section.classList.add('hidden');box.innerHTML='';return}section.classList.remove('hidden');box.innerHTML=[...groups.entries()].map(([name,books])=>{books.sort((a,b)=>(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999)||String(a.title).localeCompare(String(b.title)));return `<section class="series-shelf"><div class="series-shelf-head"><div><div class="series-shelf-kicker">Series</div><div class="series-shelf-title">${esc(name)}</div></div><span class="series-shelf-count">${books.length} ${books.length===1?'BOOK':'BOOKS'}</span></div><div class="series-track">${books.map(s=>`<article class="series-book"><button class="series-book-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="series-book-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} cover" loading="lazy">`:`<div class="series-book-cover cover-fallback">${esc(s.title)}</div>`}</button><div class="series-book-copy"><span class="series-book-no">${Number(s.series_book_number)>0?`Book ${Number(s.series_book_number)}`:'Series'}</span><div class="series-book-title">${esc(s.title)}</div><div class="series-book-meta">${(Number(s.views)||0).toLocaleString()} reads</div></div></article>`).join('')}</div></section>`}).join('');}
+function isAuStory(s){
+  const tags=Array.isArray(s?.tags)?s.tags:[];
+  return String(s?.story_type||'').toLowerCase()==='au'||tags.some(t=>/^AU$/i.test(String(t).trim())||/^AU Setting:/i.test(String(t).trim())||/^AU Format:/i.test(String(t).trim()));
+}
+function auSettingOf(s){
+  const tags=Array.isArray(s?.tags)?s.tags:[];
+  const tag=tags.find(t=>/^AU Setting:/i.test(String(t).trim()));
+  return tag?String(tag).replace(/^AU Setting:\\s*/i,'').trim():'Alternate Universe';
+}
+function auFormatOf(s){
+  const tags=Array.isArray(s?.tags)?s.tags:[];
+  const tag=tags.find(t=>/^AU Format:/i.test(String(t).trim()));
+  return tag?String(tag).replace(/^AU Format:\\s*/i,'').trim():'AU Story';
+}
+function renderAuShelves(stories){
+  const section=document.getElementById('au-stories'),box=document.getElementById('au-shelves');
+  if(!section||!box)return;
+  const aus=(stories||[]).filter(isAuStory);
+  if(!aus.length){section.classList.add('hidden');box.innerHTML='';return;}
+  section.classList.remove('hidden');
+  box.innerHTML=aus.slice(0,8).map(s=>`<article class="story-card au-story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+auSettingOf(s)+' '+auFormatOf(s)).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><span class="au-story-badge">AU · ALTERNATE UNIVERSE</span><h3 class="card-title">${esc(s.title)}</h3><div class="meta">${esc(auSettingOf(s))} · ${esc(auFormatOf(s))}</div><div class="meta story-read-count">${(Number(s.views)||0).toLocaleString()} reads</div></div></article>`).join('');
+  bindStoryCards();
+}
 
 async function loadLatestChapterPromotion(stories=[]){
   const box=document.getElementById('latest-promo');
@@ -7441,6 +7468,7 @@ async function loadHome(){
    await loadHomepageFeatures();
    renderGenreShelves(stories);
    renderSeriesShelves(stories);
+   renderAuShelves(stories);
    renderHomeLatestUpdates(stories);
    const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
    const signals=getReaderSignals(stories);
@@ -9443,6 +9471,7 @@ async function openAllStories(type='published'){
     else if(type==='top-picks'){title='Top Picks For You';kicker='FOR READERS';sorted.sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));note=signals.length?'Personalized from your reading and saved-book signals.':'A reader-focused mix of engagement and freshness.'}
     else if(type==='next-read'){title='Your Next Read';kicker='A LITTLE NUDGE';sorted=sorted.filter(s=>!signals.some(x=>String(x.id)===String(s.id)));sorted.sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals)||Math.random()-.5);note=signals.length?'Related to books you have opened or saved.':'A rotating selection of published books.'}
     else if(type==='series'){title='Series Novels';kicker='SERIES NOVELS';sorted=sorted.filter(s=>String(s.series_name||'').trim());sorted.sort((a,b)=>String(a.series_name||'').localeCompare(String(b.series_name||''))||(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999));note='Series books are grouped by their series name and book number.'}
+    else if(type==='au'){title='AU Stories';kicker='ALTERNATE UNIVERSE';sorted=sorted.filter(isAuStory);sorted.sort((a,b)=>String(auSettingOf(a)).localeCompare(String(auSettingOf(b)))||String(a.title||'').localeCompare(String(b.title||'')));note='Explore published Alternate Universe stories by setting and format.'}
     else if(type==='completed'){title='Completed Stories';kicker='COMPLETED';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='COMPLETED');note='Published stories marked as completed.'}
     else if(type==='ongoing'){title='Ongoing Stories';kicker='ON-GOING';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='ON-GOING');note='Published stories that are still ongoing.'}
     open(`<div class="modal all-stories-modal"><button class="close" id="all-stories-close" type="button">×</button><div class="kicker">${esc(kicker)}</div><h2>${esc(title)}</h2><p class="meta">${esc(note)}</p><div class="all-stories-grid">${sorted.length?sorted.map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`)).join(''):'<div class="empty">No stories match this shelf yet.</div>'}</div></div>`,'all-stories-overlay');
