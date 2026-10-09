@@ -6772,8 +6772,10 @@ function avxAddWindowControls(root){
     return;
   }
   if(root.dataset.avxWindowReady==='1')return;
-  const shell=root.querySelector(':scope > .panel, :scope > .modal, :scope > .reader, :scope > .rank-panel, :scope > .feature-modal, :scope > .global-search-panel, :scope > .policy-panel, :scope > .crop-modal, :scope > .author-hub-panel, :scope > .lounge-panel, :scope > .community-messenger, :scope > .fb-notes-panel, :scope > .avx-live-modal, :scope > .home-pop, :scope > .author-social-shell')||root.firstElementChild;
+  const shell=root.querySelector(':scope > .panel, :scope > .modal, :scope > .reader, :scope > .rank-panel, :scope > .feature-modal, :scope > .global-search-panel, :scope > .policy-panel, :scope > .crop-modal, :scope > .author-hub-panel, :scope > .lounge-panel, :scope > .community-messenger, :scope > .avx-live-modal, :scope > .home-pop, :scope > .author-social-shell')||root.firstElementChild;
   if(!shell||shell.dataset.avxWindowShell==='1')return;
+  /* The promotional pop-ad has only its own close/read actions; no window controls. */
+  if(shell.classList.contains('home-pop')){root.dataset.avxWindowReady='1';return;}
   const looksLikeWindow=['panel','modal','reader','rank-panel','feature-modal','global-search-panel','policy-panel','crop-modal','author-hub-panel','lounge-panel','community-messenger','fb-notes-panel','avx-live-modal','home-pop','author-social-shell'].some(c=>shell.classList.contains(c));
   if(!looksLikeWindow)return;
   shell.dataset.avxWindowShell='1';shell.classList.add('avx-window-shell');
@@ -9197,7 +9199,7 @@ async function maybeShowHomepageFeature(){
   const stories=await getPublished();if(!stories.length)return;
   const latest=stories.slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0))[0];
   const cover=latest.cover_url||'';
-  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">THE HOT DOCTOR IN MY ROOM</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
+  open(`<div class="home-pop"><button class="home-pop-close" id="home-pop-close">×</button><div class="home-pop-art">${cover?`<img src="${esc(cover)}" alt="${esc(latest.title)} full book cover" style="width:100%;height:100%;object-fit:contain;display:block">`:''}</div><div class="home-pop-copy"><div class="home-pop-kicker">FEATURED STORY</div><h2>${esc(latest.title)}</h2><p>A story worth opening tonight. Discover the latest published chapter, then continue reading in the new book-style reader.</p><div class="home-pop-actions"><button class="btn" id="home-pop-read">READ NOW</button><button class="btn alt" id="home-pop-later">MAYBE LATER</button></div></div></div>`,'home-feature-overlay');
   document.getElementById('home-pop-read').onclick=()=>{localStorage.setItem(key,'1');close();openPublicStory(latest.share_slug||latest.id)};
   document.getElementById('home-pop-later').onclick=()=>{localStorage.setItem(key,'1');close()};
   document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
@@ -11299,5 +11301,32 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
  .author-post-action{font-size:8px!important}
 }
 </style>
+
+<style id="avx-home-pop-compact-fix">
+/* Keep the homepage promotional pop-ad compact and readable, especially on phones. */
+.home-feature-overlay{padding:12px!important;overflow-y:auto!important}
+.home-feature-overlay .home-pop{width:min(560px,calc(100vw - 32px))!important;max-height:min(620px,calc(100dvh - 32px))!important;overflow:auto!important;display:grid!important;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important;align-items:stretch!important;border-radius:20px!important}
+.home-feature-overlay .home-pop-art{min-height:0!important;height:auto!important;aspect-ratio:3/4!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
+.home-feature-overlay .home-pop-copy{min-width:0!important;padding:22px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+.home-feature-overlay .home-pop h2{font-size:clamp(24px,3vw,32px)!important;line-height:1.08!important;margin:7px 0 9px!important;overflow-wrap:anywhere}
+.home-feature-overlay .home-pop p{font-size:13px!important;line-height:1.5!important;margin:0!important}
+.home-feature-overlay .home-pop-actions{gap:7px!important;margin-top:13px!important}
+.home-feature-overlay .home-pop-actions .btn{min-height:38px!important;padding:10px 13px!important;font-size:9px!important}
+.home-feature-overlay .avx-window-tools,.home-feature-overlay .avx-window-minimized-host{display:none!important}
+@media(max-width:700px){
+ .home-feature-overlay{padding:12px!important;align-items:center!important}
+ .home-feature-overlay .home-pop{width:min(390px,calc(100vw - 28px))!important;max-height:calc(100dvh - 28px)!important;display:block!important;grid-template-columns:none!important;border-radius:18px!important}
+ .home-feature-overlay .home-pop-art{height:clamp(90px,19vh,145px)!important;min-height:0!important;aspect-ratio:auto!important;background-size:contain!important}
+ .home-feature-overlay .home-pop-art img{width:100%!important;height:100%!important;object-fit:contain!important}
+ .home-feature-overlay .home-pop-copy{padding:15px 16px 16px!important}
+ .home-feature-overlay .home-pop-kicker{font-size:8px!important;letter-spacing:.15em!important}
+ .home-feature-overlay .home-pop h2{font-size:clamp(22px,6vw,27px)!important;line-height:1.08!important;margin:6px 0 8px!important}
+ .home-feature-overlay .home-pop p{font-size:12px!important;line-height:1.45!important}
+ .home-feature-overlay .home-pop-actions{margin-top:11px!important;gap:7px!important}
+ .home-feature-overlay .home-pop-actions .btn{min-height:36px!important;padding:9px 11px!important;font-size:8px!important}
+ .home-feature-overlay .home-pop-close{width:32px!important;height:32px!important;right:8px!important;top:8px!important}
+}
+</style>
+
 </body>
 </html>
