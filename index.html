@@ -8081,12 +8081,27 @@ function openImageCropper(file,ratio=1,title='Crop image'){
       cropLayer.onclick=e=>{if(e.target===cropLayer)finish(null)};
       cropLayer.querySelector('#crop-use').onclick=()=>{
         const useButton=cropLayer.querySelector('#crop-use');useButton.disabled=true;useButton.textContent='PROCESSING…';
-        /* Export the visible crop canvas; exporting an unused blank canvas caused black images. */
-         c.toBlob(blob=>{
-          if(!blob){useButton.disabled=false;useButton.textContent='CROP & USE';notice('profile-status','Could not crop image. Please try another image.');return}
-          const cropped=new File([blob],file.name.replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'});
-          finish(cropped);
-        },'image/jpeg',.92);
+        /* Render the selected source-image region onto a fresh export canvas.
+           This avoids black/blank output in browsers that fail to export the preview canvas correctly. */
+        try{
+          const out=document.createElement('canvas');out.width=W;out.height=H;
+          const og=out.getContext('2d',{alpha:false});
+          if(!og)throw new Error('Image canvas is unavailable in this browser.');
+          og.fillStyle='#ffffff';og.fillRect(0,0,W,H);
+          const sc=scale*zoom;
+          const sx=Math.max(0,Math.min(img.width-1,(-ox)/sc));
+          const sy=Math.max(0,Math.min(img.height-1,(-oy)/sc));
+          const sw=Math.min(img.width-sx,W/sc);
+          const sh=Math.min(img.height-sy,H/sc);
+          if(!(sw>0&&sh>0))throw new Error('The selected crop is outside the image. Please reposition it.');
+          og.drawImage(img,sx,sy,sw,sh,0,0,W,H);
+          out.toBlob(blob=>{
+            if(!blob||blob.size===0){useButton.disabled=false;useButton.textContent='CROP & USE';notice('profile-status','Could not export the cropped image. Please try again.');return}
+            const cropped=new File([blob],(file.name||'image').replace(/\.[^.]+$/,'')+'-cropped.jpg',{type:'image/jpeg'});
+            finish(cropped);
+          },'image/jpeg',.92);
+        }catch(err){useButton.disabled=false;useButton.textContent='CROP & USE';notice('profile-status',err.message||String(err));}
+
       };
     };
     img.onerror=()=>{URL.revokeObjectURL(url);cropLayer.remove();document.body.classList.remove('avx-crop-open');reject(new Error('Could not read image. Please choose another image.'))};
