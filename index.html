@@ -7733,7 +7733,27 @@ async function loadComments(){
 const SHARE_BASE_URL = 'https://avanitaxx-share.dotdotjoaquin91.workers.dev';
 function publicShareUrl(kind,id){return `${SHARE_BASE_URL}/?type=${encodeURIComponent(kind)}&id=${encodeURIComponent(id)}`}
 async function copyShareUrl(url,label='Share link'){try{await navigator.clipboard.writeText(url);alert(label+' copied!')}catch(e){try{const ta=document.createElement('textarea');ta.value=url;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert(label+' copied!')}catch{prompt('Copy this link:',url)}}}
-async function shareCurrentStory(){const url=publicShareUrl('story',currentStory.id);await copyShareUrl(url,'Book share link');avxGAEvent('story_share',{story_id:String(currentStory.id||''),story_title:String(currentStory.title||'').slice(0,100),method:'copy_link'})}
+async function shareCurrentStory(){
+  if(!currentStory?.id)return;
+  // Keep the share-worker URL so social platforms can receive story-specific OG metadata.
+  const url=publicShareUrl('story',currentStory.id);
+  const title=String(currentStory.title||'Avanitaxx Stories').trim();
+  const description=String(currentStory.description||('Read “'+title+'” on Avanitaxx Stories.')).replace(/<[^>]*>/g,'').trim().slice(0,220);
+  let method='copy_link';
+  try{
+    if(typeof navigator.share==='function'){
+      await navigator.share({title:title+' — Avanitaxx Stories',text:description,url});
+      method='native_share';
+    }else{
+      await copyShareUrl(url,'Book share link');
+    }
+  }catch(e){
+    // A user closing the native share sheet is not an error; otherwise provide a copy fallback.
+    if(e?.name!=='AbortError')await copyShareUrl(url,'Book share link');
+    else return;
+  }
+  avxGAEvent('story_share',{story_id:String(currentStory.id||''),story_title:title.slice(0,100),method});
+}
 
 async function openMyLibrary(){
   await refreshSession();if(!session){openAuth('reader');return}
@@ -9659,12 +9679,15 @@ async function ensureGoogleProfile(s){
 sb.auth.onAuthStateChange((event,s)=>{session=s;updateAuthUI();renderHomeAuthorSidebar().catch(()=>{});if(s)ensureGoogleProfile(s).catch(()=>{});if(event==='PASSWORD_RECOVERY'){setTimeout(openPasswordRecovery,150)}if(document.getElementById('public-author-profile'))getPublished().then(loadPublicAuthorProfile).catch(()=>{})});
 (async()=>{function ensureAvxFloatingTools(){}
 ensureAvxFloatingTools();
-bindStatic();bindToffeeHome();await refreshSession();await loadSoundroom();await loadHome();
+bindStatic();bindToffeeHome();await refreshSession();
   const params=new URLSearchParams(location.search);
   if(params.get('story')){
-    // Prioritize shared story links so the reader route is handled before homepage promos.
+    // Open the requested book first. Do not wait for homepage sections, Soundroom, or promos.
     await openPublicStory(params.get('story'));
+    // Load the background homepage after the reader route has been handled.
+    await Promise.allSettled([loadSoundroom(),loadHome()]);
   }else{
+    await Promise.allSettled([loadSoundroom(),loadHome()]);
     setTimeout(()=>maybeShowHomepageFeature(),1200);
     if(params.get('author')){const id=params.get('author');setTimeout(()=>openAuthorHub(id),250)}
   }
@@ -11346,3 +11369,4 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 
 </body>
 </html>
+ 
