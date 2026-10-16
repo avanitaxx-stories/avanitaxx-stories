@@ -6492,6 +6492,102 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 .avx-au-scene p{margin:.45em 0}
 @media(max-width:640px){.avx-au-scene{padding:.8em;margin:1em 0}.avx-au-chat-bubble{max-width:96%}}
 </style>
+
+<style id="avx-editorial-timeline-redesign-v1">
+/* Avanitaxx editorial refresh — styles existing Author Timeline elements only. */
+.author-social-shell{
+  --avx-feed-paper:#fffdf9;--avx-feed-cream:#f7f1e9;--avx-feed-ink:#35251e;
+  --avx-feed-muted:#78675d;--avx-feed-line:#e8dbcf;
+  background:linear-gradient(180deg,#fbf7f1 0%,#f4ece3 100%)!important;
+  color:var(--avx-feed-ink)!important;border:1px solid rgba(94,65,49,.12)!important;
+  border-radius:22px!important;box-shadow:0 28px 80px rgba(57,38,28,.18)!important;
+}
+.author-social-head{
+  background:rgba(255,253,249,.96)!important;border-bottom:1px solid var(--avx-feed-line)!important;
+  padding:24px 28px 20px!important;
+}
+.author-social-title{font-size:clamp(28px,3vw,38px)!important;letter-spacing:-.035em!important;color:#35251e!important}
+.author-social-sub{font-size:12px!important;line-height:1.7!important;max-width:720px}
+.author-social-body{grid-template-columns:minmax(0,1.55fr) minmax(235px,.55fr)!important;gap:20px!important;padding:22px!important}
+.author-social-card,.author-social-side-card{
+  background:rgba(255,253,249,.94)!important;border:1px solid var(--avx-feed-line)!important;
+  border-radius:18px!important;box-shadow:0 8px 26px rgba(65,43,31,.045)!important;
+}
+.author-social-card{padding:20px!important}
+.author-social-card h3,.author-social-side-card h3{font-family:Georgia,serif!important;font-weight:400!important;font-size:25px!important;letter-spacing:-.02em!important;color:#38271f!important}
+.author-social-note{font-size:11px!important;line-height:1.65!important;color:#79675c!important}
+.author-social-tools{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin:16px 0!important}
+.author-social-tool{
+  border:1px solid #e6d7ca!important;border-radius:12px!important;background:#fffaf5!important;
+  padding:10px 13px!important;color:#5c4032!important;transition:background .18s,border-color .18s,transform .18s!important;
+}
+.author-social-tool.active{background:#4b3327!important;border-color:#4b3327!important;color:#fffaf5!important}
+.author-social-tool:hover{transform:translateY(-1px)!important}
+.author-composer-grid{gap:12px!important}
+.author-composer-grid label{color:#725648!important;font-size:9px!important}
+.author-composer-grid .field{background:#fff!important;border-color:#e5d7cc!important;border-radius:11px!important;color:#35251e!important}
+.author-composer-grid .field:focus{border-color:#a77b60!important;box-shadow:0 0 0 3px rgba(167,123,96,.12)!important}
+.author-album-preview{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:6px!important}
+.author-album-preview img{height:76px!important;border-radius:9px!important;background:#eee2d8!important}
+.author-social-feed{gap:16px!important}
+.author-post{
+  background:#fffdf9!important;border:1px solid #e8dbcf!important;border-radius:18px!important;
+  box-shadow:0 9px 28px rgba(65,43,31,.055)!important;overflow:hidden!important;
+}
+.author-post-head{padding:16px 18px 10px!important}
+.author-post-avatar{border:2px solid #f0e2d8!important}
+.author-post-author{font-size:12px!important;color:#38271f!important}
+.author-post-meta{font-size:9px!important;line-height:1.5!important}
+.author-post-body{padding:6px 18px 15px!important}
+.author-post-type{font-size:8px!important;letter-spacing:.14em!important;color:#9a7057!important;font-weight:900!important}
+.author-post-title{font:400 clamp(20px,2.2vw,27px)/1.14 Georgia,serif!important;letter-spacing:-.025em!important;color:#38271f!important}
+.author-post-caption{font-size:13px!important;line-height:1.8!important;color:#5d4a40!important;overflow-wrap:anywhere}
+.author-post-quote{background:#faf2eb!important;border-left:2px solid #c59c82!important;border-radius:0 10px 10px 0!important;color:#705444!important}
+.author-post-album{background:#f5ece3!important}
+.author-post-album img{display:block!important;max-width:100%!important;object-fit:cover!important;loading:lazy}
+.author-post-footer{padding:12px 18px 16px!important;background:#fffdf9!important}
+.author-post-stats{font-size:10px!important;color:#8b766a!important}
+.author-post-actions{border-top:1px solid #f0e5dc!important;margin-top:10px!important;padding-top:8px!important;gap:5px!important}
+.author-post-action{border-radius:10px!important;color:#735747!important;min-height:38px!important}
+.author-post-action:hover{background:#f7ece5!important}
+.author-post-comments,.author-reactions{scroll-margin-top:100px}
+.author-social-side-card{padding:18px!important}
+.author-social-side-item{border-radius:12px!important;padding:8px!important}
+.author-social-side-item:hover{background:#f8eee6!important}
+.author-social-side-cover{border-radius:7px!important}
+.author-social-close{background:#fffaf5!important}
+.author-social-status{margin-top:12px!important}
+@media(max-width:800px){
+ .author-social-body{grid-template-columns:minmax(0,1fr)!important;padding:12px!important;gap:12px!important}
+ .author-social-side{display:grid!important;grid-template-columns:1fr!important}
+ .author-social-head{padding:18px 18px 15px!important}
+ .author-social-card{padding:15px!important}
+ .author-post-head{padding:13px 13px 8px!important}
+ .author-post-body{padding:5px 13px 13px!important}
+ .author-post-footer{padding:10px 13px 13px!important}
+ .author-album-preview{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .author-album-preview img{height:78px!important}
+}
+@media(max-width:560px){
+ .author-social-shell{max-height:96dvh!important;border-radius:18px!important}
+ .author-social-title{font-size:29px!important}
+ .author-social-sub{font-size:11px!important}
+ .author-social-body{padding:9px!important}
+ .author-social-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+ .author-social-tool{display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:0!important;padding:9px 5px!important;font-size:10px!important}
+ .author-social-tool svg{width:18px!important;height:18px!important;flex:none!important}
+ .author-post-title{font-size:21px!important}
+ .author-post-caption{font-size:12px!important}
+ .author-post-album img{height:112px!important}
+ .author-post-album.n1 img,.author-post-album.stack img{height:205px!important}
+ .author-post-action{font-size:10px!important;padding:7px 5px!important}
+ .author-social-side{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .author-social-shell *, .author-social-shell *::before,.author-social-shell *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -8725,8 +8821,9 @@ async function openOwnerTimeline(){
       document.getElementById('at-story').onchange=loadChapters;await loadChapters();
     }
     document.getElementById('at-images').onchange=e=>{
-      const files=[...(e.target.files||[])].slice(0,9),preview=document.getElementById('at-preview');preview.innerHTML='';
-      files.forEach(f=>{const img=document.createElement('img');img.src=URL.createObjectURL(f);preview.appendChild(img)});
+      const files=[...(e.target.files||[])].slice(0,6),preview=document.getElementById('at-preview');preview.innerHTML='';
+      files.forEach(f=>{const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.src=URL.createObjectURL(f);img.onload=()=>URL.revokeObjectURL(img.src);preview.appendChild(img)});
+      if((e.target.files||[]).length>6){notice('author-social-status','For faster uploads and lower storage use, a timeline album can contain up to 6 images. The first 6 are selected.',false)}
     };
     document.getElementById('at-save').onclick=async()=>{
       try{
@@ -8738,9 +8835,9 @@ async function openOwnerTimeline(){
         if(chapterId){const cq=await sb.from('chapters').select('id,chapter_number,title').eq('id',chapterId).maybeSingle();selectedChapter=cq.data||null}
         if(isStory&&selectedStory){title=title||selectedStory.title;caption=caption||selectedStory.description||`Now published: ${selectedStory.title}`;}
         if(isChapter&&selectedChapter){title=title||`Chapter ${selectedChapter.chapter_number}: ${selectedChapter.title||'New chapter'}`;caption=caption||`An updated chapter of ${selectedStory?.title||'my story'} is now live.`;}
-        const files=[...(document.getElementById('at-images').files||[])].slice(0,9);
+        const files=[...(document.getElementById('at-images').files||[])].slice(0,6);
         let media=[];
-        for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1400,.8)));
+        for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1200,.72)));
         if(isStory&&selectedStory?.cover_url&&!media.length)media=[selectedStory.cover_url];
         if(isChapter&&selectedStory?.cover_url&&!media.length)media=[selectedStory.cover_url];
         const postType=isStory?'STORY':isChapter?'CHAPTER':'NOTE';
@@ -8766,7 +8863,7 @@ async function openOwnerTimelineEditor(id){
     try{
       let media=timelineMedia(item);
       const files=[...(document.getElementById('et-images').files||[])].slice(0,9-media.length);
-      for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1400,.8)));
+      for(const f of files)media.push(await uploadOwnerMedia(await optimizeImageFile(f,1200,.72)));
       const q=await sb.from('owner_timeline').update({story_id:document.getElementById('et-story').value||null,title:document.getElementById('et-title').value.trim()||null,caption:document.getElementById('et-caption').value.trim()||null,dialogue:document.getElementById('et-dialogue').value.trim()||null,media_urls:media,poster_url:media[0]||null,album_layout:document.getElementById('et-layout').value,published:document.getElementById('et-published').checked,updated_at:new Date().toISOString()}).eq('id',id).eq('owner_id',session.user.id);
       if(q.error)throw q.error;openOwnerTimeline();
     }catch(e){notice('timeline-edit-status',e.message||String(e))}
@@ -11369,4 +11466,5 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 
 </body>
 </html>
+ 
  
