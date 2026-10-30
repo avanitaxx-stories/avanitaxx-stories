@@ -6969,13 +6969,6 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
           <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
         </div>
       </section>
-      <section class="toffee-panel toffee-latest-panel" id="home-latest">
-        <div class="toffee-section-head">
-          <div><h2>Latest Updates</h2><div class="toffee-heading-rule"></div></div>
-          <a class="toffee-view-all" href="#home-latest" data-view-all="latest">View all <span>›</span></a>
-        </div>
-        <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
-      </section>
 
 
       <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
@@ -7404,25 +7397,6 @@ function renderGenreShelves(stories){
   });
 }
 
-function renderHomeLatestUpdates(stories=[]){
-  const box=document.getElementById('home-latest-list');
-  if(!box)return;
-  const latest=(stories||[]).slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0)).slice(0,4);
-  if(!latest.length){box.innerHTML='<div class="empty">Latest updates will appear after stories are published.</div>';return;}
-  box.innerHTML=latest.map(s=>{
-    const title=esc(s.title||'Untitled Story');
-    const desc=esc(String(s.description||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim().slice(0,125));
-    const date=s.updated_at||s.created_at;
-    const label=date?new Date(date).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'Recently updated';
-    return `<article class="toffee-latest-item">
-      <button class="toffee-latest-cover read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${title} cover" loading="lazy">`:`<span>${title.slice(0,1)}</span>`}</button>
-      <div class="toffee-latest-copy"><h3>${title} <span>— Latest Update</span></h3><p>${desc||'A new chapter is waiting for you.'}</p></div>
-      <div class="toffee-latest-date"><span>◷</span>${esc(label)}</div>
-      <button class="btn toffee-read-now read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">Read Now</button>
-    </article>`;
-  }).join('');
-  bindStoryCards();
-}
 async function renderHomeAuthorSidebar(stories=[]){
   const nameEl=document.getElementById('home-author-name');
   const roleEl=document.getElementById('home-author-role');
@@ -7789,7 +7763,6 @@ async function loadHome(){
    renderGenreShelves(stories);
    renderSeriesShelves(stories);
    renderAuShelves(stories);
-   renderHomeLatestUpdates(stories);
    const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
    const signals=getReaderSignals(stories);
    const scored=enriched.slice().sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));
@@ -7799,7 +7772,7 @@ async function loadHome(){
    await loadAuthorHubData(stories);
  }catch(e){
    console.error(e);
-   ['genre-shelves','recommend-books','top-picks-books','next-read-books','home-latest-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
+   ['genre-shelves','recommend-books','top-picks-books','next-read-books'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
  }
 }
 
@@ -11918,6 +11891,174 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 }
 </style>
 
+
+
+<style id="avx-ranking-readable-layout-and-viewall-dirtywhite-20261030">
+/* Ranking: keep the book, title, author and short blurb in a balanced editorial row. */
+#overlay .rank-panel-v2 .rank-list-v2{max-width:100%;}
+#overlay .rank-panel-v2 .ranking-rest{gap:12px;}
+#overlay .rank-panel-v2 .rank-row-v2{
+  grid-template-columns:48px 76px minmax(0,1fr) minmax(76px,auto)!important;
+  gap:16px!important;
+  min-width:0!important;
+  padding:15px 17px!important;
+  align-items:center!important;
+  border-radius:17px!important;
+}
+#overlay .rank-panel-v2 .rank-info{min-width:0!important;max-width:100%!important;padding:2px 0;}
+#overlay .rank-panel-v2 .rank-story-title{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  white-space:normal!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  font-size:clamp(16px,1.55vw,20px)!important;
+  line-height:1.28!important;
+  letter-spacing:-.015em!important;
+  overflow-wrap:anywhere!important;
+}
+#overlay .rank-panel-v2 .rank-author{
+  margin-top:7px!important;
+  font-size:9px!important;
+  line-height:1.45!important;
+  letter-spacing:.09em!important;
+}
+#overlay .rank-panel-v2 .rank-desc{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:3!important;
+  max-width:68ch!important;
+  margin-top:8px!important;
+  font-size:11px!important;
+  line-height:1.62!important;
+  overflow:hidden!important;
+  overflow-wrap:anywhere!important;
+  color:#655047!important;
+}
+#overlay .rank-panel-v2 .rank-reads{
+  justify-self:end!important;
+  align-self:center!important;
+  white-space:nowrap!important;
+  font-size:9px!important;
+  letter-spacing:.08em!important;
+  padding:7px 9px!important;
+  border-radius:999px!important;
+  background:#f0e7df!important;
+  color:#50372b!important;
+}
+
+/* Bookmark-shaped 3D rank markers — consistent on podium and the remaining list. */
+#overlay .rank-panel-v2 .rank-no,
+#overlay .rank-panel-v2 .podium-rank{
+  position:relative!important;
+  display:grid!important;
+  place-items:start center!important;
+  width:36px!important;
+  height:45px!important;
+  margin:0 auto 10px!important;
+  padding-top:8px!important;
+  border:1px solid rgba(255,255,255,.48)!important;
+  border-radius:7px 7px 3px 3px!important;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)!important;
+  background:linear-gradient(115deg,#6b4937 0%,#3b251b 48%,#24150f 100%)!important;
+  color:#fffaf2!important;
+  font:900 15px/1 Georgia,serif!important;
+  text-align:center!important;
+  text-shadow:0 1px 1px rgba(0,0,0,.55)!important;
+  filter:drop-shadow(0 3px 1px rgba(35,20,13,.28)) drop-shadow(0 7px 7px rgba(35,20,13,.18))!important;
+  box-shadow:inset 1px 0 0 rgba(255,255,255,.25),inset -2px 0 0 rgba(0,0,0,.22),inset 0 2px 3px rgba(255,255,255,.18)!important;
+}
+#overlay .rank-panel-v2 .rank-no::before,
+#overlay .rank-panel-v2 .podium-rank::before{
+  content:""!important;
+  position:absolute!important;
+  left:4px!important;right:4px!important;top:4px!important;height:2px!important;
+  background:rgba(255,255,255,.42)!important;
+  border-radius:2px!important;
+}
+#overlay .rank-panel-v2 .podium-1 .podium-rank{
+  background:linear-gradient(115deg,#e5c27d 0%,#b58a43 48%,#795325 100%)!important;
+  color:#fffdf5!important;
+}
+#overlay .rank-panel-v2 .podium-2 .podium-rank{
+  background:linear-gradient(115deg,#e1e0dc 0%,#99958f 50%,#615d59 100%)!important;
+}
+#overlay .rank-panel-v2 .podium-3 .podium-rank{
+  background:linear-gradient(115deg,#d8a17d 0%,#a76f4d 50%,#70442e 100%)!important;
+}
+#overlay .rank-panel-v2 .ranking-podium-card{padding:17px 13px 16px!important;}
+#overlay .rank-panel-v2 .podium-rank{margin:0 auto 12px!important;width:32px!important;height:40px!important;padding-top:7px!important;font-size:13px!important;}
+#overlay .rank-panel-v2 .podium-title{
+  white-space:normal!important;
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  line-height:1.3!important;
+  overflow-wrap:anywhere!important;
+}
+#overlay .rank-panel-v2 .podium-reads{font-size:8px!important;line-height:1.5!important;}
+
+/* View All dialogs: warm dirty-white title/label surfaces with strong brown text. */
+#overlay.all-stories-overlay .all-stories-modal{
+  background:#f2eee7!important;
+  color:#302017!important;
+  border:1px solid #ded4c8!important;
+}
+#overlay.all-stories-overlay .all-stories-modal .kicker{
+  display:inline-flex!important;
+  align-items:center!important;
+  width:fit-content!important;
+  max-width:100%!important;
+  padding:8px 12px!important;
+  margin:0 0 10px!important;
+  border:1px solid #ded3c7!important;
+  border-radius:8px!important;
+  background:#e7e1d8!important;
+  color:#3a281f!important;
+  -webkit-text-fill-color:#3a281f!important;
+  font-weight:900!important;
+}
+#overlay.all-stories-overlay .all-stories-modal h2{
+  display:block!important;
+  width:100%!important;
+  padding:12px 15px!important;
+  margin:0 0 10px!important;
+  border:1px solid #ded3c7!important;
+  border-radius:10px!important;
+  background:#e7e1d8!important;
+  color:#302017!important;
+  -webkit-text-fill-color:#302017!important;
+  line-height:1.18!important;
+}
+#overlay.all-stories-overlay .all-stories-modal .meta{color:#5d493d!important;-webkit-text-fill-color:#5d493d!important;}
+#overlay.all-stories-overlay .all-stories-grid .story-card{background:#fffdf9!important;}
+
+@media(max-width:700px){
+  #overlay .rank-panel-v2 .rank-row-v2{
+    grid-template-columns:36px 58px minmax(0,1fr)!important;
+    gap:10px!important;
+    padding:11px!important;
+  }
+  #overlay .rank-panel-v2 .rank-no{width:31px!important;height:40px!important;font-size:13px!important;padding-top:7px!important;}
+  #overlay .rank-panel-v2 .rank-cover,
+  #overlay .rank-panel-v2 .rank-cover-fallback{width:58px!important;height:80px!important;object-fit:contain!important;}
+  #overlay .rank-panel-v2 .rank-story-title{font-size:15px!important;line-height:1.28!important;}
+  #overlay .rank-panel-v2 .rank-desc{font-size:10px!important;line-height:1.55!important;-webkit-line-clamp:3!important;}
+  #overlay .rank-panel-v2 .rank-reads{grid-column:3!important;justify-self:start!important;margin-top:2px!important;}
+  #overlay .rank-panel-v2 .ranking-podium-card{padding:11px 7px 12px!important;}
+  #overlay .rank-panel-v2 .podium-cover{width:70px!important;height:98px!important;object-fit:contain!important;}
+}
+@media(max-width:420px){
+  #overlay .rank-panel-v2 .rank-row-v2{grid-template-columns:32px 50px minmax(0,1fr)!important;gap:8px!important;}
+  #overlay .rank-panel-v2 .rank-cover,
+  #overlay .rank-panel-v2 .rank-cover-fallback{width:50px!important;height:70px!important;}
+  #overlay .rank-panel-v2 .rank-desc{font-size:9px!important;}
+  #overlay .rank-panel-v2 .podium-cover{width:60px!important;height:86px!important;}
+}
+</style>
+
 </body>
 </html>
  
@@ -12050,4 +12191,5 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   .avx-3d-icon,.writer-side-btn .ws-icon,#author-avatar-btn{transition:none!important;transform:none!important}
 }
 </style>
+ 
  
