@@ -3874,33 +3874,15 @@ body{padding-bottom:78px}
 @media(max-width:380px){.header-mobile-ranking{padding:0 7px;font-size:8px}.header-mobile-ranking span:last-child{display:none}.all-stories-grid{gap:9px}}
 </style>
 <style id="avx-window-controls-v2">
-/* AVANITAXX — desktop/mobile floating window controls */
-.avx-window-tools{position:absolute;right:14px;top:12px;z-index:100;padding:0!important;display:flex!important;gap:6px!important;align-items:center!important}
-.avx-window-tool{width:31px!important;height:31px!important;padding:0!important;border:1px solid rgba(74,48,37,.16)!important;border-radius:9px!important;background:rgba(255,253,249,.92)!important;color:#4a3025!important;font:700 15px/1 Arial,sans-serif!important;display:grid!important;place-items:center!important;cursor:pointer!important;box-shadow:0 5px 14px rgba(55,35,27,.08)!important}
-.avx-window-tool:hover{background:#f2e4dc!important;transform:none!important}
-.avx-window-shell{position:relative!important}
-.avx-window-maximized{width:calc(100vw - 20px)!important;max-width:none!important;height:calc(100vh - 20px)!important;max-height:none!important;border-radius:18px!important}
-.avx-window-maximized.panel{overflow:auto!important}
-.avx-window-maximized.rank-panel,.avx-window-maximized.rank-panel-v2{overflow:hidden!important}
-.avx-window-minimized-host{position:fixed!important;right:18px!important;bottom:18px!important;z-index:10070!important;display:none!important}
-.avx-window-minimized-host.show{display:block!important}
-.avx-window-restore{border:1px solid rgba(74,48,37,.16)!important;border-radius:999px!important;background:#4a3025!important;color:#fffdf9!important;padding:11px 16px!important;font:800 10px/1 Arial,sans-serif!important;letter-spacing:.08em!important;box-shadow:0 12px 30px rgba(55,35,27,.22)!important;cursor:pointer!important}
-.avx-window-minimized .avx-window-shell{display:none!important}
-.avx-window-minimized .avx-window-minimized-host{display:block!important}
-/* Ranking gets its own internal scroll so every rank remains reachable. */
+/* Window minimize/maximize controls removed from all overlay panels. */
+/* Ranking retains its internal scroll so every rank remains reachable. */
 .rank-panel-v2{max-height:calc(100vh - 20px)!important}
 .rank-list-v2{max-height:calc(100vh - 235px)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin!important;padding-right:18px!important}
 .rank-list-v2::-webkit-scrollbar{width:8px}.rank-list-v2::-webkit-scrollbar-thumb{background:#c8a998;border-radius:99px}.rank-list-v2::-webkit-scrollbar-track{background:#efe3db;border-radius:99px}
-/* Writing editor */
 .rich-editor{line-height:1.6}
 #toolbar .tool[data-cmd="justifyLeft"]{display:none!important}
 #toolbar .tool[data-cmd="justifyCenter"]{display:none!important}
-@media(max-width:700px){
- .avx-window-tools{right:10px;top:9px}.avx-window-tool{width:29px!important;height:29px!important}
- .avx-window-maximized{width:calc(100vw - 10px)!important;height:calc(100vh - 10px)!important;border-radius:14px!important}
- .avx-window-minimized-host{right:10px!important;bottom:10px!important}
- .rank-list-v2{max-height:calc(100vh - 260px)!important;padding-right:9px!important}
-}
+@media(max-width:700px){.rank-list-v2{max-height:calc(100vh - 260px)!important;padding-right:9px!important}}
 </style>
 
 <style id="avx-author-music-tab-v1">
@@ -7066,33 +7048,10 @@ const renderContent=s=>looksHtml(s)?safeHtml(s):String(s||'').split(/\n\s*\n/).m
 const formatDate=s=>{try{return new Date(s).toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}catch{return ''}};
 function avxAddWindowControls(root){
   if(!root)return;
-  if(root.id==='overlay'&&root.classList.contains('reader-overlay')){
-    root.querySelectorAll('.avx-window-tools,.avx-window-minimized-host').forEach(el=>el.remove());
-    root.classList.remove('avx-window-minimized');
-    root.removeAttribute('data-avx-window-ready');
-    return;
-  }
-  if(root.dataset.avxWindowReady==='1')return;
-  const shell=root.querySelector(':scope > .panel, :scope > .modal, :scope > .reader, :scope > .rank-panel, :scope > .feature-modal, :scope > .global-search-panel, :scope > .policy-panel, :scope > .crop-modal, :scope > .author-hub-panel, :scope > .lounge-panel, :scope > .community-messenger, :scope > .avx-live-modal, :scope > .home-pop, :scope > .author-social-shell')||root.firstElementChild;
-  if(!shell||shell.dataset.avxWindowShell==='1')return;
-  /* The promotional pop-ad has only its own close/read actions; no window controls. */
-  if(shell.classList.contains('home-pop')){root.dataset.avxWindowReady='1';return;}
-  const looksLikeWindow=['panel','modal','reader','rank-panel','feature-modal','global-search-panel','policy-panel','crop-modal','author-hub-panel','lounge-panel','community-messenger','fb-notes-panel','avx-live-modal','home-pop','author-social-shell'].some(c=>shell.classList.contains(c));
-  if(!looksLikeWindow)return;
-  shell.dataset.avxWindowShell='1';shell.classList.add('avx-window-shell');
-  const tools=document.createElement('div');tools.className='avx-window-tools';
-  tools.innerHTML='<button type="button" class="avx-window-tool avx-win-min" title="Minimize" aria-label="Minimize">−</button><button type="button" class="avx-window-tool avx-win-max" title="Maximize" aria-label="Maximize">□</button>';
-  shell.appendChild(tools);
-  const host=document.createElement('div');host.className='avx-window-minimized-host';
-  host.innerHTML='<button type="button" class="avx-window-restore">RESTORE WINDOW</button>';shell.parentElement?.appendChild(host);
-  const overlayRoot=root;
-  tools.querySelector('.avx-win-min').onclick=()=>{overlayRoot.classList.add('avx-window-minimized');overlayRoot.setAttribute('aria-hidden','true')};
-  host.querySelector('.avx-window-restore').onclick=()=>{overlayRoot.classList.remove('avx-window-minimized');overlayRoot.setAttribute('aria-hidden','false')};
-  tools.querySelector('.avx-win-max').onclick=()=>{
-    const max=shell.classList.toggle('avx-window-maximized');
-    const b=tools.querySelector('.avx-win-max');b.textContent=max?'❐':'□';b.title=max?'Restore Down':'Maximize';b.setAttribute('aria-label',b.title);
-  };
-  root.dataset.avxWindowReady='1';
+  root.querySelectorAll('.avx-window-tools,.avx-window-minimized-host').forEach(el=>el.remove());
+  root.classList.remove('avx-window-minimized');
+  root.querySelectorAll('.avx-window-shell').forEach(el=>el.classList.remove('avx-window-maximized'));
+  root.removeAttribute('data-avx-window-ready');
 }
 function avxObserveWindow(){
   avxAddWindowControls(overlay);
@@ -12059,6 +12018,12 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 }
 </style>
 
+<style id="avx-remove-floating-window-controls-final">
+/* No minimize/maximize/restore controls in Ranking, View All, Author Lounge, or Notifications. */
+.avx-window-tools,.avx-window-minimized-host,.avx-window-restore,
+.avx-win-min,.avx-win-max{display:none!important}
+.avx-window-maximized{width:auto!important;height:auto!important;max-width:initial!important;max-height:initial!important}
+</style>
 </body>
 </html>
  
@@ -12191,5 +12156,6 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   .avx-3d-icon,.writer-side-btn .ws-icon,#author-avatar-btn{transition:none!important;transform:none!important}
 }
 </style>
+ 
  
  
