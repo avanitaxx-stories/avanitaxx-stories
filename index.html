@@ -1,4 +1,4 @@
-  <!doctype html>
+   <!doctype html>
 <html lang="en">
 <head>
 <link rel="manifest" href="./manifest.json">
@@ -11667,6 +11667,65 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   .avx-mobile-nav [data-mobile-nav="ranking"] .avx-ranking-book-icon {
     transition: none !important;
   }
+}
+</style>
+
+
+
+<!-- AVX FIX 2026-10-30: View All dynamic modal heading contrast -->
+<style id="avx-view-all-modal-contrast-fix">
+/* The View All shelves are rendered inside #overlay.all-stories-overlay, not the home sections. */
+#overlay.all-stories-overlay,
+#overlay.all-stories-overlay .all-stories-modal {
+  color: #392820 !important;
+  -webkit-text-fill-color: #392820;
+}
+#overlay.all-stories-overlay .all-stories-modal .kicker,
+#overlay.all-stories-overlay .all-stories-modal h2,
+#overlay.all-stories-overlay .all-stories-modal .meta,
+#overlay.all-stories-overlay .all-stories-modal p,
+#overlay.all-stories-overlay .all-stories-modal > div:not(.all-stories-grid) {
+  color: #392820 !important;
+  -webkit-text-fill-color: #392820 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: none !important;
+}
+#overlay.all-stories-overlay .all-stories-modal .kicker {
+  color: #80543d !important;
+  font-weight: 900 !important;
+  letter-spacing: .16em !important;
+}
+#overlay.all-stories-overlay .all-stories-modal h2 {
+  color: #2f1d15 !important;
+  font-family: Georgia, serif !important;
+  font-weight: 500 !important;
+}
+#overlay.all-stories-overlay .all-stories-modal .meta {
+  color: #6b5144 !important;
+  font-weight: 600 !important;
+}
+#overlay.all-stories-overlay .all-stories-modal .close {
+  color: #392820 !important;
+  -webkit-text-fill-color: #392820 !important;
+  opacity: 1 !important;
+}
+/* Keep the book-card typography readable without recoloring cover artwork. */
+#overlay.all-stories-overlay .all-stories-grid .card-title,
+#overlay.all-stories-overlay .all-stories-grid .meta,
+#overlay.all-stories-overlay .all-stories-grid .story-card a,
+#overlay.all-stories-overlay .all-stories-grid .story-card button {
+  color: #392820 !important;
+  -webkit-text-fill-color: #392820 !important;
+}
+#overlay.all-stories-overlay .all-stories-grid .empty {
+  color: #6b5144 !important;
+}
+/* Real book-shaped ranking mark: raised leather cover, visible page block and spine. */
+.site-header .avx-ranking-book-icon,
+.header-mobile-ranking .avx-ranking-book-icon,
+.avx-mobile-nav [data-mobile-nav="ranking"] .avx-ranking-book-icon {
+  filter: drop-shadow(0 2px 2px rgba(53,31,20,.25)) !important;
 }
 </style>
 
