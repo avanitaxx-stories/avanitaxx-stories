@@ -1,4 +1,4 @@
-   <!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
 <link rel="manifest" href="./manifest.json">
@@ -6611,6 +6611,195 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-library-featured-cup-cappuccino-refinement-20261030">
+/* MY LIBRARY — shorter, balanced shelves; preserve story cards and their actions. */
+.library-v3-compact{
+  grid-template-columns:repeat(auto-fill,minmax(138px,1fr))!important;
+  align-items:start!important;
+  gap:14px!important;
+}
+.library-v3-compact .library-card-v3{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  border:1px solid #e4d2c1!important;
+  border-radius:13px!important;
+  background:linear-gradient(180deg,#fffdf9,#f8eee5)!important;
+  box-shadow:0 7px 20px rgba(63,41,29,.07)!important;
+  transition:transform .2s ease,box-shadow .2s ease!important;
+}
+.library-v3-compact .library-card-v3:hover{
+  transform:translateY(-3px)!important;
+  box-shadow:0 13px 27px rgba(63,41,29,.12)!important;
+}
+.library-v3-compact .library-card-v3 .read-story{
+  display:block!important;
+  width:100%!important;
+  overflow:hidden!important;
+  border-radius:12px 12px 0 0!important;
+}
+.library-v3-compact .library-card-v3 img,
+.library-v3-compact .library-cover-fallback-v3{
+  display:block!important;
+  width:100%!important;
+  aspect-ratio:2/2.55!important;
+  height:auto!important;
+  object-fit:cover!important;
+}
+.library-v3-compact .library-card-copy-v3{
+  padding:10px 11px 12px!important;
+  min-width:0!important;
+}
+.library-v3-compact .library-card-title-v3{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  min-height:2.35em!important;
+  font:700 13px/1.18 Georgia,serif!important;
+  color:#34231b!important;
+  overflow-wrap:anywhere!important;
+}
+.library-v3-compact .library-card-meta-v3{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  margin-top:5px!important;
+  font-size:9px!important;
+  line-height:1.35!important;
+  color:#756054!important;
+}
+.library-v3-compact .library-save{
+  min-height:31px!important;
+  width:100%!important;
+  margin-top:9px!important;
+  padding:7px 8px!important;
+  border-radius:8px!important;
+  font-size:8px!important;
+  letter-spacing:.06em!important;
+}
+@media(max-width:560px){
+  .library-v3-compact{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .library-v3-compact .library-card-copy-v3{padding:8px!important}
+  .library-v3-compact .library-card-title-v3{font-size:12px!important}
+}
+
+/* Featured shelf icons — dimensional embossed book + quill, not generic glyphs. */
+.avx-showcase-icon{
+  display:inline-flex!important;
+  width:40px!important;height:40px!important;
+  flex:0 0 40px!important;
+  align-items:center!important;justify-content:center!important;
+  border-radius:12px!important;
+  color:#fff6eb!important;
+  background:linear-gradient(145deg,#d9b797 0%,#a97753 48%,#684431 100%)!important;
+  border:1px solid rgba(103,67,45,.3)!important;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.52),
+             inset 0 -4px 7px rgba(55,30,18,.22),
+             0 5px 10px rgba(66,42,28,.18)!important;
+}
+.avx-showcase-icon svg{
+  width:27px!important;height:27px!important;
+  overflow:visible!important;
+  fill:rgba(255,247,236,.18)!important;
+  stroke:#fff4e6!important;
+  stroke-width:2.1!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  filter:drop-shadow(0 2px 1px rgba(49,27,16,.35))!important;
+}
+.avx-featured-author-icon svg{width:26px!important;height:26px!important}
+.avx-showcase-head h2{gap:12px!important}
+
+/* HERO CUP — rounded ceramic body, sculpted handle, coffee rim and porcelain highlights. */
+#home .coffee-cup{
+  overflow:visible!important;
+  border:1px solid rgba(255,245,231,.5)!important;
+  border-radius:15px 15px 39px 39px!important;
+  background:
+    linear-gradient(102deg,rgba(255,255,255,.38) 0 7%,transparent 20% 76%,rgba(54,31,19,.22) 100%),
+    linear-gradient(145deg,#e6c5a5 0%,#bd8e68 27%,#986342 60%,#69432e 100%)!important;
+  box-shadow:inset 0 3px 5px rgba(255,255,255,.45),
+             inset -7px -9px 13px rgba(57,31,19,.22),
+             0 18px 28px rgba(57,36,25,.25)!important;
+}
+#home .coffee-cup::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  right:-43px!important;top:21px!important;
+  width:61px!important;height:62px!important;
+  border:12px solid #805438!important;
+  border-left:0!important;
+  border-radius:0 35px 35px 0!important;
+  background:transparent!important;
+  box-shadow:inset -3px 0 4px rgba(255,255,255,.28),
+             5px 4px 8px rgba(49,29,19,.18)!important;
+}
+#home .coffee-cup::after{
+  right:-32px!important;top:32px!important;
+  width:39px!important;height:39px!important;
+  border:6px solid #d4ad89!important;
+  border-left:0!important;
+  border-radius:0 25px 25px 0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#home .coffee-liquid{
+  left:8px!important;right:8px!important;top:8px!important;
+  height:27px!important;
+  background:radial-gradient(ellipse at 45% 35%,#8b5b3c 0%,#4b2819 52%,#24130c 100%)!important;
+  border:2px solid rgba(255,239,220,.48)!important;
+  box-shadow:inset 0 3px 5px rgba(255,255,255,.18),
+             0 2px 4px rgba(44,24,14,.25)!important;
+}
+#home .cup-highlight{
+  left:16px!important;top:42px!important;width:9px!important;height:42px!important;
+  background:linear-gradient(180deg,rgba(255,250,238,.42),rgba(255,250,238,.05))!important;
+  box-shadow:3px 0 6px rgba(255,255,255,.12)!important;
+}
+
+/* View All links: cappuccino/latte surface instead of deep-brown fill. */
+.toffee-view-all,
+.toffee-view-all:visited,
+#home .avx-showcase-head a,
+#home #avx-view-all-stories,
+#home #avx-view-all-authors{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-height:34px!important;
+  padding:8px 13px!important;
+  border:1px solid #d3b79d!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#f0dfce 0%,#dfc3a8 100%)!important;
+  color:#3b281e!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:.035em!important;
+  text-shadow:none!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),
+             0 3px 8px rgba(75,49,32,.09)!important;
+  opacity:1!important;
+}
+.toffee-view-all span,
+#home .avx-showcase-head a span{color:#3b281e!important}
+.toffee-view-all:hover,
+#home .avx-showcase-head a:hover{
+  background:linear-gradient(180deg,#f6e9dc 0%,#e7cfb9 100%)!important;
+  color:#26170f!important;
+  transform:translateY(-1px)!important;
+}
+@media(max-width:560px){
+  .avx-showcase-icon{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:10px!important}
+  .avx-showcase-icon svg{width:23px!important;height:23px!important}
+  #home .avx-showcase-head a{min-height:30px!important;padding:6px 9px!important;font-size:9px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -6709,7 +6898,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
   <div class="container">
     <section class="avx-showcase-section" id="avx-featured-stories" aria-label="Featured Stories">
       <div class="avx-showcase-head">
-        <h2><span class="avx-showcase-icon">▣</span> Featured Stories</h2>
+        <h2><span class="avx-showcase-icon avx-featured-book-icon" aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path d="M7 10.5c6.8-2.1 12.3-.9 17 3.2v27c-4.7-4.1-10.2-5.3-17-3.2z"/><path d="M41 10.5c-6.8-2.1-12.3-.9-17 3.2v27c4.7-4.1 10.2-5.3 17-3.2z"/><path d="M11 16c4.2-.8 7.4-.1 10 1.5M11 22c4.2-.8 7.4-.1 10 1.5M37 16c-4.2-.8-7.4-.1-10 1.5M37 22c-4.2-.8-7.4-.1-10 1.5"/></svg></span> Featured Stories</h2>
         <a href="#featured-books" id="avx-view-all-stories">View All Stories <span>→</span></a>
       </div>
       <div id="avx-featured-story-grid" class="avx-featured-story-grid">
@@ -6719,7 +6908,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 
     <section class="avx-showcase-section avx-featured-authors-section" id="authors" aria-label="Featured Authors">
       <div class="avx-showcase-head">
-        <h2><span class="avx-showcase-icon">♧</span> Featured Authors</h2>
+        <h2><span class="avx-showcase-icon avx-featured-author-icon" aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path d="M11 36c2-10 8-18 21-25 2-1 4 1 3 3-6 13-14 19-24 22z"/><path d="M13 34c7-7 13-12 20-20M8 40c6-1 11-3 16-7"/><path d="M28 10l7 7"/></svg></span> Featured Authors</h2>
         <a href="#authors" id="avx-view-all-authors">View All Authors <span>→</span></a>
       </div>
       <div id="avx-featured-author-grid" class="avx-featured-author-grid">
@@ -7882,7 +8071,7 @@ async function openMyLibrary(){
   if(ids.length){const q=await sb.from('stories').select('*').in('id',ids).eq('published',true);stories=q.error?[]:(q.data||[])}
   const ordered=rows.map(x=>stories.find(s=>s.id===x.story_id)).filter(Boolean);
   const cards=ordered.length?ordered.map(s=>`<div class="library-card-v3"><div class="read-story" data-slug="${esc(s.share_slug||s.id)}">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="library-cover-fallback-v3">${esc(s.title)}</div>`}<div class="library-card-copy-v3"><div class="library-card-title-v3">${esc(s.title)}</div><div class="library-card-meta-v3">${(Number(s.views)||0).toLocaleString()} reads</div><div class="library-card-meta-v3">${esc(s.description||'Saved to your library')}</div><button class="btn alt library-save" data-story-id="${esc(s.id)}" type="button">✓ IN LIBRARY</button></div></div></div>`).join(''):'<div class="empty">Your library is empty. Tap ADD LIBRARY on a story you want to keep.</div>';
-  open(`<div class="author-hub-panel"><div class="author-hub-head"><div class="author-hub-top"><div><div class="author-hub-kicker">Avanitaxx Stories</div><div class="author-hub-title">MY LIBRARY</div><div class="author-hub-sub">Your private shelf of stories you chose to save. Saved books stay on the website and are not offered as downloads.</div></div><button class="author-hub-close" id="library-close" type="button">×</button></div></div><div class="author-hub-body"><div class="library-v3" style="grid-template-columns:repeat(auto-fill,minmax(155px,1fr))">${cards}</div></div></div>`);
+  open(`<div class="author-hub-panel"><div class="author-hub-head"><div class="author-hub-top"><div><div class="author-hub-kicker">Avanitaxx Stories</div><div class="author-hub-title">MY LIBRARY</div><div class="author-hub-sub">Your private shelf of stories you chose to save. Saved books stay on the website and are not offered as downloads.</div></div><button class="author-hub-close" id="library-close" type="button">×</button></div></div><div class="author-hub-body"><div class="library-v3 library-v3-compact">${cards}</div></div></div>`);
   document.getElementById('library-close').onclick=close;bindStoryCards();bindLibraryButtons();
 }
 
