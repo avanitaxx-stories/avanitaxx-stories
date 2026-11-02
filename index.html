@@ -2588,18 +2588,43 @@ body{background:var(--editorial-paper)}
 @media(max-width:420px){.ranking-podium-card{padding:9px 5px}.podium-cover{width:64px;height:90px}.podium-title{font-size:12px}.ranking-tab{padding:8px 12px;font-size:8px}.ranking-summary{font-size:10px}}
 </style>
 
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLC422WJCL"></script>
+<!-- Google Consent Mode v2: deny optional storage before any Google tag loads. -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HLC422WJCL');
+  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+  window.gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
 
-  // Avanitaxx Stories reading analytics
-  function avxGAEvent(name, params={}) {
-    try { if (typeof gtag === 'function') gtag('event', name, params); } catch (e) {}
-  }
+  window.AVX_GA_ID = 'G-HLC422WJCL';
+  window.AVX_GA_LOADED = false;
+  window.AVX_LOAD_ANALYTICS = function(){
+    if (window.AVX_GA_LOADED || !window.AVX_COOKIE_CONSENT ||
+        window.AVX_COOKIE_CONSENT.analytics !== true) return;
+    window.AVX_GA_LOADED = true;
+    window.gtag('js', new Date());
+    window.gtag('config', window.AVX_GA_ID, {anonymize_ip: true});
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(window.AVX_GA_ID);
+    tag.referrerPolicy = 'strict-origin-when-cross-origin';
+    document.head.appendChild(tag);
+  };
+
+  // Events are queued only after the visitor has enabled analytics.
+  window.avxGAEvent = function(name, params={}) {
+    try {
+      if (window.AVX_COOKIE_CONSENT && window.AVX_COOKIE_CONSENT.analytics === true) {
+        window.gtag('event', name, params);
+      }
+    } catch (e) {}
+  };
 </script>
 
 <!-- AVANITAXX STORIES — SIGNATURE TOFFEE / COFFEE VISUAL SYSTEM -->
@@ -6995,7 +7020,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
     <div class="footer-grid">
       <div><h3>AVANITAXX STORIES</h3><p>A home for stories, imagination, and the voices behind every page.</p><p style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#c5aa96">Official Website • Est. 2026</p></div>
       <div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#featured-books">Featured Stories</a><br><button id="footer-about" class="footer-link-btn" type="button">About Avanitaxx Stories</button></div>
-      <div><h3>Policies</h3><button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br><button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br><button id="footer-cookies" class="footer-link-btn" type="button">Cookie Policy</button><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button><br><button id="footer-contract" class="footer-link-btn" type="button">Author Publishing Agreement</button><br><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button></div>
+      <div><h3>Policies</h3><button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br><button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br><button id="footer-cookies" class="footer-link-btn" type="button">Cookie Policy</button><br><button id="footer-cookie-settings" class="footer-link-btn" type="button">Cookie Settings</button><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button><br><button id="footer-contract" class="footer-link-btn" type="button">Author Publishing Agreement</button><br><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button></div>
       <div><h3>Help &amp; Contact</h3><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button><br><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button><br><br><button id="footer-write" class="btn alt" type="button">Author Home</button></div>
     </div>
     <div class="copyright"><span>AVANITAXX STORIES — OFFICIAL WEBSITE</span><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span></div>
@@ -9559,12 +9584,12 @@ const AVX_POLICY_TEXT = {
   },
   cookies: {
     kicker:'BROWSER STORAGE', title:'Cookie Policy',
-    body:`<p><strong>Effective date: November 2, 2026.</strong> This Cookie Policy explains how Avanitaxx Stories may use cookies, local storage, and similar technologies.</p>
-      <h3>Essential technologies</h3><p>Some browser storage is needed for core functions such as keeping a session active, remembering reading progress, saving interface preferences, and protecting the website. Disabling these technologies may affect how some features work.</p>
-      <h3>Analytics and performance</h3><p>If analytics tools are enabled, they may use cookies or similar identifiers to understand visits, performance, and feature usage. The site should identify the specific analytics provider here when one is activated.</p>
-      <h3>Advertising technologies</h3><p>If Google AdSense or another advertising partner is enabled, that provider may use cookies or similar technologies to deliver and measure ads and, where permitted, personalize advertising. These technologies are not represented as active unless the relevant advertising service has actually been installed and enabled.</p>
-      <h3>Your choices</h3><p>You can manage or delete cookies through your browser settings. Where consent is legally required for optional cookies or advertising technologies, the website must present an appropriate consent mechanism before those technologies are used. Browser controls may not provide the same choices as a dedicated consent tool.</p>
-      <h3>More information</h3><p>For information about Google's advertising technologies, visit <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google's advertising policies and technologies</a>.</p>`
+    body:`<p><strong>Effective date: November 2, 2026.</strong> This Cookie Policy explains how Avanitaxx Stories uses browser storage and how visitors can manage optional technologies.</p>
+      <h3>Essential storage</h3><p>Essential storage supports core site functions, security, authentication/session continuity, and remembering your cookie choices. It is always active because the website cannot reliably provide these functions without it. The consent preference is saved in this browser's local storage.</p>
+      <h3>Analytics and performance</h3><p>Google Analytics 4 (measurement ID G-HLC422WJCL) is optional. Its Google tag is not loaded unless you enable Analytics in Cookie Settings. If enabled, Google Analytics may use cookies or similar identifiers to measure visits and site performance. You can withdraw this choice at any time.</p>
+      <h3>Advertising technologies</h3><p>Google AdSense is not currently installed on this website. If an advertising service is added later, advertising storage and related Google consent signals must remain denied unless you choose to enable the relevant optional settings. The site will update this policy when an advertising provider is activated. Your choices here do not by themselves establish compliance with every advertising or privacy law.</p>
+      <h3>Your choices</h3><p>Choose Accept All, Reject Optional, or Customize in the cookie notice. You can reopen Cookie Settings at any time from the Policies section in the footer. Changes are saved in this browser and can be changed later. Clearing browser storage may reset your choices and show the notice again.</p>
+      <h3>More information</h3><p>For information about Google's advertising technologies, visit <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google's advertising policies and technologies</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites or apps that use its services</a>.</p>`
   },
   copyright: {
     kicker:'CREATIVE RIGHTS', title:'Copyright / Content Policy',
@@ -12097,6 +12122,254 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 }
 </style>
 
+
+<!-- AVANITAXX STORIES — COOKIE CONSENT CENTER -->
+<style id="avx-cookie-consent-style">
+  #avx-cookie-banner,#avx-cookie-preferences{
+    --avx-cookie-ink:#38251d;--avx-cookie-muted:#79675d;--avx-cookie-line:#e7d7c8;
+    --avx-cookie-paper:#fffdf8;--avx-cookie-accent:#8e5d3f;--avx-cookie-soft:#f3e5d8;
+    color:var(--avx-cookie-ink);font-family:Inter,'DM Sans',Arial,sans-serif;
+  }
+  #avx-cookie-banner{
+    position:fixed;z-index:2147483000;left:22px;right:22px;bottom:20px;margin:auto;
+    width:min(980px,calc(100vw - 32px));display:none;
+    background:rgba(255,253,248,.98);border:1px solid var(--avx-cookie-line);
+    border-radius:20px;box-shadow:0 22px 70px rgba(38,25,18,.25);
+    padding:22px 24px;backdrop-filter:blur(16px);
+  }
+  #avx-cookie-banner.avx-visible{display:block;animation:avxCookieIn .22s ease-out}
+  @keyframes avxCookieIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .avx-cookie-layout{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center}
+  .avx-cookie-eyebrow{font-size:9px;font-weight:900;letter-spacing:.19em;color:var(--avx-cookie-accent);text-transform:uppercase}
+  .avx-cookie-title{font:400 25px/1.15 Georgia,serif;margin:7px 0;color:var(--avx-cookie-ink)}
+  .avx-cookie-copy{font-size:12px;line-height:1.65;color:var(--avx-cookie-muted);max-width:650px;margin:0}
+  .avx-cookie-copy a{color:var(--avx-cookie-accent);text-decoration:underline;text-underline-offset:2px}
+  .avx-cookie-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:350px}
+  .avx-cookie-btn{min-height:42px;border:1px solid var(--avx-cookie-line);border-radius:11px;padding:10px 14px;background:#fff;color:var(--avx-cookie-ink);font-size:10px;font-weight:900;letter-spacing:.045em;cursor:pointer}
+  .avx-cookie-btn:hover{border-color:#b98b6d;transform:translateY(-1px)}
+  .avx-cookie-btn.primary{background:#3b281f;border-color:#3b281f;color:#fff}
+  .avx-cookie-btn.soft{background:var(--avx-cookie-soft);border-color:#ead5c5}
+  #avx-cookie-preferences{
+    position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;
+    padding:18px;background:rgba(35,23,17,.62);backdrop-filter:blur(5px);
+  }
+  #avx-cookie-preferences.avx-visible{display:flex}
+  .avx-cookie-dialog{width:min(560px,100%);max-height:min(90vh,760px);overflow:auto;background:var(--avx-cookie-paper);
+    border:1px solid var(--avx-cookie-line);border-radius:22px;padding:25px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
+  .avx-cookie-dialog-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+  .avx-cookie-dialog h2{font:400 30px/1.1 Georgia,serif;margin:7px 0 8px}
+  .avx-cookie-dialog p{font-size:12px;line-height:1.65;color:var(--avx-cookie-muted)}
+  .avx-cookie-close{width:36px;height:36px;border:1px solid var(--avx-cookie-line);border-radius:50%;background:#fff;color:var(--avx-cookie-ink);font-size:21px;cursor:pointer}
+  .avx-cookie-category{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:15px 0;border-top:1px solid var(--avx-cookie-line)}
+  .avx-cookie-category strong{display:block;font-size:12px}
+  .avx-cookie-category small{display:block;color:var(--avx-cookie-muted);font-size:10px;line-height:1.5;margin-top:4px;max-width:390px}
+  .avx-cookie-status{font-size:9px;font-weight:900;letter-spacing:.08em;color:#6d7551;white-space:nowrap}
+  .avx-cookie-switch{appearance:none;width:42px;height:24px;border-radius:99px;background:#d8cbc0;position:relative;cursor:pointer;flex:0 0 42px;transition:.18s}
+  .avx-cookie-switch::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px #0002;transition:.18s}
+  .avx-cookie-switch:checked{background:#8e5d3f}
+  .avx-cookie-switch:checked::after{transform:translateX(18px)}
+  .avx-cookie-switch:disabled{opacity:.55;cursor:not-allowed}
+  .avx-cookie-dialog-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
+  .avx-cookie-footnote{font-size:9px!important;margin:14px 0 0!important}
+  @media(max-width:700px){
+    #avx-cookie-banner{left:10px;right:10px;bottom:10px;width:auto;padding:18px;border-radius:17px}
+    .avx-cookie-layout{grid-template-columns:1fr;gap:14px}
+    .avx-cookie-title{font-size:22px}
+    .avx-cookie-copy{font-size:11px}
+    .avx-cookie-actions{display:grid;grid-template-columns:1fr 1fr;max-width:none}
+    .avx-cookie-btn{padding:10px 9px;font-size:9px}
+    .avx-cookie-btn.primary{grid-column:1/-1;grid-row:1}
+    .avx-cookie-dialog{padding:20px;border-radius:18px}
+    .avx-cookie-dialog h2{font-size:26px}
+  }
+  @media(prefers-reduced-motion:reduce){#avx-cookie-banner.avx-visible{animation:none}.avx-cookie-btn,.avx-cookie-switch::after{transition:none}}
+</style>
+
+<section id="avx-cookie-banner" role="region" aria-label="Cookie consent notice" aria-live="polite">
+  <div class="avx-cookie-layout">
+    <div>
+      <div class="avx-cookie-eyebrow">AVANITAXX STORIES • PRIVACY PREFERENCES</div>
+      <h2 class="avx-cookie-title">A little note about cookies.</h2>
+      <p class="avx-cookie-copy">We use essential browser storage to keep the site working. With your permission, optional analytics can help us understand site visits. Advertising cookies are currently inactive because Google AdSense is not installed. You can accept, reject, or customize optional settings. Read our <a href="#" id="avx-cookie-policy-link">Cookie Policy</a>.</p>
+    </div>
+    <div class="avx-cookie-actions">
+      <button type="button" class="avx-cookie-btn primary" id="avx-cookie-accept">Accept All</button>
+      <button type="button" class="avx-cookie-btn" id="avx-cookie-reject">Reject Optional</button>
+      <button type="button" class="avx-cookie-btn soft" id="avx-cookie-customize">Customize</button>
+    </div>
+  </div>
+</section>
+
+<div id="avx-cookie-preferences" role="presentation" aria-hidden="true">
+  <section class="avx-cookie-dialog" role="dialog" aria-modal="true" aria-labelledby="avx-cookie-dialog-title">
+    <div class="avx-cookie-dialog-head">
+      <div><div class="avx-cookie-eyebrow">YOUR CHOICES</div><h2 id="avx-cookie-dialog-title">Cookie Settings</h2></div>
+      <button type="button" class="avx-cookie-close" id="avx-cookie-close" aria-label="Close settings">×</button>
+    </div>
+    <p>Choose which optional technologies Avanitaxx Stories may use. Essential storage is always active because it supports core site functions and saves your privacy choices.</p>
+    <div class="avx-cookie-category">
+      <div><strong>Essential</strong><small>Security, sign-in/session support, core site functions, and saving your consent choice.</small></div>
+      <span class="avx-cookie-status">ALWAYS ON</span>
+    </div>
+    <div class="avx-cookie-category">
+      <div><strong>Analytics</strong><small>Allows Google Analytics 4 to measure visits and performance. The Google tag is blocked unless this is enabled.</small></div>
+      <input class="avx-cookie-switch" id="avx-cookie-analytics" type="checkbox" role="switch" aria-label="Allow analytics">
+    </div>
+    <div class="avx-cookie-category">
+      <div><strong>Advertising storage and measurement</strong><small>Allows advertising-related storage and measurement signals. No AdSense code is currently installed.</small></div>
+      <input class="avx-cookie-switch" id="avx-cookie-ads" type="checkbox" role="switch" aria-label="Allow advertising storage and measurement">
+    </div>
+    <div class="avx-cookie-category">
+      <div><strong>Personalized advertising</strong><small>Allows consent for ad personalization. This setting does not install ads or override a provider's own requirements.</small></div>
+      <input class="avx-cookie-switch" id="avx-cookie-personalized" type="checkbox" role="switch" aria-label="Allow personalized advertising">
+    </div>
+    <div class="avx-cookie-dialog-actions">
+      <button type="button" class="avx-cookie-btn" id="avx-cookie-dialog-reject">Reject Optional</button>
+      <button type="button" class="avx-cookie-btn primary" id="avx-cookie-save">Save My Choices</button>
+    </div>
+    <p class="avx-cookie-footnote">You can change or withdraw your optional choices at any time using Cookie Settings in the website footer.</p>
+  </section>
+</div>
+
+<script id="avx-cookie-consent-script">
+(function(){
+  'use strict';
+  const STORAGE_KEY = 'avx_cookie_consent_v1';
+  const CONSENT_VERSION = 1;
+  const banner = document.getElementById('avx-cookie-banner');
+  const modal = document.getElementById('avx-cookie-preferences');
+  if (!banner || !modal) return;
+
+  const controls = {
+    analytics: document.getElementById('avx-cookie-analytics'),
+    ads: document.getElementById('avx-cookie-ads'),
+    personalized: document.getElementById('avx-cookie-personalized')
+  };
+  let current = null;
+  let lastFocus = null;
+
+  function readSaved(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      const value = JSON.parse(raw);
+      if(!value || value.version !== CONSENT_VERSION ||
+         !Number.isFinite(value.updatedAt) ||
+         Date.now() - value.updatedAt > 180 * 24 * 60 * 60 * 1000) return null;
+      return {
+        essential: true,
+        analytics: value.analytics === true,
+        ads: value.ads === true,
+        personalized: value.personalized === true && value.ads === true,
+        updatedAt: value.updatedAt,
+        version: CONSENT_VERSION
+      };
+    }catch(e){ return null; }
+  }
+
+  function updateGoogleConsent(choice){
+    const granted = value => value ? 'granted' : 'denied';
+    if(typeof window.gtag === 'function'){
+      window.gtag('consent','update',{
+        analytics_storage: granted(choice.analytics),
+        ad_storage: granted(choice.ads),
+        ad_user_data: granted(choice.ads),
+        ad_personalization: granted(choice.personalized)
+      });
+    }
+  }
+
+  function publish(choice){
+    window.AVX_COOKIE_CONSENT = Object.freeze({...choice});
+    updateGoogleConsent(choice);
+    window.dispatchEvent(new CustomEvent('avx:consent-updated',{detail:{...choice}}));
+    if(choice.analytics && typeof window.AVX_LOAD_ANALYTICS === 'function'){
+      window.AVX_LOAD_ANALYTICS();
+    }
+  }
+
+  function save(choice){
+    current = {
+      essential: true,
+      analytics: choice.analytics === true,
+      ads: choice.ads === true,
+      personalized: choice.personalized === true && choice.ads === true,
+      updatedAt: Date.now(),
+      version: CONSENT_VERSION
+    };
+    try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(current)); }
+    catch(e){ console.warn('Cookie preferences could not be saved in this browser.',e); }
+    publish(current);
+    hideBanner();
+    closePreferences();
+  }
+
+  function hideBanner(){ banner.classList.remove('avx-visible'); }
+  function showBanner(){ banner.classList.add('avx-visible'); }
+  function openPreferences(){
+    lastFocus = document.activeElement;
+    const saved = current || {analytics:false,ads:false,personalized:false};
+    controls.analytics.checked = saved.analytics;
+    controls.ads.checked = saved.ads;
+    controls.personalized.checked = saved.personalized;
+    modal.classList.add('avx-visible');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('avx-cookie-close').focus();
+  }
+  function closePreferences(){
+    modal.classList.remove('avx-visible');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+  function reject(){save({analytics:false,ads:false,personalized:false});}
+  function accept(){save({analytics:true,ads:true,personalized:true});}
+  function saveForm(){
+    save({
+      analytics:controls.analytics.checked,
+      ads:controls.ads.checked,
+      personalized:controls.personalized.checked
+    });
+  }
+
+  document.getElementById('avx-cookie-accept').addEventListener('click',accept);
+  document.getElementById('avx-cookie-reject').addEventListener('click',reject);
+  document.getElementById('avx-cookie-customize').addEventListener('click',openPreferences);
+  document.getElementById('avx-cookie-dialog-reject').addEventListener('click',reject);
+  document.getElementById('avx-cookie-save').addEventListener('click',saveForm);
+  document.getElementById('avx-cookie-close').addEventListener('click',closePreferences);
+  modal.addEventListener('click',e=>{if(e.target===modal)closePreferences()});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && modal.classList.contains('avx-visible')) closePreferences();
+  });
+  controls.ads.addEventListener('change',()=>{
+    if(!controls.ads.checked) controls.personalized.checked=false;
+  });
+  controls.personalized.addEventListener('change',()=>{
+    if(controls.personalized.checked) controls.ads.checked=true;
+  });
+
+  document.getElementById('footer-cookie-settings')?.addEventListener('click',openPreferences);
+  document.getElementById('avx-cookie-policy-link')?.addEventListener('click',e=>{
+    e.preventDefault();
+    if(typeof window.openPolicyCenter==='function') window.openPolicyCenter('cookies');
+  });
+
+  const saved = readSaved();
+  if(saved){
+    current = saved;
+    publish(saved);
+  }else{
+    current = {essential:true,analytics:false,ads:false,personalized:false};
+    publish(current);
+    showBanner();
+  }
+
+  // Public entry point for other site UI to reopen the preference center.
+  window.AVX_OPEN_COOKIE_SETTINGS = openPreferences;
+})();
+</script>
 </body>
 </html>
  
@@ -12229,7 +12502,5 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   .avx-3d-icon,.writer-side-btn .ws-icon,#author-avatar-btn{transition:none!important;transform:none!important}
 }
 </style>
- 
- 
  
  
