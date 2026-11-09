@@ -6,9 +6,9 @@
 <link rel="apple-touch-icon" href="./56b88dd7-311e-4bb6-8e60-af0fcb1736e2.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Avanitaxx Stories — A Reading Community</title>
+<title>Avanitaxx Stories — Read Stories Online</title>
 <meta name="avx-build" content="2026-10-22-community-messenger-active-now-1">
-<meta name="description" content="Avanitaxx Stories is a reading community for discovering original stories, following authors, saving books, sharing thoughtful reviews, and connecting with fellow readers.">
+<meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
 <meta name="googlebot" content="index,follow">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Avanitaxx Stories">
 <meta property="og:title" content="Avanitaxx Stories — Read Stories Online">
-<meta property="og:description" content="Discover original stories, follow authors, save books, and connect with readers in the Avanitaxx Stories reading community.">
+<meta property="og:description" content="Read original stories online, discover authors, follow updates, save books, and explore new chapters from AVANITAXX.">
 <meta property="og:url" content="https://avanitaxx-stories.github.io/avanitaxx-stories/">
 <meta property="og:image" content="https://avanitaxx-stories.github.io/avanitaxx-stories/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -2588,43 +2588,18 @@ body{background:var(--editorial-paper)}
 @media(max-width:420px){.ranking-podium-card{padding:9px 5px}.podium-cover{width:64px;height:90px}.podium-title{font-size:12px}.ranking-tab{padding:8px 12px;font-size:8px}.ranking-summary{font-size:10px}}
 </style>
 
-<!-- Google Consent Mode v2: deny optional storage before any Google tag loads. -->
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLC422WJCL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-  window.gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    functionality_storage: 'granted',
-    security_storage: 'granted',
-    wait_for_update: 500
-  });
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HLC422WJCL');
 
-  window.AVX_GA_ID = 'G-HLC422WJCL';
-  window.AVX_GA_LOADED = false;
-  window.AVX_LOAD_ANALYTICS = function(){
-    if (window.AVX_GA_LOADED || !window.AVX_COOKIE_CONSENT ||
-        window.AVX_COOKIE_CONSENT.analytics !== true) return;
-    window.AVX_GA_LOADED = true;
-    window.gtag('js', new Date());
-    window.gtag('config', window.AVX_GA_ID, {anonymize_ip: true});
-    var tag = document.createElement('script');
-    tag.async = true;
-    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(window.AVX_GA_ID);
-    tag.referrerPolicy = 'strict-origin-when-cross-origin';
-    document.head.appendChild(tag);
-  };
-
-  // Events are queued only after the visitor has enabled analytics.
-  window.avxGAEvent = function(name, params={}) {
-    try {
-      if (window.AVX_COOKIE_CONSENT && window.AVX_COOKIE_CONSENT.analytics === true) {
-        window.gtag('event', name, params);
-      }
-    } catch (e) {}
-  };
+  // Avanitaxx Stories reading analytics
+  function avxGAEvent(name, params={}) {
+    try { if (typeof gtag === 'function') gtag('event', name, params); } catch (e) {}
+  }
 </script>
 
 <!-- AVANITAXX STORIES — SIGNATURE TOFFEE / COFFEE VISUAL SYSTEM -->
@@ -3899,15 +3874,33 @@ body{padding-bottom:78px}
 @media(max-width:380px){.header-mobile-ranking{padding:0 7px;font-size:8px}.header-mobile-ranking span:last-child{display:none}.all-stories-grid{gap:9px}}
 </style>
 <style id="avx-window-controls-v2">
-/* Window minimize/maximize controls removed from all overlay panels. */
-/* Ranking retains its internal scroll so every rank remains reachable. */
+/* AVANITAXX — desktop/mobile floating window controls */
+.avx-window-tools{position:absolute;right:14px;top:12px;z-index:100;padding:0!important;display:flex!important;gap:6px!important;align-items:center!important}
+.avx-window-tool{width:31px!important;height:31px!important;padding:0!important;border:1px solid rgba(74,48,37,.16)!important;border-radius:9px!important;background:rgba(255,253,249,.92)!important;color:#4a3025!important;font:700 15px/1 Arial,sans-serif!important;display:grid!important;place-items:center!important;cursor:pointer!important;box-shadow:0 5px 14px rgba(55,35,27,.08)!important}
+.avx-window-tool:hover{background:#f2e4dc!important;transform:none!important}
+.avx-window-shell{position:relative!important}
+.avx-window-maximized{width:calc(100vw - 20px)!important;max-width:none!important;height:calc(100vh - 20px)!important;max-height:none!important;border-radius:18px!important}
+.avx-window-maximized.panel{overflow:auto!important}
+.avx-window-maximized.rank-panel,.avx-window-maximized.rank-panel-v2{overflow:hidden!important}
+.avx-window-minimized-host{position:fixed!important;right:18px!important;bottom:18px!important;z-index:10070!important;display:none!important}
+.avx-window-minimized-host.show{display:block!important}
+.avx-window-restore{border:1px solid rgba(74,48,37,.16)!important;border-radius:999px!important;background:#4a3025!important;color:#fffdf9!important;padding:11px 16px!important;font:800 10px/1 Arial,sans-serif!important;letter-spacing:.08em!important;box-shadow:0 12px 30px rgba(55,35,27,.22)!important;cursor:pointer!important}
+.avx-window-minimized .avx-window-shell{display:none!important}
+.avx-window-minimized .avx-window-minimized-host{display:block!important}
+/* Ranking gets its own internal scroll so every rank remains reachable. */
 .rank-panel-v2{max-height:calc(100vh - 20px)!important}
 .rank-list-v2{max-height:calc(100vh - 235px)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin!important;padding-right:18px!important}
 .rank-list-v2::-webkit-scrollbar{width:8px}.rank-list-v2::-webkit-scrollbar-thumb{background:#c8a998;border-radius:99px}.rank-list-v2::-webkit-scrollbar-track{background:#efe3db;border-radius:99px}
+/* Writing editor */
 .rich-editor{line-height:1.6}
 #toolbar .tool[data-cmd="justifyLeft"]{display:none!important}
 #toolbar .tool[data-cmd="justifyCenter"]{display:none!important}
-@media(max-width:700px){.rank-list-v2{max-height:calc(100vh - 260px)!important;padding-right:9px!important}}
+@media(max-width:700px){
+ .avx-window-tools{right:10px;top:9px}.avx-window-tool{width:29px!important;height:29px!important}
+ .avx-window-maximized{width:calc(100vw - 10px)!important;height:calc(100vh - 10px)!important;border-radius:14px!important}
+ .avx-window-minimized-host{right:10px!important;bottom:10px!important}
+ .rank-list-v2{max-height:calc(100vh - 260px)!important;padding-right:9px!important}
+}
 </style>
 
 <style id="avx-author-music-tab-v1">
@@ -6900,34 +6893,6 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
   <div class="avx-hero-progress" aria-hidden="true"></div>
 </section>
 
-
-<!-- AVX READING-FIRST COMMUNITY UPGRADE -->
-<section class="avx-reading-hub" id="avx-reading-hub" aria-label="Reading community">
-  <div class="container">
-    <div class="avx-reading-intro">
-      <div class="avx-reading-eyebrow">THE AVANITAXX READING COMMUNITY</div>
-      <h2>Find your next story.<br><em>Find your people.</em></h2>
-      <p>Discover original stories, keep your reading journey together, and connect with the readers and authors who make every page memorable.</p>
-      <div class="avx-reading-actions">
-        <a class="avx-reading-primary" href="#featured-books">START READING <span>→</span></a>
-        <button type="button" class="avx-reading-secondary" data-avx-reading-action="browse">EXPLORE GENRES</button>
-      </div>
-    </div>
-    <div class="avx-reading-quickgrid">
-      <button type="button" class="avx-reading-tile" data-avx-reading-action="library">
-        <span class="avx-reading-tile-icon">▤</span><span><b>My Reading Shelf</b><small>Keep the books you want to read close</small></span><span class="avx-reading-arrow">↗</span>
-      </button>
-      <button type="button" class="avx-reading-tile" data-avx-reading-action="community">
-        <span class="avx-reading-tile-icon">♡</span><span><b>Meet the Community</b><small>Join conversations with readers and authors</small></span><span class="avx-reading-arrow">↗</span>
-      </button>
-      <a class="avx-reading-tile" href="#avx-featured-stories">
-        <span class="avx-reading-tile-icon">✧</span><span><b>Discover Stories</b><small>Find romance, AU, and your next favorite</small></span><span class="avx-reading-arrow">↗</span>
-      </a>
-    </div>
-    <div class="avx-reading-note">A welcoming space for stories, thoughtful conversations, and readers who love to read.</div>
-  </div>
-</section>
-
 <!-- Live Feature Stories / Feature Authors are rendered from Supabase below. -->
 <section class="avx-showcase-wrap" id="avx-home-showcase">
   <div class="container">
@@ -7004,6 +6969,13 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
           <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
         </div>
       </section>
+      <section class="toffee-panel toffee-latest-panel" id="home-latest">
+        <div class="toffee-section-head">
+          <div><h2>Latest Updates</h2><div class="toffee-heading-rule"></div></div>
+          <a class="toffee-view-all" href="#home-latest" data-view-all="latest">View all <span>›</span></a>
+        </div>
+        <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
+      </section>
 
 
       <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
@@ -7048,7 +7020,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
     <div class="footer-grid">
       <div><h3>AVANITAXX STORIES</h3><p>A home for stories, imagination, and the voices behind every page.</p><p style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#c5aa96">Official Website • Est. 2026</p></div>
       <div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#featured-books">Featured Stories</a><br><button id="footer-about" class="footer-link-btn" type="button">About Avanitaxx Stories</button></div>
-      <div><h3>Policies</h3><button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br><button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br><button id="footer-cookies" class="footer-link-btn" type="button">Cookie Policy</button><br><button id="footer-cookie-settings" class="footer-link-btn" type="button">Cookie Settings</button><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button><br><button id="footer-contract" class="footer-link-btn" type="button">Author Publishing Agreement</button><br><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button></div>
+      <div><h3>Policies</h3><button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br><button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button></div>
       <div><h3>Help &amp; Contact</h3><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button><br><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button><br><br><button id="footer-write" class="btn alt" type="button">Author Home</button></div>
     </div>
     <div class="copyright"><span>AVANITAXX STORIES — OFFICIAL WEBSITE</span><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span></div>
@@ -7081,7 +7053,7 @@ window.__AVX_INTERNAL__={
 };
 let editorStory=null,editorChapters=[],editorChapterIndex=0,editorCoverFile=null,compilationItems=[];
 const SITE_URL='https://avanitaxx-stories.github.io/avanitaxx-stories/';
-const DEFAULT_SEO={title:'Avanitaxx Stories — Read Stories Online',description:'Avanitaxx Stories is a reading community for discovering original stories, following authors, saving books, sharing thoughtful reviews, and connecting with fellow readers.',image:SITE_URL+'og-image.jpg',url:SITE_URL};
+const DEFAULT_SEO={title:'Avanitaxx Stories — Read Stories Online',description:'Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.',image:SITE_URL+'og-image.jpg',url:SITE_URL};
 function setMeta(selector,content){const el=document.querySelector(selector);if(el&&content)el.setAttribute('content',content)}
 function setSEO({title=DEFAULT_SEO.title,description=DEFAULT_SEO.description,image=DEFAULT_SEO.image,url=SITE_URL,type='website',schema=null}={}){
   document.title=title;
@@ -7101,10 +7073,33 @@ const renderContent=s=>looksHtml(s)?safeHtml(s):String(s||'').split(/\n\s*\n/).m
 const formatDate=s=>{try{return new Date(s).toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}catch{return ''}};
 function avxAddWindowControls(root){
   if(!root)return;
-  root.querySelectorAll('.avx-window-tools,.avx-window-minimized-host').forEach(el=>el.remove());
-  root.classList.remove('avx-window-minimized');
-  root.querySelectorAll('.avx-window-shell').forEach(el=>el.classList.remove('avx-window-maximized'));
-  root.removeAttribute('data-avx-window-ready');
+  if(root.id==='overlay'&&root.classList.contains('reader-overlay')){
+    root.querySelectorAll('.avx-window-tools,.avx-window-minimized-host').forEach(el=>el.remove());
+    root.classList.remove('avx-window-minimized');
+    root.removeAttribute('data-avx-window-ready');
+    return;
+  }
+  if(root.dataset.avxWindowReady==='1')return;
+  const shell=root.querySelector(':scope > .panel, :scope > .modal, :scope > .reader, :scope > .rank-panel, :scope > .feature-modal, :scope > .global-search-panel, :scope > .policy-panel, :scope > .crop-modal, :scope > .author-hub-panel, :scope > .lounge-panel, :scope > .community-messenger, :scope > .avx-live-modal, :scope > .home-pop, :scope > .author-social-shell')||root.firstElementChild;
+  if(!shell||shell.dataset.avxWindowShell==='1')return;
+  /* The promotional pop-ad has only its own close/read actions; no window controls. */
+  if(shell.classList.contains('home-pop')){root.dataset.avxWindowReady='1';return;}
+  const looksLikeWindow=['panel','modal','reader','rank-panel','feature-modal','global-search-panel','policy-panel','crop-modal','author-hub-panel','lounge-panel','community-messenger','fb-notes-panel','avx-live-modal','home-pop','author-social-shell'].some(c=>shell.classList.contains(c));
+  if(!looksLikeWindow)return;
+  shell.dataset.avxWindowShell='1';shell.classList.add('avx-window-shell');
+  const tools=document.createElement('div');tools.className='avx-window-tools';
+  tools.innerHTML='<button type="button" class="avx-window-tool avx-win-min" title="Minimize" aria-label="Minimize">−</button><button type="button" class="avx-window-tool avx-win-max" title="Maximize" aria-label="Maximize">□</button>';
+  shell.appendChild(tools);
+  const host=document.createElement('div');host.className='avx-window-minimized-host';
+  host.innerHTML='<button type="button" class="avx-window-restore">RESTORE WINDOW</button>';shell.parentElement?.appendChild(host);
+  const overlayRoot=root;
+  tools.querySelector('.avx-win-min').onclick=()=>{overlayRoot.classList.add('avx-window-minimized');overlayRoot.setAttribute('aria-hidden','true')};
+  host.querySelector('.avx-window-restore').onclick=()=>{overlayRoot.classList.remove('avx-window-minimized');overlayRoot.setAttribute('aria-hidden','false')};
+  tools.querySelector('.avx-win-max').onclick=()=>{
+    const max=shell.classList.toggle('avx-window-maximized');
+    const b=tools.querySelector('.avx-win-max');b.textContent=max?'❐':'□';b.title=max?'Restore Down':'Maximize';b.setAttribute('aria-label',b.title);
+  };
+  root.dataset.avxWindowReady='1';
 }
 function avxObserveWindow(){
   avxAddWindowControls(overlay);
@@ -7178,26 +7173,7 @@ async function logout(){await sb.auth.signOut();session=null;updateAuthUI();clos
 async function getPublished(){const r=await sb.from('stories').select('*').eq('published',true).order('updated_at',{ascending:false});if(r.error)throw r.error;return (r.data||[]).filter(s=>!isTestStory(s))}
 async function getCounts(storyId){const [l,c]=await Promise.all([sb.from('story_likes').select('*',{count:'exact',head:true}).eq('story_id',storyId),sb.from('comments').select('*',{count:'exact',head:true}).eq('story_id',storyId)]);return{likes:l.count||0,comments:c.count||0}}
 function seriesBadge(s){if(!s||!s.series_name)return '';const no=Number(s.series_book_number);return `<div class="story-series-badge"><b>SERIES</b><span class="series-sep">•</span><span>${no>0?`BOOK ${no}`:'SERIES STORY'}</span></div>`;}
-function coverOnlyCard(s,extra=''){
-  const reads=Number(s.views)||0;
-  const meta=extra||`${reads.toLocaleString()} reads`;
-  const author=String(s.author_name||s.pen_name||'').trim();
-  const description=String(s.description||s.blurb||'').replace(/<\/?(?:p|div|br|strong|em|span|h[1-6])\b[^>]*>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/\s+/g,' ').trim();
-  const genres=Array.isArray(s.tags)?s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).slice(0,5):[];
-  return `<article class="story-card avx-view-book-card" data-search="${esc((s.title+' '+(s.description||'')+' '+author+' '+genres.join(' ')+' '+(s.series_name||'')).toLowerCase())}">
-    <button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button" aria-label="Read ${esc(s.title)}">
-      ${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}
-    </button>
-    <div class="card-body avx-view-book-copy">
-      <h3 class="card-title">${esc(s.title||'Untitled Story')}</h3>
-      ${author?`<div class="avx-view-book-author">BY ${esc(author)}</div>`:''}
-      ${description?`<p class="avx-view-book-description">${esc(description.slice(0,260))}${description.length>260?'…':''}</p>`:''}
-      <div class="avx-view-book-meta"><span class="story-read-count">◉ ${esc(meta)}</span>${s.story_status?`<span class="avx-view-book-status">${esc(s.story_status)}</span>`:''}</div>
-      ${seriesBadge(s)}
-      ${genres.length?`<div class="tag-row avx-view-book-genres">${genres.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
-    </div>
-  </article>`;
-}
+function coverOnlyCard(s,extra=''){const reads=Number(s.views)||0;const meta=extra||`${reads.toLocaleString()} reads`;return `<article class="story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+((s.tags||[]).join(' '))+' '+(s.series_name||'')).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><h3 class="card-title">${esc(s.title)}</h3>${seriesBadge(s)}<div class="meta story-read-count">${meta}</div>${Array.isArray(s.tags)&&s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).length?`<div class="tag-row">${s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`}
 function renderSeriesShelves(stories){const section=document.getElementById('series-stories'),box=document.getElementById('series-shelves');if(!section||!box)return;const groups=new Map();(stories||[]).filter(s=>String(s.series_name||'').trim()).forEach(s=>{const key=String(s.series_name).trim();if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s)});if(!groups.size){section.classList.add('hidden');box.innerHTML='';return}section.classList.remove('hidden');box.innerHTML=[...groups.entries()].map(([name,books])=>{books.sort((a,b)=>(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999)||String(a.title).localeCompare(String(b.title)));return `<section class="series-shelf"><div class="series-shelf-head"><div><div class="series-shelf-kicker">Series</div><div class="series-shelf-title">${esc(name)}</div></div><span class="series-shelf-count">${books.length} ${books.length===1?'BOOK':'BOOKS'}</span></div><div class="series-track">${books.map(s=>`<article class="series-book"><button class="series-book-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="series-book-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} cover" loading="lazy">`:`<div class="series-book-cover cover-fallback">${esc(s.title)}</div>`}</button><div class="series-book-copy"><span class="series-book-no">${Number(s.series_book_number)>0?`Book ${Number(s.series_book_number)}`:'Series'}</span><div class="series-book-title">${esc(s.title)}</div><div class="series-book-meta">${(Number(s.views)||0).toLocaleString()} reads</div></div></article>`).join('')}</div></section>`}).join('');}
 function isAuStory(s){
   const tags=Array.isArray(s?.tags)?s.tags:[];
@@ -7428,6 +7404,25 @@ function renderGenreShelves(stories){
   });
 }
 
+function renderHomeLatestUpdates(stories=[]){
+  const box=document.getElementById('home-latest-list');
+  if(!box)return;
+  const latest=(stories||[]).slice().sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0)).slice(0,4);
+  if(!latest.length){box.innerHTML='<div class="empty">Latest updates will appear after stories are published.</div>';return;}
+  box.innerHTML=latest.map(s=>{
+    const title=esc(s.title||'Untitled Story');
+    const desc=esc(String(s.description||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim().slice(0,125));
+    const date=s.updated_at||s.created_at;
+    const label=date?new Date(date).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'Recently updated';
+    return `<article class="toffee-latest-item">
+      <button class="toffee-latest-cover read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img src="${esc(s.cover_url)}" alt="${title} cover" loading="lazy">`:`<span>${title.slice(0,1)}</span>`}</button>
+      <div class="toffee-latest-copy"><h3>${title} <span>— Latest Update</span></h3><p>${desc||'A new chapter is waiting for you.'}</p></div>
+      <div class="toffee-latest-date"><span>◷</span>${esc(label)}</div>
+      <button class="btn toffee-read-now read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">Read Now</button>
+    </article>`;
+  }).join('');
+  bindStoryCards();
+}
 async function renderHomeAuthorSidebar(stories=[]){
   const nameEl=document.getElementById('home-author-name');
   const roleEl=document.getElementById('home-author-role');
@@ -7794,6 +7789,7 @@ async function loadHome(){
    renderGenreShelves(stories);
    renderSeriesShelves(stories);
    renderAuShelves(stories);
+   renderHomeLatestUpdates(stories);
    const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
    const signals=getReaderSignals(stories);
    const scored=enriched.slice().sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));
@@ -7803,7 +7799,7 @@ async function loadHome(){
    await loadAuthorHubData(stories);
  }catch(e){
    console.error(e);
-   ['genre-shelves','recommend-books','top-picks-books','next-read-books'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
+   ['genre-shelves','recommend-books','top-picks-books','next-read-books','home-latest-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty">Could not load this section right now. Please try again.</div>'});
  }
 }
 
@@ -9555,7 +9551,7 @@ async function maybeShowHomepageFeature(){
   document.getElementById('home-pop-close').onclick=()=>{localStorage.setItem(key,'1');close()};
 }
 
-/* ===== OFFICIAL IDENTITY / POLICY CENTER — ADSENSE PREPARATION ===== */
+/* ===== OFFICIAL IDENTITY / POLICY CENTER ===== */
 const AVX_POLICY_TEXT = {
   about: {
     kicker:'OFFICIAL IDENTITY',
@@ -9564,129 +9560,143 @@ const AVX_POLICY_TEXT = {
       <div class="policy-card">
         <div class="policy-kicker">AVANITAXX STORIES</div>
         <div class="policy-motto">A home for stories, imagination, and the voices behind every page.</div>
-        <p>Avanitaxx Stories is an independently operated online reading and writing platform. It provides a place to discover published stories, follow chapter updates, explore author profiles, and participate in community features when available.</p>
-        <p>The platform features the creative work of AVANITAXX and may also publish work from invited or participating authors. Each author remains responsible for the rights and permissions relating to the material they submit.</p>
-        <p>Avanitaxx Stories is not affiliated with Wattpad, GoodNovel, Webnovel, or another third-party reading platform unless a specific affiliation is expressly stated.</p>
+        <p>Avanitaxx Stories is an independent online reading and writing space created to give readers a place to discover original stories, follow new chapters, explore authors, and take part in a respectful reading community.</p>
+        <p>The website is built around the work of AVANITAXX and may also feature invited or published writers whose stories appear through the platform. Published books, author profiles, reading features, community spaces, and Soundroom content are presented as part of the Avanitaxx Stories experience.</p>
       </div>
       <div class="policy-card">
         <div class="policy-kicker">FOR READERS</div>
         <h3>What you can find here</h3>
-        <ul><li>Original stories and chapter updates.</li><li>Series collections, recommendations, and author profiles.</li><li>Reader accounts, personal libraries, likes, comments, and replies where enabled.</li><li>Community Lounge / Community Chat spaces when available.</li><li>Notes, Soundroom entries, and creator updates.</li></ul>
+        <ul>
+          <li>Original published stories and chapter updates.</li>
+          <li>Series collections, recommendations, and author profiles.</li>
+          <li>Reader accounts, personal libraries, likes, comments, and replies where enabled.</li>
+          <li>Community Lounge / Community Chat spaces when available.</li>
+          <li>Notes, Soundroom entries, and other creator updates.</li>
+        </ul>
         <div class="policy-meta">AVANITAXX STORIES • OFFICIAL WEBSITE</div>
       </div>
     </div>
-    <h3>Our mission</h3><p>Our aim is to provide readers with a welcoming place to discover stories and writers with a space to share their creative work, while encouraging respect for authorship and readers.</p>
-    <div class="policy-note"><strong>Transparency:</strong> Features and services may change as the platform develops. This page describes the platform generally and does not promise that every listed feature is available at all times.</div>`
+    <div class="policy-note"><strong>Purpose:</strong> to provide a dedicated home for reading, writing, discovery, and community interaction while protecting the creative work published here.</div>`
   },
   terms: {
-    kicker:'SITE RULES', title:'Terms & Conditions',
-    body:`<p><strong>Effective date: November 2, 2026.</strong> By accessing or using Avanitaxx Stories, you agree to these Terms. If you do not agree, please stop using the website and its interactive features.</p>
-      <h3>1. Eligibility and accounts</h3><ul><li>You must meet the minimum age required by the laws that apply to you. If you are below the age at which you may independently consent to online services, use the website only with the involvement and permission of a parent or legal guardian where required.</li><li>You are responsible for keeping your account credentials secure and for activity performed through your account.</li><li>Do not impersonate another person, create deceptive identities, abuse account systems, or attempt to access another user's account.</li><li>Some reading, library, commenting, community, or author features may require an account.</li></ul>
-      <h3>2. Authors and submissions</h3><ul><li>Authors may submit only material they own or are authorized to publish and must obtain permission for third-party text, images, music, and other protected material.</li><li>Authors are responsible for the accuracy and legality of titles, descriptions, covers, chapters, artwork, audio, and other submitted material.</li><li>Submitting content does not transfer copyright to Avanitaxx Stories. The limited permission needed to host and display submissions is described in the Author Publishing Agreement.</li><li>Owner-only tools, moderation tools, publishing controls, and private studio features must not be shared or used to bypass access controls.</li></ul>
-      <h3>3. Reading and published content</h3><ul><li>Readers receive a limited, personal, non-exclusive, non-transferable permission to access published material through the website. This does not grant ownership, republication, adaptation, translation, or commercial rights.</li><li>Published stories may be edited, unpublished, reorganized, or removed by an authorized platform administrator when reasonably necessary.</li></ul>
-      <h3>4. Comments and community</h3><ul><li>Do not post harassment, threats, hate-based abuse, sexual exploitation, spam, scams, unlawful material, or content intended to disrupt the community.</li><li>Do not post another person's private information without permission.</li><li>Comments, replies, images, and community messages may be moderated or removed when they violate these Terms, the Community Guidelines, or applicable law.</li></ul>
-      <h3>5. Prohibited use</h3><ul><li>No scraping, automated extraction, mass downloading, unauthorized copying, republishing, or attempts to defeat technical protections around reader content.</li><li>No interference with the website, authentication, storage, database, hosting, or other technical services.</li><li>Do not manipulate advertising, generate invalid ad interactions, encourage others to click ads, or interfere with ad measurement if advertising is enabled.</li></ul>
-      <h3>6. Third-party services and advertising</h3><p>The website may rely on third-party services for hosting, authentication, storage, analytics, or advertising. Those services may have their own terms and privacy practices. Advertising, if introduced, will be identified and handled in accordance with applicable platform requirements and law. Avanitaxx Stories does not ask visitors to click advertisements.</p>
-      <h3>7. Availability and disclaimer</h3><p>The website and its features are provided on an “as available” basis. We make reasonable efforts to maintain the service, but do not guarantee uninterrupted, secure, or error-free operation. Nothing in these Terms excludes rights or remedies that cannot lawfully be excluded.</p>
-      <h3>8. Limitation of liability</h3><p>To the extent permitted by applicable law, Avanitaxx Stories is not liable for indirect or consequential loss arising from use of the website. This clause does not limit liability where such limitation is prohibited by law, including liability that cannot legally be excluded.</p>
-      <h3>9. Enforcement</h3><p>We may restrict features, remove content, or suspend accounts where reasonably necessary to protect users, authors, content, the website, or comply with law.</p>
-      <h3>10. Changes to these Terms</h3><p>These Terms may be updated from time to time. The effective date will be revised when material changes are made. Continued use after an update takes effect means you accept the revised Terms to the extent permitted by law.</p>
-      <h3>11. Governing law</h3><p>These Terms are subject to applicable laws. Any mandatory consumer rights or legal protections available in your place of residence remain unaffected.</p>`
+    kicker:'SITE RULES',
+    title:'Terms & Conditions',
+    body:`<p>By accessing or using Avanitaxx Stories, you agree to use the website lawfully, respectfully, and only for the purposes allowed by these Terms. If you do not agree, please do not use features that require acceptance of these rules.</p>
+      <h3>1. Readers and accounts</h3><ul>
+        <li>You are responsible for keeping your account credentials secure and for activity performed through your account.</li>
+        <li>Do not impersonate another person, create deceptive identities, abuse account systems, or attempt to access another user's account.</li>
+        <li>Some reading, library, commenting, community, or author features may require an account.</li>
+      </ul>
+      <h3>2. Authors / owners</h3><ul>
+        <li>Authors must only publish material they own, are authorized to publish, or have the necessary rights to use.</li>
+        <li>Authors are responsible for the accuracy of titles, descriptions, cover files, chapter content, artwork, and other material they submit.</li>
+        <li>Owner-only tools, moderation tools, publishing controls, and private studio features must not be shared or used to bypass access controls.</li>
+      </ul>
+      <h3>3. Published stories</h3><ul>
+        <li>Published stories may be edited, unpublished, reorganized, or removed by the authorized owner/platform administrator when necessary.</li>
+        <li>Readers may read published material through the website but do not receive ownership or republication rights merely by accessing it.</li>
+      </ul>
+      <h3>4. Comments and community interactions</h3><ul>
+        <li>Do not post harassment, threats, hate-based abuse, sexual exploitation content, spam, scams, unlawful material, or content intended to disrupt the community.</li>
+        <li>Do not post another person's private information without permission.</li>
+        <li>Comments, replies, images, and community messages may be removed when they violate these Terms or the Community Guidelines.</li>
+      </ul>
+      <h3>5. Prohibited use</h3><ul>
+        <li>No scraping, automated extraction, mass downloading, unauthorized copying, republishing, or attempts to defeat technical protections around reader content.</li>
+        <li>No interference with the website, authentication, storage, database, or other technical services.</li>
+      </ul>
+      <h3>6. Enforcement</h3><p>Avanitaxx Stories may restrict, suspend, or remove access to features or accounts when reasonably necessary to protect users, authors, content, or the website.</p>`
   },
   privacy: {
-    kicker:'YOUR INFORMATION', title:'Privacy Policy',
-    body:`<p><strong>Effective date: November 2, 2026.</strong> This Privacy Policy explains the categories of information that may be processed when you use Avanitaxx Stories. It should be read with the Terms &amp; Conditions. The actual information processed depends on the features you use and the services enabled on the website.</p>
-      <h3>Information associated with accounts</h3><p>When you create or use an account, the website and its authentication provider may process account identifiers and profile information such as email address, display name, pen name, avatar, and profile fields you choose to provide.</p>
-      <h3>Reading and library activity</h3><p>Depending on the features used, the site may store reading progress, chapter-read activity, story view/read counts, saved library entries, likes, and similar interaction records to provide reading and engagement features.</p>
-      <h3>Comments and community data</h3><p>Comments, replies, community messages, uploaded community images, timestamps, and associated account identifiers may be processed to display conversations, operate community features, and support moderation.</p>
-      <h3>Technical information and storage</h3><p>The website may use browser storage for authentication persistence, reading progress, interface preferences, and feature notices. Hosting, authentication, security, storage, analytics, and advertising providers may process technical information such as device/browser details, log data, identifiers, and network information according to their services and applicable law.</p>
-      <h3>How information is used</h3><ul><li>To provide accounts and requested website features.</li><li>To save reading and library preferences.</li><li>To display stories, profiles, comments, and community interactions.</li><li>To maintain security, prevent abuse, moderate content, and troubleshoot issues.</li><li>To understand website usage and, if enabled, measure and support advertising.</li></ul>
-      <h3>Service providers and sharing</h3><p>Information may be processed by service providers that support hosting, authentication, databases, file storage, security, analytics, or advertising. Public profile information, published stories, comments, and community posts may be visible to other visitors when the relevant feature is public. We do not state that private account information is publicly displayed merely because you use the website.</p>
-      <h3>Advertising and Google AdSense</h3><p>Avanitaxx Stories may apply to use Google AdSense or another advertising service in the future. If advertising is enabled, Google and its partners may use cookies or similar technologies to serve, personalize, limit, and measure advertisements, subject to applicable law and the user's settings. Google may use advertising cookies, including the DoubleClick cookie, for ad serving and measurement. The use of personalized advertising and related technologies depends on Google's settings, applicable consent requirements, and the choices available to users. We will update this Policy if and when an advertising provider is activated.</p>
-      <p>Visitors can review or manage Google advertising personalization through <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> and learn how Google uses data through <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google's information about partner sites</a>.</p>
-      <h3>Cookies and similar technologies</h3><p>Essential storage may be used to operate core site functions. Optional analytics or advertising cookies may be used only when those services are enabled and subject to consent or other requirements that apply in the visitor's location. See the Cookie Policy for more information.</p>
-      <h3>Retention and your choices</h3><p>Information is retained for as long as reasonably necessary for the purposes described, subject to legal, security, operational, and dispute-resolution requirements. You may stop using the website, log out, and request access, correction, or deletion where applicable. Some information may need to be retained where the law permits or requires it.</p>
-      <h3>Children's privacy</h3><p>The website is not intended to knowingly collect personal information from children in circumstances where parental consent is required but has not been obtained. A parent or guardian who believes a child has provided personal information may contact the site to request review and appropriate action.</p>
-      <h3>Policy updates</h3><p>This Policy may be updated as features, service providers, or legal requirements change. The effective date above will be updated when material changes are made.</p>
-      <div class="policy-note"><strong>Important:</strong> This is a practical website policy draft, not a certification of legal compliance. Confirm the services actually enabled on the site and obtain appropriate legal advice before commercial launch.</div>`
-  },
-  cookies: {
-    kicker:'BROWSER STORAGE', title:'Cookie Policy',
-    body:`<p><strong>Effective date: November 2, 2026.</strong> This Cookie Policy explains how Avanitaxx Stories uses browser storage and how visitors can manage optional technologies.</p>
-      <h3>Essential storage</h3><p>Essential storage supports core site functions, security, authentication/session continuity, and remembering your cookie choices. It is always active because the website cannot reliably provide these functions without it. The consent preference is saved in this browser's local storage.</p>
-      <h3>Analytics and performance</h3><p>Google Analytics 4 (measurement ID G-HLC422WJCL) is optional. Its Google tag is not loaded unless you enable Analytics in Cookie Settings. If enabled, Google Analytics may use cookies or similar identifiers to measure visits and site performance. You can withdraw this choice at any time.</p>
-      <h3>Advertising technologies</h3><p>Google AdSense is not currently installed on this website. If an advertising service is added later, advertising storage and related Google consent signals must remain denied unless you choose to enable the relevant optional settings. The site will update this policy when an advertising provider is activated. Your choices here do not by themselves establish compliance with every advertising or privacy law.</p>
-      <h3>Your choices</h3><p>Choose Accept All, Reject Optional, or Customize in the cookie notice. You can reopen Cookie Settings at any time from the Policies section in the footer. Changes are saved in this browser and can be changed later. Clearing browser storage may reset your choices and show the notice again.</p>
-      <h3>More information</h3><p>For information about Google's advertising technologies, visit <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google's advertising policies and technologies</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites or apps that use its services</a>.</p>`
+    kicker:'YOUR INFORMATION',
+    title:'Privacy Policy',
+    body:`<p>This Privacy Policy explains, in plain language, the categories of information that may be handled when you use Avanitaxx Stories. It should be read together with the website's Terms &amp; Conditions.</p>
+      <h3>Information associated with accounts</h3><p>When you create or use an account, the website may handle account identifiers and profile information such as email address, display name, pen name, avatar, and other profile fields that you choose to provide. Authentication and related account services are provided through the site's connected backend service.</p>
+      <h3>Reading and library activity</h3><p>Depending on the features you use, the site may store reading progress, chapter-read activity, story view/read counts, saved library entries, likes, and similar interaction records. These records help provide features such as continuing a book, maintaining a personal library, and displaying engagement counts.</p>
+      <h3>Comments and community data</h3><p>Comments, replies, community messages, uploaded community images, timestamps, and associated account identifiers may be stored so that conversations and moderation can function. Community areas may also record membership or invitation information.</p>
+      <h3>Technical and local storage</h3><p>The website may use browser storage for functions such as authentication persistence, reading progress, interface state, and feature notices. The site may also use standard technical information handled by hosting, authentication, analytics, security, or advertising services when those services are enabled.</p>
+      <h3>How information is used</h3><ul><li>To provide accounts and requested website features.</li><li>To save reading and library preferences.</li><li>To display comments, community interactions, and author content.</li><li>To maintain security, prevent abuse, and troubleshoot technical issues.</li><li>To understand website usage and support future site operations, including advertising where enabled.</li></ul>
+      <h3>Sharing</h3><p>Public profile information, published stories, comments, and community posts may be visible to other visitors when the relevant feature is public. Account and backend data may be processed by service providers that operate authentication, hosting, storage, security, or advertising functions.</p>
+      <h3>Your choices</h3><p>You may stop using the site, log out, or request correction/removal of information where applicable. Some records may need to be retained when required for security, legal, operational, or dispute-resolution purposes.</p>
+      <div class="policy-note"><strong>Important:</strong> this page describes the website's current intended data practices. Before using it as a formal legal compliance document for a commercial launch, have the final policy reviewed for the laws that apply to your business and audience.</div>`
   },
   copyright: {
-    kicker:'CREATIVE RIGHTS', title:'Copyright / Content Policy',
-    body:`<p>Stories, chapters, descriptions, cover designs, illustrations, artwork, graphics, audio, and other original creative assets published through Avanitaxx Stories are protected by applicable intellectual-property laws unless a different license or ownership statement is expressly provided.</p>
-      <h3>What is not allowed</h3><ul><li>Copying or reproducing a story, chapter, scene, cover, artwork, or substantial portion without permission.</li><li>Re-uploading or republishing content on another website, app, social page, document, channel, or reading platform without authorization.</li><li>Removing ownership notices or presenting another person's work as your own.</li><li>Using automated tools to harvest or archive protected story content.</li></ul>
-      <h3>Limited reader use</h3><p>Readers may access published stories through the website for personal reading. Access does not transfer copyright, ownership, adaptation, translation, commercial, or republication rights.</p>
-      <h3>Author submissions</h3><p>Authors represent that they own or have permission to submit the material. Authors retain their rights, subject to the limited hosting and display permission in the Author Publishing Agreement.</p>
-      <h3>Copyright reports and removal requests</h3><p>If you believe content infringes your copyright, contact the site through the official contact method shown on this page when available. Include your name and contact details, identify the copyrighted work, provide the exact URL or location of the material, explain the basis of your claim, and provide a good-faith statement that the information is accurate and that you are the rights holder or authorized to act for them. We may request further information and may remove or restrict access to material while reviewing a report. Do not submit knowingly false claims.</p>`
+    kicker:'CREATIVE RIGHTS',
+    title:'Copyright / Content Policy',
+    body:`<p>Avanitaxx Stories is a publishing and reading platform. Stories, chapters, book titles, character concepts, character names, descriptions, cover designs, illustrations, artwork, graphics, author materials, and other original writings or creative assets published through the website are protected content unless a different license or ownership statement is expressly provided.</p>
+      <h3>What is not allowed</h3><ul>
+        <li>Copying or reproducing a story, chapter, scene, character, cover, artwork, or substantial portion of content without permission.</li>
+        <li>Re-uploading or republishing content on another website, app, social page, document, channel, or reading platform without authorization.</li>
+        <li>Removing ownership notices or presenting another person's work as your own.</li>
+        <li>Using automated tools to harvest or archive the site's protected story content.</li>
+      </ul>
+      <h3>Limited reader use</h3><p>Readers may access and enjoy published stories through the website for personal reading. Access to a story does not transfer copyright, ownership, adaptation rights, translation rights, commercial rights, or republication rights.</p>
+      <h3>Copyright concerns</h3><p>If you believe material on Avanitaxx Stories infringes your copyright or other rights, use the Contact / Report section and provide enough information to identify the material, explain your concern, and provide a reliable way to follow up. Reports should be made in good faith and should not contain intentionally false claims.</p>
+      <h3>Author submissions</h3><p>By submitting material for publication, an author represents that they have the necessary rights or permission to submit that material. The platform may request clarification or supporting information when ownership is disputed.</p>`
   },
   community: {
-    kicker:'READ WITH RESPECT', title:'Community Guidelines',
-    body:`<p>Avanitaxx Stories aims to provide a welcoming space for readers and writers. Community features may include comments, replies, Community Lounge / Community Chat, Soundroom discussions, and other interactions.</p>
-      <h3>Keep conversations respectful</h3><ul><li>Discuss stories, ideas, and creative work without attacking other members.</li><li>No bullying, harassment, threats, stalking, or targeted abuse.</li><li>No hateful attacks or discriminatory abuse.</li><li>No spam, repetitive promotion, scams, phishing, or deceptive links.</li><li>Do not share another person's private or identifying information without permission.</li></ul>
-      <h3>Comments, replies, and images</h3><p>Keep comments relevant. Do not upload illegal, abusive, exploitative, sexually explicit, or otherwise inappropriate material. Images shared in community areas may be moderated or removed.</p>
-      <h3>Community Lounge</h3><p>Some community rooms may be invitation-only and owner-controlled. Membership does not grant moderation or ownership rights. Authorized moderators may manage invitations and remove messages or members when necessary.</p>
-      <h3>User safety</h3><p>Do not share passwords, verification codes, payment details, government identification numbers, or other sensitive personal information in public comments or community chats.</p>
+    kicker:'READ WITH RESPECT',
+    title:'Community Guidelines',
+    body:`<p>Avanitaxx Stories is intended to be a welcoming space for readers and writers. Community features may include comments, replies, Community Lounge / Community Chat, Soundroom discussions, and other interactions.</p>
+      <h3>Keep conversations respectful</h3><ul>
+        <li>Discuss stories, ideas, and creative work without attacking other members.</li>
+        <li>No bullying, harassment, threats, stalking, or targeted abuse.</li>
+        <li>No hateful attacks based on protected characteristics or identity.</li>
+        <li>No spam, repetitive promotion, scams, phishing, or deceptive links.</li>
+        <li>Do not share private or identifying information about another person without permission.</li>
+      </ul>
+      <h3>Comments, replies, and images</h3><p>Keep comments relevant to the story or community conversation. Do not upload illegal, abusive, exploitative, or otherwise inappropriate material. Images shared in community areas may be moderated or removed.</p>
+      <h3>Community Lounge</h3><p>Some community rooms may be invitation-only and owner-controlled. Membership does not give a member moderation or ownership rights. The room owner or authorized moderator may manage invitations and remove messages or members when necessary.</p>
       <h3>Moderation</h3><p>Content may be reviewed, hidden, deleted, or restricted when it violates these Guidelines, the Terms, or applicable law. Serious or repeated violations may result in loss of community or account access.</p>`
   },
-  contract: {
-    kicker:'AUTHOR TERMS • TEMPLATE', title:'Author Publishing Agreement',
-    body:`<p><strong>Important:</strong> This is a proposed standard agreement for review. It does not automatically create a signed contract or replace a separately accepted agreement. Before enabling author submissions under this agreement, provide authors with a clear acceptance process and retain a record of the version and date accepted.</p>
-      <h3>1. Parties and work</h3><p>This agreement is intended to apply between the person submitting a work (“Author”) and the operator of Avanitaxx Stories (“Platform”) for the specific story, chapter, artwork, or other material the Author submits for publication.</p>
-      <h3>2. Copyright ownership</h3><p>The Author retains ownership of the original work and its copyright. No ownership transfer is made to the Platform by submission or publication.</p>
-      <h3>3. Limited publication permission</h3><p>The Author grants the Platform a non-exclusive, worldwide, royalty-free permission to host, store, reproduce as technically necessary, display, distribute, and promote the submitted work on Avanitaxx Stories and its official promotional channels for the purpose of operating and promoting the platform. This permission does not allow the Platform to sell or license the work to third parties as a standalone work without separate written permission.</p>
-      <h3>4. Author warranties</h3><p>The Author confirms that they created the submitted work or have all rights and permissions needed to submit it and grant the permission above. The Author must disclose third-party material, licensed assets, or other restrictions that affect publication.</p>
-      <h3>5. Editing and presentation</h3><p>The Platform may make reasonable formatting, layout, accessibility, and technical adjustments. Substantive edits should be discussed with the Author where reasonably practicable. The Author remains responsible for the content they submit.</p>
-      <h3>6. Removal and termination</h3><p>The Author may request unpublishing or withdrawal through the Platform's official contact method. The Platform will review the request within a reasonable time. Copies may remain temporarily in backups, security logs, or records where retention is necessary or legally permitted. The Platform may remove content that violates this agreement, platform rules, or applicable law.</p>
-      <h3>7. No guaranteed payment</h3><p>Publication does not create a promise of payment, royalties, advertising revenue, or revenue sharing. Any future compensation or revenue-sharing arrangement must be set out in a separate written agreement accepted by both parties before it applies.</p>
-      <h3>8. Author conduct and promotion</h3><p>The Author agrees not to upload unlawful, infringing, deceptive, or abusive material and not to manipulate advertising or engagement metrics. The Author must not encourage invalid ad clicks or impressions.</p>
-      <h3>9. Agreement changes</h3><p>Material changes to this agreement should be communicated to affected authors. Changes should not retroactively reduce rights already granted without the Author's agreement.</p>
-      <h3>10. Acceptance</h3><p>Before publication, the Author should be shown the complete agreement and affirmatively accept it. The Platform should record the Author's identity, work title, agreement version, acceptance timestamp, and acceptance action. This displayed template alone is not proof that any particular Author has accepted it.</p>`
-  },
   contact: {
-    kicker:'HELP • REPORT • COPYRIGHT', title:'Contact / Report',
-    body:`<div class="policy-contact-box"><h3 style="margin-top:0">How to report an issue</h3><p>For a report, identify the relevant story, chapter, profile, or community area and explain the issue clearly. For copyright reports, include the information described in the Copyright / Content Policy.</p>
-      <div class="policy-report-list"><div class="policy-report-item"><strong>Inappropriate content:</strong> story title or community room, exact location, what happened, and why it violates the rules.</div><div class="policy-report-item"><strong>Copyright concern:</strong> identify the original work and the material you believe is infringing, provide the page location, and explain your rights or authorization to report.</div><div class="policy-report-item"><strong>Account or safety issue:</strong> describe the problem without sending passwords or verification codes.</div><div class="policy-report-item"><strong>Technical problem:</strong> describe the page/feature, device or browser if relevant, and the error message.</div></div></div>
-      <h3>Official identity</h3><p><strong>AVANITAXX STORIES — OFFICIAL WEBSITE</strong></p>
-      <p>A dedicated support email or contact form has not been confirmed in the supplied website file. Add a monitored official email address or working contact form before applying for advertising or inviting public reports. Do not publish an email address unless you control and regularly monitor it.</p>
-      <div class="policy-note"><strong>Privacy reminder:</strong> never send passwords, authentication codes, payment card numbers, or other sensitive credentials in a report.</div>`
+    kicker:'HELP • REPORT • COPYRIGHT',
+    title:'Contact / Report',
+    body:`<div class="policy-contact-box">
+      <h3 style="margin-top:0">How to report an issue</h3>
+      <p>For now, use this section as the official reporting route while the site's dedicated contact endpoint is being finalized. When contacting AVANITAXX STORIES, include the information below so the report can be reviewed efficiently.</p>
+      <div class="policy-report-list">
+        <div class="policy-report-item"><strong>Inappropriate content:</strong> story title or community room, exact location, what happened, and why it violates the rules.</div>
+        <div class="policy-report-item"><strong>Copyright concern:</strong> your name/rights basis, the exact story or asset involved, what you believe was copied, and evidence or a link showing the original work when available.</div>
+        <div class="policy-report-item"><strong>Account or safety issue:</strong> describe the problem without sending passwords, verification codes, or other sensitive credentials.</div>
+        <div class="policy-report-item"><strong>Technical problem:</strong> describe the page/feature, device or browser if relevant, and the error message you saw.</div>
+      </div>
+    </div>
+    <h3>Official identity</h3><p><strong>AVANITAXX STORIES — OFFICIAL WEBSITE</strong></p>
+    <p>This website is the official online reading and writing home represented by the Avanitaxx Stories brand. Contact details can be added here once the final official support email or contact form endpoint is selected.</p>
+    <div class="policy-note"><strong>Privacy reminder:</strong> never send your password, authentication code, payment card number, or other sensitive credential in a report.</div>`
   }
 };
 
 function openPolicyCenter(section='about'){
   const key=AVX_POLICY_TEXT[section]?section:'about';
-  const labels={about:'ABOUT',terms:'TERMS',privacy:'PRIVACY',cookies:'COOKIE POLICY',copyright:'COPYRIGHT',community:'COMMUNITY',contract:'AUTHOR CONTRACT',contact:'CONTACT / REPORT'};
-  const tabs=Object.keys(AVX_POLICY_TEXT).map(k=>
-    `<button class="policy-tab ${k===key?'active':''}" data-policy-tab="${k}" type="button">${labels[k]||k.toUpperCase()}</button>`
-  ).join('');
+  const tabs=Object.keys(AVX_POLICY_TEXT).map(k=>{
+    const labels={about:'ABOUT',terms:'TERMS',privacy:'PRIVACY',copyright:'COPYRIGHT',community:'COMMUNITY',contact:'CONTACT / REPORT'};
+    return `<button class="policy-tab ${k===key?'active':''}" data-policy-tab="${k}" type="button">${labels[k]}</button>`;
+  }).join('');
   const sections=Object.entries(AVX_POLICY_TEXT).map(([k,v])=>
     `<section class="policy-section ${k===key?'active':''}" data-policy-section="${k}">
-      <div class="policy-closebar"><span class="policy-kicker">${v.kicker}</span><button class="policy-close-action" type="button">CLOSE</button></div>
+      <div class="policy-closebar"><span class="policy-kicker">${v.kicker}</span><button id="policy-close-top" type="button">CLOSE</button></div>
       <h2>${v.title}</h2><div class="policy-copy">${v.body}</div>
     </section>`).join('');
   open(`<div class="policy-panel">
-    <div class="policy-head"><div class="policy-brand">AVANITAXX STORIES</div>
+    <div class="policy-head">
+      <div class="policy-brand">AVANITAXX STORIES</div>
       <div class="policy-kicker">OFFICIAL WEBSITE • IDENTITY &amp; POLICIES</div>
       <div class="policy-title">The home behind the stories.</div>
-      <div class="policy-sub">About the platform, terms, privacy, cookies, creative rights, author publishing terms, community standards, and reporting.</div>
+      <div class="policy-sub">About the platform, rules for using it, privacy information, creative-rights protection, community standards, and reporting guidance.</div>
       <div class="policy-tabs">${tabs}</div>
     </div>
     <div class="policy-body">${sections}
-      <div class="policy-footer-note">Last reviewed: November 2, 2026. This information describes intended site practices and is not a substitute for jurisdiction-specific legal advice.</div>
-    </div></div>`);
+      <div class="policy-footer-note">Last reviewed for this site build: September 17, 2026. This information is intended to describe the site's current practices and rules; it is not a substitute for jurisdiction-specific legal advice.</div>
+    </div>
+  </div>`);
   const setTab=k=>{
     document.querySelectorAll('[data-policy-tab]').forEach(b=>b.classList.toggle('active',b.dataset.policyTab===k));
     document.querySelectorAll('[data-policy-section]').forEach(x=>x.classList.toggle('active',x.dataset.policySection===k));
   };
   document.querySelectorAll('[data-policy-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.policyTab));
-  document.querySelectorAll('.policy-close-action').forEach(b=>b.addEventListener('click',close));
+  document.getElementById('policy-close-top')?.addEventListener('click',close);
 }
 
 async function openGlobalSearch(rawQuery){
@@ -9848,8 +9858,6 @@ function bindStatic(){
   byId('footer-about')?.addEventListener('click',()=>openPolicyCenter('about'));
   byId('footer-terms')?.addEventListener('click',()=>openPolicyCenter('terms'));
   byId('footer-privacy')?.addEventListener('click',()=>openPolicyCenter('privacy'));
-  byId('footer-cookies')?.addEventListener('click',()=>openPolicyCenter('cookies'));
-  byId('footer-contract')?.addEventListener('click',()=>openPolicyCenter('contract'));
   byId('footer-copyright')?.addEventListener('click',()=>openPolicyCenter('copyright'));
   byId('footer-community')?.addEventListener('click',()=>openPolicyCenter('community'));
   byId('footer-contact')?.addEventListener('click',()=>openPolicyCenter('contact'));
@@ -11910,494 +11918,6 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 }
 </style>
 
-
-
-<style id="avx-ranking-readable-layout-and-viewall-dirtywhite-20261030">
-/* Ranking: keep the book, title, author and short blurb in a balanced editorial row. */
-#overlay .rank-panel-v2 .rank-list-v2{max-width:100%;}
-#overlay .rank-panel-v2 .ranking-rest{gap:12px;}
-#overlay .rank-panel-v2 .rank-row-v2{
-  grid-template-columns:48px 76px minmax(0,1fr) minmax(76px,auto)!important;
-  gap:16px!important;
-  min-width:0!important;
-  padding:15px 17px!important;
-  align-items:center!important;
-  border-radius:17px!important;
-}
-#overlay .rank-panel-v2 .rank-info{min-width:0!important;max-width:100%!important;padding:2px 0;}
-#overlay .rank-panel-v2 .rank-story-title{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:2!important;
-  white-space:normal!important;
-  overflow:hidden!important;
-  text-overflow:clip!important;
-  font-size:clamp(16px,1.55vw,20px)!important;
-  line-height:1.28!important;
-  letter-spacing:-.015em!important;
-  overflow-wrap:anywhere!important;
-}
-#overlay .rank-panel-v2 .rank-author{
-  margin-top:7px!important;
-  font-size:9px!important;
-  line-height:1.45!important;
-  letter-spacing:.09em!important;
-}
-#overlay .rank-panel-v2 .rank-desc{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:3!important;
-  max-width:68ch!important;
-  margin-top:8px!important;
-  font-size:11px!important;
-  line-height:1.62!important;
-  overflow:hidden!important;
-  overflow-wrap:anywhere!important;
-  color:#655047!important;
-}
-#overlay .rank-panel-v2 .rank-reads{
-  justify-self:end!important;
-  align-self:center!important;
-  white-space:nowrap!important;
-  font-size:9px!important;
-  letter-spacing:.08em!important;
-  padding:7px 9px!important;
-  border-radius:999px!important;
-  background:#f0e7df!important;
-  color:#50372b!important;
-}
-
-/* Bookmark-shaped 3D rank markers — consistent on podium and the remaining list. */
-#overlay .rank-panel-v2 .rank-no,
-#overlay .rank-panel-v2 .podium-rank{
-  position:relative!important;
-  display:grid!important;
-  place-items:start center!important;
-  width:36px!important;
-  height:45px!important;
-  margin:0 auto 10px!important;
-  padding-top:8px!important;
-  border:1px solid rgba(255,255,255,.48)!important;
-  border-radius:7px 7px 3px 3px!important;
-  clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)!important;
-  background:linear-gradient(115deg,#6b4937 0%,#3b251b 48%,#24150f 100%)!important;
-  color:#fffaf2!important;
-  font:900 15px/1 Georgia,serif!important;
-  text-align:center!important;
-  text-shadow:0 1px 1px rgba(0,0,0,.55)!important;
-  filter:drop-shadow(0 3px 1px rgba(35,20,13,.28)) drop-shadow(0 7px 7px rgba(35,20,13,.18))!important;
-  box-shadow:inset 1px 0 0 rgba(255,255,255,.25),inset -2px 0 0 rgba(0,0,0,.22),inset 0 2px 3px rgba(255,255,255,.18)!important;
-}
-#overlay .rank-panel-v2 .rank-no::before,
-#overlay .rank-panel-v2 .podium-rank::before{
-  content:""!important;
-  position:absolute!important;
-  left:4px!important;right:4px!important;top:4px!important;height:2px!important;
-  background:rgba(255,255,255,.42)!important;
-  border-radius:2px!important;
-}
-#overlay .rank-panel-v2 .podium-1 .podium-rank{
-  background:linear-gradient(115deg,#e5c27d 0%,#b58a43 48%,#795325 100%)!important;
-  color:#fffdf5!important;
-}
-#overlay .rank-panel-v2 .podium-2 .podium-rank{
-  background:linear-gradient(115deg,#e1e0dc 0%,#99958f 50%,#615d59 100%)!important;
-}
-#overlay .rank-panel-v2 .podium-3 .podium-rank{
-  background:linear-gradient(115deg,#d8a17d 0%,#a76f4d 50%,#70442e 100%)!important;
-}
-#overlay .rank-panel-v2 .ranking-podium-card{padding:17px 13px 16px!important;}
-#overlay .rank-panel-v2 .podium-rank{margin:0 auto 12px!important;width:32px!important;height:40px!important;padding-top:7px!important;font-size:13px!important;}
-#overlay .rank-panel-v2 .podium-title{
-  white-space:normal!important;
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:2!important;
-  overflow:hidden!important;
-  line-height:1.3!important;
-  overflow-wrap:anywhere!important;
-}
-#overlay .rank-panel-v2 .podium-reads{font-size:8px!important;line-height:1.5!important;}
-
-/* View All dialogs: warm dirty-white title/label surfaces with strong brown text. */
-#overlay.all-stories-overlay .all-stories-modal{
-  background:#f2eee7!important;
-  color:#302017!important;
-  border:1px solid #ded4c8!important;
-}
-#overlay.all-stories-overlay .all-stories-modal .kicker{
-  display:inline-flex!important;
-  align-items:center!important;
-  width:fit-content!important;
-  max-width:100%!important;
-  padding:8px 12px!important;
-  margin:0 0 10px!important;
-  border:1px solid #ded3c7!important;
-  border-radius:8px!important;
-  background:#e7e1d8!important;
-  color:#3a281f!important;
-  -webkit-text-fill-color:#3a281f!important;
-  font-weight:900!important;
-}
-#overlay.all-stories-overlay .all-stories-modal h2{
-  display:block!important;
-  width:100%!important;
-  padding:12px 15px!important;
-  margin:0 0 10px!important;
-  border:1px solid #ded3c7!important;
-  border-radius:10px!important;
-  background:#e7e1d8!important;
-  color:#302017!important;
-  -webkit-text-fill-color:#302017!important;
-  line-height:1.18!important;
-}
-#overlay.all-stories-overlay .all-stories-modal .meta{color:#5d493d!important;-webkit-text-fill-color:#5d493d!important;}
-#overlay.all-stories-overlay .all-stories-grid .story-card{background:#fffdf9!important;}
-
-@media(max-width:700px){
-  #overlay .rank-panel-v2 .rank-row-v2{
-    grid-template-columns:36px 58px minmax(0,1fr)!important;
-    gap:10px!important;
-    padding:11px!important;
-  }
-  #overlay .rank-panel-v2 .rank-no{width:31px!important;height:40px!important;font-size:13px!important;padding-top:7px!important;}
-  #overlay .rank-panel-v2 .rank-cover,
-  #overlay .rank-panel-v2 .rank-cover-fallback{width:58px!important;height:80px!important;object-fit:contain!important;}
-  #overlay .rank-panel-v2 .rank-story-title{font-size:15px!important;line-height:1.28!important;}
-  #overlay .rank-panel-v2 .rank-desc{font-size:10px!important;line-height:1.55!important;-webkit-line-clamp:3!important;}
-  #overlay .rank-panel-v2 .rank-reads{grid-column:3!important;justify-self:start!important;margin-top:2px!important;}
-  #overlay .rank-panel-v2 .ranking-podium-card{padding:11px 7px 12px!important;}
-  #overlay .rank-panel-v2 .podium-cover{width:70px!important;height:98px!important;object-fit:contain!important;}
-}
-@media(max-width:420px){
-  #overlay .rank-panel-v2 .rank-row-v2{grid-template-columns:32px 50px minmax(0,1fr)!important;gap:8px!important;}
-  #overlay .rank-panel-v2 .rank-cover,
-  #overlay .rank-panel-v2 .rank-cover-fallback{width:50px!important;height:70px!important;}
-  #overlay .rank-panel-v2 .rank-desc{font-size:9px!important;}
-  #overlay .rank-panel-v2 .podium-cover{width:60px!important;height:86px!important;}
-}
-</style>
-
-<style id="avx-remove-floating-window-controls-final">
-/* No minimize/maximize/restore controls in Ranking, View All, Author Lounge, or Notifications. */
-.avx-window-tools,.avx-window-minimized-host,.avx-window-restore,
-.avx-win-min,.avx-win-max{display:none!important}
-.avx-window-maximized{width:auto!important;height:auto!important;max-width:initial!important;max-height:initial!important}
-</style>
-
-<style id="avx-view-all-book-layout-v2">
-/* Compact editorial list: use the full row for the book details, not empty cover-card space. */
-.all-stories-modal{width:min(1120px,100%)!important}
-.all-stories-grid{grid-template-columns:1fr!important;gap:12px!important}
-.all-stories-grid .avx-view-book-card{
-  display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;
-  align-items:stretch!important;gap:0!important;padding:0!important;overflow:hidden!important;
-  border-radius:14px!important;min-width:0!important
-}
-.all-stories-grid .avx-view-book-card .story-cover-btn{
-  width:112px!important;height:168px!important;min-height:100%!important;overflow:hidden!important;
-  border-radius:0!important;align-self:stretch!important
-}
-.all-stories-grid .avx-view-book-card .story-cover,
-.all-stories-grid .avx-view-book-card .cover-fallback{
-  width:100%!important;height:100%!important;min-height:168px!important;aspect-ratio:auto!important;
-  object-fit:cover!important;border-radius:0!important
-}
-.all-stories-grid .avx-view-book-copy{
-  min-width:0!important;padding:13px 17px!important;align-self:center!important
-}
-.all-stories-grid .avx-view-book-copy .card-title{
-  margin:0 0 4px!important;font-size:20px!important;line-height:1.18!important
-}
-.avx-view-book-author{
-  margin:0 0 7px;color:#946b55;font-size:9px;font-weight:900;letter-spacing:.13em;
-  line-height:1.35;text-transform:uppercase;overflow-wrap:anywhere
-}
-.avx-view-book-description{
-  margin:0 0 8px;color:#65534a;font:12px/1.55 Georgia,serif;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
-}
-.avx-view-book-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 7px}
-.avx-view-book-meta .story-read-count{font-size:9px;font-weight:800;color:#5f4b42}
-.avx-view-book-status{font-size:8px;font-weight:900;letter-spacing:.08em;color:#84634f;text-transform:uppercase}
-.all-stories-grid .avx-view-book-genres{gap:5px!important;margin-top:7px!important}
-.all-stories-grid .avx-view-book-genres .tag{
-  background:#654638!important;border:1px solid #654638!important;color:#fff!important;
-  font-size:8px!important;font-weight:800!important;padding:5px 8px!important;letter-spacing:.035em
-}
-@media(max-width:700px){
-  .all-stories-modal{padding:22px 15px!important}
-  .all-stories-grid{gap:9px!important}
-  .all-stories-grid .avx-view-book-card{grid-template-columns:78px minmax(0,1fr)!important}
-  .all-stories-grid .avx-view-book-card .story-cover-btn{width:78px!important;height:117px!important}
-  .all-stories-grid .avx-view-book-card .story-cover,
-  .all-stories-grid .avx-view-book-card .cover-fallback{min-height:117px!important}
-  .all-stories-grid .avx-view-book-copy{padding:9px 10px!important}
-  .all-stories-grid .avx-view-book-copy .card-title{font-size:15px!important}
-  .avx-view-book-author{font-size:8px;margin-bottom:5px}
-  .avx-view-book-description{font-size:10px;line-height:1.4;-webkit-line-clamp:2;margin-bottom:5px}
-  .avx-view-book-meta{gap:7px;margin-bottom:4px}
-  .avx-view-book-meta .story-read-count{font-size:8px}
-  .all-stories-grid .avx-view-book-genres{gap:4px!important;margin-top:4px!important}
-  .all-stories-grid .avx-view-book-genres .tag{font-size:7px!important;padding:3px 6px!important}
-}
-@media(max-width:380px){
-  .all-stories-grid .avx-view-book-card{grid-template-columns:68px minmax(0,1fr)!important}
-  .all-stories-grid .avx-view-book-card .story-cover-btn{width:68px!important;height:102px!important}
-  .all-stories-grid .avx-view-book-card .story-cover,
-  .all-stories-grid .avx-view-book-card .cover-fallback{min-height:102px!important}
-  .all-stories-grid .avx-view-book-description{-webkit-line-clamp:1}
-}
-</style>
-
-
-<!-- AVANITAXX STORIES — COOKIE CONSENT CENTER -->
-<style id="avx-cookie-consent-style">
-  #avx-cookie-banner,#avx-cookie-preferences{
-    --avx-cookie-ink:#38251d;--avx-cookie-muted:#79675d;--avx-cookie-line:#e7d7c8;
-    --avx-cookie-paper:#fffdf8;--avx-cookie-accent:#8e5d3f;--avx-cookie-soft:#f3e5d8;
-    color:var(--avx-cookie-ink);font-family:Inter,'DM Sans',Arial,sans-serif;
-  }
-  #avx-cookie-banner{
-    position:fixed;z-index:2147483000;left:22px;right:22px;bottom:20px;margin:auto;
-    width:min(980px,calc(100vw - 32px));display:none;
-    background:rgba(255,253,248,.98);border:1px solid var(--avx-cookie-line);
-    border-radius:20px;box-shadow:0 22px 70px rgba(38,25,18,.25);
-    padding:22px 24px;backdrop-filter:blur(16px);
-  }
-  #avx-cookie-banner.avx-visible{display:block;animation:avxCookieIn .22s ease-out}
-  @keyframes avxCookieIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .avx-cookie-layout{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center}
-  .avx-cookie-eyebrow{font-size:9px;font-weight:900;letter-spacing:.19em;color:var(--avx-cookie-accent);text-transform:uppercase}
-  .avx-cookie-title{font:400 25px/1.15 Georgia,serif;margin:7px 0;color:var(--avx-cookie-ink)}
-  .avx-cookie-copy{font-size:12px;line-height:1.65;color:var(--avx-cookie-muted);max-width:650px;margin:0}
-  .avx-cookie-copy a{color:var(--avx-cookie-accent);text-decoration:underline;text-underline-offset:2px}
-  .avx-cookie-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:350px}
-  .avx-cookie-btn{min-height:42px;border:1px solid var(--avx-cookie-line);border-radius:11px;padding:10px 14px;background:#fff;color:var(--avx-cookie-ink);font-size:10px;font-weight:900;letter-spacing:.045em;cursor:pointer}
-  .avx-cookie-btn:hover{border-color:#b98b6d;transform:translateY(-1px)}
-  .avx-cookie-btn.primary{background:#3b281f;border-color:#3b281f;color:#fff}
-  .avx-cookie-btn.soft{background:var(--avx-cookie-soft);border-color:#ead5c5}
-  #avx-cookie-preferences{
-    position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;
-    padding:18px;background:rgba(35,23,17,.62);backdrop-filter:blur(5px);
-  }
-  #avx-cookie-preferences.avx-visible{display:flex}
-  .avx-cookie-dialog{width:min(560px,100%);max-height:min(90vh,760px);overflow:auto;background:var(--avx-cookie-paper);
-    border:1px solid var(--avx-cookie-line);border-radius:22px;padding:25px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
-  .avx-cookie-dialog-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
-  .avx-cookie-dialog h2{font:400 30px/1.1 Georgia,serif;margin:7px 0 8px}
-  .avx-cookie-dialog p{font-size:12px;line-height:1.65;color:var(--avx-cookie-muted)}
-  .avx-cookie-close{width:36px;height:36px;border:1px solid var(--avx-cookie-line);border-radius:50%;background:#fff;color:var(--avx-cookie-ink);font-size:21px;cursor:pointer}
-  .avx-cookie-category{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:15px 0;border-top:1px solid var(--avx-cookie-line)}
-  .avx-cookie-category strong{display:block;font-size:12px}
-  .avx-cookie-category small{display:block;color:var(--avx-cookie-muted);font-size:10px;line-height:1.5;margin-top:4px;max-width:390px}
-  .avx-cookie-status{font-size:9px;font-weight:900;letter-spacing:.08em;color:#6d7551;white-space:nowrap}
-  .avx-cookie-switch{appearance:none;width:42px;height:24px;border-radius:99px;background:#d8cbc0;position:relative;cursor:pointer;flex:0 0 42px;transition:.18s}
-  .avx-cookie-switch::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px #0002;transition:.18s}
-  .avx-cookie-switch:checked{background:#8e5d3f}
-  .avx-cookie-switch:checked::after{transform:translateX(18px)}
-  .avx-cookie-switch:disabled{opacity:.55;cursor:not-allowed}
-  .avx-cookie-dialog-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
-  .avx-cookie-footnote{font-size:9px!important;margin:14px 0 0!important}
-  @media(max-width:700px){
-    #avx-cookie-banner{left:10px;right:10px;bottom:10px;width:auto;padding:18px;border-radius:17px}
-    .avx-cookie-layout{grid-template-columns:1fr;gap:14px}
-    .avx-cookie-title{font-size:22px}
-    .avx-cookie-copy{font-size:11px}
-    .avx-cookie-actions{display:grid;grid-template-columns:1fr 1fr;max-width:none}
-    .avx-cookie-btn{padding:10px 9px;font-size:9px}
-    .avx-cookie-btn.primary{grid-column:1/-1;grid-row:1}
-    .avx-cookie-dialog{padding:20px;border-radius:18px}
-    .avx-cookie-dialog h2{font-size:26px}
-  }
-  @media(prefers-reduced-motion:reduce){#avx-cookie-banner.avx-visible{animation:none}.avx-cookie-btn,.avx-cookie-switch::after{transition:none}}
-</style>
-
-<section id="avx-cookie-banner" role="region" aria-label="Cookie consent notice" aria-live="polite">
-  <div class="avx-cookie-layout">
-    <div>
-      <div class="avx-cookie-eyebrow">AVANITAXX STORIES • PRIVACY PREFERENCES</div>
-      <h2 class="avx-cookie-title">A little note about cookies.</h2>
-      <p class="avx-cookie-copy">We use essential browser storage to keep the site working. With your permission, optional analytics can help us understand site visits. Advertising cookies are currently inactive because Google AdSense is not installed. You can accept, reject, or customize optional settings. Read our <a href="#" id="avx-cookie-policy-link">Cookie Policy</a>.</p>
-    </div>
-    <div class="avx-cookie-actions">
-      <button type="button" class="avx-cookie-btn primary" id="avx-cookie-accept">Accept All</button>
-      <button type="button" class="avx-cookie-btn" id="avx-cookie-reject">Reject Optional</button>
-      <button type="button" class="avx-cookie-btn soft" id="avx-cookie-customize">Customize</button>
-    </div>
-  </div>
-</section>
-
-<div id="avx-cookie-preferences" role="presentation" aria-hidden="true">
-  <section class="avx-cookie-dialog" role="dialog" aria-modal="true" aria-labelledby="avx-cookie-dialog-title">
-    <div class="avx-cookie-dialog-head">
-      <div><div class="avx-cookie-eyebrow">YOUR CHOICES</div><h2 id="avx-cookie-dialog-title">Cookie Settings</h2></div>
-      <button type="button" class="avx-cookie-close" id="avx-cookie-close" aria-label="Close settings">×</button>
-    </div>
-    <p>Choose which optional technologies Avanitaxx Stories may use. Essential storage is always active because it supports core site functions and saves your privacy choices.</p>
-    <div class="avx-cookie-category">
-      <div><strong>Essential</strong><small>Security, sign-in/session support, core site functions, and saving your consent choice.</small></div>
-      <span class="avx-cookie-status">ALWAYS ON</span>
-    </div>
-    <div class="avx-cookie-category">
-      <div><strong>Analytics</strong><small>Allows Google Analytics 4 to measure visits and performance. The Google tag is blocked unless this is enabled.</small></div>
-      <input class="avx-cookie-switch" id="avx-cookie-analytics" type="checkbox" role="switch" aria-label="Allow analytics">
-    </div>
-    <div class="avx-cookie-category">
-      <div><strong>Advertising storage and measurement</strong><small>Allows advertising-related storage and measurement signals. No AdSense code is currently installed.</small></div>
-      <input class="avx-cookie-switch" id="avx-cookie-ads" type="checkbox" role="switch" aria-label="Allow advertising storage and measurement">
-    </div>
-    <div class="avx-cookie-category">
-      <div><strong>Personalized advertising</strong><small>Allows consent for ad personalization. This setting does not install ads or override a provider's own requirements.</small></div>
-      <input class="avx-cookie-switch" id="avx-cookie-personalized" type="checkbox" role="switch" aria-label="Allow personalized advertising">
-    </div>
-    <div class="avx-cookie-dialog-actions">
-      <button type="button" class="avx-cookie-btn" id="avx-cookie-dialog-reject">Reject Optional</button>
-      <button type="button" class="avx-cookie-btn primary" id="avx-cookie-save">Save My Choices</button>
-    </div>
-    <p class="avx-cookie-footnote">You can change or withdraw your optional choices at any time using Cookie Settings in the website footer.</p>
-  </section>
-</div>
-
-<script id="avx-cookie-consent-script">
-(function(){
-  'use strict';
-  const STORAGE_KEY = 'avx_cookie_consent_v1';
-  const CONSENT_VERSION = 1;
-  const banner = document.getElementById('avx-cookie-banner');
-  const modal = document.getElementById('avx-cookie-preferences');
-  if (!banner || !modal) return;
-
-  const controls = {
-    analytics: document.getElementById('avx-cookie-analytics'),
-    ads: document.getElementById('avx-cookie-ads'),
-    personalized: document.getElementById('avx-cookie-personalized')
-  };
-  let current = null;
-  let lastFocus = null;
-
-  function readSaved(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return null;
-      const value = JSON.parse(raw);
-      if(!value || value.version !== CONSENT_VERSION ||
-         !Number.isFinite(value.updatedAt) ||
-         Date.now() - value.updatedAt > 180 * 24 * 60 * 60 * 1000) return null;
-      return {
-        essential: true,
-        analytics: value.analytics === true,
-        ads: value.ads === true,
-        personalized: value.personalized === true && value.ads === true,
-        updatedAt: value.updatedAt,
-        version: CONSENT_VERSION
-      };
-    }catch(e){ return null; }
-  }
-
-  function updateGoogleConsent(choice){
-    const granted = value => value ? 'granted' : 'denied';
-    if(typeof window.gtag === 'function'){
-      window.gtag('consent','update',{
-        analytics_storage: granted(choice.analytics),
-        ad_storage: granted(choice.ads),
-        ad_user_data: granted(choice.ads),
-        ad_personalization: granted(choice.personalized)
-      });
-    }
-  }
-
-  function publish(choice){
-    window.AVX_COOKIE_CONSENT = Object.freeze({...choice});
-    updateGoogleConsent(choice);
-    window.dispatchEvent(new CustomEvent('avx:consent-updated',{detail:{...choice}}));
-    if(choice.analytics && typeof window.AVX_LOAD_ANALYTICS === 'function'){
-      window.AVX_LOAD_ANALYTICS();
-    }
-  }
-
-  function save(choice){
-    current = {
-      essential: true,
-      analytics: choice.analytics === true,
-      ads: choice.ads === true,
-      personalized: choice.personalized === true && choice.ads === true,
-      updatedAt: Date.now(),
-      version: CONSENT_VERSION
-    };
-    try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(current)); }
-    catch(e){ console.warn('Cookie preferences could not be saved in this browser.',e); }
-    publish(current);
-    hideBanner();
-    closePreferences();
-  }
-
-  function hideBanner(){ banner.classList.remove('avx-visible'); }
-  function showBanner(){ banner.classList.add('avx-visible'); }
-  function openPreferences(){
-    lastFocus = document.activeElement;
-    const saved = current || {analytics:false,ads:false,personalized:false};
-    controls.analytics.checked = saved.analytics;
-    controls.ads.checked = saved.ads;
-    controls.personalized.checked = saved.personalized;
-    modal.classList.add('avx-visible');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('avx-cookie-close').focus();
-  }
-  function closePreferences(){
-    modal.classList.remove('avx-visible');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    if(lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-  }
-  function reject(){save({analytics:false,ads:false,personalized:false});}
-  function accept(){save({analytics:true,ads:true,personalized:true});}
-  function saveForm(){
-    save({
-      analytics:controls.analytics.checked,
-      ads:controls.ads.checked,
-      personalized:controls.personalized.checked
-    });
-  }
-
-  document.getElementById('avx-cookie-accept').addEventListener('click',accept);
-  document.getElementById('avx-cookie-reject').addEventListener('click',reject);
-  document.getElementById('avx-cookie-customize').addEventListener('click',openPreferences);
-  document.getElementById('avx-cookie-dialog-reject').addEventListener('click',reject);
-  document.getElementById('avx-cookie-save').addEventListener('click',saveForm);
-  document.getElementById('avx-cookie-close').addEventListener('click',closePreferences);
-  modal.addEventListener('click',e=>{if(e.target===modal)closePreferences()});
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape' && modal.classList.contains('avx-visible')) closePreferences();
-  });
-  controls.ads.addEventListener('change',()=>{
-    if(!controls.ads.checked) controls.personalized.checked=false;
-  });
-  controls.personalized.addEventListener('change',()=>{
-    if(controls.personalized.checked) controls.ads.checked=true;
-  });
-
-  document.getElementById('footer-cookie-settings')?.addEventListener('click',openPreferences);
-  document.getElementById('avx-cookie-policy-link')?.addEventListener('click',e=>{
-    e.preventDefault();
-    if(typeof window.openPolicyCenter==='function') window.openPolicyCenter('cookies');
-  });
-
-  const saved = readSaved();
-  if(saved){
-    current = saved;
-    publish(saved);
-  }else{
-    current = {essential:true,analytics:false,ads:false,personalized:false};
-    publish(current);
-    showBanner();
-  }
-
-  // Public entry point for other site UI to reopen the preference center.
-  window.AVX_OPEN_COOKIE_SETTINGS = openPreferences;
-})();
-</script>
 </body>
 </html>
  
@@ -12530,92 +12050,4 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   .avx-3d-icon,.writer-side-btn .ws-icon,#author-avatar-btn{transition:none!important;transform:none!important}
 }
 </style>
-
-
-<style id="avx-reading-first-community-upgrade">
-/* Reading-first home layer: additive styling only; existing story/auth/database behavior stays intact. */
-/* Readability + desktop-only visibility refinement */
-.avx-reading-intro h2{color:#241610!important}
-.avx-reading-intro h2 em{color:#392018!important}
-.avx-reading-eyebrow{color:#563326!important}
-.avx-reading-intro p{color:#392820!important}
-.avx-reading-tile{color:#241610!important}
-.avx-reading-tile b{color:#241610!important}
-.avx-reading-tile small{color:#49372f!important}
-.avx-reading-tile-icon{color:#392018!important}
-.avx-reading-arrow{color:#563326!important}
-.avx-reading-note{color:#392820!important}
-@media(max-width:760px){
-  .avx-reading-hub{display:none!important}
-}
-
-.avx-reading-hub{position:relative;padding:48px 0 34px;background:linear-gradient(135deg,rgba(255,253,249,.96),rgba(242,227,218,.88));border-top:1px solid rgba(74,48,37,.08);border-bottom:1px solid rgba(74,48,37,.09)}
-.avx-reading-hub .container{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:22px 48px;align-items:center}
-.avx-reading-intro{max-width:650px}
-.avx-reading-eyebrow{font-size:9px;font-weight:900;letter-spacing:.22em;color:#956c55;text-transform:uppercase}
-.avx-reading-intro h2{font:400 clamp(36px,4.6vw,57px)/.99 Georgia,serif;letter-spacing:-.04em;color:#392820;margin:12px 0}
-.avx-reading-intro h2 em{font-weight:400;color:#a16f6d}
-.avx-reading-intro p{max-width:560px;font:15px/1.75 Georgia,serif;color:#715f57;margin:0}
-.avx-reading-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-.avx-reading-primary,.avx-reading-secondary{min-height:42px;padding:12px 16px;border-radius:10px;font-size:9px;font-weight:900;letter-spacing:.1em;display:inline-flex;align-items:center;justify-content:center;gap:14px;cursor:pointer}
-.avx-reading-primary{background:#392820;color:#fff;text-decoration:none;border:1px solid #392820}
-.avx-reading-secondary{background:#fffdf9;color:#392820;border:1px solid #ddcabe}
-.avx-reading-primary:hover,.avx-reading-secondary:hover{transform:translateY(-1px)}
-.avx-reading-quickgrid{display:grid;gap:9px}
-.avx-reading-tile{display:flex;align-items:center;gap:13px;width:100%;min-height:72px;padding:12px 15px;border:1px solid rgba(74,48,37,.11);border-radius:14px;background:rgba(255,253,249,.88);color:#392820;text-align:left;text-decoration:none;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
-.avx-reading-tile:hover{transform:translateY(-2px);border-color:#d5b8a6;box-shadow:0 10px 24px rgba(55,35,27,.08)}
-.avx-reading-tile-icon{width:39px;height:39px;flex:0 0 39px;display:grid;place-items:center;border-radius:12px;background:#f1ddda;color:#80584b;font:24px Georgia,serif}
-.avx-reading-tile b{display:block;font:400 17px Georgia,serif;color:#392820}
-.avx-reading-tile small{display:block;margin-top:4px;font-size:10px;line-height:1.45;color:#796861}
-.avx-reading-arrow{margin-left:auto;color:#a8795b;font-size:17px}
-.avx-reading-note{grid-column:1/-1;padding-top:15px;border-top:1px solid rgba(74,48,37,.1);font:italic 12px Georgia,serif;color:#80685c}
-.avx-reading-note span{color:#b58a60;margin-right:7px}
-@media(max-width:760px){
- .avx-reading-hub{padding:32px 0 24px}
- .avx-reading-hub .container{grid-template-columns:1fr;gap:20px}
- .avx-reading-intro h2{font-size:42px}
- .avx-reading-intro p{font-size:14px}
- .avx-reading-tile{min-height:66px;padding:10px 12px}
- .avx-reading-note{font-size:11px}
-}
-@media(prefers-reduced-motion:reduce){.avx-reading-tile,.avx-reading-primary,.avx-reading-secondary{transition:none}}
-</style>
-<script id="avx-reading-first-community-actions">
-(function(){
-  function bind(){
-    document.querySelectorAll('[data-avx-reading-action]').forEach(function(btn){
-      if(btn.dataset.avxReadingBound==='1')return;
-      btn.dataset.avxReadingBound='1';
-      btn.addEventListener('click',function(){
-        var action=btn.dataset.avxReadingAction;
-        if(action==='browse'){
-          var browse=document.getElementById('home-sidebar-browse');
-          if(browse){browse.click();return;}
-          var genres=document.getElementById('recent');
-          if(genres)genres.scrollIntoView({behavior:'smooth',block:'start'});
-          return;
-        }
-        if(action==='library'){
-          var library=document.getElementById('menu-library');
-          if(library){library.click();return;}
-          var account=document.getElementById('author-avatar-btn');
-          if(account){account.click();return;}
-          var signIn=document.getElementById('reader-btn');
-          if(signIn)signIn.click();
-          return;
-        }
-        if(action==='community'){
-          var chat=document.querySelector('[data-mobile-nav="chat"]')||document.getElementById('home-chat-btn');
-          if(chat){chat.click();return;}
-          var lounge=document.getElementById('home-notes-btn');
-          if(lounge)lounge.click();
-        }
-      });
-    });
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);
-  else bind();
-  document.addEventListener('click',function(){bind();});
-})();
-</script>
-
+ 
