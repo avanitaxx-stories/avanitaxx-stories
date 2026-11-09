@@ -6924,7 +6924,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
         <span class="avx-reading-tile-icon">✧</span><span><b>Discover Stories</b><small>Find romance, AU, and your next favorite</small></span><span class="avx-reading-arrow">↗</span>
       </a>
     </div>
-    <div class="avx-reading-note"><span>✦</span> A welcoming space for stories, thoughtful conversations, and readers who love to read.</div>
+    <div class="avx-reading-note">A welcoming space for stories, thoughtful conversations, and readers who love to read.</div>
   </div>
 </section>
 
@@ -12534,6 +12534,21 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
 
 <style id="avx-reading-first-community-upgrade">
 /* Reading-first home layer: additive styling only; existing story/auth/database behavior stays intact. */
+/* Readability + desktop-only visibility refinement */
+.avx-reading-intro h2{color:#241610!important}
+.avx-reading-intro h2 em{color:#392018!important}
+.avx-reading-eyebrow{color:#563326!important}
+.avx-reading-intro p{color:#392820!important}
+.avx-reading-tile{color:#241610!important}
+.avx-reading-tile b{color:#241610!important}
+.avx-reading-tile small{color:#49372f!important}
+.avx-reading-tile-icon{color:#392018!important}
+.avx-reading-arrow{color:#563326!important}
+.avx-reading-note{color:#392820!important}
+@media(max-width:760px){
+  .avx-reading-hub{display:none!important}
+}
+
 .avx-reading-hub{position:relative;padding:48px 0 34px;background:linear-gradient(135deg,rgba(255,253,249,.96),rgba(242,227,218,.88));border-top:1px solid rgba(74,48,37,.08);border-bottom:1px solid rgba(74,48,37,.09)}
 .avx-reading-hub .container{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:22px 48px;align-items:center}
 .avx-reading-intro{max-width:650px}
