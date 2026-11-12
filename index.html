@@ -7,8 +7,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-10-22-community-messenger-active-now-1">
-<meta name="description" content="Avanitaxx Stories — read original stories online, discover authors, follow updates, save books to your library, and explore new chapters from AVANITAXX.">
+<meta name="avx-build" content="2026-11-09-standalone-legal-pages-cookie-consent-1">
+<meta name="description" content="Avanitaxx Stories is an independent online reading and writing community for original stories, authors, and readers.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
 <meta name="googlebot" content="index,follow">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Avanitaxx Stories">
 <meta property="og:title" content="Avanitaxx Stories — Read Stories Online">
-<meta property="og:description" content="Read original stories online, discover authors, follow updates, save books, and explore new chapters from AVANITAXX.">
+<meta property="og:description" content="Discover original stories, authors, and a welcoming reading community on Avanitaxx Stories.">
 <meta property="og:url" content="https://avanitaxx-stories.github.io/avanitaxx-stories/">
 <meta property="og:image" content="https://avanitaxx-stories.github.io/avanitaxx-stories/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -2588,19 +2588,94 @@ body{background:var(--editorial-paper)}
 @media(max-width:420px){.ranking-podium-card{padding:9px 5px}.podium-cover{width:64px;height:90px}.podium-title{font-size:12px}.ranking-tab{padding:8px 12px;font-size:8px}.ranking-summary{font-size:10px}}
 </style>
 
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLC422WJCL"></script>
+<!-- Google Analytics is loaded only after the visitor opts in to analytics cookies. -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HLC422WJCL');
+(function(){
+  'use strict';
+  const AVX_CONSENT_KEY = 'avx_cookie_consent_v1';
+  const AVX_GA_ID = 'G-HLC422WJCL';
+  let avxAnalyticsLoaded = false;
 
-  // Avanitaxx Stories reading analytics
-  function avxGAEvent(name, params={}) {
-    try { if (typeof gtag === 'function') gtag('event', name, params); } catch (e) {}
+  function avxGetConsent(){
+    try { return JSON.parse(localStorage.getItem(AVX_CONSENT_KEY) || 'null'); }
+    catch (_) { return null; }
   }
+  function avxLoadAnalytics(){
+    if (avxAnalyticsLoaded) return;
+    avxAnalyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', AVX_GA_ID);
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(AVX_GA_ID);
+    document.head.appendChild(script);
+  }
+  function avxSaveConsent(analytics){
+    const record = {
+      necessary: true,
+      analytics: !!analytics,
+      updatedAt: new Date().toISOString(),
+      version: 1
+    };
+    try { localStorage.setItem(AVX_CONSENT_KEY, JSON.stringify(record)); } catch (_) {}
+    document.getElementById('avx-cookie-banner')?.remove();
+    if (record.analytics) avxLoadAnalytics();
+    window.dispatchEvent(new CustomEvent('avx:cookie-consent-updated', {detail: record}));
+  }
+  function avxShowCookieBanner(){
+    if (avxGetConsent()) return;
+    const banner = document.createElement('section');
+    banner.id = 'avx-cookie-banner';
+    banner.setAttribute('aria-label','Cookie preferences');
+    banner.innerHTML = `
+      <div class="avx-cookie-copy">
+        <strong>Your privacy choices</strong>
+        <p>We use essential browser storage to make the website work. With your permission, Google Analytics helps us understand how visitors use Avanitaxx Stories. You can accept or decline analytics cookies. Read our <a href="./cookie-policy.html">Cookie Policy</a> and <a href="./privacy-policy.html">Privacy Policy</a>.</p>
+      </div>
+      <div class="avx-cookie-actions">
+        <button type="button" data-avx-cookie="necessary">Decline optional</button>
+        <button type="button" data-avx-cookie="all">Accept analytics</button>
+      </div>`;
+    document.body.appendChild(banner);
+    banner.querySelector('[data-avx-cookie="necessary"]').addEventListener('click',()=>avxSaveConsent(false));
+    banner.querySelector('[data-avx-cookie="all"]').addEventListener('click',()=>avxSaveConsent(true));
+  }
+  window.avxCookiePreferences = {
+    get: avxGetConsent,
+    update: avxSaveConsent,
+    open: function(){
+      const old = document.getElementById('avx-cookie-banner');
+      if (old) { old.remove(); }
+      try { localStorage.removeItem(AVX_CONSENT_KEY); } catch (_) {}
+      avxShowCookieBanner();
+    }
+  };
+  window.avxGAEvent = function(name, params){
+    const consent = avxGetConsent();
+    if (consent && consent.analytics && typeof window.gtag === 'function') {
+      try { window.gtag('event', name, params || {}); } catch (_) {}
+    }
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', avxShowCookieBanner, {once:true});
+  } else { avxShowCookieBanner(); }
+  const saved = avxGetConsent();
+  if (saved && saved.analytics) avxLoadAnalytics();
+})();
 </script>
+<style id="avx-cookie-consent-styles">
+#avx-cookie-banner{position:fixed;z-index:20000;left:20px;right:20px;bottom:18px;display:flex;gap:22px;align-items:center;justify-content:space-between;padding:18px 20px;background:#fffdf9;border:1px solid #dfcfc2;border-radius:18px;box-shadow:0 18px 55px rgba(42,27,20,.22);color:#2b1b16;font:13px/1.55 Arial,sans-serif}
+#avx-cookie-banner .avx-cookie-copy{max-width:780px}
+#avx-cookie-banner strong{display:block;font:700 17px Georgia,serif;margin-bottom:4px}
+#avx-cookie-banner p{margin:0;color:#5d493f}
+#avx-cookie-banner a{color:#704126;text-decoration:underline;font-weight:700}
+#avx-cookie-banner .avx-cookie-actions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
+#avx-cookie-banner button{border:1px solid #6f4937;border-radius:999px;padding:10px 14px;background:#fff;color:#392820;font-size:11px;font-weight:800;cursor:pointer}
+#avx-cookie-banner button[data-avx-cookie="all"]{background:#392820;color:#fff}
+@media(max-width:700px){#avx-cookie-banner{left:10px;right:10px;bottom:10px;display:block;padding:15px;border-radius:15px}#avx-cookie-banner .avx-cookie-actions{margin-top:12px}#avx-cookie-banner button{flex:1}}
+</style>
 
 <!-- AVANITAXX STORIES — SIGNATURE TOFFEE / COFFEE VISUAL SYSTEM -->
 <style id="avx-signature-theme">
@@ -7019,8 +7094,8 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
   <div class="container">
     <div class="footer-grid">
       <div><h3>AVANITAXX STORIES</h3><p>A home for stories, imagination, and the voices behind every page.</p><p style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#c5aa96">Official Website • Est. 2026</p></div>
-      <div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#featured-books">Featured Stories</a><br><button id="footer-about" class="footer-link-btn" type="button">About Avanitaxx Stories</button></div>
-      <div><h3>Policies</h3><button id="footer-terms" class="footer-link-btn" type="button">Terms &amp; Conditions</button><br><button id="footer-privacy" class="footer-link-btn" type="button">Privacy Policy</button><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><button id="footer-community" class="footer-link-btn" type="button">Community Guidelines</button></div>
+      <div><h3>Explore</h3><a href="#home">Home</a><br><a href="#recent">Recent Books</a><br><a href="#featured-books">Featured Stories</a><br><a class="footer-link-btn" href="./about.html">About Avanitaxx Stories</a></div>
+      <div><h3>Policies</h3><a class="footer-link-btn" href="./terms-and-conditions.html">Terms &amp; Conditions</a><br><a class="footer-link-btn" href="./privacy-policy.html">Privacy Policy</a><br><button id="footer-copyright" class="footer-link-btn" type="button">Copyright / Content Policy</button><br><a class="footer-link-btn" href="./terms-and-conditions.html#community-guidelines">Community Guidelines</a><br><a class="footer-link-btn" href="./cookie-policy.html">Cookie Policy</a><br><button id="footer-cookie-settings" class="footer-link-btn" type="button">Cookie Settings</button></div>
       <div><h3>Help &amp; Contact</h3><button id="footer-contact" class="footer-link-btn" type="button">Contact / Report</button><br><button id="footer-author-hub" class="footer-link-btn" type="button">Author Hub</button><br><br><button id="footer-write" class="btn alt" type="button">Author Home</button></div>
     </div>
     <div class="copyright"><span>AVANITAXX STORIES — OFFICIAL WEBSITE</span><span>© 2026 Avanitaxx Stories. All Rights Reserved.</span></div>
@@ -9854,10 +9929,8 @@ function bindStatic(){
   byId('author-hub-nav')?.addEventListener('click',()=>openAuthorHub());
   byId('header-soundroom-btn')?.addEventListener('click',()=>{const p=byId('soundroom-player');if(!soundroomTracks.length){alert('No published soundtrack yet.');return}soundroomSetExpanded(true);soundroomSelect(soundroomTracks[soundroomIndex]?.id)});
   byId('footer-author-hub')?.addEventListener('click',()=>openAuthorHub());
-  byId('nav-about-btn')?.addEventListener('click',()=>openPolicyCenter('about'));
-  byId('footer-about')?.addEventListener('click',()=>openPolicyCenter('about'));
-  byId('footer-terms')?.addEventListener('click',()=>openPolicyCenter('terms'));
-  byId('footer-privacy')?.addEventListener('click',()=>openPolicyCenter('privacy'));
+  byId('footer-cookie-settings')?.addEventListener('click',()=>window.avxCookiePreferences?.open());
+  byId('nav-about-btn')?.addEventListener('click',()=>{ location.href='./about.html'; });
   byId('footer-copyright')?.addEventListener('click',()=>openPolicyCenter('copyright'));
   byId('footer-community')?.addEventListener('click',()=>openPolicyCenter('community'));
   byId('footer-contact')?.addEventListener('click',()=>openPolicyCenter('contact'));
