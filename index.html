@@ -6982,6 +6982,176 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 #home .avx-top-read-welcome .avx-couple-copy p{ text-shadow:0 2px 18px rgba(28,16,11,.18); }
 </style>
 
+
+<style id="avx-reader-library-viewall-polish-v1">
+/* View All: readable editorial book-list inspired by familiar online reading libraries,
+   while keeping Avanitaxx's own typography, colors and identity. */
+#overlay.all-stories-overlay .all-stories-modal{
+  width:min(1080px,100%)!important;
+  max-height:94vh!important;
+  overflow:auto!important;
+  padding:clamp(20px,3vw,34px)!important;
+  background:#fffaf5!important;
+  color:#2d1b14!important;
+}
+#overlay.all-stories-overlay .all-stories-modal .kicker{
+  color:#85553b!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:.18em!important;
+}
+#overlay.all-stories-overlay .all-stories-modal h2{
+  color:#2b1912!important;
+  font:400 clamp(30px,4vw,44px)/1.08 Georgia,serif!important;
+  margin:9px 42px 8px 0!important;
+}
+#overlay.all-stories-overlay .all-stories-modal>p.meta{
+  color:#60483b!important;
+  font-size:13px!important;
+  line-height:1.6!important;
+  margin:0!important;
+}
+#overlay.all-stories-overlay .all-stories-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:13px!important;
+  margin-top:23px!important;
+}
+#overlay.all-stories-overlay .all-stories-grid .avx-library-story-card{
+  display:grid!important;
+  grid-template-columns:clamp(104px,15vw,154px) minmax(0,1fr)!important;
+  gap:0!important;
+  align-items:stretch!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid #e5d5c9!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(58,35,24,.055)!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .story-cover-btn{
+  width:100%!important;
+  height:100%!important;
+  min-height:156px!important;
+  aspect-ratio:auto!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+  background:#eadbd1!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .story-cover,
+#overlay.all-stories-overlay .avx-library-story-card .cover-fallback{
+  width:100%!important;
+  height:100%!important;
+  min-height:156px!important;
+  aspect-ratio:auto!important;
+  object-fit:cover!important;
+  border-radius:0!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .card-body{
+  min-width:0!important;
+  align-self:center!important;
+  padding:17px 20px!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .card-title{
+  margin:0 0 5px!important;
+  color:#2b1912!important;
+  font:400 clamp(19px,2.1vw,25px)/1.17 Georgia,serif!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+#overlay.all-stories-overlay .avx-library-author{
+  color:#765744!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  margin:0 0 7px!important;
+}
+#overlay.all-stories-overlay .avx-story-blurb{
+  color:#49372e!important;
+  font:13px/1.65 Georgia,serif!important;
+  margin:9px 0 11px!important;
+  max-width:780px!important;
+  overflow-wrap:anywhere!important;
+}
+#overlay.all-stories-overlay .avx-no-blurb{
+  color:#77665c!important;
+  font-style:italic!important;
+}
+#overlay.all-stories-overlay .avx-library-meta{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+}
+#overlay.all-stories-overlay .avx-library-meta .story-read-count{
+  color:#5d473b!important;
+  font-size:10px!important;
+  font-weight:800!important;
+}
+#overlay.all-stories-overlay .avx-story-label,
+#overlay.all-stories-overlay .story-series-badge,
+#overlay.all-stories-overlay .tag-row .tag{
+  display:inline-flex!important;
+  align-items:center!important;
+  width:max-content!important;
+  max-width:100%!important;
+  background:#4b2d20!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border:1px solid #4b2d20!important;
+  border-radius:5px!important;
+  padding:6px 9px!important;
+  font-size:9px!important;
+  line-height:1.25!important;
+  font-weight:800!important;
+  letter-spacing:.045em!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#overlay.all-stories-overlay .story-series-badge b,
+#overlay.all-stories-overlay .story-series-badge span,
+#overlay.all-stories-overlay .tag-row .tag *{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .tag-row{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin-top:10px!important;
+}
+#overlay.all-stories-overlay .avx-library-story-card .close{
+  color:#392820!important;
+}
+@media(max-width:700px){
+  #overlay.all-stories-overlay{padding:10px!important}
+  #overlay.all-stories-overlay .all-stories-modal{padding:19px 13px!important;border-radius:17px!important}
+  #overlay.all-stories-overlay .all-stories-grid{gap:10px!important;margin-top:17px!important}
+  #overlay.all-stories-overlay .all-stories-grid .avx-library-story-card{
+    grid-template-columns:88px minmax(0,1fr)!important;
+    border-radius:11px!important;
+  }
+  #overlay.all-stories-overlay .avx-library-story-card .story-cover-btn,
+  #overlay.all-stories-overlay .avx-library-story-card .story-cover,
+  #overlay.all-stories-overlay .avx-library-story-card .cover-fallback{
+    min-height:132px!important;
+  }
+  #overlay.all-stories-overlay .avx-library-story-card .card-body{padding:10px 11px!important}
+  #overlay.all-stories-overlay .avx-library-story-card .card-title{font-size:16px!important}
+  #overlay.all-stories-overlay .avx-library-author{font-size:9px!important}
+  #overlay.all-stories-overlay .avx-story-blurb{
+    font-size:11px!important;
+    line-height:1.48!important;
+    margin:6px 0 8px!important;
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:5!important;
+    overflow:hidden!important;
+  }
+  #overlay.all-stories-overlay .avx-story-label,
+  #overlay.all-stories-overlay .story-series-badge,
+  #overlay.all-stories-overlay .tag-row .tag{font-size:8px!important;padding:5px 7px!important}
+}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -7388,7 +7558,28 @@ async function logout(){await sb.auth.signOut();session=null;updateAuthUI();clos
 async function getPublished(){const r=await sb.from('stories').select('*').eq('published',true).order('updated_at',{ascending:false});if(r.error)throw r.error;return (r.data||[]).filter(s=>!isTestStory(s))}
 async function getCounts(storyId){const [l,c]=await Promise.all([sb.from('story_likes').select('*',{count:'exact',head:true}).eq('story_id',storyId),sb.from('comments').select('*',{count:'exact',head:true}).eq('story_id',storyId)]);return{likes:l.count||0,comments:c.count||0}}
 function seriesBadge(s){if(!s||!s.series_name)return '';const no=Number(s.series_book_number);return `<div class="story-series-badge"><b>SERIES</b><span class="series-sep">•</span><span>${no>0?`BOOK ${no}`:'SERIES STORY'}</span></div>`;}
-function coverOnlyCard(s,extra=''){const reads=Number(s.views)||0;const meta=extra||`${reads.toLocaleString()} reads`;return `<article class="story-card" data-search="${esc((s.title+' '+(s.description||'')+' '+((s.tags||[]).join(' '))+' '+(s.series_name||'')).toLowerCase())}"><button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}</button><div class="card-body"><h3 class="card-title">${esc(s.title)}</h3>${seriesBadge(s)}<div class="meta story-read-count">${meta}</div>${Array.isArray(s.tags)&&s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).length?`<div class="tag-row">${s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`}
+function coverOnlyCard(s,extra='',options={}){
+  const reads=Number(s.views)||0;
+  const meta=extra||`${reads.toLocaleString()} reads`;
+  const cleanBlurb=String(s.description||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;/gi,' ').replace(/\s+/g,' ').trim();
+  const blurb=cleanBlurb.length>360?cleanBlurb.slice(0,357).trimEnd()+'…':cleanBlurb;
+  const tags=Array.isArray(s.tags)?s.tags.filter(t=>!/^AU(?: Setting:| Format:)?$/i.test(String(t).trim())&&!/^AU (?:Setting|Format):/i.test(String(t).trim())).slice(0,4):[];
+  const author=String(s.author_name||s.pen_name||'').trim();
+  const status=String(s.story_status||'').trim();
+  return `<article class="story-card avx-library-story-card ${options.showBlurb?'has-story-blurb':''}" data-search="${esc((s.title+' '+(s.description||'')+' '+tags.join(' ')+' '+(s.series_name||'')).toLowerCase())}">
+    <button class="story-cover-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button" aria-label="Read ${esc(s.title)}">
+      ${s.cover_url?`<img class="story-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} book cover" loading="lazy">`:`<div class="cover-fallback">${esc(s.title)}</div>`}
+    </button>
+    <div class="card-body">
+      <h3 class="card-title">${esc(s.title||'Untitled Story')}</h3>
+      ${author?`<div class="avx-library-author">By ${esc(author)}</div>`:''}
+      ${seriesBadge(s)}
+      ${options.showBlurb?`<p class="avx-story-blurb">${blurb?esc(blurb):'<span class="avx-no-blurb">No story blurb provided by the author yet.</span>'}</p>`:''}
+      <div class="avx-library-meta"><span class="meta story-read-count">${meta}</span>${status?`<span class="avx-story-label">${esc(status)}</span>`:''}</div>
+      ${tags.length?`<div class="tag-row">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
+    </div>
+  </article>`;
+}
 function renderSeriesShelves(stories){const section=document.getElementById('series-stories'),box=document.getElementById('series-shelves');if(!section||!box)return;const groups=new Map();(stories||[]).filter(s=>String(s.series_name||'').trim()).forEach(s=>{const key=String(s.series_name).trim();if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s)});if(!groups.size){section.classList.add('hidden');box.innerHTML='';return}section.classList.remove('hidden');box.innerHTML=[...groups.entries()].map(([name,books])=>{books.sort((a,b)=>(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999)||String(a.title).localeCompare(String(b.title)));return `<section class="series-shelf"><div class="series-shelf-head"><div><div class="series-shelf-kicker">Series</div><div class="series-shelf-title">${esc(name)}</div></div><span class="series-shelf-count">${books.length} ${books.length===1?'BOOK':'BOOKS'}</span></div><div class="series-track">${books.map(s=>`<article class="series-book"><button class="series-book-btn read-story" data-slug="${esc(s.share_slug||s.id)}" type="button">${s.cover_url?`<img class="series-book-cover" src="${esc(s.cover_url)}" alt="${esc(s.title)} cover" loading="lazy">`:`<div class="series-book-cover cover-fallback">${esc(s.title)}</div>`}</button><div class="series-book-copy"><span class="series-book-no">${Number(s.series_book_number)>0?`Book ${Number(s.series_book_number)}`:'Series'}</span><div class="series-book-title">${esc(s.title)}</div><div class="series-book-meta">${(Number(s.views)||0).toLocaleString()} reads</div></div></article>`).join('')}</div></section>`}).join('');}
 function isAuStory(s){
   const tags=Array.isArray(s?.tags)?s.tags:[];
@@ -10053,7 +10244,7 @@ async function openAllStories(type='published'){
     else if(type==='au'){title='AU Stories';kicker='ALTERNATE UNIVERSE';sorted=sorted.filter(isAuStory);sorted.sort((a,b)=>String(auSettingOf(a)).localeCompare(String(auSettingOf(b)))||String(a.title||'').localeCompare(String(b.title||'')));note='Explore published Alternate Universe stories by setting and format.'}
     else if(type==='completed'){title='Completed Stories';kicker='COMPLETED';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='COMPLETED');note='Published stories marked as completed.'}
     else if(type==='ongoing'){title='Ongoing Stories';kicker='ON-GOING';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='ON-GOING');note='Published stories that are still ongoing.'}
-    open(`<div class="modal all-stories-modal"><button class="close" id="all-stories-close" type="button">×</button><div class="kicker">${esc(kicker)}</div><h2>${esc(title)}</h2><p class="meta">${esc(note)}</p><div class="all-stories-grid">${sorted.length?sorted.map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`)).join(''):'<div class="empty">No stories match this shelf yet.</div>'}</div></div>`,'all-stories-overlay');
+    open(`<div class="modal all-stories-modal"><button class="close" id="all-stories-close" type="button">×</button><div class="kicker">${esc(kicker)}</div><h2>${esc(title)}</h2><p class="meta">${esc(note)}</p><div class="all-stories-grid">${sorted.length?sorted.map(s=>coverOnlyCard(s,`${Number(s.views||0).toLocaleString()} reads`,{showBlurb:true})).join(''):'<div class="empty">No stories match this shelf yet.</div>'}</div></div>`,'all-stories-overlay');
     document.getElementById('all-stories-close')?.addEventListener('click',close);bindStoryCards();
   }catch(e){alert('Could not load stories right now.');console.error(e)}
 }
