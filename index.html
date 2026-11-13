@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avanitaxx Stories — Read Stories Online</title>
-<meta name="avx-build" content="2026-11-09-standalone-legal-pages-cookie-consent-1">
+<meta name="avx-build" content="2026-11-13-reader-community-series-home-v1">
 <meta name="description" content="Avanitaxx Stories is an independent online reading and writing community for original stories, authors, and readers.">
 <meta name="author" content="AVANITAXX">
 <meta name="theme-color" content="#24130D">
@@ -6875,6 +6875,74 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+<style id="avx-reader-community-series-upgrade">
+/* Reader-first discovery rail */
+#home .avx-home-discovery-rail{width:min(1240px,92%);margin:0 auto 18px;display:flex;gap:9px;overflow-x:auto;padding:7px 1px 12px;scrollbar-width:none}
+#home .avx-home-discovery-rail::-webkit-scrollbar{display:none}
+#home .avx-home-discovery-rail a{flex:0 0 auto;padding:9px 14px;border:1px solid #e5d6cb;border-radius:999px;background:rgba(255,253,249,.88);color:#5a4034;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;transition:.2s}
+#home .avx-home-discovery-rail a:hover{background:#4a3025;color:#fff;border-color:#4a3025;transform:translateY(-1px)}
+/* Refined, consistent book-card rhythm */
+#home .toffee-story-grid{align-items:start}
+#home .toffee-story-grid .story-card{min-width:0;height:100%;display:flex;flex-direction:column;overflow:hidden}
+#home .toffee-story-grid .story-cover-btn{aspect-ratio:2/3;overflow:hidden;background:#eee2d9}
+#home .toffee-story-grid .story-cover{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+#home .toffee-story-grid .card-body{flex:1;min-width:0}
+#home .toffee-story-grid .card-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.25em}
+#home .toffee-story-grid .story-series-badge{max-width:100%;width:max-content;line-height:1.25}
+@media(min-width:1100px){
+ #home #recommend-books.toffee-story-grid,#home #top-picks-books.toffee-story-grid,#home #next-read-books.toffee-story-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:16px!important}
+}
+@media(min-width:701px) and (max-width:1099px){
+ #home #recommend-books.toffee-story-grid,#home #top-picks-books.toffee-story-grid,#home #next-read-books.toffee-story-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:13px!important}
+}
+/* Series becomes a prominent, browsable collection on the homepage */
+#home #series-stories{padding-top:28px;padding-bottom:34px}
+#home #series-stories .section-head{margin-bottom:18px}
+#home #series-stories .series-shelf{border-radius:20px;background:linear-gradient(135deg,#fffdf9,#f5eae2);border-color:#e6d7cc}
+#home #series-stories .series-shelf-title{font-size:clamp(23px,3vw,31px)}
+#home #series-stories .series-book{flex-basis:clamp(118px,14vw,158px);transition:transform .2s,box-shadow .2s}
+#home #series-stories .series-book:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(55,35,27,.12)}
+#home #series-stories .series-book-btn{display:block;width:100%;overflow:hidden}
+#home #series-stories .series-book-cover{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
+#home #series-stories .series-book-copy{padding:9px 10px 12px}
+#home #series-stories .series-book-no{display:inline-block;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#936d58;background:#f3e4dd;border-radius:999px;padding:5px 7px}
+#home #series-stories .series-book-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.3em}
+/* A warm, editorial reader community invitation */
+#home .avx-reader-corner{width:min(1240px,92%);margin:26px auto 10px;padding:30px;border:1px solid rgba(93,64,49,.13);border-radius:24px;background:linear-gradient(125deg,#fffdf9 0%,#f5e8e1 58%,#efe0d6 100%);box-shadow:0 18px 45px rgba(55,35,27,.07)}
+#home .avx-reader-corner-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:22px}
+#home .avx-reader-corner-head h2{font:400 clamp(29px,4vw,43px)/1.05 Georgia,serif;color:#392820;margin:9px 0}
+#home .avx-reader-corner-head p{max-width:650px;margin:0;color:#79665c;font:14px/1.7 Georgia,serif}
+#home .avx-community-join{flex:0 0 auto;border:0;border-radius:10px;background:#392820;color:#fff;padding:14px 17px;font-size:9px;font-weight:900;letter-spacing:.1em;cursor:pointer}
+#home .avx-community-join span{margin-left:8px}
+#home .avx-reader-corner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#home .avx-reader-corner-card{min-width:0;display:flex;align-items:center;gap:12px;text-align:left;padding:16px;border:1px solid rgba(93,64,49,.12);border-radius:15px;background:rgba(255,253,249,.83);color:#392820;cursor:pointer;transition:.2s;text-decoration:none}
+#home .avx-reader-corner-card:hover{transform:translateY(-3px);border-color:#c9a997;box-shadow:0 12px 25px rgba(55,35,27,.08)}
+#home .avx-corner-icon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:13px;background:#f1dfd9;color:#805b4b;font:24px Georgia,serif}
+#home .avx-corner-copy{display:grid;gap:5px;min-width:0}
+#home .avx-corner-copy b{font:400 18px Georgia,serif;color:#392820}
+#home .avx-corner-copy small{font-size:10px;line-height:1.5;color:#79665c}
+#home .avx-corner-arrow{margin-left:auto;color:#9a7460;font-size:17px}
+#home .avx-reader-corner-foot{margin-top:18px;padding-top:14px;border-top:1px solid rgba(93,64,49,.12);font-size:8px;font-weight:900;letter-spacing:.16em;color:#92796c}
+#home .avx-reader-corner-foot span{padding:0 7px;color:#c49d87}
+@media(max-width:760px){
+ #home .avx-reader-corner{padding:22px 17px;border-radius:19px}
+ #home .avx-reader-corner-head{display:block}
+ #home .avx-community-join{margin-top:16px}
+ #home .avx-reader-corner-grid{grid-template-columns:1fr;gap:8px}
+ #home .avx-reader-corner-card{padding:13px}
+}
+@media(max-width:560px){
+ #home .avx-home-discovery-rail{width:92%;margin-bottom:10px}
+ #home #recommend-books.toffee-story-grid,#home #top-picks-books.toffee-story-grid,#home #next-read-books.toffee-story-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+ #home #series-stories .series-shelf{padding:13px}
+ #home #series-stories .series-book{flex-basis:126px}
+ #home #series-stories .series-shelf-head{align-items:flex-start}
+ #home .avx-reader-corner-head p{font-size:13px}
+ #home .avx-corner-copy b{font-size:16px}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -7022,12 +7090,27 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
         <div id="recommend-books" class="cards toffee-story-grid"><div class="empty">Loading published stories…</div></div>
       </section>
 
+      <nav class="avx-home-discovery-rail" aria-label="Explore Avanitaxx Stories">
+        <a href="#featured-books">Featured</a>
+        <a href="#top-picks-section">Top Picks</a>
+        <a href="#series-stories">Series</a>
+        <a href="#recent">Genres</a>
+        <a href="#reader-corner">Readers’ Corner</a>
+      </nav>
+
       <section class="toffee-panel avx-discovery-section" id="top-picks-section">
         <div class="toffee-section-head">
           <div><div class="kicker">For Readers</div><h2>Top Picks For You</h2><div class="toffee-heading-rule"></div></div>
           <a class="toffee-view-all" href="#top-picks-section" data-view-all="top-picks">View all <span>›</span></a>
         </div>
         <div id="top-picks-books" class="cards toffee-story-grid"><div class="empty">Finding stories for you…</div></div>
+      </section>
+
+
+
+
+      <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
+        <div class="container"><div class="section-head"><div><div class="kicker">SERIES NOVELS</div><h2>Series Novels</h2><p>Read connected books in order, from Book 1 to the latest volume.</p></div><a class="toffee-view-all" href="#series-stories" data-view-all="series">View all <span>›</span></a></div><div id="series-shelves"></div></div>
       </section>
 
       <section class="toffee-panel avx-discovery-section" id="next-read-section">
@@ -7051,11 +7134,6 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
         </div>
         <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
       </section>
-
-
-      <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
-        <div class="container"><div class="section-head"><div><div class="kicker">SERIES NOVELS</div><h2>Series Novels</h2><p>Read connected books in order, from Book 1 to the latest volume.</p></div><a class="toffee-view-all" href="#series-stories" data-view-all="series">View all <span>›</span></a></div><div id="series-shelves"></div></div>
-      </section>
       <section class="legacy-home-section section series-library hidden avx-discovery-section" id="au-stories">
         <div class="container"><div class="section-head"><div><div class="kicker">ALTERNATE UNIVERSE</div><h2>AU Stories</h2><p>Step into different worlds — College AU, Mafia AU, Chatfic, and more.</p></div><a class="toffee-view-all" href="#au-stories" data-view-all="au">View all <span>›</span></a></div><div id="au-shelves" class="cards"></div></div>
       </section>
@@ -7064,6 +7142,29 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
       </section>
       <section class="legacy-home-section section avx-feature-shell" id="avx-reader-features" aria-label="Reader features"><div class="container"><div id="avx-phase1-reader"></div></div></section>
       <section class="legacy-home-section section avx-feature-shell" id="avx-author-features" aria-label="Author Center"><div class="container"><div id="avx-author-phase2"></div></div></section>
+
+      <section class="avx-reader-corner" id="reader-corner" aria-label="Readers community">
+        <div class="avx-reader-corner-head">
+          <div>
+            <div class="kicker">A COMMUNITY FOR READERS</div>
+            <h2>Stories are better when shared.</h2>
+            <p>Find your next favorite, share what moved you, and meet readers who love the same kind of stories.</p>
+          </div>
+          <button class="avx-community-join" id="reader-corner-join" type="button">JOIN THE CONVERSATION <span>↗</span></button>
+        </div>
+        <div class="avx-reader-corner-grid">
+          <button class="avx-reader-corner-card" id="reader-corner-chat" type="button">
+            <span class="avx-corner-icon">☏</span><span class="avx-corner-copy"><b>Community Chat</b><small>Talk about stories and meet fellow readers.</small></span><span class="avx-corner-arrow">↗</span>
+          </button>
+          <a class="avx-reader-corner-card" href="#top-picks-section">
+            <span class="avx-corner-icon">♡</span><span class="avx-corner-copy"><b>Discover & React</b><small>Explore reader picks, then leave a comment or reaction.</small></span><span class="avx-corner-arrow">↗</span>
+          </a>
+          <button class="avx-reader-corner-card" id="reader-corner-notes" type="button">
+            <span class="avx-corner-icon">✎</span><span class="avx-corner-copy"><b>From the Story Desk</b><small>Read announcements, notes, and behind-the-scenes updates.</small></span><span class="avx-corner-arrow">↗</span>
+          </button>
+        </div>
+        <div class="avx-reader-corner-foot">READ • REACT • CONNECT <span>—</span> YOUR PLACE IN THE STORY COMMUNITY</div>
+      </section>
 
       <section class="home-community-strip avx-restored-tools" aria-label="Community tools">
         <div class="home-community-grid">
@@ -9165,6 +9266,13 @@ async function loadHomepageFeatures(){
   if(noteBtn)noteBtn.onclick=(e)=>{if(e.target.closest('.avx-hide-home-tool'))return;openHomeNotes(notes)};
   if(chatBtn)chatBtn.onclick=(e)=>{if(e.target.closest('.avx-hide-home-tool'))return;openHomeCommunity(rooms)};
   if(soundBtn)soundBtn.onclick=(e)=>{if(e.target.closest('.avx-hide-home-tool'))return;openSoundroomModal()};
+  const cornerChat=document.getElementById('reader-corner-chat');
+  const cornerJoin=document.getElementById('reader-corner-join');
+  const cornerNotes=document.getElementById('reader-corner-notes');
+  const openChat=()=>openHomeCommunity(rooms);
+  if(cornerChat)cornerChat.onclick=openChat;
+  if(cornerJoin)cornerJoin.onclick=openChat;
+  if(cornerNotes)cornerNotes.onclick=()=>openHomeNotes(notes);
   return {notes,rooms};
 }
 async function openHomeNotes(notes=[]){
