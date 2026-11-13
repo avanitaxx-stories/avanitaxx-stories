@@ -6943,6 +6943,45 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 }
 </style>
 
+
+
+<style id="avx-reader-corner-deep-contrast">
+/* Reader community: dark, accessible text on all light surfaces. */
+#home .avx-reader-corner,
+#home .avx-reader-corner * { text-shadow:none!important; opacity:1!important; }
+#home .avx-reader-corner .kicker { color:#56301f!important; font-weight:900!important; }
+#home .avx-reader-corner-head h2 { color:#29170f!important; }
+#home .avx-reader-corner-head p { color:#493329!important; }
+#home .avx-reader-corner-card { color:#29170f!important; background:#fffdf9!important; border-color:#cbb4a4!important; }
+#home .avx-corner-icon { color:#49291c!important; background:#ead5ca!important; }
+#home .avx-corner-copy b { color:#29170f!important; font-weight:700!important; }
+#home .avx-corner-copy small { color:#493329!important; }
+#home .avx-corner-arrow { color:#56301f!important; }
+#home .avx-reader-corner-foot { color:#493329!important; }
+#home .avx-reader-corner-foot span { color:#80533d!important; }
+#home .avx-community-join { color:#fff!important; background:#392016!important; }
+#home #series-stories .section-head h2 { color:#29170f!important; }
+#home #series-stories .section-head p { color:#493329!important; }
+#home #series-stories .series-shelf-title { color:#29170f!important; }
+#home #series-stories .series-shelf-count,
+#home #series-stories .series-book-meta { color:#493329!important; }
+</style>
+
+
+
+<style id="avx-top-read-welcome-style">
+#home .avx-top-read-welcome{position:relative;isolation:isolate}
+#home .avx-top-read-welcome::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(90deg,rgba(32,18,13,.12),rgba(32,18,13,.02)),var(--avx-top-read-cover);
+  background-size:cover;background-position:center 35%;opacity:.16;filter:blur(2px) saturate(.8);
+}
+#home .avx-top-read-welcome .avx-couple-inner,
+#home .avx-top-read-welcome .avx-couple-overlay{position:relative;z-index:1}
+#home .avx-top-read-welcome .avx-couple-copy h2,
+#home .avx-top-read-welcome .avx-couple-copy p{ text-shadow:0 2px 18px rgba(28,16,11,.18); }
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -7028,8 +7067,8 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
       <div class="avx-couple-copy">
         <div class="avx-hero-kicker light">A PLACE FOR LOVE &amp; STORIES</div>
         <h2>Stories that feel<br><em>like coming home.</em></h2>
-        <p>Stay awhile. Find a romance that makes your heart linger on every page.</p>
-        <a class="avx-couple-button" href="#featured-books">EXPLORE STORIES <span>→</span></a>
+        <p>Discover the stories readers are loving, revisit unforgettable favorites, and find the next book to keep close.</p>
+        <a class="avx-couple-button" href="#top-picks-section">EXPLORE TOP READS <span>→</span></a>
       </div>
     </div>
   </div>
@@ -7109,9 +7148,7 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
 
 
 
-      <section class="legacy-home-section section series-library hidden avx-discovery-section" id="series-stories">
-        <div class="container"><div class="section-head"><div><div class="kicker">SERIES NOVELS</div><h2>Series Novels</h2><p>Read connected books in order, from Book 1 to the latest volume.</p></div><a class="toffee-view-all" href="#series-stories" data-view-all="series">View all <span>›</span></a></div><div id="series-shelves"></div></div>
-      </section>
+
 
       <section class="toffee-panel avx-discovery-section" id="next-read-section">
         <div class="toffee-section-head">
@@ -7127,12 +7164,14 @@ body.avx-tools-home-visible:not(.avx-tools-modal-open) #home .avx-restored-tools
           <div id="genre-shelves" class="genre-shelves"><div class="empty">Loading published books…</div></div>
         </div>
       </section>
-      <section class="toffee-panel toffee-latest-panel" id="home-latest">
-        <div class="toffee-section-head">
-          <div><h2>Latest Updates</h2><div class="toffee-heading-rule"></div></div>
-          <a class="toffee-view-all" href="#home-latest" data-view-all="latest">View all <span>›</span></a>
+      <section class="legacy-home-section section series-library avx-discovery-section" id="series-stories">
+        <div class="container">
+          <div class="section-head">
+            <div><div class="kicker">CURATED STORY COLLECTIONS</div><h2>Recommended Series</h2><p>Explore connected stories and follow each series in reading order.</p></div>
+            <a class="toffee-view-all" href="#series-stories" data-view-all="series">View all <span>›</span></a>
+          </div>
+          <div id="series-shelves"><div class="empty">Loading recommended series…</div></div>
         </div>
-        <div id="home-latest-list" class="toffee-latest-list"><div class="empty">Loading latest updates…</div></div>
       </section>
       <section class="legacy-home-section section series-library hidden avx-discovery-section" id="au-stories">
         <div class="container"><div class="section-head"><div><div class="kicker">ALTERNATE UNIVERSE</div><h2>AU Stories</h2><p>Step into different worlds — College AU, Mafia AU, Chatfic, and more.</p></div><a class="toffee-view-all" href="#au-stories" data-view-all="au">View all <span>›</span></a></div><div id="au-shelves" class="cards"></div></div>
@@ -7965,7 +8004,7 @@ async function loadHome(){
    renderGenreShelves(stories);
    renderSeriesShelves(stories);
    renderAuShelves(stories);
-   renderHomeLatestUpdates(stories);
+   if(typeof window.avxApplyTopReadWelcome==='function')window.avxApplyTopReadWelcome(stories);
    const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
    const signals=getReaderSignals(stories);
    const scored=enriched.slice().sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));
@@ -9960,7 +9999,7 @@ async function openGlobalSearch(rawQuery){
 
 async function openBrowsePanel(){
   const genres=['Romance','Fantasy','Paranormal','Vampire','Mafia','Contemporary','Historical','Mystery','Thriller','Science Fiction','Adventure','Teen Fiction','New Adult','Short Story','Poetry','Horror','Humor','Fanfiction'];
-  open(`<div class="modal avx-browse-modal"><button class="close" id="browse-close" type="button">×</button><div class="kicker">AVANITAXX STORIES</div><h2>Browse Stories</h2><p class="meta">Explore published books by genre, reading status, series, and discovery shelves.</p><div class="avx-browse-block"><div class="avx-browse-label">DISCOVER</div><div class="avx-browse-actions"><button data-browse-type="published">Published Books</button><button data-browse-type="top-picks">Top Picks For You</button><button data-browse-type="next-read">Your Next Read</button><button data-browse-type="series">Series Novels</button><button data-browse-type="latest">Latest Updates</button><button data-browse-type="completed">Completed Stories</button><button data-browse-type="ongoing">Ongoing Stories</button></div></div><div class="avx-browse-block"><div class="avx-browse-label">GENRES</div><div class="avx-genre-grid">${genres.map(g=>`<button data-browse-genre="${esc(g)}">${esc(g)}</button>`).join('')}</div></div></div>`,'avx-browse-overlay');
+  open(`<div class="modal avx-browse-modal"><button class="close" id="browse-close" type="button">×</button><div class="kicker">AVANITAXX STORIES</div><h2>Browse Stories</h2><p class="meta">Explore published books by genre, reading status, series, and discovery shelves.</p><div class="avx-browse-block"><div class="avx-browse-label">DISCOVER</div><div class="avx-browse-actions"><button data-browse-type="published">Published Books</button><button data-browse-type="top-picks">Top Picks For You</button><button data-browse-type="next-read">Your Next Read</button><button data-browse-type="series">Series Novels</button><button data-browse-type="completed">Completed Stories</button><button data-browse-type="ongoing">Ongoing Stories</button></div></div><div class="avx-browse-block"><div class="avx-browse-label">GENRES</div><div class="avx-genre-grid">${genres.map(g=>`<button data-browse-genre="${esc(g)}">${esc(g)}</button>`).join('')}</div></div></div>`,'avx-browse-overlay');
   document.getElementById('browse-close')?.addEventListener('click',close);
   document.querySelectorAll('[data-browse-type]').forEach(b=>b.addEventListener('click',()=>{const type=b.dataset.browseType;close();openAllStories(type)}));
   document.querySelectorAll('[data-browse-genre]').forEach(b=>b.addEventListener('click',async()=>{const genre=b.dataset.browseGenre;close();await openGenreStories(genre)}));
@@ -10008,10 +10047,9 @@ async function openAllStories(type='published'){
     const signals=getReaderSignals(stories);
     const enriched=await Promise.all(stories.map(async s=>({...s,__counts:await getCounts(s.id)})));
     let sorted=enriched.slice(); let title='Published Books'; let kicker='PUBLISHED BOOKS'; let note='Browse all published stories.';
-    if(type==='latest'){title='Latest Updates';kicker='LATEST UPDATES';sorted.sort((a,b)=>Date.parse(b.updated_at||b.created_at||0)-Date.parse(a.updated_at||a.created_at||0));note='The newest published updates appear first.'}
-    else if(type==='top-picks'){title='Top Picks For You';kicker='FOR READERS';sorted.sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));note=signals.length?'Personalized from your reading and saved-book signals.':'A reader-focused mix of engagement and freshness.'}
+    if(type==='top-picks'){title='Top Picks For You';kicker='FOR READERS';sorted.sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals));note=signals.length?'Personalized from your reading and saved-book signals.':'A reader-focused mix of engagement and freshness.'}
     else if(type==='next-read'){title='Your Next Read';kicker='A LITTLE NUDGE';sorted=sorted.filter(s=>!signals.some(x=>String(x.id)===String(s.id)));sorted.sort((a,b)=>scoreForReader(b,signals)-scoreForReader(a,signals)||Math.random()-.5);note=signals.length?'Related to books you have opened or saved.':'A rotating selection of published books.'}
-    else if(type==='series'){title='Series Novels';kicker='SERIES NOVELS';sorted=sorted.filter(s=>String(s.series_name||'').trim());sorted.sort((a,b)=>String(a.series_name||'').localeCompare(String(b.series_name||''))||(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999));note='Series books are grouped by their series name and book number.'}
+    else if(type==='series'){title='Recommended Series';kicker='RECOMMENDED SERIES';sorted=sorted.filter(s=>String(s.series_name||'').trim());sorted.sort((a,b)=>String(a.series_name||'').localeCompare(String(b.series_name||''))||(Number(a.series_book_number)||9999)-(Number(b.series_book_number)||9999));note='Series books are grouped by their series name and book number.'}
     else if(type==='au'){title='AU Stories';kicker='ALTERNATE UNIVERSE';sorted=sorted.filter(isAuStory);sorted.sort((a,b)=>String(auSettingOf(a)).localeCompare(String(auSettingOf(b)))||String(a.title||'').localeCompare(String(b.title||'')));note='Explore published Alternate Universe stories by setting and format.'}
     else if(type==='completed'){title='Completed Stories';kicker='COMPLETED';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='COMPLETED');note='Published stories marked as completed.'}
     else if(type==='ongoing'){title='Ongoing Stories';kicker='ON-GOING';sorted=sorted.filter(s=>String(s.story_status||'').toUpperCase()==='ON-GOING');note='Published stories that are still ongoing.'}
@@ -12098,6 +12136,24 @@ if(type==='chat'){document.getElementById('home-chat-btn')?.click();return}});</
   filter: drop-shadow(0 2px 2px rgba(53,31,20,.25)) !important;
 }
 </style>
+
+
+
+<script id="avx-top-reads-welcome-accent">
+(function(){
+  function applyTopReadAccent(stories){
+    const hero=document.querySelector('#home .avx-couple-hero, #home .avx-romantic-hero, #home .avx-couple-banner, #home [class*="avx-couple"]');
+    if(!hero || !Array.isArray(stories)) return;
+    const picks=stories.filter(x=>x && x.published && x.cover_url)
+      .sort((a,b)=>(Number(b.views)||0)-(Number(a.views)||0)).slice(0,3);
+    if(!picks.length)return;
+    hero.classList.add('avx-top-read-welcome');
+    hero.style.setProperty('--avx-top-read-cover',`url("${String(picks[0].cover_url).replace(/["\\]/g,'')}")`);
+    hero.setAttribute('data-top-read-title',picks[0].title||'Top reader pick');
+  }
+  window.avxApplyTopReadWelcome=applyTopReadAccent;
+})();
+</script>
 
 </body>
 </html>
