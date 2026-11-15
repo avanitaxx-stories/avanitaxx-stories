@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://avanitaxx-stories.github.io/avanitaxx-stories/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://avanitaxxstories.top/</loc>
+  </url>
+  <url>
+    <loc>https://avanitaxxstories.top/about.html</loc>
+  </url>
+  <url>
+    <loc>https://avanitaxxstories.top/privacy-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://avanitaxxstories.top/terms-and-conditions.html</loc>
+  </url>
+  <url>
+    <loc>https://avanitaxxstories.top/cookie-policy.html</loc>
   </url>
 </urlset>
