@@ -1,66 +1,64 @@
-const CACHE_NAME = "avanitaxx-stories-v2";
-const APP_SHELL = ["./", "./index.html", "./manifest.json"];
+/* Avanitaxx Stories PWA service worker
+   Safe network-first navigation handling. Supabase/API/auth requests are never cached.
+*/
+'use strict';
 
-self.addEventListener("install", event => {
+const CACHE_PREFIX = 'avx-pwa-';
+const CACHE_VERSION = 'v1';
+const SHELL_CACHE = CACHE_PREFIX + CACHE_VERSION;
+const OFFLINE_URL = '/offline.html';
+const SHELL_FILES = [
+  OFFLINE_URL,
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-512-maskable.png',
+  '/icons/apple-touch-icon.png',
+  '/icons/favicon-32.png'
+];
+
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(APP_SHELL).catch(() => undefined))
+    caches.open(SHELL_CACHE)
+      .then(cache => cache.addAll(SHELL_FILES))
       .then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener("activate", event => {
+self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(key => key.startsWith("avanitaxx-stories-") && key !== CACHE_NAME).map(key => caches.delete(key))))
+      .then(keys => Promise.all(
+        keys.filter(key => key.startsWith(CACHE_PREFIX) && key !== SHELL_CACHE)
+          .map(key => caches.delete(key))
+      ))
       .then(() => self.clients.claim())
   );
 });
 
-// Cache only same-origin GET requests; never cache API/auth or cross-origin responses.
-self.addEventListener("fetch", event => {
+self.addEventListener('fetch', event => {
   const request = event.request;
+  if (request.method !== 'GET') return;
+
   const url = new URL(request.url);
-  if (request.method !== "GET" || url.origin !== self.location.origin || url.pathname.includes("/rest/v1/") || url.pathname.includes("/auth/v1/")) return;
-  event.respondWith(
-    fetch(request).then(response => {
-      if (response && response.ok && response.type === "basic") {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).catch(() => {});
-      }
-      return response;
-    }).catch(() => caches.match(request))
-  );
-});
+  // Never intercept third-party scripts, Supabase, auth, storage, or API traffic.
+  if (url.origin !== self.location.origin) return;
 
-self.addEventListener("push", event => {
-  let data = {};
-  try { data = event.data ? event.data.json() : {}; }
-  catch { data = { body: event.data ? event.data.text() : "You have a new update." }; }
-  const title = typeof data.title === "string" ? data.title : "Avanitaxx Stories";
-  const options = {
-    body: typeof data.body === "string" ? data.body : "You have a new story update.",
-    icon: typeof data.icon === "string" ? data.icon : "./favicon.ico",
-    badge: "./favicon.ico",
-    data: { url: typeof data.url === "string" ? data.url : "./" },
-    tag: typeof data.tag === "string" ? data.tag : "avanitaxx-update",
-    renotify: false
-  };
-  event.waitUntil(self.registration.showNotification(title, options));
-});
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(async () => {
+        const cache = await caches.open(SHELL_CACHE);
+        return (await cache.match(OFFLINE_URL)) || Response.error();
+      })
+    );
+    return;
+  }
 
-self.addEventListener("notificationclick", event => {
-  event.notification.close();
-  const target = new URL(event.notification.data?.url || "./", self.location.origin).href;
-  event.waitUntil((async () => {
-    const windows = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
-    for (const client of windows) {
-      if (client.url.startsWith(self.location.origin) && "focus" in client) {
-        await client.focus();
-        if ("navigate" in client && client.url !== target) await client.navigate(target);
-        return;
-      }
-    }
-    if (self.clients.openWindow) await self.clients.openWindow(target);
-  })());
+  // Cache only the small, immutable app identity assets. Other same-origin files
+  // continue to use the network so live site content and updates are not stale.
+  if (url.pathname.startsWith('/icons/')) {
+    event.respondWith(
+      caches.match(request).then(cached => cached || fetch(request))
+    );
+  }
 });
