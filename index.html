@@ -15,7 +15,7 @@
 <meta name="avx-build" content="2026-11-13-reader-community-series-home-v1">
 <meta name="description" content="Avanitaxx Stories is an independent online reading and writing community for original stories, authors, and readers.">
 <meta name="author" content="AVANITAXX">
-<meta name="theme-color" content="#24130D">
+
 <meta name="googlebot" content="index,follow">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://avanitaxxstories.top/">
@@ -10335,7 +10335,7 @@ bindStatic();bindToffeeHome();await refreshSession();
   <script>
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js")
+        navigator.serviceWorker.register("/sw.js", { scope: "/" })
             .then(function (registration) {
                 console.log("Avanitaxx Stories PWA is ready:", registration.scope);
             })
