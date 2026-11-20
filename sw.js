@@ -1,12 +1,14 @@
 /* Avanitaxx Stories PWA service worker
-   Safe network-first navigation handling. Supabase/API/auth requests are never cached.
+   Network-first navigation with offline fallback.
+   Third-party requests (including Supabase/auth/API traffic) are not intercepted.
 */
 'use strict';
 
 const CACHE_PREFIX = 'avx-pwa-';
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const SHELL_CACHE = CACHE_PREFIX + CACHE_VERSION;
 const OFFLINE_URL = '/offline.html';
+
 const SHELL_FILES = [
   OFFLINE_URL,
   '/manifest.json',
@@ -17,12 +19,23 @@ const SHELL_FILES = [
   '/icons/favicon-32.png'
 ];
 
+// Cache shell files independently. A missing optional icon must not cancel
+// the entire service-worker installation.
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(SHELL_CACHE)
-      .then(cache => cache.addAll(SHELL_FILES))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(SHELL_CACHE);
+    const results = await Promise.allSettled(
+      SHELL_FILES.map(file => cache.add(file))
+    );
+
+    results.forEach((result, index) => {
+      if (result.status === 'rejected') {
+        console.warn('[Avanitaxx PWA] Could not precache:', SHELL_FILES[index], result.reason);
+      }
+    });
+
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', event => {
@@ -41,9 +54,12 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  // Never intercept third-party scripts, Supabase, auth, storage, or API traffic.
+
+  // Never intercept third-party scripts, Supabase, authentication, storage,
+  // realtime, or API traffic. These requests stay network-controlled.
   if (url.origin !== self.location.origin) return;
 
+  // Navigation stays network-first; show the cached offline page on failure.
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request).catch(async () => {
@@ -54,8 +70,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Cache only the small, immutable app identity assets. Other same-origin files
-  // continue to use the network so live site content and updates are not stale.
+  // Cache only app identity icons. All other same-origin content stays live.
   if (url.pathname.startsWith('/icons/')) {
     event.respondWith(
       caches.match(request).then(cached => cached || fetch(request))
